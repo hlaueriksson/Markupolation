@@ -1,10 +1,11 @@
-﻿namespace Markupolation
+namespace Markupolation
 {
     internal enum AttributeType
     {
         abbr,
         accept,
         accept_charset,
+        [Global]
         accesskey,
         action,
         allow,
@@ -12,8 +13,10 @@
         alt,
         as_,
         async,
+        [Global]
         autocapitalize,
         autocomplete,
+        [Global]
         autofocus,
         autoplay,
         charset,
@@ -24,6 +27,7 @@
         cols,
         colspan,
         content,
+        [Global]
         contenteditable,
         controls,
         coords,
@@ -33,12 +37,15 @@
         decoding,
         default_,
         defer,
+        [Global]
         dir,
         dirname,
         disabled,
         download,
+        [Global]
         draggable,
         enctype,
+        [Global]
         enterkeyhint,
         for_,
         form,
@@ -49,6 +56,7 @@
         formtarget,
         headers,
         height,
+        [Global]
         hidden,
         high,
         href,
@@ -57,17 +65,24 @@
         id,
         imagesizes,
         imagesrcset,
+        [Global]
         inputmode,
         integrity,
         is_,
         ismap,
+        [Global]
         itemid,
+        [Global]
         itemprop,
+        [Global]
         itemref,
+        [Global]
         itemscope,
+        [Global]
         itemtype,
         kind,
         label,
+        [Global]
         lang,
         list,
         loading,
@@ -83,6 +98,7 @@
         muted,
         name,
         nomodule,
+        [Global]
         nonce,
         novalidate,
         open,
@@ -108,6 +124,7 @@
         sizes,
         slot,
         span,
+        [Global]
         spellcheck,
         src,
         srcdoc,
@@ -115,10 +132,14 @@
         srcset,
         start,
         step,
+        [Global]
         style,
+        [Global]
         tabindex,
         target,
+        [Global]
         title,
+        [Global]
         translate,
         type,
         usemap,

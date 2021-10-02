@@ -1,3 +1,5 @@
+using System;
+
 namespace Markupolation
 {
     public sealed record Attribute : Content
@@ -23,5 +25,10 @@ namespace Markupolation
         {
             return value.ToString();
         }
+    }
+
+    [AttributeUsage(AttributeTargets.Field, Inherited = false)]
+    internal class GlobalAttribute : System.Attribute
+    {
     }
 }

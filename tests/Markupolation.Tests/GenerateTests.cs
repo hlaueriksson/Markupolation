@@ -51,8 +51,12 @@ namespace Markupolation.Tests
             await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
             var page = await browser.NewPageAsync();
 
+            await page.GotoAsync("https://html.spec.whatwg.org/dev/dom.html#global-attributes");
+            var attributes = await page.QuerySelectorAllAsync("ul.brief:nth-of-type(11) li code[id^='global-attributes'] a");
+            var globalAttributes = attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToList();
+
             await page.GotoAsync("https://html.spec.whatwg.org/dev/indices.html#attributes-3");
-            var attributes = await page.QuerySelectorAllAsync("table#attributes-1 tbody tr th code");
+            attributes = await page.QuerySelectorAllAsync("table#attributes-1 tbody tr th code");
             var distinctAttributes = attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).Distinct().ToList();
 
             var result = new StringBuilder();
@@ -64,6 +68,10 @@ namespace Markupolation.Tests
                 if (new[] { "as", "checked", "class", "default", "for", "is", "readonly" }.Contains(name))
                 {
                     name += "_";
+                }
+                if (globalAttributes.Contains(name))
+                {
+                    result.AppendLine("    [Global]");
                 }
                 result.AppendLine($"    {name},");
             }
