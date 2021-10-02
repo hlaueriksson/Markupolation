@@ -5,6 +5,10 @@ namespace Markupolation
     [DebuggerDisplay("{ToString()}")]
     public record Content
     {
+        internal Content()
+        {
+        }
+
         public Content(string value)
         {
             Value = value;

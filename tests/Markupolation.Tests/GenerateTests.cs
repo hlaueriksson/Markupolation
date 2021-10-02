@@ -146,11 +146,24 @@ namespace Markupolation.Tests
             result.AppendLine("{");
             foreach (var value in values)
             {
-                result.AppendLine($"    public static Attribute {value}(string value) => new(AttributeType.{value}, value);");
+                if (IsBooleanAttribute(value))
+                {
+                    result.AppendLine($"    public static Attribute {value}() => new(AttributeType.{value});");
+                }
+                else
+                {
+                    result.AppendLine($"    public static Attribute {value}(string value) => new(AttributeType.{value}, value);");
+                }
             }
             result.AppendLine("}");
 
             Console.WriteLine(result.ToString());
+
+            bool IsBooleanAttribute(object value)
+            {
+                var member = typeof(AttributeType).GetMember(value.ToString()).First();
+                return System.Attribute.IsDefined(member, typeof(BooleanAttribute));
+            }
         }
     }
 }

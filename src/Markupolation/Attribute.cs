@@ -9,6 +9,12 @@ namespace Markupolation
             Name = name;
         }
 
+        internal Attribute(AttributeType type) : base()
+        {
+            Name = type.ToString();
+            Type = type;
+        }
+
         internal Attribute(AttributeType type, string value) : base(value)
         {
             Name = type.ToString();
@@ -19,7 +25,7 @@ namespace Markupolation
 
         internal AttributeType Type { get; }
 
-        public override string ToString() => $"{Name}=\"{Value}\"";
+        public override string ToString() => Value is null ? $"{Name}" : $"{Name}=\"{Value}\"";
 
         public static implicit operator string(Attribute value)
         {
