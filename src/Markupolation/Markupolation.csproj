@@ -5,4 +5,8 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Markupolation.Tests" />
+  </ItemGroup>
+
 </Project>

@@ -94,5 +94,52 @@ namespace Markupolation.Tests
 
             Console.WriteLine(result.ToString());
         }
+
+        [Test, Explicit]
+        public void ElementMethods()
+        {
+            var values = Enum.GetValues(typeof(ElementType));
+
+            var result = new StringBuilder();
+            result.AppendLine("public static class Elements");
+            result.AppendLine("{");
+            foreach (var value in values)
+            {
+                if (IsVoidElement(value))
+                {
+                    result.AppendLine($"    public static Element {value}(params Content[] content) => VoidElement(ElementType.{value}, content);");
+                }
+                else
+                {
+                    result.AppendLine($"    public static Element {value}(params Content[] content) => NormalElement(ElementType.{value}, content);");
+                }
+            }
+            result.AppendLine("}");
+
+            Console.WriteLine(result.ToString());
+
+            bool IsVoidElement(object value)
+            {
+                var member = typeof(ElementType).GetMember(value.ToString()).First();
+                return System.Attribute.IsDefined(member, typeof(VoidAttribute));
+            }
+        }
+
+        [Test, Explicit]
+        public void AttributeMethods()
+        {
+            var values = Enum.GetValues(typeof(AttributeType));
+
+            var result = new StringBuilder();
+            result.AppendLine("public static class Attributes");
+            result.AppendLine("{");
+            foreach (var value in values)
+            {
+                result.AppendLine($"    public static Attribute {value}(string value) => new(AttributeType.{value}, value);");
+            }
+            result.AppendLine("}");
+
+            Console.WriteLine(result.ToString());
+        }
     }
 }
