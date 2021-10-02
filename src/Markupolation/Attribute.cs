@@ -31,4 +31,9 @@ namespace Markupolation
     internal class GlobalAttribute : System.Attribute
     {
     }
+
+    [AttributeUsage(AttributeTargets.Field, Inherited = false)]
+    internal class BooleanAttribute : System.Attribute
+    {
+    }
 }

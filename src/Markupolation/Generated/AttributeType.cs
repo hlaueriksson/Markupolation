@@ -9,17 +9,22 @@ namespace Markupolation
         accesskey,
         action,
         allow,
+        [Boolean]
         allowfullscreen,
         alt,
         as_,
+        [Boolean]
         async,
         [Global]
         autocapitalize,
         autocomplete,
         [Global]
+        [Boolean]
         autofocus,
+        [Boolean]
         autoplay,
         charset,
+        [Boolean]
         checked_,
         cite,
         class_,
@@ -29,17 +34,21 @@ namespace Markupolation
         content,
         [Global]
         contenteditable,
+        [Boolean]
         controls,
         coords,
         crossorigin,
         data,
         datetime,
         decoding,
+        [Boolean]
         default_,
+        [Boolean]
         defer,
         [Global]
         dir,
         dirname,
+        [Boolean]
         disabled,
         download,
         [Global]
@@ -52,11 +61,13 @@ namespace Markupolation
         formaction,
         formenctype,
         formmethod,
+        [Boolean]
         formnovalidate,
         formtarget,
         headers,
         height,
         [Global]
+        [Boolean]
         hidden,
         high,
         href,
@@ -69,6 +80,7 @@ namespace Markupolation
         inputmode,
         integrity,
         is_,
+        [Boolean]
         ismap,
         [Global]
         itemid,
@@ -77,6 +89,7 @@ namespace Markupolation
         [Global]
         itemref,
         [Global]
+        [Boolean]
         itemscope,
         [Global]
         itemtype,
@@ -86,6 +99,7 @@ namespace Markupolation
         lang,
         list,
         loading,
+        [Boolean]
         loop,
         low,
         max,
@@ -94,30 +108,40 @@ namespace Markupolation
         method,
         min,
         minlength,
+        [Boolean]
         multiple,
+        [Boolean]
         muted,
         name,
+        [Boolean]
         nomodule,
         [Global]
         nonce,
+        [Boolean]
         novalidate,
+        [Boolean]
         open,
         optimum,
         pattern,
         ping,
         placeholder,
+        [Boolean]
         playsinline,
         poster,
         preload,
+        [Boolean]
         readonly_,
         referrerpolicy,
         rel,
+        [Boolean]
         required,
+        [Boolean]
         reversed,
         rows,
         rowspan,
         sandbox,
         scope,
+        [Boolean]
         selected,
         shape,
         size,

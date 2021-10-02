@@ -56,15 +56,14 @@ namespace Markupolation.Tests
             var globalAttributes = attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToList();
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/indices.html#attributes-3");
-            attributes = await page.QuerySelectorAllAsync("table#attributes-1 tbody tr th code");
-            var distinctAttributes = attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).Distinct().ToList();
-
+            attributes = await page.QuerySelectorAllAsync("table#attributes-1 tbody tr");
+            var distinctAttributes = attributes.Select(async x => new { Name = await (await x.QuerySelectorAsync("th code")).InnerTextAsync(), IsBoolean = await x.QuerySelectorAsync("td a[href$='boolean-attribute']") != null }).Select(x => x.Result).Distinct().ToList();
             var result = new StringBuilder();
             result.AppendLine("internal enum AttributeType");
             result.AppendLine("{");
             foreach (var attribute in distinctAttributes)
             {
-                var name = attribute.Replace('-', '_');
+                var name = attribute.Name.Replace('-', '_');
                 if (new[] { "as", "checked", "class", "default", "for", "is", "readonly" }.Contains(name))
                 {
                     name += "_";
@@ -72,6 +71,10 @@ namespace Markupolation.Tests
                 if (globalAttributes.Contains(name))
                 {
                     result.AppendLine("    [Global]");
+                }
+                if (attribute.IsBoolean)
+                {
+                    result.AppendLine("    [Boolean]");
                 }
                 result.AppendLine($"    {name},");
             }
