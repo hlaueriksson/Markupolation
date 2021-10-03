@@ -113,7 +113,7 @@ namespace Markupolation.Tests
             var values = Enum.GetValues(typeof(ElementType));
 
             var result = new StringBuilder();
-            result.AppendLine("public static class Elements");
+            result.AppendLine("public static partial class Elements");
             result.AppendLine("{");
             foreach (var value in values)
             {
@@ -143,7 +143,7 @@ namespace Markupolation.Tests
             var values = Enum.GetValues(typeof(AttributeType));
 
             var result = new StringBuilder();
-            result.AppendLine("public static class Attributes");
+            result.AppendLine("public static partial class Attributes");
             result.AppendLine("{");
             foreach (var value in values)
             {

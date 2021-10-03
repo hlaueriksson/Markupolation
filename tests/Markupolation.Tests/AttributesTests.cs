@@ -26,6 +26,14 @@ namespace Markupolation.Tests
         }
 
         [Test]
+        public void Data()
+        {
+            data("value").ToString().Should().Be("data=\"value\"");
+            data("foo", "value").ToString().Should().Be("data-foo=\"value\"");
+            data("foo-bar", "value").ToString().Should().Be("data-foo-bar=\"value\"");
+        }
+
+        [Test]
         public void Attribute_()
         {
             as_("value").ToString().Should().Be("as=\"value\"");

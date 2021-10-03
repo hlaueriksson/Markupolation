@@ -1,6 +1,6 @@
 namespace Markupolation
 {
-    public static class Attributes
+    public static partial class Attributes
     {
         public static Attribute abbr(string value) => new(AttributeType.abbr, value);
         public static Attribute accept(string value) => new(AttributeType.accept, value);
