@@ -8,17 +8,19 @@ namespace Markupolation
 
         private static Element NormalElement(ElementType type, Content[] content)
         {
+            var name = type.ToString().TrimEnd('_');
             var attributes = content.OfType<Attribute>().ToArray();
             var children = content.Where(x => x.GetType() != typeof(Attribute)).ToArray();
 
-            return new($"<{type}{attributes.Join(" ").Pad()}>{children.Join()}</{type}>");
+            return new($"<{name}{attributes.Join(" ").Pad()}>{children.Join()}</{name}>");
         }
 
         private static Element VoidElement(ElementType type, Content[] content)
         {
+            var name = type.ToString().TrimEnd('_');
             var attributes = content.OfType<Attribute>().ToArray();
 
-            return new($"<{type}{attributes.Join(" ").Pad()} />");
+            return new($"<{name}{attributes.Join(" ").Pad()} />");
         }
     }
 }

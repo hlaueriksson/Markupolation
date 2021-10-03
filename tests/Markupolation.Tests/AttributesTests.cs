@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Markupolation.Tests
@@ -13,7 +13,7 @@ namespace Markupolation.Tests
         }
 
         [Test]
-        public void BooleanElement()
+        public void BooleanAttribute()
         {
             var result = crossorigin(null);
             result.ToString().Should().Be("crossorigin");
@@ -23,6 +23,21 @@ namespace Markupolation.Tests
 
             result = required();
             result.ToString().Should().Be("required");
+        }
+
+        [Test]
+        public void Attribute_()
+        {
+            as_("value").ToString().Should().Be("as=\"value\"");
+            checked_().ToString().Should().Be("checked");
+            class_("value").ToString().Should().Be("class=\"value\"");
+            default_().ToString().Should().Be("default");
+            for_("value").ToString().Should().Be("for=\"value\"");
+            is_("value").ToString().Should().Be("is=\"value\"");
+            readonly_().ToString().Should().Be("readonly");
+
+            accept_charset("value").ToString().Should().Be("accept-charset=\"value\"");
+            http_equiv("value").ToString().Should().Be("http-equiv=\"value\"");
         }
     }
 }

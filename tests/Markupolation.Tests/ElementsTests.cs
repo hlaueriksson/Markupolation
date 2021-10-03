@@ -24,5 +24,12 @@ namespace Markupolation.Tests
             result = img(id("main-logo"), crossorigin(null), src("https://resources.whatwg.org/logo.svg"), "Child");
             result.ToString().Should().Be("<img id=\"main-logo\" crossorigin src=\"https://resources.whatwg.org/logo.svg\" />");
         }
+
+        [Test]
+        public void Element_()
+        {
+            base_().ToString().Should().Be("<base />");
+            object_().ToString().Should().Be("<object></object>");
+        }
     }
 }

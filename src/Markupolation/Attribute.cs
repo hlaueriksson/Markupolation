@@ -9,15 +9,13 @@ namespace Markupolation
             Name = name;
         }
 
-        internal Attribute(AttributeType type) : base()
+        internal Attribute(AttributeType type) : this(type, null)
         {
-            Name = type.ToString();
-            Type = type;
         }
 
         internal Attribute(AttributeType type, string value) : base(value)
         {
-            Name = type.ToString();
+            Name = type.ToString().TrimEnd('_').Replace("_", "-");
             Type = type;
         }
 
