@@ -113,7 +113,7 @@ namespace Markupolation
         [Element("Footer for a page or section", false)]
         footer,
 
-        [Element("User-submittable form", false, "accept-charset", "action", "autocomplete", "enctype", "method", "name", "novalidate", "target")]
+        [Element("User-submittable form", false, "accept_charset", "action", "autocomplete", "enctype", "method", "name", "novalidate", "target")]
         form,
 
         [Element("Section heading", false)]
@@ -158,7 +158,7 @@ namespace Markupolation
         [Element("Image", true, "alt", "src", "srcset", "sizes", "crossorigin", "usemap", "ismap", "width", "height", "referrerpolicy", "decoding", "loading")]
         img,
 
-        [Element("Form control", true, "accept", "alt", "autocomplete", "checked", "dirname", "disabled", "form", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget", "height", "list", "max", "maxlength", "min", "minlength", "multiple", "name", "pattern", "placeholder", "readonly", "required", "size", "src", "step", "type", "value", "width")]
+        [Element("Form control", true, "accept", "alt", "autocomplete", "checked_", "dirname", "disabled", "form", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget", "height", "list", "max", "maxlength", "min", "minlength", "multiple", "name", "pattern", "placeholder", "readonly_", "required", "size", "src", "step", "type", "value", "width")]
         input,
 
         [Element("An addition to the document", false, "cite", "datetime")]
@@ -167,7 +167,7 @@ namespace Markupolation
         [Element("User input", false)]
         kbd,
 
-        [Element("Caption for a form control", false, "for")]
+        [Element("Caption for a form control", false, "for_")]
         label,
 
         [Element("Caption for fieldset", false)]
@@ -176,7 +176,7 @@ namespace Markupolation
         [Element("List item", false, "value")]
         li,
 
-        [Element("Link metadata", true, "href", "crossorigin", "rel", "as", "media", "hreflang", "type", "sizes", "imagesrcset", "imagesizes", "referrerpolicy", "integrity", "color", "disabled")]
+        [Element("Link metadata", true, "href", "crossorigin", "rel", "as_", "media", "hreflang", "type", "sizes", "imagesrcset", "imagesizes", "referrerpolicy", "integrity", "color", "disabled")]
         link,
 
         [Element("Container for the dominant contents of the document", false)]
@@ -191,7 +191,7 @@ namespace Markupolation
         [Element("Menu of commands", false)]
         menu,
 
-        [Element("Text metadata", true, "name", "http-equiv", "content", "charset", "media")]
+        [Element("Text metadata", true, "name", "http_equiv", "content", "charset", "media")]
         meta,
 
         [Element("Gauge", false, "value", "min", "max", "low", "high", "optimum")]
@@ -215,7 +215,7 @@ namespace Markupolation
         [Element("Option in a list box or combo box control", false, "disabled", "label", "selected", "value")]
         option,
 
-        [Element("Calculated output value", false, "for", "form", "name")]
+        [Element("Calculated output value", false, "for_", "form", "name")]
         output,
 
         [Element("Paragraph", false)]
@@ -299,7 +299,7 @@ namespace Markupolation
         [Element("Template", false)]
         template,
 
-        [Element("Multiline text controls", false, "cols", "dirname", "disabled", "form", "maxlength", "minlength", "name", "placeholder", "readonly", "required", "rows", "wrap")]
+        [Element("Multiline text controls", false, "cols", "dirname", "disabled", "form", "maxlength", "minlength", "name", "placeholder", "readonly_", "required", "rows", "wrap")]
         textarea,
 
         [Element("Group of footer rows in a table", false)]
@@ -320,7 +320,7 @@ namespace Markupolation
         [Element("Table row", false)]
         tr,
 
-        [Element("Timed text track", true, "default", "kind", "label", "src", "srclang")]
+        [Element("Timed text track", true, "default_", "kind", "label", "src", "srclang")]
         track,
 
         [Element("Unarticulated annotation", false)]

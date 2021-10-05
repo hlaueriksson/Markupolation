@@ -203,7 +203,7 @@ namespace Markupolation
         /// <summary>
         /// Address of the resource.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.object"/></remarks>
+        /// <remarks>Elements: <see cref="Elements.object_"/></remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>data="value"</code></returns>
         public static Attribute data(string value) => new(AttributeType.data, value);
@@ -306,7 +306,7 @@ namespace Markupolation
         /// <summary>
         /// Associates the element with a form element.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.button"/>, <see cref="Elements.fieldset"/>, <see cref="Elements.input"/>, <see cref="Elements.object"/>, <see cref="Elements.output"/>, <see cref="Elements.select"/>, <see cref="Elements.textarea"/></remarks>
+        /// <remarks>Elements: <see cref="Elements.button"/>, <see cref="Elements.fieldset"/>, <see cref="Elements.input"/>, <see cref="Elements.object_"/>, <see cref="Elements.output"/>, <see cref="Elements.select"/>, <see cref="Elements.textarea"/></remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>form="value"</code></returns>
         public static Attribute form(string value) => new(AttributeType.form, value);
@@ -361,7 +361,7 @@ namespace Markupolation
         /// <summary>
         /// Vertical dimension.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.canvas"/>, <see cref="Elements.embed"/>, <see cref="Elements.iframe"/>, <see cref="Elements.img"/>, <see cref="Elements.input"/>, <see cref="Elements.object"/>, <see cref="Elements.source"/>, <see cref="Elements.video"/></remarks>
+        /// <remarks>Elements: <see cref="Elements.canvas"/>, <see cref="Elements.embed"/>, <see cref="Elements.iframe"/>, <see cref="Elements.img"/>, <see cref="Elements.input"/>, <see cref="Elements.object_"/>, <see cref="Elements.source"/>, <see cref="Elements.video"/></remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>height="value"</code></returns>
         public static Attribute height(string value) => new(AttributeType.height, value);
@@ -385,7 +385,7 @@ namespace Markupolation
         /// Address of the hyperlink.
         /// Document base URL.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.a"/>, <see cref="Elements.area"/>, <see cref="Elements.link"/>, <see cref="Elements.base"/></remarks>
+        /// <remarks>Elements: <see cref="Elements.a"/>, <see cref="Elements.area"/>, <see cref="Elements.link"/>, <see cref="Elements.base_"/></remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>href="value"</code></returns>
         public static Attribute href(string value) => new(AttributeType.href, value);
@@ -619,7 +619,7 @@ namespace Markupolation
         /// Name of parameter.
         /// Name of shadow tree slot.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.button"/>, <see cref="Elements.fieldset"/>, <see cref="Elements.input"/>, <see cref="Elements.output"/>, <see cref="Elements.select"/>, <see cref="Elements.textarea"/>, <see cref="Elements.form"/>, <see cref="Elements.iframe"/>, <see cref="Elements.object"/>, <see cref="Elements.map"/>, <see cref="Elements.meta"/>, <see cref="Elements.param"/>, <see cref="Elements.slot"/></remarks>
+        /// <remarks>Elements: <see cref="Elements.button"/>, <see cref="Elements.fieldset"/>, <see cref="Elements.input"/>, <see cref="Elements.output"/>, <see cref="Elements.select"/>, <see cref="Elements.textarea"/>, <see cref="Elements.form"/>, <see cref="Elements.iframe"/>, <see cref="Elements.object_"/>, <see cref="Elements.map"/>, <see cref="Elements.meta"/>, <see cref="Elements.param"/>, <see cref="Elements.slot"/></remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>name="value"</code></returns>
         public static Attribute name(string value) => new(AttributeType.name, value);
@@ -899,7 +899,7 @@ namespace Markupolation
         /// Default browsing context for hyperlink navigation and form submission.
         /// Browsing context for form submission.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.a"/>, <see cref="Elements.area"/>, <see cref="Elements.base"/>, <see cref="Elements.form"/></remarks>
+        /// <remarks>Elements: <see cref="Elements.a"/>, <see cref="Elements.area"/>, <see cref="Elements.base_"/>, <see cref="Elements.form"/></remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>target="value"</code></returns>
         public static Attribute target(string value) => new(AttributeType.target, value);
@@ -931,7 +931,7 @@ namespace Markupolation
         /// Kind of list marker.
         /// Type of script.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.a"/>, <see cref="Elements.link"/>, <see cref="Elements.button"/>, <see cref="Elements.embed"/>, <see cref="Elements.object"/>, <see cref="Elements.source"/>, <see cref="Elements.input"/>, <see cref="Elements.ol"/>, <see cref="Elements.script"/></remarks>
+        /// <remarks>Elements: <see cref="Elements.a"/>, <see cref="Elements.link"/>, <see cref="Elements.button"/>, <see cref="Elements.embed"/>, <see cref="Elements.object_"/>, <see cref="Elements.source"/>, <see cref="Elements.input"/>, <see cref="Elements.ol"/>, <see cref="Elements.script"/></remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>type="value"</code></returns>
         public static Attribute type(string value) => new(AttributeType.type, value);
@@ -960,7 +960,7 @@ namespace Markupolation
         /// <summary>
         /// Horizontal dimension.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.canvas"/>, <see cref="Elements.embed"/>, <see cref="Elements.iframe"/>, <see cref="Elements.img"/>, <see cref="Elements.input"/>, <see cref="Elements.object"/>, <see cref="Elements.source"/>, <see cref="Elements.video"/></remarks>
+        /// <remarks>Elements: <see cref="Elements.canvas"/>, <see cref="Elements.embed"/>, <see cref="Elements.iframe"/>, <see cref="Elements.img"/>, <see cref="Elements.input"/>, <see cref="Elements.object_"/>, <see cref="Elements.source"/>, <see cref="Elements.video"/></remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>width="value"</code></returns>
         public static Attribute width(string value) => new(AttributeType.width, value);

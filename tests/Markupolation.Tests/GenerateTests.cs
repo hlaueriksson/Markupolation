@@ -19,7 +19,7 @@ namespace Markupolation.Tests
 
             await page.GotoAsync("https://html.spec.whatwg.org/multipage/syntax.html#void-elements");
             var elements = await page.QuerySelectorAllAsync("dl dd:first-of-type code[id^='elements'] a");
-            var voidElements = elements.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToList();
+            var voidElements = elements.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.CleanName()).ToList();
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/indices.html#elements-3");
             elements = await page.QuerySelectorAllAsync("body > table:nth-child(7) tbody tr");
@@ -40,10 +40,9 @@ namespace Markupolation.Tests
                 foreach (var name in names)
                 {
                     var isVoidElement = voidElements.Contains(name).ToString().ToLower();
-                    var suffix = IsCsharpKeyword(name) ? "_" : string.Empty;
 
                     result.AppendLine($"    [Element(\"{description}\", {isVoidElement}{attributeArray})]");
-                    result.AppendLine($"    {name}{suffix},");
+                    result.AppendLine($"    {name},");
                     result.AppendLine();
                 }
             }
@@ -54,16 +53,14 @@ namespace Markupolation.Tests
             async Task<string[]> GetNamesAsync(IElementHandle element)
             {
                 var links = await element.QuerySelectorAllAsync("th code[id^='elements'] a");
-                return links.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToArray();
+                return links.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.CleanName()).ToArray();
             }
 
             async Task<string[]> GetAttributesAsync(IElementHandle element)
             {
                 var attributes = await element.QuerySelectorAllAsync("td code[id^='elements'] a[href*='attr']");
-                return attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToArray();
+                return attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.CleanName()).ToArray();
             }
-
-            bool IsCsharpKeyword(string name) => new[] { "base", "object" }.Contains(name);
         }
 
         [Test, Explicit]
@@ -75,7 +72,7 @@ namespace Markupolation.Tests
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/dom.html#global-attributes");
             var attributes = await page.QuerySelectorAllAsync("ul.brief:nth-of-type(11) li code[id^='global-attributes'] a");
-            var globalAttributes = attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.Replace('-', '_')).ToList();
+            var globalAttributes = attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.CleanName()).ToList();
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/indices.html#attributes-3");
             attributes = await page.QuerySelectorAllAsync("table#attributes-1 tbody tr");
@@ -87,7 +84,6 @@ namespace Markupolation.Tests
             {
                 var attribute = attributes[i];
                 var name = await GetNameAsync(attribute);
-                var suffix = IsCsharpKeyword(name) ? "_" : string.Empty;
                 var nextName = await GetNameAsync(i < attributes.Count - 1 ? attributes[i + 1] : null);
 
                 var description = (await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(2)", "e => e.innerText")).Replace("\"", "\\\"");
@@ -99,7 +95,7 @@ namespace Markupolation.Tests
                 result.AppendLine($"    [Attribute(\"{description}\", {isGlobalAttribute}, {isBooleanAttribute}{elementArray})]");
                 if (name != nextName)
                 {
-                    result.AppendLine($"    {name}{suffix},");
+                    result.AppendLine($"    {name},");
                     result.AppendLine();
                 }
             }
@@ -112,16 +108,14 @@ namespace Markupolation.Tests
                 if (attribute == null) return null;
                 var code = await attribute.QuerySelectorAsync("th code");
                 var name = await code.InnerTextAsync();
-                return name.Replace('-', '_');
+                return name.CleanName();
             }
 
             async Task<string[]> GetElementsAsync(IElementHandle attribute)
             {
                 var elements = await attribute.QuerySelectorAllAsync("td:first-of-type code[id^='attributes'] a[href*='attr']");
-                return elements.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToArray();
+                return elements.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.CleanName()).ToArray();
             }
-
-            bool IsCsharpKeyword(string name) => new[] { "as", "checked", "class", "default", "for", "is", "readonly" }.Contains(name);
         }
 
         [Test, Explicit]
@@ -262,5 +256,18 @@ namespace Markupolation.Tests
             result = $"{Markupolation.Elements.title("Title")}";
             result.Should().Be("<title>Title</title>");
         }
+    }
+
+    public static class NameExtensions
+    {
+        public static string CleanName(this string name)
+        {
+            var suffix = IsCsharpKeyword(name) ? "_" : string.Empty;
+            return name.Replace('-', '_') + suffix;
+        }
+
+        private static readonly string[] keywords = new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" };
+
+        private static bool IsCsharpKeyword(this string name) => keywords.Contains(name);
     }
 }

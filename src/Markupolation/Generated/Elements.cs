@@ -203,7 +203,7 @@ namespace Markupolation
         public static Element footer(params Content[] content) => NormalElement(ElementType.footer, content);
 
         /// <summary>User-submittable form.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.accept-charset"/>, <see cref="Attributes.action"/>, <see cref="Attributes.autocomplete"/>, <see cref="Attributes.enctype"/>, <see cref="Attributes.method"/>, <see cref="Attributes.name"/>, <see cref="Attributes.novalidate"/>, <see cref="Attributes.target"/></remarks>
+        /// <remarks>Attributes: <see cref="Attributes.accept_charset"/>, <see cref="Attributes.action"/>, <see cref="Attributes.autocomplete"/>, <see cref="Attributes.enctype"/>, <see cref="Attributes.method"/>, <see cref="Attributes.name"/>, <see cref="Attributes.novalidate"/>, <see cref="Attributes.target"/></remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<form></form>]]></code></returns>
         public static Element form(params Content[] content) => NormalElement(ElementType.form, content);
@@ -282,7 +282,7 @@ namespace Markupolation
         public static Element img(params Content[] content) => VoidElement(ElementType.img, content);
 
         /// <summary>Form control.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.accept"/>, <see cref="Attributes.alt"/>, <see cref="Attributes.autocomplete"/>, <see cref="Attributes.checked"/>, <see cref="Attributes.dirname"/>, <see cref="Attributes.disabled"/>, <see cref="Attributes.form"/>, <see cref="Attributes.formaction"/>, <see cref="Attributes.formenctype"/>, <see cref="Attributes.formmethod"/>, <see cref="Attributes.formnovalidate"/>, <see cref="Attributes.formtarget"/>, <see cref="Attributes.height"/>, <see cref="Attributes.list"/>, <see cref="Attributes.max"/>, <see cref="Attributes.maxlength"/>, <see cref="Attributes.min"/>, <see cref="Attributes.minlength"/>, <see cref="Attributes.multiple"/>, <see cref="Attributes.name"/>, <see cref="Attributes.pattern"/>, <see cref="Attributes.placeholder"/>, <see cref="Attributes.readonly"/>, <see cref="Attributes.required"/>, <see cref="Attributes.size"/>, <see cref="Attributes.src"/>, <see cref="Attributes.step"/>, <see cref="Attributes.type"/>, <see cref="Attributes.value"/>, <see cref="Attributes.width"/></remarks>
+        /// <remarks>Attributes: <see cref="Attributes.accept"/>, <see cref="Attributes.alt"/>, <see cref="Attributes.autocomplete"/>, <see cref="Attributes.checked_"/>, <see cref="Attributes.dirname"/>, <see cref="Attributes.disabled"/>, <see cref="Attributes.form"/>, <see cref="Attributes.formaction"/>, <see cref="Attributes.formenctype"/>, <see cref="Attributes.formmethod"/>, <see cref="Attributes.formnovalidate"/>, <see cref="Attributes.formtarget"/>, <see cref="Attributes.height"/>, <see cref="Attributes.list"/>, <see cref="Attributes.max"/>, <see cref="Attributes.maxlength"/>, <see cref="Attributes.min"/>, <see cref="Attributes.minlength"/>, <see cref="Attributes.multiple"/>, <see cref="Attributes.name"/>, <see cref="Attributes.pattern"/>, <see cref="Attributes.placeholder"/>, <see cref="Attributes.readonly_"/>, <see cref="Attributes.required"/>, <see cref="Attributes.size"/>, <see cref="Attributes.src"/>, <see cref="Attributes.step"/>, <see cref="Attributes.type"/>, <see cref="Attributes.value"/>, <see cref="Attributes.width"/></remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<input />]]></code></returns>
         public static Element input(params Content[] content) => VoidElement(ElementType.input, content);
@@ -299,7 +299,7 @@ namespace Markupolation
         public static Element kbd(params Content[] content) => NormalElement(ElementType.kbd, content);
 
         /// <summary>Caption for a form control.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.for"/></remarks>
+        /// <remarks>Attributes: <see cref="Attributes.for_"/></remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<label></label>]]></code></returns>
         public static Element label(params Content[] content) => NormalElement(ElementType.label, content);
@@ -316,7 +316,7 @@ namespace Markupolation
         public static Element li(params Content[] content) => NormalElement(ElementType.li, content);
 
         /// <summary>Link metadata.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.href"/>, <see cref="Attributes.crossorigin"/>, <see cref="Attributes.rel"/>, <see cref="Attributes.as"/>, <see cref="Attributes.media"/>, <see cref="Attributes.hreflang"/>, <see cref="Attributes.type"/>, <see cref="Attributes.sizes"/>, <see cref="Attributes.imagesrcset"/>, <see cref="Attributes.imagesizes"/>, <see cref="Attributes.referrerpolicy"/>, <see cref="Attributes.integrity"/>, <see cref="Attributes.color"/>, <see cref="Attributes.disabled"/></remarks>
+        /// <remarks>Attributes: <see cref="Attributes.href"/>, <see cref="Attributes.crossorigin"/>, <see cref="Attributes.rel"/>, <see cref="Attributes.as_"/>, <see cref="Attributes.media"/>, <see cref="Attributes.hreflang"/>, <see cref="Attributes.type"/>, <see cref="Attributes.sizes"/>, <see cref="Attributes.imagesrcset"/>, <see cref="Attributes.imagesizes"/>, <see cref="Attributes.referrerpolicy"/>, <see cref="Attributes.integrity"/>, <see cref="Attributes.color"/>, <see cref="Attributes.disabled"/></remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<link />]]></code></returns>
         public static Element link(params Content[] content) => VoidElement(ElementType.link, content);
@@ -343,7 +343,7 @@ namespace Markupolation
         public static Element menu(params Content[] content) => NormalElement(ElementType.menu, content);
 
         /// <summary>Text metadata.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.name"/>, <see cref="Attributes.http-equiv"/>, <see cref="Attributes.content"/>, <see cref="Attributes.charset"/>, <see cref="Attributes.media"/></remarks>
+        /// <remarks>Attributes: <see cref="Attributes.name"/>, <see cref="Attributes.http_equiv"/>, <see cref="Attributes.content"/>, <see cref="Attributes.charset"/>, <see cref="Attributes.media"/></remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<meta />]]></code></returns>
         public static Element meta(params Content[] content) => VoidElement(ElementType.meta, content);
@@ -389,7 +389,7 @@ namespace Markupolation
         public static Element option(params Content[] content) => NormalElement(ElementType.option, content);
 
         /// <summary>Calculated output value.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.for"/>, <see cref="Attributes.form"/>, <see cref="Attributes.name"/></remarks>
+        /// <remarks>Attributes: <see cref="Attributes.for_"/>, <see cref="Attributes.form"/>, <see cref="Attributes.name"/></remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<output></output>]]></code></returns>
         public static Element output(params Content[] content) => NormalElement(ElementType.output, content);
@@ -539,7 +539,7 @@ namespace Markupolation
         public static Element template(params Content[] content) => NormalElement(ElementType.template, content);
 
         /// <summary>Multiline text controls.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.cols"/>, <see cref="Attributes.dirname"/>, <see cref="Attributes.disabled"/>, <see cref="Attributes.form"/>, <see cref="Attributes.maxlength"/>, <see cref="Attributes.minlength"/>, <see cref="Attributes.name"/>, <see cref="Attributes.placeholder"/>, <see cref="Attributes.readonly"/>, <see cref="Attributes.required"/>, <see cref="Attributes.rows"/>, <see cref="Attributes.wrap"/></remarks>
+        /// <remarks>Attributes: <see cref="Attributes.cols"/>, <see cref="Attributes.dirname"/>, <see cref="Attributes.disabled"/>, <see cref="Attributes.form"/>, <see cref="Attributes.maxlength"/>, <see cref="Attributes.minlength"/>, <see cref="Attributes.name"/>, <see cref="Attributes.placeholder"/>, <see cref="Attributes.readonly_"/>, <see cref="Attributes.required"/>, <see cref="Attributes.rows"/>, <see cref="Attributes.wrap"/></remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<textarea></textarea>]]></code></returns>
         public static Element textarea(params Content[] content) => NormalElement(ElementType.textarea, content);
@@ -577,7 +577,7 @@ namespace Markupolation
         public static Element tr(params Content[] content) => NormalElement(ElementType.tr, content);
 
         /// <summary>Timed text track.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.default"/>, <see cref="Attributes.kind"/>, <see cref="Attributes.label"/>, <see cref="Attributes.src"/>, <see cref="Attributes.srclang"/></remarks>
+        /// <remarks>Attributes: <see cref="Attributes.default_"/>, <see cref="Attributes.kind"/>, <see cref="Attributes.label"/>, <see cref="Attributes.src"/>, <see cref="Attributes.srclang"/></remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<track />]]></code></returns>
         public static Element track(params Content[] content) => VoidElement(ElementType.track, content);

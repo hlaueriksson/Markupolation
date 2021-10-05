@@ -81,7 +81,7 @@ namespace Markupolation
         [Attribute("How the element handles crossorigin requests", false, false, "audio", "img", "link", "script", "video")]
         crossorigin,
 
-        [Attribute("Address of the resource", false, false, "object")]
+        [Attribute("Address of the resource", false, false, "object_")]
         data,
 
         [Attribute("Date and (optionally) time of the change", false, false, "del", "ins")]
@@ -125,7 +125,7 @@ namespace Markupolation
         [Attribute("Specifies controls from which the output was calculated", false, false, "output")]
         for_,
 
-        [Attribute("Associates the element with a form element", false, false, "button", "fieldset", "input", "object", "output", "select", "textarea")]
+        [Attribute("Associates the element with a form element", false, false, "button", "fieldset", "input", "object_", "output", "select", "textarea")]
         form,
 
         [Attribute("URL to use for form submission", false, false, "button", "input")]
@@ -146,7 +146,7 @@ namespace Markupolation
         [Attribute("The header cells for this cell", false, false, "td", "th")]
         headers,
 
-        [Attribute("Vertical dimension", false, false, "canvas", "embed", "iframe", "img", "input", "object", "source", "video")]
+        [Attribute("Vertical dimension", false, false, "canvas", "embed", "iframe", "img", "input", "object_", "source", "video")]
         height,
 
         [Attribute("Whether the element is relevant", true, true)]
@@ -157,7 +157,7 @@ namespace Markupolation
 
         [Attribute("Address of the hyperlink", false, false, "a", "area")]
         [Attribute("Address of the hyperlink", false, false, "link")]
-        [Attribute("Document base URL", false, false, "base")]
+        [Attribute("Document base URL", false, false, "base_")]
         href,
 
         [Attribute("Language of the linked resource", false, false, "a", "link")]
@@ -251,7 +251,7 @@ namespace Markupolation
 
         [Attribute("Name of the element to use for form submission and in the form.elements API", false, false, "button", "fieldset", "input", "output", "select", "textarea")]
         [Attribute("Name of form to use in the document.forms API", false, false, "form")]
-        [Attribute("Name of nested browsing context", false, false, "iframe", "object")]
+        [Attribute("Name of nested browsing context", false, false, "iframe", "object_")]
         [Attribute("Name of image map to reference from the usemap attribute", false, false, "map")]
         [Attribute("Metadata name", false, false, "meta")]
         [Attribute("Name of parameter", false, false, "param")]
@@ -368,7 +368,7 @@ namespace Markupolation
         tabindex,
 
         [Attribute("Browsing context for hyperlink navigation", false, false, "a", "area")]
-        [Attribute("Default browsing context for hyperlink navigation and form submission", false, false, "base")]
+        [Attribute("Default browsing context for hyperlink navigation and form submission", false, false, "base_")]
         [Attribute("Browsing context for form submission", false, false, "form")]
         target,
 
@@ -384,7 +384,7 @@ namespace Markupolation
 
         [Attribute("Hint for the type of the referenced resource", false, false, "a", "link")]
         [Attribute("Type of button", false, false, "button")]
-        [Attribute("Type of embedded resource", false, false, "embed", "object", "source")]
+        [Attribute("Type of embedded resource", false, false, "embed", "object_", "source")]
         [Attribute("Type of form control", false, false, "input")]
         [Attribute("Kind of list marker", false, false, "ol")]
         [Attribute("Type of script", false, false, "script")]
@@ -401,7 +401,7 @@ namespace Markupolation
         [Attribute("Value of parameter", false, false, "param")]
         value,
 
-        [Attribute("Horizontal dimension", false, false, "canvas", "embed", "iframe", "img", "input", "object", "source", "video")]
+        [Attribute("Horizontal dimension", false, false, "canvas", "embed", "iframe", "img", "input", "object_", "source", "video")]
         width,
 
         [Attribute("How the value of the form control is to be wrapped for form submission", false, false, "textarea")]
