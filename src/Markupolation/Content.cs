@@ -5,18 +5,19 @@ namespace Markupolation
     [DebuggerDisplay("{ToString()}")]
     public record Content
     {
-        internal Content()
-        {
-        }
-
-        public Content(string value)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Content"/> class.
+        /// </summary>
+        /// <param name="value">Content value.</param>
+        public Content(string? value)
         {
             Value = value;
         }
 
-        public string Value { get; }
-
-        public override string ToString() => Value;
+        /// <summary>
+        /// Content value.
+        /// </summary>
+        public string? Value { get; }
 
         public static implicit operator string(Content value)
         {
@@ -27,5 +28,8 @@ namespace Markupolation
         {
             return new Content(value);
         }
+
+        /// <inheritdoc/>
+        public override string ToString() => Value ?? string.Empty;
     }
 }

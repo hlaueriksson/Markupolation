@@ -2,8 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <LangVersion>preview</LangVersion>
   </PropertyGroup>
+
+  <Import Project="../../Analyzers.props" />
 
   <ItemGroup>
     <InternalsVisibleTo Include="Markupolation.Tests" />

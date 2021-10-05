@@ -3,11 +3,21 @@ using System.Linq;
 
 namespace Markupolation
 {
+    /// <summary>
+    /// Extension methods for HTML templating.
+    /// </summary>
     public static class Extensions
     {
-        public static string Each<T>(this T[] items, Func<string, string> tag)
+        /// <summary>
+        /// Wraps each item in an <see cref="Element"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of items.</typeparam>
+        /// <param name="items">Items.</param>
+        /// <param name="element">Element delegate.</param>
+        /// <returns>Content.</returns>
+        public static string Each<T>(this T[] items, Func<string, Element> element)
         {
-            return items.Select(x => tag(x.ToString())).ToArray().Join();
+            return items.Select(x => element(x!.ToString())).ToArray().Join();
         }
 
         internal static string Join<T>(this T[] items, string separator = "") => string.Join(separator, items);

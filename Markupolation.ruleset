@@ -1,0 +1,10 @@
+﻿<RuleSet Name="Rules" Description="Rules for Markupolation" ToolsVersion="10.0">
+ <Rules AnalyzerId="StyleCop.Analyzers" RuleNamespace="StyleCop.Analyzers">
+    <Rule Id="SA0001" Action="None" />
+    <Rule Id="SA1101" Action="None" />
+    <Rule Id="SA1128" Action="None" />
+    <Rule Id="SA1633" Action="None" />
+    <Rule Id="SA1300" Action="None" /><!-- Element should begin with an uppercase letter -->
+    <Rule Id="SX1309" Action="Error" />
+  </Rules>
+</RuleSet>
