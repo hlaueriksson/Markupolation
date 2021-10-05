@@ -17,7 +17,17 @@ namespace Markupolation
     }
 
     [AttributeUsage(AttributeTargets.Field, Inherited = false)]
-    internal class VoidAttribute : System.Attribute
+    internal class ElementAttribute : System.Attribute
     {
+        public ElementAttribute(string description, bool isVoidElement, params string[] attributes)
+        {
+            Description = description;
+            IsVoidElement = isVoidElement;
+            Attributes = attributes;
+        }
+
+        public string Description { get; set; }
+        public bool IsVoidElement { get; set; }
+        public string[] Attributes { get; set; }
     }
 }
