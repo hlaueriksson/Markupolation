@@ -11,7 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{FD33
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{950F23E7-76D3-44CA-B730-4F4D0C35E32B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Markupolation.Tests", "tests\Markupolation.Tests\Markupolation.Tests.csproj", "{F86DE17B-2C5F-4674-8D25-FF03BDA31CF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markupolation.Tests", "tests\Markupolation.Tests\Markupolation.Tests.csproj", "{F86DE17B-2C5F-4674-8D25-FF03BDA31CF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Markupolation.Benchmark", "tests\Markupolation.Benchmark\Markupolation.Benchmark.csproj", "{A2D9F6F7-726F-46F3-8943-74350B0B8B9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{F86DE17B-2C5F-4674-8D25-FF03BDA31CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F86DE17B-2C5F-4674-8D25-FF03BDA31CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F86DE17B-2C5F-4674-8D25-FF03BDA31CF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2D9F6F7-726F-46F3-8943-74350B0B8B9A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2D9F6F7-726F-46F3-8943-74350B0B8B9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2D9F6F7-726F-46F3-8943-74350B0B8B9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2D9F6F7-726F-46F3-8943-74350B0B8B9A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,6 +40,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{DF2632D5-153A-46C5-B81C-C0B11099141C} = {8259CAB8-AA6E-412B-A632-5F17DAEB0761}
 		{F86DE17B-2C5F-4674-8D25-FF03BDA31CF8} = {950F23E7-76D3-44CA-B730-4F4D0C35E32B}
+		{A2D9F6F7-726F-46F3-8943-74350B0B8B9A} = {950F23E7-76D3-44CA-B730-4F4D0C35E32B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07E18CD0-C1C9-41F1-A41D-7E9721A2B045}
