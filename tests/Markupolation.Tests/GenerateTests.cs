@@ -11,7 +11,7 @@ namespace Markupolation.Tests
     public class GenerateTests
     {
         [Test, Explicit]
-        public async Task Elements()
+        public async Task ElementType()
         {
             using var playwright = await Playwright.CreateAsync();
             await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
@@ -22,31 +22,52 @@ namespace Markupolation.Tests
             var voidElements = elements.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToList();
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/indices.html#elements-3");
-            elements = await page.QuerySelectorAllAsync("table tbody tr th code[id^='elements'] a");
+            elements = await page.QuerySelectorAllAsync("body > table:nth-child(7) tbody tr");
 
             var result = new StringBuilder();
             result.AppendLine("internal enum ElementType");
             result.AppendLine("{");
             foreach (var element in elements)
             {
-                var name = await element.InnerTextAsync();
-                if (new[] { "base", "object" }.Contains(name))
+                var names = await GetNamesAsync(element);
+
+                if (!names.Any()) continue;
+
+                var description = await element.EvalOnSelectorAsync<string>("td", "e => e.innerText");
+                var attributes = await GetAttributesAsync(element);
+                var attributeArray = attributes.Any() ? ", " + string.Join(" ,", attributes.Select(x => $"\"{x}\"")) : string.Empty;
+
+                foreach (var name in names)
                 {
-                    name += "_";
+                    var isVoidElement = voidElements.Contains(name).ToString().ToLower();
+                    var suffix = IsCsharpKeyword(name) ? "_" : string.Empty;
+
+                    result.AppendLine($"    [Element(\"{description}\", {isVoidElement}{attributeArray})]");
+                    result.AppendLine($"    {name}{suffix},");
+                    result.AppendLine();
                 }
-                if (voidElements.Contains(name))
-                {
-                    result.AppendLine("    [Void]");
-                }
-                result.AppendLine($"    {name},");
             }
             result.AppendLine("}");
 
             Console.WriteLine(result.ToString());
+
+            async Task<string[]> GetNamesAsync(IElementHandle element)
+            {
+                var links = await element.QuerySelectorAllAsync("th code[id^='elements'] a");
+                return links.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToArray();
+            }
+
+            async Task<string[]> GetAttributesAsync(IElementHandle element)
+            {
+                var attributes = await element.QuerySelectorAllAsync("td code[id^='elements'] a[href*='attr']");
+                return attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToArray();
+            }
+
+            bool IsCsharpKeyword(string name) => new[] { "base", "object" }.Contains(name);
         }
 
         [Test, Explicit]
-        public async Task Attributes()
+        public async Task AttributeType()
         {
             using var playwright = await Playwright.CreateAsync();
             await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
@@ -54,38 +75,57 @@ namespace Markupolation.Tests
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/dom.html#global-attributes");
             var attributes = await page.QuerySelectorAllAsync("ul.brief:nth-of-type(11) li code[id^='global-attributes'] a");
-            var globalAttributes = attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToList();
+            var globalAttributes = attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.Replace('-', '_')).ToList();
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/indices.html#attributes-3");
             attributes = await page.QuerySelectorAllAsync("table#attributes-1 tbody tr");
-            var distinctAttributes = attributes.Select(async x => new { Name = await (await x.QuerySelectorAsync("th code")).InnerTextAsync(), IsBoolean = await x.QuerySelectorAsync("td a[href$='boolean-attribute']") != null }).Select(x => x.Result).Distinct().ToList();
+
             var result = new StringBuilder();
             result.AppendLine("internal enum AttributeType");
             result.AppendLine("{");
-            foreach (var attribute in distinctAttributes)
+            for (int i = 0; i < attributes.Count; i++)
             {
-                var name = attribute.Name.Replace('-', '_');
-                if (new[] { "as", "checked", "class", "default", "for", "is", "readonly" }.Contains(name))
+                var attribute = attributes[i];
+                var name = await GetNameAsync(attribute);
+                var suffix = IsCsharpKeyword(name) ? "_" : string.Empty;
+                var nextName = await GetNameAsync(i < attributes.Count - 1 ? attributes[i + 1] : null);
+
+                var description = (await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(2)", "e => e.innerText")).Replace("\"", "\\\"");
+                var isGlobalAttribute = globalAttributes.Contains(name).ToString().ToLower();
+                var isBooleanAttribute = (await attribute.QuerySelectorAsync("td a[href$='boolean-attribute']") != null).ToString().ToLower();
+                var elements = await GetElementsAsync(attribute);
+                var elementArray = elements.Any() ? ", " + string.Join(" ,", elements.Select(x => $"\"{x}\"")) : string.Empty;
+
+                result.AppendLine($"    [Attribute(\"{description}\", {isGlobalAttribute}, {isBooleanAttribute}{elementArray})]");
+                if (name != nextName)
                 {
-                    name += "_";
+                    result.AppendLine($"    {name}{suffix},");
+                    result.AppendLine();
                 }
-                if (globalAttributes.Contains(name))
-                {
-                    result.AppendLine("    [Global]");
-                }
-                if (attribute.IsBoolean)
-                {
-                    result.AppendLine("    [Boolean]");
-                }
-                result.AppendLine($"    {name},");
             }
             result.AppendLine("}");
 
             Console.WriteLine(result.ToString());
+
+            async Task<string> GetNameAsync(IElementHandle attribute)
+            {
+                if (attribute == null) return null;
+                var code = await attribute.QuerySelectorAsync("th code");
+                var name = await code.InnerTextAsync();
+                return name.Replace('-', '_');
+            }
+
+            async Task<string[]> GetElementsAsync(IElementHandle attribute)
+            {
+                var elements = await attribute.QuerySelectorAllAsync("td:first-of-type code[id^='attributes'] a[href*='attr']");
+                return elements.Select(async x => await x.InnerTextAsync()).Select(x => x.Result).ToArray();
+            }
+
+            bool IsCsharpKeyword(string name) => new[] { "as", "checked", "class", "default", "for", "is", "readonly" }.Contains(name);
         }
 
         [Test, Explicit]
-        public async Task EventHandlerContentAttributes()
+        public async Task EventHandlerContentAttributeType()
         {
             using var playwright = await Playwright.CreateAsync();
             await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
@@ -99,7 +139,7 @@ namespace Markupolation.Tests
             result.AppendLine("{");
             foreach (var attribute in attributes)
             {
-                var name = (await attribute.InnerTextAsync());
+                var name = await attribute.InnerTextAsync();
                 result.AppendLine($"    {name},");
             }
             result.AppendLine("}");
@@ -108,7 +148,7 @@ namespace Markupolation.Tests
         }
 
         [Test, Explicit]
-        public void ElementMethods()
+        public void Elements()
         {
             var values = Enum.GetValues(typeof(ElementType));
 
@@ -117,7 +157,19 @@ namespace Markupolation.Tests
             result.AppendLine("{");
             foreach (var value in values)
             {
-                if (IsVoidElement(value))
+                var a = GetElementAttribute(value);
+                var remarks = string.Join(", ", a.Attributes.Select(x => $"<see cref=\"Attributes.{x}\"/>"));
+                var param = a.IsVoidElement ? "Attributes." : "Attributes, elements and content.";
+                var returns = a.IsVoidElement ? $"<{value} />" : $"<{value}></{value}>";
+
+                result.AppendLine($"    /// <summary>{a.Description}.</summary>");
+                if (a.Attributes.Any())
+                {
+                    result.AppendLine($"    /// <remarks>Attributes: {remarks}</remarks>");
+                }
+                result.AppendLine($"    /// <param name=\"content\">{param}</param>");
+                result.AppendLine($"    /// <returns><code><![CDATA[{returns}]]></code></returns>");
+                if (a.IsVoidElement)
                 {
                     result.AppendLine($"    public static Element {value}(params Content[] content) => VoidElement(ElementType.{value}, content);");
                 }
@@ -125,20 +177,21 @@ namespace Markupolation.Tests
                 {
                     result.AppendLine($"    public static Element {value}(params Content[] content) => NormalElement(ElementType.{value}, content);");
                 }
+                result.AppendLine();
             }
             result.AppendLine("}");
 
             Console.WriteLine(result.ToString());
 
-            bool IsVoidElement(object value)
+            ElementAttribute GetElementAttribute(object value)
             {
                 var member = typeof(ElementType).GetMember(value.ToString()).First();
-                return System.Attribute.IsDefined(member, typeof(VoidAttribute));
+                return member.GetCustomAttributes(false).OfType<ElementAttribute>().Single();
             }
         }
 
         [Test, Explicit]
-        public void AttributeMethods()
+        public void Attributes()
         {
             var values = Enum.GetValues(typeof(AttributeType));
 
@@ -147,7 +200,27 @@ namespace Markupolation.Tests
             result.AppendLine("{");
             foreach (var value in values)
             {
-                if (IsBooleanAttribute(value))
+                var a = GetAttributeAttributes(value);
+                var remarks = string.Join(", ", a.SelectMany(x => x.Elements).Select(x => $"<see cref=\"Elements.{x}\"/>"));
+                var returns = a.Any(x => x.IsBooleanAttribute) ? $"{value}" : $"{value}=\"value\"";
+
+                result.AppendLine($"    /// <summary>");
+                foreach (var x in a)
+                {
+                    result.AppendLine($"    /// {x.Description}.");
+                }
+                result.AppendLine($"    /// </summary>");
+                if (a.SelectMany(x => x.Elements).Any())
+                {
+                    result.AppendLine($"    /// <remarks>Elements: {remarks}</remarks>");
+                }
+                if (a.All(x => !x.IsBooleanAttribute))
+                {
+                    result.AppendLine($"    /// <param name=\"value\">Attribute value.</param>");
+                }
+                result.AppendLine($"    /// <returns><code>{returns}</code></returns>");
+
+                if (a.Any(x => x.IsBooleanAttribute))
                 {
                     result.AppendLine($"    public static Attribute {value}() => new(AttributeType.{value});");
                 }
@@ -155,15 +228,16 @@ namespace Markupolation.Tests
                 {
                     result.AppendLine($"    public static Attribute {value}(string value) => new(AttributeType.{value}, value);");
                 }
+                result.AppendLine();
             }
             result.AppendLine("}");
 
             Console.WriteLine(result.ToString());
 
-            bool IsBooleanAttribute(object value)
+            AttributeAttribute[] GetAttributeAttributes(object value)
             {
                 var member = typeof(AttributeType).GetMember(value.ToString()).First();
-                return System.Attribute.IsDefined(member, typeof(BooleanAttribute));
+                return member.GetCustomAttributes(false).OfType<AttributeAttribute>().ToArray();
             }
         }
 
