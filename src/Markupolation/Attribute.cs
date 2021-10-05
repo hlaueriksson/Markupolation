@@ -31,13 +31,20 @@ namespace Markupolation
         }
     }
 
-    [AttributeUsage(AttributeTargets.Field, Inherited = false)]
-    internal class GlobalAttribute : System.Attribute
+    [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = true)]
+    internal class AttributeAttribute : System.Attribute
     {
-    }
+        public AttributeAttribute(string description, bool isGlobalAttribute, bool isBooleanAttribute, params string[] elements)
+        {
+            Description = description;
+            IsGlobalAttribute = isGlobalAttribute;
+            IsBooleanAttribute = isBooleanAttribute;
+            Elements = elements;
+        }
 
-    [AttributeUsage(AttributeTargets.Field, Inherited = false)]
-    internal class BooleanAttribute : System.Attribute
-    {
+        public string Description { get; set; }
+        public bool IsGlobalAttribute { get; set; }
+        public bool IsBooleanAttribute { get; set; }
+        public string[] Elements { get; set; }
     }
 }
