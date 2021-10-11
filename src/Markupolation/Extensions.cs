@@ -22,6 +22,6 @@ namespace Markupolation
 
         internal static string Join<T>(this T[] items, string separator = "") => string.Join(separator, items);
 
-        internal static string Pad(this string content) => content.Any() ? " " + content : content;
+        internal static string Pad(this string content) => content.Length > 0 ? " " + content : content;
     }
 }

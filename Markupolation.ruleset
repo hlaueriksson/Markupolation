@@ -6,5 +6,6 @@
     <Rule Id="SA1633" Action="None" />
     <Rule Id="SA1300" Action="None" /><!-- Element should begin with an uppercase letter -->
     <Rule Id="SX1309" Action="Error" />
+    <Rule Id="RCS1247" Action="None" /><!-- Fix documentation comment tag -->
   </Rules>
 </RuleSet>

@@ -178,7 +178,7 @@ namespace Markupolation.Tests
 
             Console.WriteLine(result.ToString());
 
-            ElementAttribute GetElementAttribute(object value)
+            static ElementAttribute GetElementAttribute(object value)
             {
                 var member = typeof(ElementType).GetMember(value.ToString()!).First();
                 return member.GetCustomAttributes(false).OfType<ElementAttribute>().Single();
@@ -230,7 +230,7 @@ namespace Markupolation.Tests
 
             Console.WriteLine(result.ToString());
 
-            AttributeAttribute[] GetAttributeAttributes(object value)
+            static AttributeAttribute[] GetAttributeAttributes(object value)
             {
                 var member = typeof(AttributeType).GetMember(value.ToString()!).First();
                 return member.GetCustomAttributes(false).OfType<AttributeAttribute>().ToArray();
@@ -268,8 +268,8 @@ namespace Markupolation.Tests
             return name.Replace('-', '_') + suffix;
         }
 
-        private static readonly string[] keywords = new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" };
+        private static readonly string[] _keywords = new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" };
 
-        private static bool IsCsharpKeyword(this string name) => keywords.Contains(name);
+        private static bool IsCsharpKeyword(this string name) => _keywords.Contains(name);
     }
 }

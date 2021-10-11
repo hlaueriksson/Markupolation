@@ -15,7 +15,7 @@ namespace Markupolation.Tests
         [Test]
         public void BooleanAttribute()
         {
-            var result = crossorigin(null);
+            var result = crossorigin(null!);
             result.ToString().Should().Be("crossorigin");
 
             result = crossorigin("");

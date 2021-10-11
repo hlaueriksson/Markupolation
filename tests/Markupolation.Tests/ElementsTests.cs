@@ -18,10 +18,10 @@ namespace Markupolation.Tests
         [Test]
         public void VoidElement()
         {
-            var result = img(id("main-logo"), crossorigin(null), src("https://resources.whatwg.org/logo.svg"));
+            var result = img(id("main-logo"), crossorigin(null!), src("https://resources.whatwg.org/logo.svg"));
             result.ToString().Should().Be("<img id=\"main-logo\" crossorigin src=\"https://resources.whatwg.org/logo.svg\" />");
 
-            result = img(id("main-logo"), crossorigin(null), src("https://resources.whatwg.org/logo.svg"), "Child");
+            result = img(id("main-logo"), crossorigin(null!), src("https://resources.whatwg.org/logo.svg"), "Child");
             result.ToString().Should().Be("<img id=\"main-logo\" crossorigin src=\"https://resources.whatwg.org/logo.svg\" />");
         }
 
