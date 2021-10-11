@@ -87,7 +87,7 @@ namespace Markupolation.Tests
                 var nextName = await GetNameAsync(i < attributes.Count - 1 ? attributes[i + 1] : null);
 
                 var description = (await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(2)", "e => e.innerText")).Replace("\"", "\\\"");
-                var isGlobalAttribute = globalAttributes.Contains(name).ToString().ToLower();
+                var isGlobalAttribute = globalAttributes.Contains(name!).ToString().ToLower();
                 var isBooleanAttribute = (await attribute.QuerySelectorAsync("td a[href$='boolean-attribute']") != null).ToString().ToLower();
                 var elements = await GetElementsAsync(attribute);
                 var elementArray = elements.Any() ? ", " + string.Join(" ,", elements.Select(x => $"\"{x}\"")) : string.Empty;
@@ -103,11 +103,11 @@ namespace Markupolation.Tests
 
             Console.WriteLine(result.ToString());
 
-            async Task<string> GetNameAsync(IElementHandle attribute)
+            async Task<string?> GetNameAsync(IElementHandle? attribute)
             {
                 if (attribute == null) return null;
                 var code = await attribute.QuerySelectorAsync("th code");
-                var name = await code.InnerTextAsync();
+                var name = await code!.InnerTextAsync();
                 return name.CleanName();
             }
 
@@ -147,6 +147,7 @@ namespace Markupolation.Tests
             var values = Enum.GetValues(typeof(ElementType));
 
             var result = new StringBuilder();
+            result.AppendLine("/// <summary>HTML elements.</summary>");
             result.AppendLine("public static partial class Elements");
             result.AppendLine("{");
             foreach (var value in values)
@@ -159,7 +160,7 @@ namespace Markupolation.Tests
                 result.AppendLine($"    /// <summary>{a.Description}.</summary>");
                 if (a.Attributes.Any())
                 {
-                    result.AppendLine($"    /// <remarks>Attributes: {remarks}</remarks>");
+                    result.AppendLine($"    /// <remarks>Attributes: {remarks}.</remarks>");
                 }
                 result.AppendLine($"    /// <param name=\"content\">{param}</param>");
                 result.AppendLine($"    /// <returns><code><![CDATA[{returns}]]></code></returns>");
@@ -179,7 +180,7 @@ namespace Markupolation.Tests
 
             ElementAttribute GetElementAttribute(object value)
             {
-                var member = typeof(ElementType).GetMember(value.ToString()).First();
+                var member = typeof(ElementType).GetMember(value.ToString()!).First();
                 return member.GetCustomAttributes(false).OfType<ElementAttribute>().Single();
             }
         }
@@ -190,13 +191,14 @@ namespace Markupolation.Tests
             var values = Enum.GetValues(typeof(AttributeType));
 
             var result = new StringBuilder();
+            result.AppendLine("/// <summary>HTML attributes.</summary>");
             result.AppendLine("public static partial class Attributes");
             result.AppendLine("{");
             foreach (var value in values)
             {
                 var a = GetAttributeAttributes(value);
                 var remarks = string.Join(", ", a.SelectMany(x => x.Elements).Select(x => $"<see cref=\"Elements.{x}\"/>"));
-                var returns = a.Any(x => x.IsBooleanAttribute) ? $"{value}" : $"{value}=\"value\"";
+                var returns = a.Any(x => x.IsBooleanAttribute) ? $"{value}" : $"{value}=\"{{value}}\"";
 
                 result.AppendLine($"    /// <summary>");
                 foreach (var x in a)
@@ -206,7 +208,7 @@ namespace Markupolation.Tests
                 result.AppendLine($"    /// </summary>");
                 if (a.SelectMany(x => x.Elements).Any())
                 {
-                    result.AppendLine($"    /// <remarks>Elements: {remarks}</remarks>");
+                    result.AppendLine($"    /// <remarks>Elements: {remarks}.</remarks>");
                 }
                 if (a.All(x => !x.IsBooleanAttribute))
                 {
@@ -230,7 +232,7 @@ namespace Markupolation.Tests
 
             AttributeAttribute[] GetAttributeAttributes(object value)
             {
-                var member = typeof(AttributeType).GetMember(value.ToString()).First();
+                var member = typeof(AttributeType).GetMember(value.ToString()!).First();
                 return member.GetCustomAttributes(false).OfType<AttributeAttribute>().ToArray();
             }
         }

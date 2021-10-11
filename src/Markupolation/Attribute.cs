@@ -25,7 +25,7 @@ namespace Markupolation
         }
 
         /// <summary>
-        /// Attribute name.
+        /// Gets attribute name.
         /// </summary>
         public string Name { get; }
 
