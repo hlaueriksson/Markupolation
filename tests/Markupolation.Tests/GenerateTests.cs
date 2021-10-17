@@ -164,14 +164,7 @@ namespace Markupolation.Tests
                 }
                 result.AppendLine($"    /// <param name=\"content\">{param}</param>");
                 result.AppendLine($"    /// <returns><code><![CDATA[{returns}]]></code></returns>");
-                if (a.IsVoidElement)
-                {
-                    result.AppendLine($"    public static Element {value}(params Content[] content) => VoidElement(ElementType.{value}, content);");
-                }
-                else
-                {
-                    result.AppendLine($"    public static Element {value}(params Content[] content) => NormalElement(ElementType.{value}, content);");
-                }
+                result.AppendLine($"    public static Element {value}(params Content[] content) => new(ElementType.{value}, {a.IsVoidElement.ToString().ToLower()}, content);");
                 result.AppendLine();
             }
             result.AppendLine("}");
