@@ -307,7 +307,7 @@ div(class_("min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
 
             await page.GotoAsync("https://play.tailwindcss.com/");
             var iframe = await page.QuerySelectorAsync("iframe");
-            var expected = await (await iframe.ContentFrameAsync()).ContentAsync();
+            var expected = await (await iframe!.ContentFrameAsync())!.ContentAsync();
 
             var diffs = DiffBuilder
                 .Compare(expected)

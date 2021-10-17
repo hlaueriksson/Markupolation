@@ -2,7 +2,9 @@ using System;
 
 namespace Markupolation
 {
+#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
     public sealed record Attribute : Content
+#pragma warning restore CA1711 // Identifiers should not have incorrect suffix
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Attribute"/> class.
@@ -33,7 +35,7 @@ namespace Markupolation
 
         public static implicit operator string(Attribute value)
         {
-            return value.ToString();
+            return value != null ? value.ToString() : string.Empty;
         }
 
         /// <inheritdoc/>
@@ -41,7 +43,7 @@ namespace Markupolation
     }
 
     [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = true)]
-    internal class AttributeAttribute : System.Attribute
+    internal sealed class AttributeAttribute : System.Attribute
     {
         public AttributeAttribute(string description, bool isGlobalAttribute, bool isBooleanAttribute, params string[] elements)
         {
@@ -51,12 +53,12 @@ namespace Markupolation
             Elements = elements;
         }
 
-        public string Description { get; set; }
+        public string Description { get; }
 
-        public bool IsGlobalAttribute { get; set; }
+        public bool IsGlobalAttribute { get; }
 
-        public bool IsBooleanAttribute { get; set; }
+        public bool IsBooleanAttribute { get; }
 
-        public string[] Elements { get; set; }
+        public string[] Elements { get; }
     }
 }

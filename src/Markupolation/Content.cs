@@ -15,16 +15,18 @@ namespace Markupolation
         }
 
         /// <summary>
-        /// Content value.
+        /// Gets content value.
         /// </summary>
         public string? Value { get; }
 
         public static implicit operator string(Content value)
         {
-            return value.ToString();
+            return value != null ? value.ToString() : string.Empty;
         }
 
+#pragma warning disable CA2225 // Operator overloads have named alternates
         public static implicit operator Content(string value)
+#pragma warning restore CA2225 // Operator overloads have named alternates
         {
             return new Content(value);
         }
