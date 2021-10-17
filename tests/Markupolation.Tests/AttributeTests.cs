@@ -13,6 +13,12 @@ namespace Markupolation.Tests
 
             subject = new Attribute(AttributeType.required);
             subject.ToString().Should().Be("required");
+
+            subject = new Attribute("foo", "bar");
+            subject.ToString().Should().Be("foo=\"bar\"");
+
+            subject = new Attribute("foo");
+            subject.ToString().Should().Be("foo");
         }
 
         [Test]

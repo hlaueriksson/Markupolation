@@ -11,25 +11,14 @@ namespace Markupolation
         /// </summary>
         /// <param name="name">Attribute name.</param>
         /// <param name="value">Attribute value.</param>
-        public Attribute(string name, string value) : base(value)
-        {
-            Name = name;
-        }
-
-        internal Attribute(AttributeType type) : this(type, null)
+        public Attribute(string name, string? value = null) : base(ToString(name, value))
         {
         }
 
-        internal Attribute(AttributeType type, string? value) : base(value)
+        internal Attribute(AttributeType type, string? value = null) : base(ToString(type, value))
         {
-            Name = type.ToString().TrimEnd('_').Replace("_", "-");
             Type = type;
         }
-
-        /// <summary>
-        /// Gets attribute name.
-        /// </summary>
-        public string Name { get; }
 
         internal AttributeType Type { get; }
 
@@ -39,7 +28,17 @@ namespace Markupolation
         }
 
         /// <inheritdoc/>
-        public override string ToString() => Value is null ? $"{Name}" : $"{Name}=\"{Value}\"";
+        public override string ToString() => base.ToString();
+
+        private static string ToString(AttributeType type, string? value = null)
+        {
+            return ToString(type.ToString().TrimEnd('_').Replace("_", "-"), value);
+        }
+
+        private static string ToString(string name, string? value = null)
+        {
+            return value != null ? $"{name}=\"{value}\"" : $"{name}";
+        }
     }
 
     [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = true)]
