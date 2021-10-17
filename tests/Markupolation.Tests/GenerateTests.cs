@@ -2,15 +2,15 @@ using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FluentAssertions;
 using Microsoft.Playwright;
 using NUnit.Framework;
 
 namespace Markupolation.Tests
 {
+    [Explicit]
     public class GenerateTests
     {
-        [Test, Explicit]
+        [Test]
         public async Task ElementType()
         {
             using var playwright = await Playwright.CreateAsync();
@@ -63,7 +63,7 @@ namespace Markupolation.Tests
             }
         }
 
-        [Test, Explicit]
+        [Test]
         public async Task AttributeType()
         {
             using var playwright = await Playwright.CreateAsync();
@@ -118,7 +118,7 @@ namespace Markupolation.Tests
             }
         }
 
-        [Test, Explicit]
+        [Test]
         public async Task EventHandlerContentAttributeType()
         {
             using var playwright = await Playwright.CreateAsync();
@@ -141,7 +141,7 @@ namespace Markupolation.Tests
             Console.WriteLine(result.ToString());
         }
 
-        [Test, Explicit]
+        [Test]
         public void Elements()
         {
             var values = Enum.GetValues(typeof(ElementType));
@@ -178,7 +178,7 @@ namespace Markupolation.Tests
             }
         }
 
-        [Test, Explicit]
+        [Test]
         public void Attributes()
         {
             var values = Enum.GetValues(typeof(AttributeType));
@@ -228,28 +228,6 @@ namespace Markupolation.Tests
                 var member = typeof(AttributeType).GetMember(value.ToString()!).First();
                 return member.GetCustomAttributes(false).OfType<AttributeAttribute>().ToArray();
             }
-        }
-
-        [Test]
-        public void Conflicts()
-        {
-            var elementValues = Enum.GetValues(typeof(ElementType)).Cast<ElementType>().Select(x => x.ToString());
-            var attributeValues = Enum.GetValues(typeof(AttributeType)).Cast<AttributeType>().Select(x => x.ToString());
-            var result = elementValues.Intersect(attributeValues);
-            result.Should().BeEquivalentTo(new[] { "abbr", "cite", "data", "form", "label", "slot", "span", "style", "title" });
-        }
-
-        [Test]
-        public void Conflicts_title()
-        {
-            var result = $"{title("Title")}";
-            result.Should().Be("title=\"Title\"");
-
-            result = $"{Markupolation.Attributes.title("Title")}";
-            result.Should().Be("title=\"Title\"");
-
-            result = $"{Markupolation.Elements.title("Title")}";
-            result.Should().Be("<title>Title</title>");
         }
     }
 
