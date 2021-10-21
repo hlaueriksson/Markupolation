@@ -1,8 +1,12 @@
+using System;
+using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using AngleSharp.Diffing;
 using FluentAssertions;
+using Humanizer;
+using Markdig;
 using Microsoft.Playwright;
 using NUnit.Framework;
 
@@ -316,6 +320,158 @@ div(class_("min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
                 .ToList();
 
             diffs.Should().BeEmpty();
+        }
+
+        [Test]
+        public async Task statiq_web_examples()
+        {
+            // https://github.com/statiqdev/Statiq.Web
+            // cd /examples/Statiq.Web.Examples
+            // dotnet run -- preview
+
+            dynamic input = new ExpandoObject();
+            input.archives = new[]
+            {
+                new { Filename = "/archives/simple-archive.cshtml", Body = "" },
+                new { Filename = "/archives/ordered-archive.cshtml", Body = "" },
+                new { Filename = "/archives/paged-archive.cshtml", Body = "" },
+                new { Filename = "/archives/grouped-archive.cshtml", Body = "" },
+                new { Filename = "/archives/computed-order-archive.cshtml", Body = "" },
+                new { Filename = "/archives/filtered-archive.cshtml", Body = "" },
+                new { Filename = "/archives/computed-grouped-archive.cshtml", Body = "" },
+            };
+            input.archives_md = new
+            {
+                Filename = "archives.md",
+                Title = "Archives Examples",
+                Body =
+$@"Examples of the [archives](https://statiq.dev/web/content-and-data/archives) feature.
+
+<div>{ListPages(input.archives)}</div>
+"
+            };
+            input.index_md = new
+            {
+                Filename = "index.md",
+                Title = "Examples",
+                Body =
+$@"Examples demonstrating various aspects of [Statiq Web](https://statiq.dev/web).
+
+<div>{ListPages(new[] { input.archives_md })}</div>
+"
+            };
+
+            // index
+            var actual = layout(input.index_md, new[] { input.archives_md });
+            using var client = new HttpClient();
+            var expected = await client.GetStringAsync("http://localhost:5080/");
+            DiffBuilder
+                .Compare(expected)
+                .WithTest(actual)
+                .Build()
+                .ToList()
+                .Should().BeEmpty();
+
+            // archives
+            actual = layout(input.archives_md, new[] { input.archives_md });
+            expected = await client.GetStringAsync("http://localhost:5080/archives");
+            DiffBuilder
+                .Compare(expected)
+                .WithTest(actual)
+                .Build()
+                .ToList()
+                .Should().BeEmpty();
+
+            static string layout(dynamic document, dynamic[] children)
+            {
+                return
+$@"{
+html(
+    head(
+        meta(charset("utf-8")),
+        meta(http_equiv("X-UA-Compatible"), content("IE=edge")),
+        meta(name("viewport"), content("width=device-width, initial-scale=1")),
+        link(rel("stylesheet"), href("https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"), integrity("sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"), crossorigin("anonymous"), new Attribute("data-no-mirror")),
+        link(rel("stylesheet"), href("https://cdn.jsdelivr.net/npm/prismjs@1.19.0/themes/prism.css"), new Attribute("data-no-mirror")),
+        Elements.title($"Archives Examples - {document.Title}")
+    ),
+    body(
+        nav(class_("navbar navbar-light navbar-expand bg-light"),
+            div(class_("container"),
+                a(class_("navbar-brand"), href("/"), "Home"),
+                div(class_("collapse navbar-collapse"),
+                    ul(class_("navbar-nav"),
+                        children.Each(child =>
+                            li(class_("nav-item"),
+                                a(class_("nav-link"), href(Url(child)), Title(child))
+                            )
+                        )
+                    )
+                )
+            )
+        ),
+        div(class_("container"),
+            div(class_("mt-4"),
+                h1(document.Title),
+                hr(),
+                Markdown.ToHtml(document.Body)
+            )
+        ),
+        "<script type=\"text/javascript\" src=\"/livereload.js?host=localhost&port=5080\"></script>"
+    )
+)
+}";
+            }
+
+            static string ListPages(dynamic[] children)
+            {
+                var result = string.Empty;
+                foreach (dynamic page in children)
+                {
+                    result += DocumentLink(page);
+                    result += Excerpt(page);
+                }
+                return result;
+            }
+
+            static string DocumentLink(dynamic document)
+            {
+                return h5(a(href(Url(document)), Title(document)));
+            }
+
+            static string Url(dynamic document)
+            {
+                if (document.Filename == "index.md") return "/";
+
+                var url = document.Filename.Substring(0, document.Filename.LastIndexOf("."));
+
+                return url.StartsWith("/") ? url : "/" + url;
+            }
+
+            static string Title(dynamic document)
+            {
+                if (Has(document, "Title")) return document.Title;
+
+                string filename = document.Filename;
+                var startIndex = filename.LastIndexOf("/") + 1;
+                var length = filename.LastIndexOf(".") - startIndex;
+                var name = filename.Substring(startIndex, length);
+
+                return name.Humanize(LetterCasing.Title);
+            }
+
+            static string Excerpt(dynamic document)
+            {
+                var newLineIndex = document.Body.IndexOf('\n');
+
+                return Markdown.ToHtml(newLineIndex > 0 ? document.Body.Substring(0, newLineIndex) : document.Body);
+            }
+
+            static bool Has(dynamic document, string property)
+            {
+                Type type = document.GetType();
+                return type.GetProperties().Where(p => p.Name.Equals(property)).Any();
+            }
         }
     }
 }

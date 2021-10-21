@@ -9,15 +9,15 @@ namespace Markupolation
     public static class Extensions
     {
         /// <summary>
-        /// Wraps each item in an <see cref="Element"/>.
+        /// Wraps each item in <see cref="Content"/>.
         /// </summary>
         /// <typeparam name="T">Type of items.</typeparam>
         /// <param name="items">Items.</param>
-        /// <param name="element">Element delegate.</param>
+        /// <param name="content">Content delegate.</param>
         /// <returns>Content.</returns>
-        public static string Each<T>(this T[] items, Func<string, Element> element)
+        public static Content Each<T>(this T[] items, Func<T, Content> content)
         {
-            return items.Select(x => element(x!.ToString())).ToArray().Join();
+            return items.Select(x => content(x)).ToArray().Join();
         }
 
         internal static string Join<T>(this T[] items, string separator = "") => string.Join(separator, items);
