@@ -1,0 +1,21 @@
+@page "/counter"
+@inject HttpClient Http
+
+<PageTitle>Counter</PageTitle>
+
+<h1>Counter</h1>
+
+<p role="status">Current count: @((MarkupString)words)</p>
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+@code {
+    private int currentCount = 0;
+    private string? words;
+
+    private async Task IncrementCount()
+    {
+        currentCount++;
+        words = await Http.GetStringAsync($"https://localhost:7066/counter/{currentCount}");
+    }
+}

@@ -1,0 +1,17 @@
+@page "/"
+@inject HttpClient Http
+
+<PageTitle>Index</PageTitle>
+
+@((MarkupString)hello)
+
+<SurveyPrompt Title="How is Blazor working for you?" />
+
+@code {
+    private string? hello;
+
+    protected override async Task OnInitializedAsync()
+    {
+        hello = await Http.GetStringAsync("https://localhost:7066/hello");
+    }
+}
