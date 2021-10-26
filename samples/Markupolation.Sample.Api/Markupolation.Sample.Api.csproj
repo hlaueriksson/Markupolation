@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Humanizer" Version="2.11.10" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
     <Using Include="Markupolation.Element" Alias="E" />
     <Using Include="Markupolation.Elements" Alias="e" />
