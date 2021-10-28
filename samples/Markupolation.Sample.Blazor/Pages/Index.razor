@@ -12,6 +12,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        hello = await Http.GetStringAsync("https://localhost:7066/hello");
+        hello = await Http.GetStringAsync("/api/hello");
     }
 }

@@ -16,6 +16,6 @@
     private async Task IncrementCount()
     {
         currentCount++;
-        words = await Http.GetStringAsync($"https://localhost:7066/counter/{currentCount}");
+        words = await Http.GetStringAsync($"/api/counter/{currentCount}");
     }
 }

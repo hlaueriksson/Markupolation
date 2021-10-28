@@ -21,6 +21,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetStringAsync("http://localhost:7071/api/Weather");
+        forecasts = await Http.GetStringAsync("/api/weather");
     }
 }

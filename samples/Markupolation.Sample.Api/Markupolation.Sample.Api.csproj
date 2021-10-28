@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
+    <Using Include="Markupolation" />
     <Using Include="Markupolation.Element" Alias="E" />
     <Using Include="Markupolation.Elements" Alias="e" />
     <Using Include="Markupolation.Elements" Static="True" />
