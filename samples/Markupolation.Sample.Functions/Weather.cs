@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using System;
 
 namespace Markupolation.Sample.Functions
@@ -10,7 +9,7 @@ namespace Markupolation.Sample.Functions
     public static class Weather
     {
         [FunctionName("Weather")]
-        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req, ILogger log)
+        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req)
         {
             var forecasts = new[]
             {
@@ -46,6 +45,6 @@ namespace Markupolation.Sample.Functions
             };
         }
 
-        public static int TemperatureF(dynamic forecast) => 32 + (int)(forecast.TemperatureC / 0.5556);
+        static int TemperatureF(dynamic forecast) => 32 + (int)(forecast.TemperatureC / 0.5556);
     }
 }

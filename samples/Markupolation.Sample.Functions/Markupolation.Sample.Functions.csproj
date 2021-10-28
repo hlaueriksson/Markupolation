@@ -4,7 +4,8 @@
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.0-preview2" />
+    <PackageReference Include="Humanizer" Version="2.11.10" />
+    <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
