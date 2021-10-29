@@ -22,7 +22,7 @@ app.MapGet("/hello", () => Results.Extensions.Html(
 ));
 
 app.MapGet("/counter/{count:int}", (int count) => Results.Extensions.Html(
-    $"{mark(title(count.ToString()), Humanizer.NumberToWordsExtension.ToWords(count))}"
+    $"{mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count))}"
 ));
 
 app.MapGet("/weather", () =>
@@ -49,8 +49,8 @@ app.MapGet("/weather", () =>
             <tbody>
                 {forecasts.Each(x => tr(
                     td(x.Date.ToShortDateString()),
-                    td(x.TemperatureC.ToString()),
-                    td(TemperatureF(x).ToString()),
+                    td(x.TemperatureC),
+                    td(TemperatureF(x)),
                     td(x.Summary)
                 ))}
             </tbody>

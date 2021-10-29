@@ -35,8 +35,8 @@ namespace Markupolation.Sample.Functions
                         <tbody>
                             {forecasts.Each(x => tr(
                                 td(x.Date.ToShortDateString()),
-                                td(x.TemperatureC.ToString()),
-                                td(TemperatureF(x).ToString()),
+                                td(x.TemperatureC),
+                                td(TemperatureF(x)),
                                 td(x.Summary)
                             ))}
                         </tbody>

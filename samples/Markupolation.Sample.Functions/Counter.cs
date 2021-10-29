@@ -12,7 +12,7 @@ namespace Markupolation.Sample.Functions
         {
             return new ContentResult
             {
-                Content = $"{mark(title(count.ToString()), Humanizer.NumberToWordsExtension.ToWords(count))}",
+                Content = $"{mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count))}",
                 ContentType = "text/html"
             };
         }
