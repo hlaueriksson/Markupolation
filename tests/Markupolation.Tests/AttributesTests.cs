@@ -47,5 +47,12 @@ namespace Markupolation.Tests
             accept_charset("value").ToString().Should().Be("accept-charset=\"value\"");
             http_equiv("value").ToString().Should().Be("http-equiv=\"value\"");
         }
+
+        [Test]
+        public void ObjectArgument()
+        {
+            accept(1).ToString().Should().Be("accept=\"1\"");
+            accept((int?)null!).ToString().Should().Be("accept");
+        }
     }
 }

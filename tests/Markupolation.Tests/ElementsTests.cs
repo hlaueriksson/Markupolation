@@ -31,5 +31,12 @@ namespace Markupolation.Tests
             base_().ToString().Should().Be("<base />");
             object_().ToString().Should().Be("<object></object>");
         }
+
+        [Test]
+        public void ObjectArgument()
+        {
+            a(1).ToString().Should().Be("<a>1</a>");
+            a((int?)null!).ToString().Should().Be("<a></a>");
+        }
     }
 }

@@ -11,6 +11,9 @@ namespace Markupolation
         /// <returns><code>abbr="{value}"</code></returns>
         public static Attribute abbr(string value) => new(AttributeType.abbr, value);
 
+        /// <inheritdoc cref="abbr" />
+        public static Attribute abbr(object value) => new(AttributeType.abbr, value?.ToString());
+
         /// <summary>
         /// Hint for expected file type in file upload controls.
         /// </summary>
@@ -18,6 +21,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>accept="{value}"</code></returns>
         public static Attribute accept(string value) => new(AttributeType.accept, value);
+
+        /// <inheritdoc cref="accept" />
+        public static Attribute accept(object value) => new(AttributeType.accept, value?.ToString());
 
         /// <summary>
         /// Character encodings to use for form submission.
@@ -27,12 +33,18 @@ namespace Markupolation
         /// <returns><code>accept_charset="{value}"</code></returns>
         public static Attribute accept_charset(string value) => new(AttributeType.accept_charset, value);
 
+        /// <inheritdoc cref="accept_charset" />
+        public static Attribute accept_charset(object value) => new(AttributeType.accept_charset, value?.ToString());
+
         /// <summary>
         /// Keyboard shortcut to activate or focus element.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>accesskey="{value}"</code></returns>
         public static Attribute accesskey(string value) => new(AttributeType.accesskey, value);
+
+        /// <inheritdoc cref="accesskey" />
+        public static Attribute accesskey(object value) => new(AttributeType.accesskey, value?.ToString());
 
         /// <summary>
         /// URL to use for form submission.
@@ -42,6 +54,9 @@ namespace Markupolation
         /// <returns><code>action="{value}"</code></returns>
         public static Attribute action(string value) => new(AttributeType.action, value);
 
+        /// <inheritdoc cref="action" />
+        public static Attribute action(object value) => new(AttributeType.action, value?.ToString());
+
         /// <summary>
         /// Permissions policy to be applied to the iframe's contents.
         /// </summary>
@@ -49,6 +64,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>allow="{value}"</code></returns>
         public static Attribute allow(string value) => new(AttributeType.allow, value);
+
+        /// <inheritdoc cref="allow" />
+        public static Attribute allow(object value) => new(AttributeType.allow, value?.ToString());
 
         /// <summary>
         /// Whether to allow the iframe's contents to use requestFullscreen().
@@ -65,6 +83,9 @@ namespace Markupolation
         /// <returns><code>alt="{value}"</code></returns>
         public static Attribute alt(string value) => new(AttributeType.alt, value);
 
+        /// <inheritdoc cref="alt" />
+        public static Attribute alt(object value) => new(AttributeType.alt, value?.ToString());
+
         /// <summary>
         /// Potential destination for a preload request (for rel="preload" and rel="modulepreload").
         /// </summary>
@@ -72,6 +93,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>as_="{value}"</code></returns>
         public static Attribute as_(string value) => new(AttributeType.as_, value);
+
+        /// <inheritdoc cref="as_" />
+        public static Attribute as_(object value) => new(AttributeType.as_, value?.ToString());
 
         /// <summary>
         /// Execute script when available, without blocking while fetching.
@@ -87,6 +111,9 @@ namespace Markupolation
         /// <returns><code>autocapitalize="{value}"</code></returns>
         public static Attribute autocapitalize(string value) => new(AttributeType.autocapitalize, value);
 
+        /// <inheritdoc cref="autocapitalize" />
+        public static Attribute autocapitalize(object value) => new(AttributeType.autocapitalize, value?.ToString());
+
         /// <summary>
         /// Default setting for autofill feature for controls in the form.
         /// Hint for form autofill feature.
@@ -95,6 +122,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>autocomplete="{value}"</code></returns>
         public static Attribute autocomplete(string value) => new(AttributeType.autocomplete, value);
+
+        /// <inheritdoc cref="autocomplete" />
+        public static Attribute autocomplete(object value) => new(AttributeType.autocomplete, value?.ToString());
 
         /// <summary>
         /// Automatically focus the element when the page is loaded.
@@ -117,6 +147,9 @@ namespace Markupolation
         /// <returns><code>charset="{value}"</code></returns>
         public static Attribute charset(string value) => new(AttributeType.charset, value);
 
+        /// <inheritdoc cref="charset" />
+        public static Attribute charset(object value) => new(AttributeType.charset, value?.ToString());
+
         /// <summary>
         /// Whether the control is checked.
         /// </summary>
@@ -132,12 +165,18 @@ namespace Markupolation
         /// <returns><code>cite="{value}"</code></returns>
         public static Attribute cite(string value) => new(AttributeType.cite, value);
 
+        /// <inheritdoc cref="cite" />
+        public static Attribute cite(object value) => new(AttributeType.cite, value?.ToString());
+
         /// <summary>
         /// Classes to which the element belongs.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>class_="{value}"</code></returns>
         public static Attribute class_(string value) => new(AttributeType.class_, value);
+
+        /// <inheritdoc cref="class_" />
+        public static Attribute class_(object value) => new(AttributeType.class_, value?.ToString());
 
         /// <summary>
         /// Color to use when customizing a site's icon (for rel="mask-icon").
@@ -147,6 +186,9 @@ namespace Markupolation
         /// <returns><code>color="{value}"</code></returns>
         public static Attribute color(string value) => new(AttributeType.color, value);
 
+        /// <inheritdoc cref="color" />
+        public static Attribute color(object value) => new(AttributeType.color, value?.ToString());
+
         /// <summary>
         /// Maximum number of characters per line.
         /// </summary>
@@ -154,6 +196,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>cols="{value}"</code></returns>
         public static Attribute cols(string value) => new(AttributeType.cols, value);
+
+        /// <inheritdoc cref="cols" />
+        public static Attribute cols(object value) => new(AttributeType.cols, value?.ToString());
 
         /// <summary>
         /// Number of columns that the cell is to span.
@@ -163,6 +208,9 @@ namespace Markupolation
         /// <returns><code>colspan="{value}"</code></returns>
         public static Attribute colspan(string value) => new(AttributeType.colspan, value);
 
+        /// <inheritdoc cref="colspan" />
+        public static Attribute colspan(object value) => new(AttributeType.colspan, value?.ToString());
+
         /// <summary>
         /// Value of the element.
         /// </summary>
@@ -171,12 +219,18 @@ namespace Markupolation
         /// <returns><code>content="{value}"</code></returns>
         public static Attribute content(string value) => new(AttributeType.content, value);
 
+        /// <inheritdoc cref="content" />
+        public static Attribute content(object value) => new(AttributeType.content, value?.ToString());
+
         /// <summary>
         /// Whether the element is editable.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>contenteditable="{value}"</code></returns>
         public static Attribute contenteditable(string value) => new(AttributeType.contenteditable, value);
+
+        /// <inheritdoc cref="contenteditable" />
+        public static Attribute contenteditable(object value) => new(AttributeType.contenteditable, value?.ToString());
 
         /// <summary>
         /// Show user agent controls.
@@ -193,6 +247,9 @@ namespace Markupolation
         /// <returns><code>coords="{value}"</code></returns>
         public static Attribute coords(string value) => new(AttributeType.coords, value);
 
+        /// <inheritdoc cref="coords" />
+        public static Attribute coords(object value) => new(AttributeType.coords, value?.ToString());
+
         /// <summary>
         /// How the element handles crossorigin requests.
         /// </summary>
@@ -201,6 +258,9 @@ namespace Markupolation
         /// <returns><code>crossorigin="{value}"</code></returns>
         public static Attribute crossorigin(string value) => new(AttributeType.crossorigin, value);
 
+        /// <inheritdoc cref="crossorigin" />
+        public static Attribute crossorigin(object value) => new(AttributeType.crossorigin, value?.ToString());
+
         /// <summary>
         /// Address of the resource.
         /// </summary>
@@ -208,6 +268,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>data="{value}"</code></returns>
         public static Attribute data(string value) => new(AttributeType.data, value);
+
+        /// <inheritdoc cref="data" />
+        public static Attribute data(object value) => new(AttributeType.data, value?.ToString());
 
         /// <summary>
         /// Date and (optionally) time of the change.
@@ -218,6 +281,9 @@ namespace Markupolation
         /// <returns><code>datetime="{value}"</code></returns>
         public static Attribute datetime(string value) => new(AttributeType.datetime, value);
 
+        /// <inheritdoc cref="datetime" />
+        public static Attribute datetime(object value) => new(AttributeType.datetime, value?.ToString());
+
         /// <summary>
         /// Decoding hint to use when processing this image for presentation.
         /// </summary>
@@ -225,6 +291,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>decoding="{value}"</code></returns>
         public static Attribute decoding(string value) => new(AttributeType.decoding, value);
+
+        /// <inheritdoc cref="decoding" />
+        public static Attribute decoding(object value) => new(AttributeType.decoding, value?.ToString());
 
         /// <summary>
         /// Enable the track if no other text track is more suitable.
@@ -248,6 +317,9 @@ namespace Markupolation
         /// <returns><code>dir="{value}"</code></returns>
         public static Attribute dir(string value) => new(AttributeType.dir, value);
 
+        /// <inheritdoc cref="dir" />
+        public static Attribute dir(object value) => new(AttributeType.dir, value?.ToString());
+
         /// <summary>
         /// Name of form control to use for sending the element's directionality in form submission.
         /// </summary>
@@ -255,6 +327,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>dirname="{value}"</code></returns>
         public static Attribute dirname(string value) => new(AttributeType.dirname, value);
+
+        /// <inheritdoc cref="dirname" />
+        public static Attribute dirname(object value) => new(AttributeType.dirname, value?.ToString());
 
         /// <summary>
         /// Whether the form control is disabled.
@@ -273,12 +348,18 @@ namespace Markupolation
         /// <returns><code>download="{value}"</code></returns>
         public static Attribute download(string value) => new(AttributeType.download, value);
 
+        /// <inheritdoc cref="download" />
+        public static Attribute download(object value) => new(AttributeType.download, value?.ToString());
+
         /// <summary>
         /// Whether the element is draggable.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>draggable="{value}"</code></returns>
         public static Attribute draggable(string value) => new(AttributeType.draggable, value);
+
+        /// <inheritdoc cref="draggable" />
+        public static Attribute draggable(object value) => new(AttributeType.draggable, value?.ToString());
 
         /// <summary>
         /// Entry list encoding type to use for form submission.
@@ -288,12 +369,18 @@ namespace Markupolation
         /// <returns><code>enctype="{value}"</code></returns>
         public static Attribute enctype(string value) => new(AttributeType.enctype, value);
 
+        /// <inheritdoc cref="enctype" />
+        public static Attribute enctype(object value) => new(AttributeType.enctype, value?.ToString());
+
         /// <summary>
         /// Hint for selecting an enter key action.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>enterkeyhint="{value}"</code></returns>
         public static Attribute enterkeyhint(string value) => new(AttributeType.enterkeyhint, value);
+
+        /// <inheritdoc cref="enterkeyhint" />
+        public static Attribute enterkeyhint(object value) => new(AttributeType.enterkeyhint, value?.ToString());
 
         /// <summary>
         /// Associate the label with form control.
@@ -304,6 +391,9 @@ namespace Markupolation
         /// <returns><code>for_="{value}"</code></returns>
         public static Attribute for_(string value) => new(AttributeType.for_, value);
 
+        /// <inheritdoc cref="for_" />
+        public static Attribute for_(object value) => new(AttributeType.for_, value?.ToString());
+
         /// <summary>
         /// Associates the element with a form element.
         /// </summary>
@@ -311,6 +401,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>form="{value}"</code></returns>
         public static Attribute form(string value) => new(AttributeType.form, value);
+
+        /// <inheritdoc cref="form" />
+        public static Attribute form(object value) => new(AttributeType.form, value?.ToString());
 
         /// <summary>
         /// URL to use for form submission.
@@ -320,6 +413,9 @@ namespace Markupolation
         /// <returns><code>formaction="{value}"</code></returns>
         public static Attribute formaction(string value) => new(AttributeType.formaction, value);
 
+        /// <inheritdoc cref="formaction" />
+        public static Attribute formaction(object value) => new(AttributeType.formaction, value?.ToString());
+
         /// <summary>
         /// Entry list encoding type to use for form submission.
         /// </summary>
@@ -328,6 +424,9 @@ namespace Markupolation
         /// <returns><code>formenctype="{value}"</code></returns>
         public static Attribute formenctype(string value) => new(AttributeType.formenctype, value);
 
+        /// <inheritdoc cref="formenctype" />
+        public static Attribute formenctype(object value) => new(AttributeType.formenctype, value?.ToString());
+
         /// <summary>
         /// Variant to use for form submission.
         /// </summary>
@@ -335,6 +434,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>formmethod="{value}"</code></returns>
         public static Attribute formmethod(string value) => new(AttributeType.formmethod, value);
+
+        /// <inheritdoc cref="formmethod" />
+        public static Attribute formmethod(object value) => new(AttributeType.formmethod, value?.ToString());
 
         /// <summary>
         /// Bypass form control validation for form submission.
@@ -351,6 +453,9 @@ namespace Markupolation
         /// <returns><code>formtarget="{value}"</code></returns>
         public static Attribute formtarget(string value) => new(AttributeType.formtarget, value);
 
+        /// <inheritdoc cref="formtarget" />
+        public static Attribute formtarget(object value) => new(AttributeType.formtarget, value?.ToString());
+
         /// <summary>
         /// The header cells for this cell.
         /// </summary>
@@ -359,6 +464,9 @@ namespace Markupolation
         /// <returns><code>headers="{value}"</code></returns>
         public static Attribute headers(string value) => new(AttributeType.headers, value);
 
+        /// <inheritdoc cref="headers" />
+        public static Attribute headers(object value) => new(AttributeType.headers, value?.ToString());
+
         /// <summary>
         /// Vertical dimension.
         /// </summary>
@@ -366,6 +474,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>height="{value}"</code></returns>
         public static Attribute height(string value) => new(AttributeType.height, value);
+
+        /// <inheritdoc cref="height" />
+        public static Attribute height(object value) => new(AttributeType.height, value?.ToString());
 
         /// <summary>
         /// Whether the element is relevant.
@@ -381,6 +492,9 @@ namespace Markupolation
         /// <returns><code>high="{value}"</code></returns>
         public static Attribute high(string value) => new(AttributeType.high, value);
 
+        /// <inheritdoc cref="high" />
+        public static Attribute high(object value) => new(AttributeType.high, value?.ToString());
+
         /// <summary>
         /// Address of the hyperlink.
         /// Address of the hyperlink.
@@ -391,6 +505,9 @@ namespace Markupolation
         /// <returns><code>href="{value}"</code></returns>
         public static Attribute href(string value) => new(AttributeType.href, value);
 
+        /// <inheritdoc cref="href" />
+        public static Attribute href(object value) => new(AttributeType.href, value?.ToString());
+
         /// <summary>
         /// Language of the linked resource.
         /// </summary>
@@ -398,6 +515,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>hreflang="{value}"</code></returns>
         public static Attribute hreflang(string value) => new(AttributeType.hreflang, value);
+
+        /// <inheritdoc cref="hreflang" />
+        public static Attribute hreflang(object value) => new(AttributeType.hreflang, value?.ToString());
 
         /// <summary>
         /// Pragma directive.
@@ -407,12 +527,18 @@ namespace Markupolation
         /// <returns><code>http_equiv="{value}"</code></returns>
         public static Attribute http_equiv(string value) => new(AttributeType.http_equiv, value);
 
+        /// <inheritdoc cref="http_equiv" />
+        public static Attribute http_equiv(object value) => new(AttributeType.http_equiv, value?.ToString());
+
         /// <summary>
         /// The element's ID.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>id="{value}"</code></returns>
         public static Attribute id(string value) => new(AttributeType.id, value);
+
+        /// <inheritdoc cref="id" />
+        public static Attribute id(object value) => new(AttributeType.id, value?.ToString());
 
         /// <summary>
         /// Image sizes for different page layouts (for rel="preload").
@@ -422,6 +548,9 @@ namespace Markupolation
         /// <returns><code>imagesizes="{value}"</code></returns>
         public static Attribute imagesizes(string value) => new(AttributeType.imagesizes, value);
 
+        /// <inheritdoc cref="imagesizes" />
+        public static Attribute imagesizes(object value) => new(AttributeType.imagesizes, value?.ToString());
+
         /// <summary>
         /// Images to use in different situations, e.g., high-resolution displays, small monitors, etc. (for rel="preload").
         /// </summary>
@@ -430,12 +559,18 @@ namespace Markupolation
         /// <returns><code>imagesrcset="{value}"</code></returns>
         public static Attribute imagesrcset(string value) => new(AttributeType.imagesrcset, value);
 
+        /// <inheritdoc cref="imagesrcset" />
+        public static Attribute imagesrcset(object value) => new(AttributeType.imagesrcset, value?.ToString());
+
         /// <summary>
         /// Hint for selecting an input modality.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>inputmode="{value}"</code></returns>
         public static Attribute inputmode(string value) => new(AttributeType.inputmode, value);
+
+        /// <inheritdoc cref="inputmode" />
+        public static Attribute inputmode(object value) => new(AttributeType.inputmode, value?.ToString());
 
         /// <summary>
         /// Integrity metadata used in Subresource Integrity checks [SRI].
@@ -445,12 +580,18 @@ namespace Markupolation
         /// <returns><code>integrity="{value}"</code></returns>
         public static Attribute integrity(string value) => new(AttributeType.integrity, value);
 
+        /// <inheritdoc cref="integrity" />
+        public static Attribute integrity(object value) => new(AttributeType.integrity, value?.ToString());
+
         /// <summary>
         /// Creates a customized built-in element.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>is_="{value}"</code></returns>
         public static Attribute is_(string value) => new(AttributeType.is_, value);
+
+        /// <inheritdoc cref="is_" />
+        public static Attribute is_(object value) => new(AttributeType.is_, value?.ToString());
 
         /// <summary>
         /// Whether the image is a server-side image map.
@@ -466,6 +607,9 @@ namespace Markupolation
         /// <returns><code>itemid="{value}"</code></returns>
         public static Attribute itemid(string value) => new(AttributeType.itemid, value);
 
+        /// <inheritdoc cref="itemid" />
+        public static Attribute itemid(object value) => new(AttributeType.itemid, value?.ToString());
+
         /// <summary>
         /// Property names of a microdata item.
         /// </summary>
@@ -473,12 +617,18 @@ namespace Markupolation
         /// <returns><code>itemprop="{value}"</code></returns>
         public static Attribute itemprop(string value) => new(AttributeType.itemprop, value);
 
+        /// <inheritdoc cref="itemprop" />
+        public static Attribute itemprop(object value) => new(AttributeType.itemprop, value?.ToString());
+
         /// <summary>
         /// Referenced elements.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>itemref="{value}"</code></returns>
         public static Attribute itemref(string value) => new(AttributeType.itemref, value);
+
+        /// <inheritdoc cref="itemref" />
+        public static Attribute itemref(object value) => new(AttributeType.itemref, value?.ToString());
 
         /// <summary>
         /// Introduces a microdata item.
@@ -493,6 +643,9 @@ namespace Markupolation
         /// <returns><code>itemtype="{value}"</code></returns>
         public static Attribute itemtype(string value) => new(AttributeType.itemtype, value);
 
+        /// <inheritdoc cref="itemtype" />
+        public static Attribute itemtype(object value) => new(AttributeType.itemtype, value?.ToString());
+
         /// <summary>
         /// The type of text track.
         /// </summary>
@@ -500,6 +653,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>kind="{value}"</code></returns>
         public static Attribute kind(string value) => new(AttributeType.kind, value);
+
+        /// <inheritdoc cref="kind" />
+        public static Attribute kind(object value) => new(AttributeType.kind, value?.ToString());
 
         /// <summary>
         /// User-visible label.
@@ -509,12 +665,18 @@ namespace Markupolation
         /// <returns><code>label="{value}"</code></returns>
         public static Attribute label(string value) => new(AttributeType.label, value);
 
+        /// <inheritdoc cref="label" />
+        public static Attribute label(object value) => new(AttributeType.label, value?.ToString());
+
         /// <summary>
         /// Language of the element.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>lang="{value}"</code></returns>
         public static Attribute lang(string value) => new(AttributeType.lang, value);
+
+        /// <inheritdoc cref="lang" />
+        public static Attribute lang(object value) => new(AttributeType.lang, value?.ToString());
 
         /// <summary>
         /// List of autocomplete options.
@@ -524,6 +686,9 @@ namespace Markupolation
         /// <returns><code>list="{value}"</code></returns>
         public static Attribute list(string value) => new(AttributeType.list, value);
 
+        /// <inheritdoc cref="list" />
+        public static Attribute list(object value) => new(AttributeType.list, value?.ToString());
+
         /// <summary>
         /// Used when determining loading deferral.
         /// </summary>
@@ -531,6 +696,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>loading="{value}"</code></returns>
         public static Attribute loading(string value) => new(AttributeType.loading, value);
+
+        /// <inheritdoc cref="loading" />
+        public static Attribute loading(object value) => new(AttributeType.loading, value?.ToString());
 
         /// <summary>
         /// Whether to loop the media resource.
@@ -547,6 +715,9 @@ namespace Markupolation
         /// <returns><code>low="{value}"</code></returns>
         public static Attribute low(string value) => new(AttributeType.low, value);
 
+        /// <inheritdoc cref="low" />
+        public static Attribute low(object value) => new(AttributeType.low, value?.ToString());
+
         /// <summary>
         /// Maximum value.
         /// Upper bound of range.
@@ -556,6 +727,9 @@ namespace Markupolation
         /// <returns><code>max="{value}"</code></returns>
         public static Attribute max(string value) => new(AttributeType.max, value);
 
+        /// <inheritdoc cref="max" />
+        public static Attribute max(object value) => new(AttributeType.max, value?.ToString());
+
         /// <summary>
         /// Maximum length of value.
         /// </summary>
@@ -563,6 +737,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>maxlength="{value}"</code></returns>
         public static Attribute maxlength(string value) => new(AttributeType.maxlength, value);
+
+        /// <inheritdoc cref="maxlength" />
+        public static Attribute maxlength(object value) => new(AttributeType.maxlength, value?.ToString());
 
         /// <summary>
         /// Applicable media.
@@ -572,6 +749,9 @@ namespace Markupolation
         /// <returns><code>media="{value}"</code></returns>
         public static Attribute media(string value) => new(AttributeType.media, value);
 
+        /// <inheritdoc cref="media" />
+        public static Attribute media(object value) => new(AttributeType.media, value?.ToString());
+
         /// <summary>
         /// Variant to use for form submission.
         /// </summary>
@@ -579,6 +759,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>method="{value}"</code></returns>
         public static Attribute method(string value) => new(AttributeType.method, value);
+
+        /// <inheritdoc cref="method" />
+        public static Attribute method(object value) => new(AttributeType.method, value?.ToString());
 
         /// <summary>
         /// Minimum value.
@@ -589,6 +772,9 @@ namespace Markupolation
         /// <returns><code>min="{value}"</code></returns>
         public static Attribute min(string value) => new(AttributeType.min, value);
 
+        /// <inheritdoc cref="min" />
+        public static Attribute min(object value) => new(AttributeType.min, value?.ToString());
+
         /// <summary>
         /// Minimum length of value.
         /// </summary>
@@ -596,6 +782,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>minlength="{value}"</code></returns>
         public static Attribute minlength(string value) => new(AttributeType.minlength, value);
+
+        /// <inheritdoc cref="minlength" />
+        public static Attribute minlength(object value) => new(AttributeType.minlength, value?.ToString());
 
         /// <summary>
         /// Whether to allow multiple values.
@@ -625,6 +814,9 @@ namespace Markupolation
         /// <returns><code>name="{value}"</code></returns>
         public static Attribute name(string value) => new(AttributeType.name, value);
 
+        /// <inheritdoc cref="name" />
+        public static Attribute name(object value) => new(AttributeType.name, value?.ToString());
+
         /// <summary>
         /// Prevents execution in user agents that support module scripts.
         /// </summary>
@@ -638,6 +830,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>nonce="{value}"</code></returns>
         public static Attribute nonce(string value) => new(AttributeType.nonce, value);
+
+        /// <inheritdoc cref="nonce" />
+        public static Attribute nonce(object value) => new(AttributeType.nonce, value?.ToString());
 
         /// <summary>
         /// Bypass form control validation for form submission.
@@ -662,6 +857,9 @@ namespace Markupolation
         /// <returns><code>optimum="{value}"</code></returns>
         public static Attribute optimum(string value) => new(AttributeType.optimum, value);
 
+        /// <inheritdoc cref="optimum" />
+        public static Attribute optimum(object value) => new(AttributeType.optimum, value?.ToString());
+
         /// <summary>
         /// Pattern to be matched by the form control's value.
         /// </summary>
@@ -670,12 +868,18 @@ namespace Markupolation
         /// <returns><code>pattern="{value}"</code></returns>
         public static Attribute pattern(string value) => new(AttributeType.pattern, value);
 
+        /// <inheritdoc cref="pattern" />
+        public static Attribute pattern(object value) => new(AttributeType.pattern, value?.ToString());
+
         /// <summary>
         /// URLs to ping.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>ping="{value}"</code></returns>
         public static Attribute ping(string value) => new(AttributeType.ping, value);
+
+        /// <inheritdoc cref="ping" />
+        public static Attribute ping(object value) => new(AttributeType.ping, value?.ToString());
 
         /// <summary>
         /// User-visible label to be placed within the form control.
@@ -684,6 +888,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>placeholder="{value}"</code></returns>
         public static Attribute placeholder(string value) => new(AttributeType.placeholder, value);
+
+        /// <inheritdoc cref="placeholder" />
+        public static Attribute placeholder(object value) => new(AttributeType.placeholder, value?.ToString());
 
         /// <summary>
         /// Encourage the user agent to display video content within the element's playback area.
@@ -700,6 +907,9 @@ namespace Markupolation
         /// <returns><code>poster="{value}"</code></returns>
         public static Attribute poster(string value) => new(AttributeType.poster, value);
 
+        /// <inheritdoc cref="poster" />
+        public static Attribute poster(object value) => new(AttributeType.poster, value?.ToString());
+
         /// <summary>
         /// Hints how much buffering the media resource will likely need.
         /// </summary>
@@ -707,6 +917,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>preload="{value}"</code></returns>
         public static Attribute preload(string value) => new(AttributeType.preload, value);
+
+        /// <inheritdoc cref="preload" />
+        public static Attribute preload(object value) => new(AttributeType.preload, value?.ToString());
 
         /// <summary>
         /// Whether to allow the value to be edited by the user.
@@ -724,6 +937,9 @@ namespace Markupolation
         /// <returns><code>referrerpolicy="{value}"</code></returns>
         public static Attribute referrerpolicy(string value) => new(AttributeType.referrerpolicy, value);
 
+        /// <inheritdoc cref="referrerpolicy" />
+        public static Attribute referrerpolicy(object value) => new(AttributeType.referrerpolicy, value?.ToString());
+
         /// <summary>
         /// Relationship between the location in the document containing the hyperlink and the destination resource.
         /// Relationship between the document containing the hyperlink and the destination resource.
@@ -732,6 +948,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>rel="{value}"</code></returns>
         public static Attribute rel(string value) => new(AttributeType.rel, value);
+
+        /// <inheritdoc cref="rel" />
+        public static Attribute rel(object value) => new(AttributeType.rel, value?.ToString());
 
         /// <summary>
         /// Whether the control is required for form submission.
@@ -755,6 +974,9 @@ namespace Markupolation
         /// <returns><code>rows="{value}"</code></returns>
         public static Attribute rows(string value) => new(AttributeType.rows, value);
 
+        /// <inheritdoc cref="rows" />
+        public static Attribute rows(object value) => new(AttributeType.rows, value?.ToString());
+
         /// <summary>
         /// Number of rows that the cell is to span.
         /// </summary>
@@ -762,6 +984,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>rowspan="{value}"</code></returns>
         public static Attribute rowspan(string value) => new(AttributeType.rowspan, value);
+
+        /// <inheritdoc cref="rowspan" />
+        public static Attribute rowspan(object value) => new(AttributeType.rowspan, value?.ToString());
 
         /// <summary>
         /// Security rules for nested content.
@@ -771,6 +996,9 @@ namespace Markupolation
         /// <returns><code>sandbox="{value}"</code></returns>
         public static Attribute sandbox(string value) => new(AttributeType.sandbox, value);
 
+        /// <inheritdoc cref="sandbox" />
+        public static Attribute sandbox(object value) => new(AttributeType.sandbox, value?.ToString());
+
         /// <summary>
         /// Specifies which cells the header cell applies to.
         /// </summary>
@@ -778,6 +1006,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>scope="{value}"</code></returns>
         public static Attribute scope(string value) => new(AttributeType.scope, value);
+
+        /// <inheritdoc cref="scope" />
+        public static Attribute scope(object value) => new(AttributeType.scope, value?.ToString());
 
         /// <summary>
         /// Whether the option is selected by default.
@@ -794,6 +1025,9 @@ namespace Markupolation
         /// <returns><code>shape="{value}"</code></returns>
         public static Attribute shape(string value) => new(AttributeType.shape, value);
 
+        /// <inheritdoc cref="shape" />
+        public static Attribute shape(object value) => new(AttributeType.shape, value?.ToString());
+
         /// <summary>
         /// Size of the control.
         /// </summary>
@@ -801,6 +1035,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>size="{value}"</code></returns>
         public static Attribute size(string value) => new(AttributeType.size, value);
+
+        /// <inheritdoc cref="size" />
+        public static Attribute size(object value) => new(AttributeType.size, value?.ToString());
 
         /// <summary>
         /// Sizes of the icons (for rel="icon").
@@ -811,12 +1048,18 @@ namespace Markupolation
         /// <returns><code>sizes="{value}"</code></returns>
         public static Attribute sizes(string value) => new(AttributeType.sizes, value);
 
+        /// <inheritdoc cref="sizes" />
+        public static Attribute sizes(object value) => new(AttributeType.sizes, value?.ToString());
+
         /// <summary>
         /// The element's desired slot.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>slot="{value}"</code></returns>
         public static Attribute slot(string value) => new(AttributeType.slot, value);
+
+        /// <inheritdoc cref="slot" />
+        public static Attribute slot(object value) => new(AttributeType.slot, value?.ToString());
 
         /// <summary>
         /// Number of columns spanned by the element.
@@ -826,12 +1069,18 @@ namespace Markupolation
         /// <returns><code>span="{value}"</code></returns>
         public static Attribute span(string value) => new(AttributeType.span, value);
 
+        /// <inheritdoc cref="span" />
+        public static Attribute span(object value) => new(AttributeType.span, value?.ToString());
+
         /// <summary>
         /// Whether the element is to have its spelling and grammar checked.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>spellcheck="{value}"</code></returns>
         public static Attribute spellcheck(string value) => new(AttributeType.spellcheck, value);
+
+        /// <inheritdoc cref="spellcheck" />
+        public static Attribute spellcheck(object value) => new(AttributeType.spellcheck, value?.ToString());
 
         /// <summary>
         /// Address of the resource.
@@ -841,6 +1090,9 @@ namespace Markupolation
         /// <returns><code>src="{value}"</code></returns>
         public static Attribute src(string value) => new(AttributeType.src, value);
 
+        /// <inheritdoc cref="src" />
+        public static Attribute src(object value) => new(AttributeType.src, value?.ToString());
+
         /// <summary>
         /// A document to render in the iframe.
         /// </summary>
@@ -848,6 +1100,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>srcdoc="{value}"</code></returns>
         public static Attribute srcdoc(string value) => new(AttributeType.srcdoc, value);
+
+        /// <inheritdoc cref="srcdoc" />
+        public static Attribute srcdoc(object value) => new(AttributeType.srcdoc, value?.ToString());
 
         /// <summary>
         /// Language of the text track.
@@ -857,6 +1112,9 @@ namespace Markupolation
         /// <returns><code>srclang="{value}"</code></returns>
         public static Attribute srclang(string value) => new(AttributeType.srclang, value);
 
+        /// <inheritdoc cref="srclang" />
+        public static Attribute srclang(object value) => new(AttributeType.srclang, value?.ToString());
+
         /// <summary>
         /// Images to use in different situations, e.g., high-resolution displays, small monitors, etc..
         /// </summary>
@@ -864,6 +1122,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>srcset="{value}"</code></returns>
         public static Attribute srcset(string value) => new(AttributeType.srcset, value);
+
+        /// <inheritdoc cref="srcset" />
+        public static Attribute srcset(object value) => new(AttributeType.srcset, value?.ToString());
 
         /// <summary>
         /// Starting value of the list.
@@ -873,6 +1134,9 @@ namespace Markupolation
         /// <returns><code>start="{value}"</code></returns>
         public static Attribute start(string value) => new(AttributeType.start, value);
 
+        /// <inheritdoc cref="start" />
+        public static Attribute start(object value) => new(AttributeType.start, value?.ToString());
+
         /// <summary>
         /// Granularity to be matched by the form control's value.
         /// </summary>
@@ -881,6 +1145,9 @@ namespace Markupolation
         /// <returns><code>step="{value}"</code></returns>
         public static Attribute step(string value) => new(AttributeType.step, value);
 
+        /// <inheritdoc cref="step" />
+        public static Attribute step(object value) => new(AttributeType.step, value?.ToString());
+
         /// <summary>
         /// Presentational and formatting instructions.
         /// </summary>
@@ -888,12 +1155,18 @@ namespace Markupolation
         /// <returns><code>style="{value}"</code></returns>
         public static Attribute style(string value) => new(AttributeType.style, value);
 
+        /// <inheritdoc cref="style" />
+        public static Attribute style(object value) => new(AttributeType.style, value?.ToString());
+
         /// <summary>
         /// Whether the element is focusable and sequentially focusable, and the relative order of the element for the purposes of sequential focus navigation.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>tabindex="{value}"</code></returns>
         public static Attribute tabindex(string value) => new(AttributeType.tabindex, value);
+
+        /// <inheritdoc cref="tabindex" />
+        public static Attribute tabindex(object value) => new(AttributeType.tabindex, value?.ToString());
 
         /// <summary>
         /// Browsing context for hyperlink navigation.
@@ -904,6 +1177,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>target="{value}"</code></returns>
         public static Attribute target(string value) => new(AttributeType.target, value);
+
+        /// <inheritdoc cref="target" />
+        public static Attribute target(object value) => new(AttributeType.target, value?.ToString());
 
         /// <summary>
         /// Advisory information for the element.
@@ -917,12 +1193,18 @@ namespace Markupolation
         /// <returns><code>title="{value}"</code></returns>
         public static Attribute title(string value) => new(AttributeType.title, value);
 
+        /// <inheritdoc cref="title" />
+        public static Attribute title(object value) => new(AttributeType.title, value?.ToString());
+
         /// <summary>
         /// Whether the element is to be translated when the page is localized.
         /// </summary>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>translate="{value}"</code></returns>
         public static Attribute translate(string value) => new(AttributeType.translate, value);
+
+        /// <inheritdoc cref="translate" />
+        public static Attribute translate(object value) => new(AttributeType.translate, value?.ToString());
 
         /// <summary>
         /// Hint for the type of the referenced resource.
@@ -937,6 +1219,9 @@ namespace Markupolation
         /// <returns><code>type="{value}"</code></returns>
         public static Attribute type(string value) => new(AttributeType.type, value);
 
+        /// <inheritdoc cref="type" />
+        public static Attribute type(object value) => new(AttributeType.type, value?.ToString());
+
         /// <summary>
         /// Name of image map to use.
         /// </summary>
@@ -944,6 +1229,9 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>usemap="{value}"</code></returns>
         public static Attribute usemap(string value) => new(AttributeType.usemap, value);
+
+        /// <inheritdoc cref="usemap" />
+        public static Attribute usemap(object value) => new(AttributeType.usemap, value?.ToString());
 
         /// <summary>
         /// Value to be used for form submission.
@@ -958,6 +1246,9 @@ namespace Markupolation
         /// <returns><code>value="{value}"</code></returns>
         public static Attribute value(string value) => new(AttributeType.value, value);
 
+        /// <inheritdoc cref="value" />
+        public static Attribute value(object value) => new(AttributeType.value, value?.ToString());
+
         /// <summary>
         /// Horizontal dimension.
         /// </summary>
@@ -966,6 +1257,9 @@ namespace Markupolation
         /// <returns><code>width="{value}"</code></returns>
         public static Attribute width(string value) => new(AttributeType.width, value);
 
+        /// <inheritdoc cref="width" />
+        public static Attribute width(object value) => new(AttributeType.width, value?.ToString());
+
         /// <summary>
         /// How the value of the form control is to be wrapped for form submission.
         /// </summary>
@@ -973,5 +1267,8 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>wrap="{value}"</code></returns>
         public static Attribute wrap(string value) => new(AttributeType.wrap, value);
+
+        /// <inheritdoc cref="wrap" />
+        public static Attribute wrap(object value) => new(AttributeType.wrap, value?.ToString());
     }
 }

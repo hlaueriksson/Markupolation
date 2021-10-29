@@ -166,6 +166,13 @@ namespace Markupolation.Tests
                 result.AppendLine($"    /// <returns><code><![CDATA[{returns}]]></code></returns>");
                 result.AppendLine($"    public static Element {value}(params Content[] content) => new(ElementType.{value}, {a.IsVoidElement.ToString().ToLower()}, content);");
                 result.AppendLine();
+
+                if (!a.IsVoidElement)
+                {
+                    result.AppendLine($"    /// <inheritdoc cref=\"{value}\" />");
+                    result.AppendLine($"    public static Element {value}(object content) => new(ElementType.{value}, false, content?.ToString()!);");
+                    result.AppendLine();
+                }
             }
             result.AppendLine("}");
 
@@ -218,6 +225,13 @@ namespace Markupolation.Tests
                     result.AppendLine($"    public static Attribute {value}(string value) => new(AttributeType.{value}, value);");
                 }
                 result.AppendLine();
+
+                if (!a.Any(x => x.IsBooleanAttribute))
+                {
+                    result.AppendLine($"    /// <inheritdoc cref=\"{value}\" />");
+                    result.AppendLine($"    public static Attribute {value}(object value) => new(AttributeType.{value}, value?.ToString());");
+                    result.AppendLine();
+                }
             }
             result.AppendLine("}");
 
