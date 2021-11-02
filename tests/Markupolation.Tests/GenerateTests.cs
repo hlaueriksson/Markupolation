@@ -126,19 +126,38 @@ namespace Markupolation.Tests
             var page = await browser.NewPageAsync();
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/indices.html#ix-event-handlers");
-            var attributes = await page.QuerySelectorAllAsync("table#ix-event-handlers tbody tr th code");
+            var attributes = await page.QuerySelectorAllAsync("table#ix-event-handlers tbody tr");
 
             var result = new StringBuilder();
             result.AppendLine("internal enum EventHandlerContentAttributeType");
             result.AppendLine("{");
             foreach (var attribute in attributes)
             {
-                var name = await attribute.InnerTextAsync();
+                var name = await GetNameAsync(attribute);
+                var description = (await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(2)", "e => e.innerText")).Replace("\"", "\\\"");
+                var elements = await GetElementsAsync(attribute);
+                var elementArray = elements.Any() ? ", " + string.Join(" ,", elements.Select(x => $"\"{x}\"")) : string.Empty;
+
+                result.AppendLine($"    [EventHandlerContentAttribute(\"{description}\"{elementArray})]");
                 result.AppendLine($"    {name},");
             }
             result.AppendLine("}");
 
             Console.WriteLine(result.ToString());
+
+            async Task<string?> GetNameAsync(IElementHandle? attribute)
+            {
+                if (attribute == null) return null;
+                var code = await attribute.QuerySelectorAsync("th code");
+                var name = await code!.InnerTextAsync();
+                return name.CleanName();
+            }
+
+            async Task<string[]> GetElementsAsync(IElementHandle attribute)
+            {
+                var elements = await attribute.QuerySelectorAllAsync("td:first-of-type code[id^='attributes'] a:not([id])");
+                return elements.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.CleanName()).ToArray();
+            }
         }
 
         [Test]
@@ -241,6 +260,41 @@ namespace Markupolation.Tests
             {
                 var member = typeof(AttributeType).GetMember(value.ToString()!).First();
                 return member.GetCustomAttributes(false).OfType<AttributeAttribute>().ToArray();
+            }
+        }
+
+        [Test]
+        public void EventHandlerContentAttributes()
+        {
+            var values = Enum.GetValues(typeof(EventHandlerContentAttributeType));
+
+            var result = new StringBuilder();
+            result.AppendLine("/// <summary>HTML event handler content attributes.</summary>");
+            result.AppendLine("public static class EventHandlerContentAttributes");
+            result.AppendLine("{");
+            foreach (var value in values)
+            {
+                var a = GetEventHandlerContentAttributeAttribute(value);
+                var remarks = string.Join(", ", a.Elements.Select(x => $"<see cref=\"Elements.{x}\"/>"));
+
+                result.AppendLine($"    /// <summary>{a.Description}.</summary>");
+                if (a.Elements.Any())
+                {
+                    result.AppendLine($"    /// <remarks>Elements: {remarks}.</remarks>");
+                }
+                result.AppendLine($"    /// <param name=\"value\">Attribute value.</param>");
+                result.AppendLine($"    /// <returns><code>{value}=\"{{value}}\"</code></returns>");
+                result.AppendLine($"    public static Attribute {value}(string value) => new(\"{value}\", value);");
+                result.AppendLine();
+            }
+            result.AppendLine("}");
+
+            Console.WriteLine(result.ToString());
+
+            static EventHandlerContentAttributeAttribute GetEventHandlerContentAttributeAttribute(object value)
+            {
+                var member = typeof(EventHandlerContentAttributeType).GetMember(value.ToString()!).First();
+                return member.GetCustomAttributes(false).OfType<EventHandlerContentAttributeAttribute>().Single();
             }
         }
     }

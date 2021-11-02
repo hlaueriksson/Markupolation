@@ -21,7 +21,7 @@ namespace Markupolation.Sample.Functions
                             meta(name("description"), content("Sample of how to use Markupolation in a net6.0 Azure Function")),
                             meta(name("viewport"), content("width=device-width, initial-scale=1"))
                         ),
-                        body(
+                        body(onload("console.log('Markupolation in a net6.0 Azure Function');"),
                             h1("Hello, World!"),
                             p("This is ", mark(a.title("Markup with string interpolation"), "Markupolation"), " in action.")
                         )
