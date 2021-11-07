@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <LangVersion>preview</LangVersion>
+    <NoWarn>$(NoWarn);CS8600;CS8604;CS8625</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
