@@ -44,14 +44,14 @@ namespace Markupolation
 
         private static string ToString(string name, bool isVoidElement, Content[] content)
         {
-            var attributes = content.OfType<Attribute>().ToArray();
+            var attributes = content.OfType<Attribute>();
 
             if (isVoidElement)
             {
                 return $"<{name}{attributes.Join(" ").Pad()} />";
             }
 
-            var children = content.Where(x => x.GetType() != typeof(Attribute)).ToArray();
+            var children = content.Where(x => x.GetType() != typeof(Attribute));
 
             return $"<{name}{attributes.Join(" ").Pad()}>{children.Join()}</{name}>";
         }

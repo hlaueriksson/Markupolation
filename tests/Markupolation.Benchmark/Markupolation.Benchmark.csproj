@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" />
     <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
     <Using Include="Markupolation.Elements" Static="True" />
     <Using Include="Markupolation.Attributes" Static="True" />

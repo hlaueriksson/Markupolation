@@ -7,8 +7,7 @@
   <Import Project="../../Analyzers.props" />
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Markupolation.Extensions" />
-    <InternalsVisibleTo Include="Markupolation.Tests" />
+    <ProjectReference Include="..\Markupolation\Markupolation.csproj" />
   </ItemGroup>
 
 </Project>

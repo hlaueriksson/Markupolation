@@ -24,13 +24,13 @@ string bar = null;
 result = $@"{DOCTYPE() +
 html(
     body(
-        (foo != null ? div(foo) : string.Empty),
-        (bar != null ? div(bar) : string.Empty)
+        foo.IfNotNull(x => div(x)),
+        bar.IfNull(div("bar is null"))
     )
 )}";
 Console.WriteLine(result);
 
-var numbers = Enumerable.Range(0, 10).ToArray();
+var numbers = Enumerable.Range(0, 10);
 result = $@"{DOCTYPE() +
 html(
     body(

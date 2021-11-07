@@ -8,6 +8,7 @@
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" />
     <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
     <Using Include="Markupolation.Element" Alias="E" />
     <Using Include="Markupolation.Elements" Alias="e" />
