@@ -34,6 +34,20 @@ namespace Markupolation.Tests
         }
 
         [Test]
+        public void IfNull_otherwise()
+        {
+            int? item = null;
+            item.IfNull(then: div("null"), otherwise: x => div(x)).ToString()
+                .Should().Be("<div>null</div>");
+
+            item = 1;
+            item.IfNull(then: div("null"), otherwise: x => div(x)).ToString()
+                .Should().Be("<div>1</div>");
+            item.IfNull(then: div("null"), otherwise: null).ToString()
+                .Should().BeEmpty();
+        }
+
+        [Test]
         public void IfNotNull()
         {
             int? item = null;
@@ -43,8 +57,21 @@ namespace Markupolation.Tests
             item = 1;
             item.IfNotNull(x => div(x)).ToString()
                 .Should().Be("<div>1</div>");
-
             item.IfNotNull(null).ToString()
+                .Should().BeEmpty();
+        }
+
+        [Test]
+        public void IfNotNull_otherwise()
+        {
+            int? item = null;
+            item.IfNotNull(then: x => div(x), otherwise: div("null")).ToString()
+                .Should().Be("<div>null</div>");
+
+            item = 1;
+            item.IfNotNull(then: x => div(x), otherwise: div("null")).ToString()
+                .Should().Be("<div>1</div>");
+            item.IfNotNull(then: null, otherwise: div("null")).ToString()
                 .Should().BeEmpty();
         }
 
@@ -65,6 +92,24 @@ namespace Markupolation.Tests
         }
 
         [Test]
+        public void IfNullOrEmpty_otherwise()
+        {
+            string item = null;
+            item.IfNullOrEmpty(then: div("null"), otherwise: x => div(x)).ToString()
+                .Should().Be("<div>null</div>");
+
+            item = "";
+            item.IfNullOrEmpty(then: div("null"), otherwise: x => div(x)).ToString()
+                .Should().Be("<div>null</div>");
+
+            item = "foo";
+            item.IfNullOrEmpty(then: div("null"), otherwise: x => div(x)).ToString()
+                .Should().Be("<div>foo</div>");
+            item.IfNullOrEmpty(then: div("null"), otherwise: null).ToString()
+                .Should().BeEmpty();
+        }
+
+        [Test]
         public void IfNotNullOrEmpty()
         {
             string item = null;
@@ -78,8 +123,25 @@ namespace Markupolation.Tests
             item = "foo";
             item.IfNotNullOrEmpty(x => div(x)).ToString()
                 .Should().Be("<div>foo</div>");
-
             item.IfNotNullOrEmpty(null).ToString()
+                .Should().BeEmpty();
+        }
+
+        [Test]
+        public void IfNotNullOrEmpty_otherwise()
+        {
+            string item = null;
+            item.IfNotNullOrEmpty(then: x => div(x), otherwise: div("null")).ToString()
+                .Should().Be("<div>null</div>");
+
+            item = "";
+            item.IfNotNullOrEmpty(then: x => div(x), otherwise: div("null")).ToString()
+                .Should().Be("<div>null</div>");
+
+            item = "foo";
+            item.IfNotNullOrEmpty(then: x => div(x), otherwise: div("null")).ToString()
+                .Should().Be("<div>foo</div>");
+            item.IfNotNullOrEmpty(then: null, otherwise: div("null")).ToString()
                 .Should().BeEmpty();
         }
 
@@ -98,20 +160,51 @@ namespace Markupolation.Tests
         }
 
         [Test]
+        public void IfEmpty_otherwise()
+        {
+            var items = new[] { 1, 2 };
+            items.IfEmpty(then: div("empty"), otherwise: x => div(x.Count())).ToString()
+                .Should().Be("<div>2</div>");
+            items.IfEmpty(then: div("empty"), otherwise: null).ToString()
+                .Should().BeEmpty();
+
+            Enumerable.Empty<int>().IfEmpty(then: div("empty"), otherwise: x => div(x.Count())).ToString()
+                .Should().Be("<div>empty</div>");
+
+            ((IEnumerable<int>)null).IfEmpty(then: div("empty"), otherwise: x => div(x.Count())).ToString()
+                .Should().Be("<div>empty</div>");
+        }
+
+        [Test]
         public void IfNotEmpty()
         {
             var items = new[] { 1, 2 };
             items.IfNotEmpty(x => div(x.Count())).ToString()
                 .Should().Be("<div>2</div>");
+            items.IfNotEmpty(null).ToString()
+                .Should().BeEmpty();
 
             Enumerable.Empty<int>().IfNotEmpty(x => div(x.Count())).ToString()
                 .Should().BeEmpty();
 
             ((IEnumerable<int>)null).IfNotEmpty(x => div(x.Count())).ToString()
                 .Should().BeEmpty();
+        }
 
-            items.IfNotEmpty(null).ToString()
+        [Test]
+        public void IfNotEmpty_otherwise()
+        {
+            var items = new[] { 1, 2 };
+            items.IfNotEmpty(then: x => div(x.Count()), otherwise: div("empty")).ToString()
+                .Should().Be("<div>2</div>");
+            items.IfNotEmpty(then: null, otherwise: div("empty")).ToString()
                 .Should().BeEmpty();
+
+            Enumerable.Empty<int>().IfNotEmpty(then: x => div(x.Count()), otherwise: div("empty")).ToString()
+                .Should().Be("<div>empty</div>");
+
+            ((IEnumerable<int>)null).IfNotEmpty(then: x => div(x.Count()), otherwise: div("empty")).ToString()
+                .Should().Be("<div>empty</div>");
         }
 
         [Test]
@@ -124,20 +217,21 @@ namespace Markupolation.Tests
             item = 1;
             item.IfHasValue(x => div(x)).ToString()
                 .Should().Be("<div>1</div>");
-
             item.IfHasValue(null).ToString()
                 .Should().BeEmpty();
         }
 
         [Test]
-        public void IfNotHasValue()
+        public void IfHasValue_otherwise()
         {
             int? item = null;
-            item.IfNotHasValue(div("null")).ToString()
+            item.IfHasValue(then: x => div(x), otherwise: div("null")).ToString()
                 .Should().Be("<div>null</div>");
 
             item = 1;
-            item.IfNotHasValue(div("null")).ToString()
+            item.IfHasValue(then: x => div(x), otherwise: div("null")).ToString()
+                .Should().Be("<div>1</div>");
+            item.IfHasValue(then: null, otherwise: div("null")).ToString()
                 .Should().BeEmpty();
         }
 
@@ -153,8 +247,25 @@ namespace Markupolation.Tests
 
             item.IfMatch(null, x => div(x)).ToString()
                 .Should().BeEmpty();
-
             item.IfMatch(m => m.Length == 6, null).ToString()
+                .Should().BeEmpty();
+        }
+
+        [Test]
+        public void IfMatch_otherwise()
+        {
+            var item = "FooBar";
+            item.IfMatch(m => m.Length == 6, then: x => div(x), otherwise: x => section(x)).ToString()
+                .Should().Be("<div>FooBar</div>");
+
+            item.IfMatch(m => m.EndsWith("Foo"), then: x => div(x), otherwise: x => section(x)).ToString()
+                .Should().Be("<section>FooBar</section>");
+
+            item.IfMatch(null, then: x => div(x), otherwise: x => section(x)).ToString()
+                .Should().BeEmpty();
+            item.IfMatch(m => m.Length == 6, then: null, otherwise: x => section(x)).ToString()
+                .Should().BeEmpty();
+            item.IfMatch(m => m.EndsWith("Foo"), then: x => div(x), otherwise: null).ToString()
                 .Should().BeEmpty();
         }
     }
