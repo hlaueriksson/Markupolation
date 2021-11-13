@@ -2,7 +2,29 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.0.0</Version>
+    <PackageReleaseNotes>Initial release 🎉</PackageReleaseNotes>
+    <Authors>Henrik Lau Eriksson</Authors>
+    <Description>
+Markupolation = Markup + String Interpolation
+Extensions for HTML templating in C# with a fluent API:
+⌨️ var links = new[] { new { Url = "#", Title = "Foo", Active = true }, new { Url = "#", Title = "Bar", Active = false } };
+⌨️ links.Each((x, index) =&gt; a(href(x.Url), id($"link{index}"), x.IfMatch(x =&gt; x.Active, x =&gt; class_("active")), x.Title));
+🖨️ &lt;a href="#" id="link0" class="active"&gt;Foo&lt;/a&gt;&lt;a href="#" id="link1"&gt;Bar&lt;/a&gt;
+    </Description>
+    <PackageId>Markupolation.Extensions</PackageId>
+    <PackageProjectUrl>https://github.com/hlaueriksson/Markupolation</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>Markupolation.Extensions.md</PackageReadmeFile>
+    <PackageTags>HTML;HTML5;Markup</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Link="icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\Markupolation.Extensions.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <Import Project="../../Analyzers.props" />
 

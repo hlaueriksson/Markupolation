@@ -2,7 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>0.0.0</Version>
+    <PackageReleaseNotes>Initial release 🎉</PackageReleaseNotes>
+    <Authors>Henrik Lau Eriksson</Authors>
+    <Description>
+Markupolation = Markup + String Interpolation
+HTML templating in C# with a fluent API:
+⌨️ $"{DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))}";
+🖨️ &lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;title&gt;Markupolation&lt;/title&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Hello, World!&lt;/h1&gt;&lt;/body&gt;&lt;/html&gt;
+    </Description>
+    <PackageId>Markupolation</PackageId>
+    <PackageProjectUrl>https://github.com/hlaueriksson/Markupolation</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>Markupolation.md</PackageReadmeFile>
+    <PackageTags>HTML;HTML5;Markup</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Link="icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\Markupolation.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <Import Project="../../Analyzers.props" />
 
