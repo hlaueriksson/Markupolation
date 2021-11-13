@@ -2,6 +2,9 @@ using System.Linq;
 
 namespace Markupolation
 {
+    /// <summary>
+    /// HTML element.
+    /// </summary>
     public sealed record Element : Content
     {
         /// <summary>
@@ -29,6 +32,10 @@ namespace Markupolation
 
         internal ElementType Type { get; }
 
+        /// <summary>
+        /// Converts <see cref="Element"/> to <see cref="string"/>.
+        /// </summary>
+        /// <param name="value">The element.</param>
         public static implicit operator string(Element value)
         {
             return value != null ? value.ToString() : string.Empty;

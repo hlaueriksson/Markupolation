@@ -1,5 +1,8 @@
 namespace Markupolation
 {
+    /// <summary>
+    /// HTML attribute.
+    /// </summary>
 #pragma warning disable CA1711 // Identifiers should not have incorrect suffix
     public sealed record Attribute : Content
 #pragma warning restore CA1711 // Identifiers should not have incorrect suffix
@@ -20,6 +23,10 @@ namespace Markupolation
 
         internal AttributeType Type { get; }
 
+        /// <summary>
+        /// Converts <see cref="Attribute"/> to <see cref="string"/>.
+        /// </summary>
+        /// <param name="value">The attribute.</param>
         public static implicit operator string(Attribute value)
         {
             return value != null ? value.ToString() : string.Empty;

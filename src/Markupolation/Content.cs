@@ -2,6 +2,9 @@ using System.Diagnostics;
 
 namespace Markupolation
 {
+    /// <summary>
+    /// HTML content.
+    /// </summary>
     [DebuggerDisplay("{ToString()}")]
     public record Content
     {
@@ -19,11 +22,19 @@ namespace Markupolation
         /// </summary>
         public string? Value { get; }
 
+        /// <summary>
+        /// Converts <see cref="Content"/> to <see cref="string"/>.
+        /// </summary>
+        /// <param name="value">The content.</param>
         public static implicit operator string(Content value)
         {
             return value != null ? value.ToString() : string.Empty;
         }
 
+        /// <summary>
+        /// Converts <see cref="string"/> to <see cref="Content"/>.
+        /// </summary>
+        /// <param name="value">The string.</param>
 #pragma warning disable CA2225 // Operator overloads have named alternates
         public static implicit operator Content(string value)
 #pragma warning restore CA2225 // Operator overloads have named alternates
