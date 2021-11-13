@@ -4,7 +4,14 @@ using static Markupolation.Elements;
 using a = Markupolation.Attributes;
 using static Markupolation.Attributes;
 
-var result = $@"{DOCTYPE() +
+var result = $"{DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))}";
+Console.WriteLine(result);
+
+var links = new[] { new { Url = "#", Title = "Foo", Active = true }, new { Url = "#", Title = "Bar", Active = false } };
+result = links.Each((x, index) => a(href(x.Url), id($"link{index}"), x.IfMatch(x => x.Active, x => class_("active")), x.Title));
+Console.WriteLine(result);
+
+result = $@"{DOCTYPE() +
 html(lang("en"),
     head(
         meta(charset("utf-8")),
