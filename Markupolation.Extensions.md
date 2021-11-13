@@ -69,7 +69,7 @@ Configuration in `csproj` file:
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="Markupolation" Version="1.0.0" />
+  <PackageReference Include="Markupolation.Extensions" Version="1.0.0" />
   <Using Include="Markupolation" />
   <Using Include="Markupolation.Elements" Static="True" />
   <Using Include="Markupolation.Elements" Alias="e" />
