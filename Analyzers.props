@@ -5,6 +5,7 @@
     <CodeAnalysisRuleSet>../../Markupolation.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <EnablePackageValidation>true</EnablePackageValidation>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="../../stylecop.json">
