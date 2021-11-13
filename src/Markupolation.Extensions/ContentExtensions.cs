@@ -14,17 +14,34 @@ namespace Markupolation
         /// Wraps each element in <see cref="Content"/>.
         /// </summary>
         /// <typeparam name="T">Type of elements.</typeparam>
-        /// <param name="value">Elements.</param>
+        /// <param name="values">Elements.</param>
         /// <param name="content">Attribute, element or content delegate.</param>
         /// <returns>Content.</returns>
-        public static Content Each<T>(this IEnumerable<T> value, Func<T, Content> content)
+        public static Content Each<T>(this IEnumerable<T> values, Func<T, Content> content)
         {
-            if (value == null)
+            if (values == null)
             {
                 return string.Empty;
             }
 
-            return value.Select(x => content(x)).Join();
+            return values.Select(x => content(x)).Join();
+        }
+
+        /// <summary>
+        /// Wraps each element in <see cref="Content"/> by incorporating the element's index.
+        /// </summary>
+        /// <typeparam name="T">Type of elements.</typeparam>
+        /// <param name="values">Elements.</param>
+        /// <param name="content">Attribute, element or content delegate.</param>
+        /// <returns>Content.</returns>
+        public static Content Each<T>(this IEnumerable<T> values, Func<T, int, Content> content)
+        {
+            if (values == null)
+            {
+                return string.Empty;
+            }
+
+            return values.Select((x, index) => content(x, index)).Join();
         }
 
         /// <summary>
@@ -124,53 +141,53 @@ namespace Markupolation
         }
 
         /// <summary>
-        /// Returns <see cref="Content"/> if value is empty.
+        /// Returns <see cref="Content"/> if values is empty.
         /// </summary>
         /// <typeparam name="T">Type of elements.</typeparam>
-        /// <param name="value">Value.</param>
+        /// <param name="values">Elements.</param>
         /// <param name="then">Attribute, element or content.</param>
         /// <returns>Content.</returns>
-        public static Content IfEmpty<T>(this IEnumerable<T> value, Content then)
+        public static Content IfEmpty<T>(this IEnumerable<T> values, Content then)
         {
-            return value?.Any() != true ? then : string.Empty;
+            return values?.Any() != true ? then : string.Empty;
         }
 
         /// <summary>
-        /// Returns <see cref="Content"/> if value is empty; otherwise the fallback <see cref="Content"/>.
+        /// Returns <see cref="Content"/> if values is empty; otherwise the fallback <see cref="Content"/>.
         /// </summary>
         /// <typeparam name="T">Type of elements.</typeparam>
-        /// <param name="value">Value.</param>
+        /// <param name="values">Elements.</param>
         /// <param name="then">Attribute, element or content.</param>
         /// <param name="otherwise">Fallback attribute, element or content delegate.</param>
         /// <returns>Content.</returns>
-        public static Content IfEmpty<T>(this IEnumerable<T> value, Content then, Func<IEnumerable<T>, Content> otherwise)
+        public static Content IfEmpty<T>(this IEnumerable<T> values, Content then, Func<IEnumerable<T>, Content> otherwise)
         {
-            return value?.Any() != true ? then : otherwise != null ? otherwise(value) : string.Empty;
+            return values?.Any() != true ? then : otherwise != null ? otherwise(values) : string.Empty;
         }
 
         /// <summary>
-        /// Returns <see cref="Content"/> if value is not empty.
+        /// Returns <see cref="Content"/> if values is not empty.
         /// </summary>
         /// <typeparam name="T">Type of elements.</typeparam>
-        /// <param name="value">Value.</param>
+        /// <param name="values">Elements.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
         /// <returns>Content.</returns>
-        public static Content IfNotEmpty<T>(this IEnumerable<T> value, Func<IEnumerable<T>, Content> then)
+        public static Content IfNotEmpty<T>(this IEnumerable<T> values, Func<IEnumerable<T>, Content> then)
         {
-            return value?.Any() == true && then != null ? then(value) : string.Empty;
+            return values?.Any() == true && then != null ? then(values) : string.Empty;
         }
 
         /// <summary>
-        /// Returns <see cref="Content"/> if value is not empty; otherwise the fallback <see cref="Content"/>.
+        /// Returns <see cref="Content"/> if values is not empty; otherwise the fallback <see cref="Content"/>.
         /// </summary>
         /// <typeparam name="T">Type of elements.</typeparam>
-        /// <param name="value">Value.</param>
+        /// <param name="values">Elements.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
         /// <param name="otherwise">Fallback attribute, element or content.</param>
         /// <returns>Content.</returns>
-        public static Content IfNotEmpty<T>(this IEnumerable<T> value, Func<IEnumerable<T>, Content> then, Content otherwise)
+        public static Content IfNotEmpty<T>(this IEnumerable<T> values, Func<IEnumerable<T>, Content> then, Content otherwise)
         {
-            return value?.Any() == true && then != null ? then(value) : value?.Any() != true ? otherwise : string.Empty;
+            return values?.Any() == true && then != null ? then(values) : values?.Any() != true ? otherwise : string.Empty;
         }
 
         /// <summary>

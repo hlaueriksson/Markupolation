@@ -22,6 +22,20 @@ namespace Markupolation.Tests
         }
 
         [Test]
+        public void Each_index()
+        {
+            var items = new[] { "a", "b" };
+            var result = items.Each((x, i) => div(id(i), x));
+            result.ToString().Should().Be("<div id=\"0\">a</div><div id=\"1\">b</div>");
+
+            result = Enumerable.Empty<string>().Each((x, i) => div(id(i), x));
+            result.ToString().Should().BeEmpty();
+
+            ((IEnumerable<string>)null).Each((x, i) => div(id(i), x));
+            result.ToString().Should().BeEmpty();
+        }
+
+        [Test]
         public void IfNull()
         {
             int? item = null;
