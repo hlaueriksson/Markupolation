@@ -2,7 +2,7 @@ namespace Markupolation
 {
     internal enum ElementType
     {
-        [Element("Hyperlink", false, "href", "target", "download", "rel", "hreflang", "type", "referrerpolicy")]
+        [Element("Hyperlink", false, AttributeType.href, AttributeType.target, AttributeType.download, AttributeType.rel, AttributeType.hreflang, AttributeType.type, AttributeType.referrerpolicy)]
         a,
 
         [Element("Abbreviation", false)]
@@ -11,7 +11,7 @@ namespace Markupolation
         [Element("Contact information for a page or article element", false)]
         address,
 
-        [Element("Hyperlink or dead area on an image map", true, "alt", "coords", "shape", "href", "target", "download", "rel", "referrerpolicy")]
+        [Element("Hyperlink or dead area on an image map", true, AttributeType.alt, AttributeType.coords, AttributeType.shape, AttributeType.href, AttributeType.target, AttributeType.download, AttributeType.rel, AttributeType.referrerpolicy)]
         area,
 
         [Element("Self-contained syndicatable or reusable composition", false)]
@@ -20,13 +20,13 @@ namespace Markupolation
         [Element("Sidebar for tangentially related content", false)]
         aside,
 
-        [Element("Audio player", false, "src", "crossorigin", "preload", "autoplay", "loop", "muted", "controls")]
+        [Element("Audio player", false, AttributeType.src, AttributeType.crossorigin, AttributeType.preload, AttributeType.autoplay, AttributeType.loop, AttributeType.muted, AttributeType.controls)]
         audio,
 
         [Element("Keywords", false)]
         b,
 
-        [Element("Base URL and default target browsing context for hyperlinks and forms", true, "href", "target")]
+        [Element("Base URL and default target browsing context for hyperlinks and forms", true, AttributeType.href, AttributeType.target)]
         base_,
 
         [Element("Text directionality isolation", false)]
@@ -35,7 +35,7 @@ namespace Markupolation
         [Element("Text directionality formatting", false)]
         bdo,
 
-        [Element("A section quoted from another source", false, "cite")]
+        [Element("A section quoted from another source", false, AttributeType.cite)]
         blockquote,
 
         [Element("Document body", false)]
@@ -44,10 +44,10 @@ namespace Markupolation
         [Element("Line break, e.g. in poem or postal address", true)]
         br,
 
-        [Element("Button control", false, "disabled", "form", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget", "name", "type", "value")]
+        [Element("Button control", false, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.name, AttributeType.type, AttributeType.value)]
         button,
 
-        [Element("Scriptable bitmap canvas", false, "width", "height")]
+        [Element("Scriptable bitmap canvas", false, AttributeType.width, AttributeType.height)]
         canvas,
 
         [Element("Table caption", false)]
@@ -59,13 +59,13 @@ namespace Markupolation
         [Element("Computer code", false)]
         code,
 
-        [Element("Table column", true, "span")]
+        [Element("Table column", true, AttributeType.span)]
         col,
 
-        [Element("Group of columns in a table", false, "span")]
+        [Element("Group of columns in a table", false, AttributeType.span)]
         colgroup,
 
-        [Element("Machine-readable equivalent", false, "value")]
+        [Element("Machine-readable equivalent", false, AttributeType.value)]
         data,
 
         [Element("Container for options for combo box control", false)]
@@ -74,16 +74,16 @@ namespace Markupolation
         [Element("Content for corresponding dt element(s)", false)]
         dd,
 
-        [Element("A removal from the document", false, "cite", "datetime")]
+        [Element("A removal from the document", false, AttributeType.cite, AttributeType.datetime)]
         del,
 
-        [Element("Disclosure control for hiding details", false, "open")]
+        [Element("Disclosure control for hiding details", false, AttributeType.open)]
         details,
 
         [Element("Defining instance", false)]
         dfn,
 
-        [Element("Dialog box or window", false, "open")]
+        [Element("Dialog box or window", false, AttributeType.open)]
         dialog,
 
         [Element("Generic flow container, or container for name-value groups in dl elements", false)]
@@ -98,10 +98,10 @@ namespace Markupolation
         [Element("Stress emphasis", false)]
         em,
 
-        [Element("Plugin", true, "src", "type", "width", "height")]
+        [Element("Plugin", true, AttributeType.src, AttributeType.type, AttributeType.width, AttributeType.height)]
         embed,
 
-        [Element("Group of form controls", false, "disabled", "form", "name")]
+        [Element("Group of form controls", false, AttributeType.disabled, AttributeType.form, AttributeType.name)]
         fieldset,
 
         [Element("Caption for figure", false)]
@@ -113,7 +113,7 @@ namespace Markupolation
         [Element("Footer for a page or section", false)]
         footer,
 
-        [Element("User-submittable form", false, "accept_charset", "action", "autocomplete", "enctype", "method", "name", "novalidate", "target")]
+        [Element("User-submittable form", false, AttributeType.accept_charset, AttributeType.action, AttributeType.autocomplete, AttributeType.enctype, AttributeType.method, AttributeType.name, AttributeType.novalidate, AttributeType.target)]
         form,
 
         [Element("Section heading", false)]
@@ -146,43 +146,43 @@ namespace Markupolation
         [Element("Thematic break", true)]
         hr,
 
-        [Element("Root element", false, "manifest")]
+        [Element("Root element", false)]
         html,
 
         [Element("Alternate voice", false)]
         i,
 
-        [Element("Nested browsing context", false, "src", "srcdoc", "name", "sandbox", "allow", "allowfullscreen", "width", "height", "referrerpolicy", "loading")]
+        [Element("Nested browsing context", false, AttributeType.src, AttributeType.srcdoc, AttributeType.name, AttributeType.sandbox, AttributeType.allow, AttributeType.allowfullscreen, AttributeType.width, AttributeType.height, AttributeType.referrerpolicy, AttributeType.loading)]
         iframe,
 
-        [Element("Image", true, "alt", "src", "srcset", "sizes", "crossorigin", "usemap", "ismap", "width", "height", "referrerpolicy", "decoding", "loading")]
+        [Element("Image", true, AttributeType.alt, AttributeType.src, AttributeType.srcset, AttributeType.sizes, AttributeType.crossorigin, AttributeType.usemap, AttributeType.ismap, AttributeType.width, AttributeType.height, AttributeType.referrerpolicy, AttributeType.decoding, AttributeType.loading)]
         img,
 
-        [Element("Form control", true, "accept", "alt", "autocomplete", "checked_", "dirname", "disabled", "form", "formaction", "formenctype", "formmethod", "formnovalidate", "formtarget", "height", "list", "max", "maxlength", "min", "minlength", "multiple", "name", "pattern", "placeholder", "readonly_", "required", "size", "src", "step", "type", "value", "width")]
+        [Element("Form control", true, AttributeType.accept, AttributeType.alt, AttributeType.autocomplete, AttributeType.checked_, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.height, AttributeType.list, AttributeType.max, AttributeType.maxlength, AttributeType.min, AttributeType.minlength, AttributeType.multiple, AttributeType.name, AttributeType.pattern, AttributeType.placeholder, AttributeType.readonly_, AttributeType.required, AttributeType.size, AttributeType.src, AttributeType.step, AttributeType.type, AttributeType.value, AttributeType.width)]
         input,
 
-        [Element("An addition to the document", false, "cite", "datetime")]
+        [Element("An addition to the document", false, AttributeType.cite, AttributeType.datetime)]
         ins,
 
         [Element("User input", false)]
         kbd,
 
-        [Element("Caption for a form control", false, "for_")]
+        [Element("Caption for a form control", false, AttributeType.for_)]
         label,
 
         [Element("Caption for fieldset", false)]
         legend,
 
-        [Element("List item", false, "value")]
+        [Element("List item", false, AttributeType.value)]
         li,
 
-        [Element("Link metadata", true, "href", "crossorigin", "rel", "as_", "media", "hreflang", "type", "sizes", "imagesrcset", "imagesizes", "referrerpolicy", "integrity", "color", "disabled")]
+        [Element("Link metadata", true, AttributeType.href, AttributeType.crossorigin, AttributeType.rel, AttributeType.as_, AttributeType.media, AttributeType.hreflang, AttributeType.type, AttributeType.sizes, AttributeType.imagesrcset, AttributeType.imagesizes, AttributeType.referrerpolicy, AttributeType.integrity, AttributeType.color, AttributeType.disabled)]
         link,
 
         [Element("Container for the dominant contents of the document", false)]
         main,
 
-        [Element("Image map", false, "name")]
+        [Element("Image map", false, AttributeType.name)]
         map,
 
         [Element("Highlight", false)]
@@ -191,10 +191,10 @@ namespace Markupolation
         [Element("Menu of commands", false)]
         menu,
 
-        [Element("Text metadata", true, "name", "http_equiv", "content", "charset", "media")]
+        [Element("Text metadata", true, AttributeType.name, AttributeType.http_equiv, AttributeType.content, AttributeType.charset, AttributeType.media)]
         meta,
 
-        [Element("Gauge", false, "value", "min", "max", "low", "high", "optimum")]
+        [Element("Gauge", false, AttributeType.value, AttributeType.min, AttributeType.max, AttributeType.low, AttributeType.high, AttributeType.optimum)]
         meter,
 
         [Element("Section with navigational links", false)]
@@ -203,25 +203,25 @@ namespace Markupolation
         [Element("Fallback content for script", false)]
         noscript,
 
-        [Element("Image, nested browsing context, or plugin", false, "data", "type", "name", "form", "width", "height")]
+        [Element("Image, nested browsing context, or plugin", false, AttributeType.data, AttributeType.type, AttributeType.name, AttributeType.form, AttributeType.width, AttributeType.height)]
         object_,
 
-        [Element("Ordered list", false, "reversed", "start", "type")]
+        [Element("Ordered list", false, AttributeType.reversed, AttributeType.start, AttributeType.type)]
         ol,
 
-        [Element("Group of options in a list box", false, "disabled", "label")]
+        [Element("Group of options in a list box", false, AttributeType.disabled, AttributeType.label)]
         optgroup,
 
-        [Element("Option in a list box or combo box control", false, "disabled", "label", "selected", "value")]
+        [Element("Option in a list box or combo box control", false, AttributeType.disabled, AttributeType.label, AttributeType.selected, AttributeType.value)]
         option,
 
-        [Element("Calculated output value", false, "for_", "form", "name")]
+        [Element("Calculated output value", false, AttributeType.for_, AttributeType.form, AttributeType.name)]
         output,
 
         [Element("Paragraph", false)]
         p,
 
-        [Element("Parameter for object", true, "name", "value")]
+        [Element("Parameter for object", true, AttributeType.name, AttributeType.value)]
         param,
 
         [Element("Image", false)]
@@ -230,10 +230,10 @@ namespace Markupolation
         [Element("Block of preformatted text", false)]
         pre,
 
-        [Element("Progress bar", false, "value", "max")]
+        [Element("Progress bar", false, AttributeType.value, AttributeType.max)]
         progress,
 
-        [Element("Quotation", false, "cite")]
+        [Element("Quotation", false, AttributeType.cite)]
         q,
 
         [Element("Parenthesis for ruby annotation text", false)]
@@ -251,22 +251,22 @@ namespace Markupolation
         [Element("Computer output", false)]
         samp,
 
-        [Element("Embedded script", false, "src", "type", "async", "defer", "crossorigin", "integrity", "referrerpolicy")]
+        [Element("Embedded script", false, AttributeType.src, AttributeType.type, AttributeType.async, AttributeType.defer, AttributeType.crossorigin, AttributeType.integrity, AttributeType.referrerpolicy)]
         script,
 
         [Element("Generic document or application section", false)]
         section,
 
-        [Element("List box control", false, "autocomplete", "disabled", "form", "multiple", "name", "required", "size")]
+        [Element("List box control", false, AttributeType.autocomplete, AttributeType.disabled, AttributeType.form, AttributeType.multiple, AttributeType.name, AttributeType.required, AttributeType.size)]
         select,
 
-        [Element("Shadow tree slot", false, "name")]
+        [Element("Shadow tree slot", false, AttributeType.name)]
         slot,
 
         [Element("Side comment", false)]
         small,
 
-        [Element("Image source for img or media source for video or audio", true, "src", "type", "srcset", "sizes", "media", "width", "height")]
+        [Element("Image source for img or media source for video or audio", true, AttributeType.src, AttributeType.type, AttributeType.srcset, AttributeType.sizes, AttributeType.media, AttributeType.width, AttributeType.height)]
         source,
 
         [Element("Generic phrasing container", false)]
@@ -275,7 +275,7 @@ namespace Markupolation
         [Element("Importance", false)]
         strong,
 
-        [Element("Embedded styling information", false, "media")]
+        [Element("Embedded styling information", false, AttributeType.media)]
         style,
 
         [Element("Subscript", false)]
@@ -293,25 +293,25 @@ namespace Markupolation
         [Element("Group of rows in a table", false)]
         tbody,
 
-        [Element("Table cell", false, "colspan", "rowspan", "headers")]
+        [Element("Table cell", false, AttributeType.colspan, AttributeType.rowspan, AttributeType.headers)]
         td,
 
         [Element("Template", false)]
         template,
 
-        [Element("Multiline text controls", false, "cols", "dirname", "disabled", "form", "maxlength", "minlength", "name", "placeholder", "readonly_", "required", "rows", "wrap")]
+        [Element("Multiline text controls", false, AttributeType.cols, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.maxlength, AttributeType.minlength, AttributeType.name, AttributeType.placeholder, AttributeType.readonly_, AttributeType.required, AttributeType.rows, AttributeType.wrap)]
         textarea,
 
         [Element("Group of footer rows in a table", false)]
         tfoot,
 
-        [Element("Table header cell", false, "colspan", "rowspan", "headers", "scope", "abbr")]
+        [Element("Table header cell", false, AttributeType.colspan, AttributeType.rowspan, AttributeType.headers, AttributeType.scope, AttributeType.abbr)]
         th,
 
         [Element("Group of heading rows in a table", false)]
         thead,
 
-        [Element("Machine-readable equivalent of date- or time-related data", false, "datetime")]
+        [Element("Machine-readable equivalent of date- or time-related data", false, AttributeType.datetime)]
         time,
 
         [Element("Document title", false)]
@@ -320,7 +320,7 @@ namespace Markupolation
         [Element("Table row", false)]
         tr,
 
-        [Element("Timed text track", true, "default_", "kind", "label", "src", "srclang")]
+        [Element("Timed text track", true, AttributeType.default_, AttributeType.kind, AttributeType.label, AttributeType.src, AttributeType.srclang)]
         track,
 
         [Element("Unarticulated annotation", false)]
@@ -332,7 +332,7 @@ namespace Markupolation
         [Element("Variable", false)]
         var,
 
-        [Element("Video player", false, "src", "crossorigin", "poster", "preload", "autoplay", "playsinline", "loop", "muted", "controls", "width", "height")]
+        [Element("Video player", false, AttributeType.src, AttributeType.crossorigin, AttributeType.poster, AttributeType.preload, AttributeType.autoplay, AttributeType.playsinline, AttributeType.loop, AttributeType.muted, AttributeType.controls, AttributeType.width, AttributeType.height)]
         video,
 
         [Element("Line breaking opportunity", true)]

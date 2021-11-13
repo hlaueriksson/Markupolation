@@ -4,12 +4,12 @@ namespace Markupolation
     public static partial class Elements
     {
         /// <summary>Hyperlink.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.href"/>, <see cref="Attributes.target"/>, <see cref="Attributes.download"/>, <see cref="Attributes.rel"/>, <see cref="Attributes.hreflang"/>, <see cref="Attributes.type"/>, <see cref="Attributes.referrerpolicy"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.href(string)"/>, <see cref="Attributes.target(string)"/>, <see cref="Attributes.download(string)"/>, <see cref="Attributes.rel(string)"/>, <see cref="Attributes.hreflang(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<a></a>]]></code></returns>
         public static Element a(params Content[] content) => new(ElementType.a, false, content);
 
-        /// <inheritdoc cref="a" />
+        /// <inheritdoc cref="a(Content[])" />
         public static Element a(object content) => new(ElementType.a, false, content?.ToString()!);
 
         /// <summary>Abbreviation.</summary>
@@ -17,7 +17,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<abbr></abbr>]]></code></returns>
         public static Element abbr(params Content[] content) => new(ElementType.abbr, false, content);
 
-        /// <inheritdoc cref="abbr" />
+        /// <inheritdoc cref="abbr(Content[])" />
         public static Element abbr(object content) => new(ElementType.abbr, false, content?.ToString()!);
 
         /// <summary>Contact information for a page or article element.</summary>
@@ -25,11 +25,11 @@ namespace Markupolation
         /// <returns><code><![CDATA[<address></address>]]></code></returns>
         public static Element address(params Content[] content) => new(ElementType.address, false, content);
 
-        /// <inheritdoc cref="address" />
+        /// <inheritdoc cref="address(Content[])" />
         public static Element address(object content) => new(ElementType.address, false, content?.ToString()!);
 
         /// <summary>Hyperlink or dead area on an image map.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.alt"/>, <see cref="Attributes.coords"/>, <see cref="Attributes.shape"/>, <see cref="Attributes.href"/>, <see cref="Attributes.target"/>, <see cref="Attributes.download"/>, <see cref="Attributes.rel"/>, <see cref="Attributes.referrerpolicy"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.alt(string)"/>, <see cref="Attributes.coords(string)"/>, <see cref="Attributes.shape(string)"/>, <see cref="Attributes.href(string)"/>, <see cref="Attributes.target(string)"/>, <see cref="Attributes.download(string)"/>, <see cref="Attributes.rel(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<area />]]></code></returns>
         public static Element area(params Content[] content) => new(ElementType.area, true, content);
@@ -39,7 +39,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<article></article>]]></code></returns>
         public static Element article(params Content[] content) => new(ElementType.article, false, content);
 
-        /// <inheritdoc cref="article" />
+        /// <inheritdoc cref="article(Content[])" />
         public static Element article(object content) => new(ElementType.article, false, content?.ToString()!);
 
         /// <summary>Sidebar for tangentially related content.</summary>
@@ -47,16 +47,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<aside></aside>]]></code></returns>
         public static Element aside(params Content[] content) => new(ElementType.aside, false, content);
 
-        /// <inheritdoc cref="aside" />
+        /// <inheritdoc cref="aside(Content[])" />
         public static Element aside(object content) => new(ElementType.aside, false, content?.ToString()!);
 
         /// <summary>Audio player.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.src"/>, <see cref="Attributes.crossorigin"/>, <see cref="Attributes.preload"/>, <see cref="Attributes.autoplay"/>, <see cref="Attributes.loop"/>, <see cref="Attributes.muted"/>, <see cref="Attributes.controls"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.preload(string)"/>, <see cref="Attributes.autoplay()"/>, <see cref="Attributes.loop()"/>, <see cref="Attributes.muted()"/>, <see cref="Attributes.controls()"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<audio></audio>]]></code></returns>
         public static Element audio(params Content[] content) => new(ElementType.audio, false, content);
 
-        /// <inheritdoc cref="audio" />
+        /// <inheritdoc cref="audio(Content[])" />
         public static Element audio(object content) => new(ElementType.audio, false, content?.ToString()!);
 
         /// <summary>Keywords.</summary>
@@ -64,11 +64,11 @@ namespace Markupolation
         /// <returns><code><![CDATA[<b></b>]]></code></returns>
         public static Element b(params Content[] content) => new(ElementType.b, false, content);
 
-        /// <inheritdoc cref="b" />
+        /// <inheritdoc cref="b(Content[])" />
         public static Element b(object content) => new(ElementType.b, false, content?.ToString()!);
 
         /// <summary>Base URL and default target browsing context for hyperlinks and forms.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.href"/>, <see cref="Attributes.target"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.href(string)"/>, <see cref="Attributes.target(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<base_ />]]></code></returns>
         public static Element base_(params Content[] content) => new(ElementType.base_, true, content);
@@ -78,7 +78,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<bdi></bdi>]]></code></returns>
         public static Element bdi(params Content[] content) => new(ElementType.bdi, false, content);
 
-        /// <inheritdoc cref="bdi" />
+        /// <inheritdoc cref="bdi(Content[])" />
         public static Element bdi(object content) => new(ElementType.bdi, false, content?.ToString()!);
 
         /// <summary>Text directionality formatting.</summary>
@@ -86,16 +86,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<bdo></bdo>]]></code></returns>
         public static Element bdo(params Content[] content) => new(ElementType.bdo, false, content);
 
-        /// <inheritdoc cref="bdo" />
+        /// <inheritdoc cref="bdo(Content[])" />
         public static Element bdo(object content) => new(ElementType.bdo, false, content?.ToString()!);
 
         /// <summary>A section quoted from another source.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.cite"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.cite(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<blockquote></blockquote>]]></code></returns>
         public static Element blockquote(params Content[] content) => new(ElementType.blockquote, false, content);
 
-        /// <inheritdoc cref="blockquote" />
+        /// <inheritdoc cref="blockquote(Content[])" />
         public static Element blockquote(object content) => new(ElementType.blockquote, false, content?.ToString()!);
 
         /// <summary>Document body.</summary>
@@ -103,7 +103,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<body></body>]]></code></returns>
         public static Element body(params Content[] content) => new(ElementType.body, false, content);
 
-        /// <inheritdoc cref="body" />
+        /// <inheritdoc cref="body(Content[])" />
         public static Element body(object content) => new(ElementType.body, false, content?.ToString()!);
 
         /// <summary>Line break, e.g. in poem or postal address.</summary>
@@ -112,21 +112,21 @@ namespace Markupolation
         public static Element br(params Content[] content) => new(ElementType.br, true, content);
 
         /// <summary>Button control.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.disabled"/>, <see cref="Attributes.form"/>, <see cref="Attributes.formaction"/>, <see cref="Attributes.formenctype"/>, <see cref="Attributes.formmethod"/>, <see cref="Attributes.formnovalidate"/>, <see cref="Attributes.formtarget"/>, <see cref="Attributes.name"/>, <see cref="Attributes.type"/>, <see cref="Attributes.value"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<button></button>]]></code></returns>
         public static Element button(params Content[] content) => new(ElementType.button, false, content);
 
-        /// <inheritdoc cref="button" />
+        /// <inheritdoc cref="button(Content[])" />
         public static Element button(object content) => new(ElementType.button, false, content?.ToString()!);
 
         /// <summary>Scriptable bitmap canvas.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.width"/>, <see cref="Attributes.height"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<canvas></canvas>]]></code></returns>
         public static Element canvas(params Content[] content) => new(ElementType.canvas, false, content);
 
-        /// <inheritdoc cref="canvas" />
+        /// <inheritdoc cref="canvas(Content[])" />
         public static Element canvas(object content) => new(ElementType.canvas, false, content?.ToString()!);
 
         /// <summary>Table caption.</summary>
@@ -134,7 +134,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<caption></caption>]]></code></returns>
         public static Element caption(params Content[] content) => new(ElementType.caption, false, content);
 
-        /// <inheritdoc cref="caption" />
+        /// <inheritdoc cref="caption(Content[])" />
         public static Element caption(object content) => new(ElementType.caption, false, content?.ToString()!);
 
         /// <summary>Title of a work.</summary>
@@ -142,7 +142,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<cite></cite>]]></code></returns>
         public static Element cite(params Content[] content) => new(ElementType.cite, false, content);
 
-        /// <inheritdoc cref="cite" />
+        /// <inheritdoc cref="cite(Content[])" />
         public static Element cite(object content) => new(ElementType.cite, false, content?.ToString()!);
 
         /// <summary>Computer code.</summary>
@@ -150,31 +150,31 @@ namespace Markupolation
         /// <returns><code><![CDATA[<code></code>]]></code></returns>
         public static Element code(params Content[] content) => new(ElementType.code, false, content);
 
-        /// <inheritdoc cref="code" />
+        /// <inheritdoc cref="code(Content[])" />
         public static Element code(object content) => new(ElementType.code, false, content?.ToString()!);
 
         /// <summary>Table column.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.span"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.span(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<col />]]></code></returns>
         public static Element col(params Content[] content) => new(ElementType.col, true, content);
 
         /// <summary>Group of columns in a table.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.span"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.span(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<colgroup></colgroup>]]></code></returns>
         public static Element colgroup(params Content[] content) => new(ElementType.colgroup, false, content);
 
-        /// <inheritdoc cref="colgroup" />
+        /// <inheritdoc cref="colgroup(Content[])" />
         public static Element colgroup(object content) => new(ElementType.colgroup, false, content?.ToString()!);
 
         /// <summary>Machine-readable equivalent.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.value"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.value(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<data></data>]]></code></returns>
         public static Element data(params Content[] content) => new(ElementType.data, false, content);
 
-        /// <inheritdoc cref="data" />
+        /// <inheritdoc cref="data(Content[])" />
         public static Element data(object content) => new(ElementType.data, false, content?.ToString()!);
 
         /// <summary>Container for options for combo box control.</summary>
@@ -182,7 +182,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<datalist></datalist>]]></code></returns>
         public static Element datalist(params Content[] content) => new(ElementType.datalist, false, content);
 
-        /// <inheritdoc cref="datalist" />
+        /// <inheritdoc cref="datalist(Content[])" />
         public static Element datalist(object content) => new(ElementType.datalist, false, content?.ToString()!);
 
         /// <summary>Content for corresponding dt element(s).</summary>
@@ -190,25 +190,25 @@ namespace Markupolation
         /// <returns><code><![CDATA[<dd></dd>]]></code></returns>
         public static Element dd(params Content[] content) => new(ElementType.dd, false, content);
 
-        /// <inheritdoc cref="dd" />
+        /// <inheritdoc cref="dd(Content[])" />
         public static Element dd(object content) => new(ElementType.dd, false, content?.ToString()!);
 
         /// <summary>A removal from the document.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.cite"/>, <see cref="Attributes.datetime"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.cite(string)"/>, <see cref="Attributes.datetime(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<del></del>]]></code></returns>
         public static Element del(params Content[] content) => new(ElementType.del, false, content);
 
-        /// <inheritdoc cref="del" />
+        /// <inheritdoc cref="del(Content[])" />
         public static Element del(object content) => new(ElementType.del, false, content?.ToString()!);
 
         /// <summary>Disclosure control for hiding details.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.open"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.open()"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<details></details>]]></code></returns>
         public static Element details(params Content[] content) => new(ElementType.details, false, content);
 
-        /// <inheritdoc cref="details" />
+        /// <inheritdoc cref="details(Content[])" />
         public static Element details(object content) => new(ElementType.details, false, content?.ToString()!);
 
         /// <summary>Defining instance.</summary>
@@ -216,16 +216,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<dfn></dfn>]]></code></returns>
         public static Element dfn(params Content[] content) => new(ElementType.dfn, false, content);
 
-        /// <inheritdoc cref="dfn" />
+        /// <inheritdoc cref="dfn(Content[])" />
         public static Element dfn(object content) => new(ElementType.dfn, false, content?.ToString()!);
 
         /// <summary>Dialog box or window.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.open"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.open()"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<dialog></dialog>]]></code></returns>
         public static Element dialog(params Content[] content) => new(ElementType.dialog, false, content);
 
-        /// <inheritdoc cref="dialog" />
+        /// <inheritdoc cref="dialog(Content[])" />
         public static Element dialog(object content) => new(ElementType.dialog, false, content?.ToString()!);
 
         /// <summary>Generic flow container, or container for name-value groups in dl elements.</summary>
@@ -233,7 +233,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<div></div>]]></code></returns>
         public static Element div(params Content[] content) => new(ElementType.div, false, content);
 
-        /// <inheritdoc cref="div" />
+        /// <inheritdoc cref="div(Content[])" />
         public static Element div(object content) => new(ElementType.div, false, content?.ToString()!);
 
         /// <summary>Association list consisting of zero or more name-value groups.</summary>
@@ -241,7 +241,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<dl></dl>]]></code></returns>
         public static Element dl(params Content[] content) => new(ElementType.dl, false, content);
 
-        /// <inheritdoc cref="dl" />
+        /// <inheritdoc cref="dl(Content[])" />
         public static Element dl(object content) => new(ElementType.dl, false, content?.ToString()!);
 
         /// <summary>Legend for corresponding dd element(s).</summary>
@@ -249,7 +249,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<dt></dt>]]></code></returns>
         public static Element dt(params Content[] content) => new(ElementType.dt, false, content);
 
-        /// <inheritdoc cref="dt" />
+        /// <inheritdoc cref="dt(Content[])" />
         public static Element dt(object content) => new(ElementType.dt, false, content?.ToString()!);
 
         /// <summary>Stress emphasis.</summary>
@@ -257,22 +257,22 @@ namespace Markupolation
         /// <returns><code><![CDATA[<em></em>]]></code></returns>
         public static Element em(params Content[] content) => new(ElementType.em, false, content);
 
-        /// <inheritdoc cref="em" />
+        /// <inheritdoc cref="em(Content[])" />
         public static Element em(object content) => new(ElementType.em, false, content?.ToString()!);
 
         /// <summary>Plugin.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.src"/>, <see cref="Attributes.type"/>, <see cref="Attributes.width"/>, <see cref="Attributes.height"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<embed />]]></code></returns>
         public static Element embed(params Content[] content) => new(ElementType.embed, true, content);
 
         /// <summary>Group of form controls.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.disabled"/>, <see cref="Attributes.form"/>, <see cref="Attributes.name"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.name(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<fieldset></fieldset>]]></code></returns>
         public static Element fieldset(params Content[] content) => new(ElementType.fieldset, false, content);
 
-        /// <inheritdoc cref="fieldset" />
+        /// <inheritdoc cref="fieldset(Content[])" />
         public static Element fieldset(object content) => new(ElementType.fieldset, false, content?.ToString()!);
 
         /// <summary>Caption for figure.</summary>
@@ -280,7 +280,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<figcaption></figcaption>]]></code></returns>
         public static Element figcaption(params Content[] content) => new(ElementType.figcaption, false, content);
 
-        /// <inheritdoc cref="figcaption" />
+        /// <inheritdoc cref="figcaption(Content[])" />
         public static Element figcaption(object content) => new(ElementType.figcaption, false, content?.ToString()!);
 
         /// <summary>Figure with optional caption.</summary>
@@ -288,7 +288,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<figure></figure>]]></code></returns>
         public static Element figure(params Content[] content) => new(ElementType.figure, false, content);
 
-        /// <inheritdoc cref="figure" />
+        /// <inheritdoc cref="figure(Content[])" />
         public static Element figure(object content) => new(ElementType.figure, false, content?.ToString()!);
 
         /// <summary>Footer for a page or section.</summary>
@@ -296,16 +296,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<footer></footer>]]></code></returns>
         public static Element footer(params Content[] content) => new(ElementType.footer, false, content);
 
-        /// <inheritdoc cref="footer" />
+        /// <inheritdoc cref="footer(Content[])" />
         public static Element footer(object content) => new(ElementType.footer, false, content?.ToString()!);
 
         /// <summary>User-submittable form.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.accept_charset"/>, <see cref="Attributes.action"/>, <see cref="Attributes.autocomplete"/>, <see cref="Attributes.enctype"/>, <see cref="Attributes.method"/>, <see cref="Attributes.name"/>, <see cref="Attributes.novalidate"/>, <see cref="Attributes.target"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.accept_charset(string)"/>, <see cref="Attributes.action(string)"/>, <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.enctype(string)"/>, <see cref="Attributes.method(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.novalidate()"/>, <see cref="Attributes.target(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<form></form>]]></code></returns>
         public static Element form(params Content[] content) => new(ElementType.form, false, content);
 
-        /// <inheritdoc cref="form" />
+        /// <inheritdoc cref="form(Content[])" />
         public static Element form(object content) => new(ElementType.form, false, content?.ToString()!);
 
         /// <summary>Section heading.</summary>
@@ -313,7 +313,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<h1></h1>]]></code></returns>
         public static Element h1(params Content[] content) => new(ElementType.h1, false, content);
 
-        /// <inheritdoc cref="h1" />
+        /// <inheritdoc cref="h1(Content[])" />
         public static Element h1(object content) => new(ElementType.h1, false, content?.ToString()!);
 
         /// <summary>Section heading.</summary>
@@ -321,7 +321,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<h2></h2>]]></code></returns>
         public static Element h2(params Content[] content) => new(ElementType.h2, false, content);
 
-        /// <inheritdoc cref="h2" />
+        /// <inheritdoc cref="h2(Content[])" />
         public static Element h2(object content) => new(ElementType.h2, false, content?.ToString()!);
 
         /// <summary>Section heading.</summary>
@@ -329,7 +329,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<h3></h3>]]></code></returns>
         public static Element h3(params Content[] content) => new(ElementType.h3, false, content);
 
-        /// <inheritdoc cref="h3" />
+        /// <inheritdoc cref="h3(Content[])" />
         public static Element h3(object content) => new(ElementType.h3, false, content?.ToString()!);
 
         /// <summary>Section heading.</summary>
@@ -337,7 +337,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<h4></h4>]]></code></returns>
         public static Element h4(params Content[] content) => new(ElementType.h4, false, content);
 
-        /// <inheritdoc cref="h4" />
+        /// <inheritdoc cref="h4(Content[])" />
         public static Element h4(object content) => new(ElementType.h4, false, content?.ToString()!);
 
         /// <summary>Section heading.</summary>
@@ -345,7 +345,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<h5></h5>]]></code></returns>
         public static Element h5(params Content[] content) => new(ElementType.h5, false, content);
 
-        /// <inheritdoc cref="h5" />
+        /// <inheritdoc cref="h5(Content[])" />
         public static Element h5(object content) => new(ElementType.h5, false, content?.ToString()!);
 
         /// <summary>Section heading.</summary>
@@ -353,7 +353,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<h6></h6>]]></code></returns>
         public static Element h6(params Content[] content) => new(ElementType.h6, false, content);
 
-        /// <inheritdoc cref="h6" />
+        /// <inheritdoc cref="h6(Content[])" />
         public static Element h6(object content) => new(ElementType.h6, false, content?.ToString()!);
 
         /// <summary>Container for document metadata.</summary>
@@ -361,7 +361,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<head></head>]]></code></returns>
         public static Element head(params Content[] content) => new(ElementType.head, false, content);
 
-        /// <inheritdoc cref="head" />
+        /// <inheritdoc cref="head(Content[])" />
         public static Element head(object content) => new(ElementType.head, false, content?.ToString()!);
 
         /// <summary>Introductory or navigational aids for a page or section.</summary>
@@ -369,7 +369,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<header></header>]]></code></returns>
         public static Element header(params Content[] content) => new(ElementType.header, false, content);
 
-        /// <inheritdoc cref="header" />
+        /// <inheritdoc cref="header(Content[])" />
         public static Element header(object content) => new(ElementType.header, false, content?.ToString()!);
 
         /// <summary>heading group.</summary>
@@ -377,7 +377,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<hgroup></hgroup>]]></code></returns>
         public static Element hgroup(params Content[] content) => new(ElementType.hgroup, false, content);
 
-        /// <inheritdoc cref="hgroup" />
+        /// <inheritdoc cref="hgroup(Content[])" />
         public static Element hgroup(object content) => new(ElementType.hgroup, false, content?.ToString()!);
 
         /// <summary>Thematic break.</summary>
@@ -386,12 +386,11 @@ namespace Markupolation
         public static Element hr(params Content[] content) => new(ElementType.hr, true, content);
 
         /// <summary>Root element.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.manifest"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<html></html>]]></code></returns>
         public static Element html(params Content[] content) => new(ElementType.html, false, content);
 
-        /// <inheritdoc cref="html" />
+        /// <inheritdoc cref="html(Content[])" />
         public static Element html(object content) => new(ElementType.html, false, content?.ToString()!);
 
         /// <summary>Alternate voice.</summary>
@@ -399,37 +398,37 @@ namespace Markupolation
         /// <returns><code><![CDATA[<i></i>]]></code></returns>
         public static Element i(params Content[] content) => new(ElementType.i, false, content);
 
-        /// <inheritdoc cref="i" />
+        /// <inheritdoc cref="i(Content[])" />
         public static Element i(object content) => new(ElementType.i, false, content?.ToString()!);
 
         /// <summary>Nested browsing context.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.src"/>, <see cref="Attributes.srcdoc"/>, <see cref="Attributes.name"/>, <see cref="Attributes.sandbox"/>, <see cref="Attributes.allow"/>, <see cref="Attributes.allowfullscreen"/>, <see cref="Attributes.width"/>, <see cref="Attributes.height"/>, <see cref="Attributes.referrerpolicy"/>, <see cref="Attributes.loading"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.srcdoc(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.sandbox(string)"/>, <see cref="Attributes.allow(string)"/>, <see cref="Attributes.allowfullscreen()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.loading(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<iframe></iframe>]]></code></returns>
         public static Element iframe(params Content[] content) => new(ElementType.iframe, false, content);
 
-        /// <inheritdoc cref="iframe" />
+        /// <inheritdoc cref="iframe(Content[])" />
         public static Element iframe(object content) => new(ElementType.iframe, false, content?.ToString()!);
 
         /// <summary>Image.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.alt"/>, <see cref="Attributes.src"/>, <see cref="Attributes.srcset"/>, <see cref="Attributes.sizes"/>, <see cref="Attributes.crossorigin"/>, <see cref="Attributes.usemap"/>, <see cref="Attributes.ismap"/>, <see cref="Attributes.width"/>, <see cref="Attributes.height"/>, <see cref="Attributes.referrerpolicy"/>, <see cref="Attributes.decoding"/>, <see cref="Attributes.loading"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.alt(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.srcset(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.usemap(string)"/>, <see cref="Attributes.ismap()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.decoding(string)"/>, <see cref="Attributes.loading(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<img />]]></code></returns>
         public static Element img(params Content[] content) => new(ElementType.img, true, content);
 
         /// <summary>Form control.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.accept"/>, <see cref="Attributes.alt"/>, <see cref="Attributes.autocomplete"/>, <see cref="Attributes.checked_"/>, <see cref="Attributes.dirname"/>, <see cref="Attributes.disabled"/>, <see cref="Attributes.form"/>, <see cref="Attributes.formaction"/>, <see cref="Attributes.formenctype"/>, <see cref="Attributes.formmethod"/>, <see cref="Attributes.formnovalidate"/>, <see cref="Attributes.formtarget"/>, <see cref="Attributes.height"/>, <see cref="Attributes.list"/>, <see cref="Attributes.max"/>, <see cref="Attributes.maxlength"/>, <see cref="Attributes.min"/>, <see cref="Attributes.minlength"/>, <see cref="Attributes.multiple"/>, <see cref="Attributes.name"/>, <see cref="Attributes.pattern"/>, <see cref="Attributes.placeholder"/>, <see cref="Attributes.readonly_"/>, <see cref="Attributes.required"/>, <see cref="Attributes.size"/>, <see cref="Attributes.src"/>, <see cref="Attributes.step"/>, <see cref="Attributes.type"/>, <see cref="Attributes.value"/>, <see cref="Attributes.width"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.accept(string)"/>, <see cref="Attributes.alt(string)"/>, <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.checked_()"/>, <see cref="Attributes.dirname(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.list(string)"/>, <see cref="Attributes.max(string)"/>, <see cref="Attributes.maxlength(string)"/>, <see cref="Attributes.min(string)"/>, <see cref="Attributes.minlength(string)"/>, <see cref="Attributes.multiple()"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.pattern(string)"/>, <see cref="Attributes.placeholder(string)"/>, <see cref="Attributes.readonly_()"/>, <see cref="Attributes.required()"/>, <see cref="Attributes.size(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.step(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>, <see cref="Attributes.width(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<input />]]></code></returns>
         public static Element input(params Content[] content) => new(ElementType.input, true, content);
 
         /// <summary>An addition to the document.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.cite"/>, <see cref="Attributes.datetime"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.cite(string)"/>, <see cref="Attributes.datetime(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<ins></ins>]]></code></returns>
         public static Element ins(params Content[] content) => new(ElementType.ins, false, content);
 
-        /// <inheritdoc cref="ins" />
+        /// <inheritdoc cref="ins(Content[])" />
         public static Element ins(object content) => new(ElementType.ins, false, content?.ToString()!);
 
         /// <summary>User input.</summary>
@@ -437,16 +436,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<kbd></kbd>]]></code></returns>
         public static Element kbd(params Content[] content) => new(ElementType.kbd, false, content);
 
-        /// <inheritdoc cref="kbd" />
+        /// <inheritdoc cref="kbd(Content[])" />
         public static Element kbd(object content) => new(ElementType.kbd, false, content?.ToString()!);
 
         /// <summary>Caption for a form control.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.for_"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.for_(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<label></label>]]></code></returns>
         public static Element label(params Content[] content) => new(ElementType.label, false, content);
 
-        /// <inheritdoc cref="label" />
+        /// <inheritdoc cref="label(Content[])" />
         public static Element label(object content) => new(ElementType.label, false, content?.ToString()!);
 
         /// <summary>Caption for fieldset.</summary>
@@ -454,20 +453,20 @@ namespace Markupolation
         /// <returns><code><![CDATA[<legend></legend>]]></code></returns>
         public static Element legend(params Content[] content) => new(ElementType.legend, false, content);
 
-        /// <inheritdoc cref="legend" />
+        /// <inheritdoc cref="legend(Content[])" />
         public static Element legend(object content) => new(ElementType.legend, false, content?.ToString()!);
 
         /// <summary>List item.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.value"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.value(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<li></li>]]></code></returns>
         public static Element li(params Content[] content) => new(ElementType.li, false, content);
 
-        /// <inheritdoc cref="li" />
+        /// <inheritdoc cref="li(Content[])" />
         public static Element li(object content) => new(ElementType.li, false, content?.ToString()!);
 
         /// <summary>Link metadata.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.href"/>, <see cref="Attributes.crossorigin"/>, <see cref="Attributes.rel"/>, <see cref="Attributes.as_"/>, <see cref="Attributes.media"/>, <see cref="Attributes.hreflang"/>, <see cref="Attributes.type"/>, <see cref="Attributes.sizes"/>, <see cref="Attributes.imagesrcset"/>, <see cref="Attributes.imagesizes"/>, <see cref="Attributes.referrerpolicy"/>, <see cref="Attributes.integrity"/>, <see cref="Attributes.color"/>, <see cref="Attributes.disabled"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.href(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.rel(string)"/>, <see cref="Attributes.as_(string)"/>, <see cref="Attributes.media(string)"/>, <see cref="Attributes.hreflang(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.imagesrcset(string)"/>, <see cref="Attributes.imagesizes(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.integrity(string)"/>, <see cref="Attributes.color(string)"/>, <see cref="Attributes.disabled()"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<link />]]></code></returns>
         public static Element link(params Content[] content) => new(ElementType.link, true, content);
@@ -477,16 +476,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<main></main>]]></code></returns>
         public static Element main(params Content[] content) => new(ElementType.main, false, content);
 
-        /// <inheritdoc cref="main" />
+        /// <inheritdoc cref="main(Content[])" />
         public static Element main(object content) => new(ElementType.main, false, content?.ToString()!);
 
         /// <summary>Image map.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.name"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.name(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<map></map>]]></code></returns>
         public static Element map(params Content[] content) => new(ElementType.map, false, content);
 
-        /// <inheritdoc cref="map" />
+        /// <inheritdoc cref="map(Content[])" />
         public static Element map(object content) => new(ElementType.map, false, content?.ToString()!);
 
         /// <summary>Highlight.</summary>
@@ -494,7 +493,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<mark></mark>]]></code></returns>
         public static Element mark(params Content[] content) => new(ElementType.mark, false, content);
 
-        /// <inheritdoc cref="mark" />
+        /// <inheritdoc cref="mark(Content[])" />
         public static Element mark(object content) => new(ElementType.mark, false, content?.ToString()!);
 
         /// <summary>Menu of commands.</summary>
@@ -502,22 +501,22 @@ namespace Markupolation
         /// <returns><code><![CDATA[<menu></menu>]]></code></returns>
         public static Element menu(params Content[] content) => new(ElementType.menu, false, content);
 
-        /// <inheritdoc cref="menu" />
+        /// <inheritdoc cref="menu(Content[])" />
         public static Element menu(object content) => new(ElementType.menu, false, content?.ToString()!);
 
         /// <summary>Text metadata.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.name"/>, <see cref="Attributes.http_equiv"/>, <see cref="Attributes.content"/>, <see cref="Attributes.charset"/>, <see cref="Attributes.media"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.name(string)"/>, <see cref="Attributes.http_equiv(string)"/>, <see cref="Attributes.content(string)"/>, <see cref="Attributes.charset(string)"/>, <see cref="Attributes.media(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<meta />]]></code></returns>
         public static Element meta(params Content[] content) => new(ElementType.meta, true, content);
 
         /// <summary>Gauge.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.value"/>, <see cref="Attributes.min"/>, <see cref="Attributes.max"/>, <see cref="Attributes.low"/>, <see cref="Attributes.high"/>, <see cref="Attributes.optimum"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.value(string)"/>, <see cref="Attributes.min(string)"/>, <see cref="Attributes.max(string)"/>, <see cref="Attributes.low(string)"/>, <see cref="Attributes.high(string)"/>, <see cref="Attributes.optimum(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<meter></meter>]]></code></returns>
         public static Element meter(params Content[] content) => new(ElementType.meter, false, content);
 
-        /// <inheritdoc cref="meter" />
+        /// <inheritdoc cref="meter(Content[])" />
         public static Element meter(object content) => new(ElementType.meter, false, content?.ToString()!);
 
         /// <summary>Section with navigational links.</summary>
@@ -525,7 +524,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<nav></nav>]]></code></returns>
         public static Element nav(params Content[] content) => new(ElementType.nav, false, content);
 
-        /// <inheritdoc cref="nav" />
+        /// <inheritdoc cref="nav(Content[])" />
         public static Element nav(object content) => new(ElementType.nav, false, content?.ToString()!);
 
         /// <summary>Fallback content for script.</summary>
@@ -533,52 +532,52 @@ namespace Markupolation
         /// <returns><code><![CDATA[<noscript></noscript>]]></code></returns>
         public static Element noscript(params Content[] content) => new(ElementType.noscript, false, content);
 
-        /// <inheritdoc cref="noscript" />
+        /// <inheritdoc cref="noscript(Content[])" />
         public static Element noscript(object content) => new(ElementType.noscript, false, content?.ToString()!);
 
         /// <summary>Image, nested browsing context, or plugin.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.data"/>, <see cref="Attributes.type"/>, <see cref="Attributes.name"/>, <see cref="Attributes.form"/>, <see cref="Attributes.width"/>, <see cref="Attributes.height"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.data(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<object_></object_>]]></code></returns>
         public static Element object_(params Content[] content) => new(ElementType.object_, false, content);
 
-        /// <inheritdoc cref="object_" />
+        /// <inheritdoc cref="object_(Content[])" />
         public static Element object_(object content) => new(ElementType.object_, false, content?.ToString()!);
 
         /// <summary>Ordered list.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.reversed"/>, <see cref="Attributes.start"/>, <see cref="Attributes.type"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.reversed()"/>, <see cref="Attributes.start(string)"/>, <see cref="Attributes.type(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<ol></ol>]]></code></returns>
         public static Element ol(params Content[] content) => new(ElementType.ol, false, content);
 
-        /// <inheritdoc cref="ol" />
+        /// <inheritdoc cref="ol(Content[])" />
         public static Element ol(object content) => new(ElementType.ol, false, content?.ToString()!);
 
         /// <summary>Group of options in a list box.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.disabled"/>, <see cref="Attributes.label"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.disabled()"/>, <see cref="Attributes.label(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<optgroup></optgroup>]]></code></returns>
         public static Element optgroup(params Content[] content) => new(ElementType.optgroup, false, content);
 
-        /// <inheritdoc cref="optgroup" />
+        /// <inheritdoc cref="optgroup(Content[])" />
         public static Element optgroup(object content) => new(ElementType.optgroup, false, content?.ToString()!);
 
         /// <summary>Option in a list box or combo box control.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.disabled"/>, <see cref="Attributes.label"/>, <see cref="Attributes.selected"/>, <see cref="Attributes.value"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.disabled()"/>, <see cref="Attributes.label(string)"/>, <see cref="Attributes.selected()"/>, <see cref="Attributes.value(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<option></option>]]></code></returns>
         public static Element option(params Content[] content) => new(ElementType.option, false, content);
 
-        /// <inheritdoc cref="option" />
+        /// <inheritdoc cref="option(Content[])" />
         public static Element option(object content) => new(ElementType.option, false, content?.ToString()!);
 
         /// <summary>Calculated output value.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.for_"/>, <see cref="Attributes.form"/>, <see cref="Attributes.name"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.for_(string)"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.name(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<output></output>]]></code></returns>
         public static Element output(params Content[] content) => new(ElementType.output, false, content);
 
-        /// <inheritdoc cref="output" />
+        /// <inheritdoc cref="output(Content[])" />
         public static Element output(object content) => new(ElementType.output, false, content?.ToString()!);
 
         /// <summary>Paragraph.</summary>
@@ -586,11 +585,11 @@ namespace Markupolation
         /// <returns><code><![CDATA[<p></p>]]></code></returns>
         public static Element p(params Content[] content) => new(ElementType.p, false, content);
 
-        /// <inheritdoc cref="p" />
+        /// <inheritdoc cref="p(Content[])" />
         public static Element p(object content) => new(ElementType.p, false, content?.ToString()!);
 
         /// <summary>Parameter for object.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.name"/>, <see cref="Attributes.value"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.name(string)"/>, <see cref="Attributes.value(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<param />]]></code></returns>
         public static Element param(params Content[] content) => new(ElementType.param, true, content);
@@ -600,7 +599,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<picture></picture>]]></code></returns>
         public static Element picture(params Content[] content) => new(ElementType.picture, false, content);
 
-        /// <inheritdoc cref="picture" />
+        /// <inheritdoc cref="picture(Content[])" />
         public static Element picture(object content) => new(ElementType.picture, false, content?.ToString()!);
 
         /// <summary>Block of preformatted text.</summary>
@@ -608,25 +607,25 @@ namespace Markupolation
         /// <returns><code><![CDATA[<pre></pre>]]></code></returns>
         public static Element pre(params Content[] content) => new(ElementType.pre, false, content);
 
-        /// <inheritdoc cref="pre" />
+        /// <inheritdoc cref="pre(Content[])" />
         public static Element pre(object content) => new(ElementType.pre, false, content?.ToString()!);
 
         /// <summary>Progress bar.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.value"/>, <see cref="Attributes.max"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.value(string)"/>, <see cref="Attributes.max(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<progress></progress>]]></code></returns>
         public static Element progress(params Content[] content) => new(ElementType.progress, false, content);
 
-        /// <inheritdoc cref="progress" />
+        /// <inheritdoc cref="progress(Content[])" />
         public static Element progress(object content) => new(ElementType.progress, false, content?.ToString()!);
 
         /// <summary>Quotation.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.cite"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.cite(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<q></q>]]></code></returns>
         public static Element q(params Content[] content) => new(ElementType.q, false, content);
 
-        /// <inheritdoc cref="q" />
+        /// <inheritdoc cref="q(Content[])" />
         public static Element q(object content) => new(ElementType.q, false, content?.ToString()!);
 
         /// <summary>Parenthesis for ruby annotation text.</summary>
@@ -634,7 +633,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<rp></rp>]]></code></returns>
         public static Element rp(params Content[] content) => new(ElementType.rp, false, content);
 
-        /// <inheritdoc cref="rp" />
+        /// <inheritdoc cref="rp(Content[])" />
         public static Element rp(object content) => new(ElementType.rp, false, content?.ToString()!);
 
         /// <summary>Ruby annotation text.</summary>
@@ -642,7 +641,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<rt></rt>]]></code></returns>
         public static Element rt(params Content[] content) => new(ElementType.rt, false, content);
 
-        /// <inheritdoc cref="rt" />
+        /// <inheritdoc cref="rt(Content[])" />
         public static Element rt(object content) => new(ElementType.rt, false, content?.ToString()!);
 
         /// <summary>Ruby annotation(s).</summary>
@@ -650,7 +649,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<ruby></ruby>]]></code></returns>
         public static Element ruby(params Content[] content) => new(ElementType.ruby, false, content);
 
-        /// <inheritdoc cref="ruby" />
+        /// <inheritdoc cref="ruby(Content[])" />
         public static Element ruby(object content) => new(ElementType.ruby, false, content?.ToString()!);
 
         /// <summary>Inaccurate text.</summary>
@@ -658,7 +657,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<s></s>]]></code></returns>
         public static Element s(params Content[] content) => new(ElementType.s, false, content);
 
-        /// <inheritdoc cref="s" />
+        /// <inheritdoc cref="s(Content[])" />
         public static Element s(object content) => new(ElementType.s, false, content?.ToString()!);
 
         /// <summary>Computer output.</summary>
@@ -666,16 +665,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<samp></samp>]]></code></returns>
         public static Element samp(params Content[] content) => new(ElementType.samp, false, content);
 
-        /// <inheritdoc cref="samp" />
+        /// <inheritdoc cref="samp(Content[])" />
         public static Element samp(object content) => new(ElementType.samp, false, content?.ToString()!);
 
         /// <summary>Embedded script.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.src"/>, <see cref="Attributes.type"/>, <see cref="Attributes.async"/>, <see cref="Attributes.defer"/>, <see cref="Attributes.crossorigin"/>, <see cref="Attributes.integrity"/>, <see cref="Attributes.referrerpolicy"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.async()"/>, <see cref="Attributes.defer()"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.integrity(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<script></script>]]></code></returns>
         public static Element script(params Content[] content) => new(ElementType.script, false, content);
 
-        /// <inheritdoc cref="script" />
+        /// <inheritdoc cref="script(Content[])" />
         public static Element script(object content) => new(ElementType.script, false, content?.ToString()!);
 
         /// <summary>Generic document or application section.</summary>
@@ -683,25 +682,25 @@ namespace Markupolation
         /// <returns><code><![CDATA[<section></section>]]></code></returns>
         public static Element section(params Content[] content) => new(ElementType.section, false, content);
 
-        /// <inheritdoc cref="section" />
+        /// <inheritdoc cref="section(Content[])" />
         public static Element section(object content) => new(ElementType.section, false, content?.ToString()!);
 
         /// <summary>List box control.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.autocomplete"/>, <see cref="Attributes.disabled"/>, <see cref="Attributes.form"/>, <see cref="Attributes.multiple"/>, <see cref="Attributes.name"/>, <see cref="Attributes.required"/>, <see cref="Attributes.size"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.multiple()"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.required()"/>, <see cref="Attributes.size(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<select></select>]]></code></returns>
         public static Element select(params Content[] content) => new(ElementType.select, false, content);
 
-        /// <inheritdoc cref="select" />
+        /// <inheritdoc cref="select(Content[])" />
         public static Element select(object content) => new(ElementType.select, false, content?.ToString()!);
 
         /// <summary>Shadow tree slot.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.name"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.name(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<slot></slot>]]></code></returns>
         public static Element slot(params Content[] content) => new(ElementType.slot, false, content);
 
-        /// <inheritdoc cref="slot" />
+        /// <inheritdoc cref="slot(Content[])" />
         public static Element slot(object content) => new(ElementType.slot, false, content?.ToString()!);
 
         /// <summary>Side comment.</summary>
@@ -709,11 +708,11 @@ namespace Markupolation
         /// <returns><code><![CDATA[<small></small>]]></code></returns>
         public static Element small(params Content[] content) => new(ElementType.small, false, content);
 
-        /// <inheritdoc cref="small" />
+        /// <inheritdoc cref="small(Content[])" />
         public static Element small(object content) => new(ElementType.small, false, content?.ToString()!);
 
         /// <summary>Image source for img or media source for video or audio.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.src"/>, <see cref="Attributes.type"/>, <see cref="Attributes.srcset"/>, <see cref="Attributes.sizes"/>, <see cref="Attributes.media"/>, <see cref="Attributes.width"/>, <see cref="Attributes.height"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.srcset(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.media(string)"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<source />]]></code></returns>
         public static Element source(params Content[] content) => new(ElementType.source, true, content);
@@ -723,7 +722,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<span></span>]]></code></returns>
         public static Element span(params Content[] content) => new(ElementType.span, false, content);
 
-        /// <inheritdoc cref="span" />
+        /// <inheritdoc cref="span(Content[])" />
         public static Element span(object content) => new(ElementType.span, false, content?.ToString()!);
 
         /// <summary>Importance.</summary>
@@ -731,16 +730,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<strong></strong>]]></code></returns>
         public static Element strong(params Content[] content) => new(ElementType.strong, false, content);
 
-        /// <inheritdoc cref="strong" />
+        /// <inheritdoc cref="strong(Content[])" />
         public static Element strong(object content) => new(ElementType.strong, false, content?.ToString()!);
 
         /// <summary>Embedded styling information.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.media"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.media(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<style></style>]]></code></returns>
         public static Element style(params Content[] content) => new(ElementType.style, false, content);
 
-        /// <inheritdoc cref="style" />
+        /// <inheritdoc cref="style(Content[])" />
         public static Element style(object content) => new(ElementType.style, false, content?.ToString()!);
 
         /// <summary>Subscript.</summary>
@@ -748,7 +747,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<sub></sub>]]></code></returns>
         public static Element sub(params Content[] content) => new(ElementType.sub, false, content);
 
-        /// <inheritdoc cref="sub" />
+        /// <inheritdoc cref="sub(Content[])" />
         public static Element sub(object content) => new(ElementType.sub, false, content?.ToString()!);
 
         /// <summary>Caption for details.</summary>
@@ -756,7 +755,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<summary></summary>]]></code></returns>
         public static Element summary(params Content[] content) => new(ElementType.summary, false, content);
 
-        /// <inheritdoc cref="summary" />
+        /// <inheritdoc cref="summary(Content[])" />
         public static Element summary(object content) => new(ElementType.summary, false, content?.ToString()!);
 
         /// <summary>Superscript.</summary>
@@ -764,7 +763,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<sup></sup>]]></code></returns>
         public static Element sup(params Content[] content) => new(ElementType.sup, false, content);
 
-        /// <inheritdoc cref="sup" />
+        /// <inheritdoc cref="sup(Content[])" />
         public static Element sup(object content) => new(ElementType.sup, false, content?.ToString()!);
 
         /// <summary>Table.</summary>
@@ -772,7 +771,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<table></table>]]></code></returns>
         public static Element table(params Content[] content) => new(ElementType.table, false, content);
 
-        /// <inheritdoc cref="table" />
+        /// <inheritdoc cref="table(Content[])" />
         public static Element table(object content) => new(ElementType.table, false, content?.ToString()!);
 
         /// <summary>Group of rows in a table.</summary>
@@ -780,16 +779,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<tbody></tbody>]]></code></returns>
         public static Element tbody(params Content[] content) => new(ElementType.tbody, false, content);
 
-        /// <inheritdoc cref="tbody" />
+        /// <inheritdoc cref="tbody(Content[])" />
         public static Element tbody(object content) => new(ElementType.tbody, false, content?.ToString()!);
 
         /// <summary>Table cell.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.colspan"/>, <see cref="Attributes.rowspan"/>, <see cref="Attributes.headers"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.colspan(string)"/>, <see cref="Attributes.rowspan(string)"/>, <see cref="Attributes.headers(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<td></td>]]></code></returns>
         public static Element td(params Content[] content) => new(ElementType.td, false, content);
 
-        /// <inheritdoc cref="td" />
+        /// <inheritdoc cref="td(Content[])" />
         public static Element td(object content) => new(ElementType.td, false, content?.ToString()!);
 
         /// <summary>Template.</summary>
@@ -797,16 +796,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<template></template>]]></code></returns>
         public static Element template(params Content[] content) => new(ElementType.template, false, content);
 
-        /// <inheritdoc cref="template" />
+        /// <inheritdoc cref="template(Content[])" />
         public static Element template(object content) => new(ElementType.template, false, content?.ToString()!);
 
         /// <summary>Multiline text controls.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.cols"/>, <see cref="Attributes.dirname"/>, <see cref="Attributes.disabled"/>, <see cref="Attributes.form"/>, <see cref="Attributes.maxlength"/>, <see cref="Attributes.minlength"/>, <see cref="Attributes.name"/>, <see cref="Attributes.placeholder"/>, <see cref="Attributes.readonly_"/>, <see cref="Attributes.required"/>, <see cref="Attributes.rows"/>, <see cref="Attributes.wrap"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.cols(string)"/>, <see cref="Attributes.dirname(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.maxlength(string)"/>, <see cref="Attributes.minlength(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.placeholder(string)"/>, <see cref="Attributes.readonly_()"/>, <see cref="Attributes.required()"/>, <see cref="Attributes.rows(string)"/>, <see cref="Attributes.wrap(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<textarea></textarea>]]></code></returns>
         public static Element textarea(params Content[] content) => new(ElementType.textarea, false, content);
 
-        /// <inheritdoc cref="textarea" />
+        /// <inheritdoc cref="textarea(Content[])" />
         public static Element textarea(object content) => new(ElementType.textarea, false, content?.ToString()!);
 
         /// <summary>Group of footer rows in a table.</summary>
@@ -814,16 +813,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<tfoot></tfoot>]]></code></returns>
         public static Element tfoot(params Content[] content) => new(ElementType.tfoot, false, content);
 
-        /// <inheritdoc cref="tfoot" />
+        /// <inheritdoc cref="tfoot(Content[])" />
         public static Element tfoot(object content) => new(ElementType.tfoot, false, content?.ToString()!);
 
         /// <summary>Table header cell.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.colspan"/>, <see cref="Attributes.rowspan"/>, <see cref="Attributes.headers"/>, <see cref="Attributes.scope"/>, <see cref="Attributes.abbr"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.colspan(string)"/>, <see cref="Attributes.rowspan(string)"/>, <see cref="Attributes.headers(string)"/>, <see cref="Attributes.scope(string)"/>, <see cref="Attributes.abbr(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<th></th>]]></code></returns>
         public static Element th(params Content[] content) => new(ElementType.th, false, content);
 
-        /// <inheritdoc cref="th" />
+        /// <inheritdoc cref="th(Content[])" />
         public static Element th(object content) => new(ElementType.th, false, content?.ToString()!);
 
         /// <summary>Group of heading rows in a table.</summary>
@@ -831,16 +830,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<thead></thead>]]></code></returns>
         public static Element thead(params Content[] content) => new(ElementType.thead, false, content);
 
-        /// <inheritdoc cref="thead" />
+        /// <inheritdoc cref="thead(Content[])" />
         public static Element thead(object content) => new(ElementType.thead, false, content?.ToString()!);
 
         /// <summary>Machine-readable equivalent of date- or time-related data.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.datetime"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.datetime(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<time></time>]]></code></returns>
         public static Element time(params Content[] content) => new(ElementType.time, false, content);
 
-        /// <inheritdoc cref="time" />
+        /// <inheritdoc cref="time(Content[])" />
         public static Element time(object content) => new(ElementType.time, false, content?.ToString()!);
 
         /// <summary>Document title.</summary>
@@ -848,7 +847,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<title></title>]]></code></returns>
         public static Element title(params Content[] content) => new(ElementType.title, false, content);
 
-        /// <inheritdoc cref="title" />
+        /// <inheritdoc cref="title(Content[])" />
         public static Element title(object content) => new(ElementType.title, false, content?.ToString()!);
 
         /// <summary>Table row.</summary>
@@ -856,11 +855,11 @@ namespace Markupolation
         /// <returns><code><![CDATA[<tr></tr>]]></code></returns>
         public static Element tr(params Content[] content) => new(ElementType.tr, false, content);
 
-        /// <inheritdoc cref="tr" />
+        /// <inheritdoc cref="tr(Content[])" />
         public static Element tr(object content) => new(ElementType.tr, false, content?.ToString()!);
 
         /// <summary>Timed text track.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.default_"/>, <see cref="Attributes.kind"/>, <see cref="Attributes.label"/>, <see cref="Attributes.src"/>, <see cref="Attributes.srclang"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.default_()"/>, <see cref="Attributes.kind(string)"/>, <see cref="Attributes.label(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.srclang(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<track />]]></code></returns>
         public static Element track(params Content[] content) => new(ElementType.track, true, content);
@@ -870,7 +869,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<u></u>]]></code></returns>
         public static Element u(params Content[] content) => new(ElementType.u, false, content);
 
-        /// <inheritdoc cref="u" />
+        /// <inheritdoc cref="u(Content[])" />
         public static Element u(object content) => new(ElementType.u, false, content?.ToString()!);
 
         /// <summary>List.</summary>
@@ -878,7 +877,7 @@ namespace Markupolation
         /// <returns><code><![CDATA[<ul></ul>]]></code></returns>
         public static Element ul(params Content[] content) => new(ElementType.ul, false, content);
 
-        /// <inheritdoc cref="ul" />
+        /// <inheritdoc cref="ul(Content[])" />
         public static Element ul(object content) => new(ElementType.ul, false, content?.ToString()!);
 
         /// <summary>Variable.</summary>
@@ -886,16 +885,16 @@ namespace Markupolation
         /// <returns><code><![CDATA[<var></var>]]></code></returns>
         public static Element var(params Content[] content) => new(ElementType.var, false, content);
 
-        /// <inheritdoc cref="var" />
+        /// <inheritdoc cref="var(Content[])" />
         public static Element var(object content) => new(ElementType.var, false, content?.ToString()!);
 
         /// <summary>Video player.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.src"/>, <see cref="Attributes.crossorigin"/>, <see cref="Attributes.poster"/>, <see cref="Attributes.preload"/>, <see cref="Attributes.autoplay"/>, <see cref="Attributes.playsinline"/>, <see cref="Attributes.loop"/>, <see cref="Attributes.muted"/>, <see cref="Attributes.controls"/>, <see cref="Attributes.width"/>, <see cref="Attributes.height"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.poster(string)"/>, <see cref="Attributes.preload(string)"/>, <see cref="Attributes.autoplay()"/>, <see cref="Attributes.playsinline()"/>, <see cref="Attributes.loop()"/>, <see cref="Attributes.muted()"/>, <see cref="Attributes.controls()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<video></video>]]></code></returns>
         public static Element video(params Content[] content) => new(ElementType.video, false, content);
 
-        /// <inheritdoc cref="video" />
+        /// <inheritdoc cref="video(Content[])" />
         public static Element video(object content) => new(ElementType.video, false, content?.ToString()!);
 
         /// <summary>Line breaking opportunity.</summary>

@@ -35,13 +35,13 @@ namespace Markupolation.Tests
 
                 var description = await element.EvalOnSelectorAsync<string>("td", "e => e.innerText");
                 var attributes = await GetAttributesAsync(element);
-                var attributeArray = attributes.Any() ? ", " + string.Join(" ,", attributes.Select(x => $"\"{x}\"")) : string.Empty;
+                var attributeTypes = attributes.Any() ? ", " + string.Join(", ", attributes.Select(x => $"AttributeType.{x.CleanName()}")) : string.Empty;
 
                 foreach (var name in names)
                 {
                     var isVoidElement = voidElements.Contains(name).ToString().ToLower();
 
-                    result.AppendLine($"    [Element(\"{description}\", {isVoidElement}{attributeArray})]");
+                    result.AppendLine($"    [Element(\"{description}\", {isVoidElement}{attributeTypes})]");
                     result.AppendLine($"    {name},");
                     result.AppendLine();
                 }
@@ -58,8 +58,13 @@ namespace Markupolation.Tests
 
             async Task<string[]> GetAttributesAsync(IElementHandle element)
             {
+                var obsolete = new[] { "manifest" };
                 var attributes = await element.QuerySelectorAllAsync("td code[id^='elements'] a[href*='attr']");
-                return attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.CleanName()).ToArray();
+                return attributes
+                    .Select(async x => await x.InnerTextAsync())
+                    .Select(x => x.Result.CleanName())
+                    .Where(x => !obsolete.Contains(x))
+                    .ToArray();
             }
         }
 
@@ -90,9 +95,9 @@ namespace Markupolation.Tests
                 var isGlobalAttribute = globalAttributes.Contains(name!).ToString().ToLower();
                 var isBooleanAttribute = (await attribute.QuerySelectorAsync("td a[href$='boolean-attribute']") != null).ToString().ToLower();
                 var elements = await GetElementsAsync(attribute);
-                var elementArray = elements.Any() ? ", " + string.Join(" ,", elements.Select(x => $"\"{x}\"")) : string.Empty;
+                var elementTypes = elements.Any() ? ", " + string.Join(", ", elements.Select(x => $"ElementType.{x.CleanName()}")) : string.Empty;
 
-                result.AppendLine($"    [Attribute(\"{description}\", {isGlobalAttribute}, {isBooleanAttribute}{elementArray})]");
+                result.AppendLine($"    [Attribute(\"{description}\", {isGlobalAttribute}, {isBooleanAttribute}{elementTypes})]");
                 if (name != nextName)
                 {
                     result.AppendLine($"    {name},");
@@ -136,9 +141,9 @@ namespace Markupolation.Tests
                 var name = await GetNameAsync(attribute);
                 var description = (await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(2)", "e => e.innerText")).Replace("\"", "\\\"");
                 var elements = await GetElementsAsync(attribute);
-                var elementArray = elements.Any() ? ", " + string.Join(" ,", elements.Select(x => $"\"{x}\"")) : string.Empty;
+                var elementTypes = elements.Any() ? ", " + string.Join(", ", elements.Select(x => $"ElementType.{x}")) : string.Empty;
 
-                result.AppendLine($"    [EventHandlerContentAttribute(\"{description}\"{elementArray})]");
+                result.AppendLine($"    [EventHandlerContentAttribute(\"{description}\"{elementTypes})]");
                 result.AppendLine($"    {name},");
             }
             result.AppendLine("}");
@@ -172,7 +177,7 @@ namespace Markupolation.Tests
             foreach (var value in values)
             {
                 var a = GetElementAttribute(value);
-                var remarks = string.Join(", ", a.Attributes.Select(x => $"<see cref=\"Attributes.{x}\"/>"));
+                var remarks = string.Join(", ", a.Attributes.Select(x => $"<see cref=\"Attributes.{x}{(GetAttributeAttribute(x).IsBooleanAttribute ? "()" : "(string)")}\"/>"));
                 var param = a.IsVoidElement ? "Attributes." : "Attributes, elements and content.";
                 var returns = a.IsVoidElement ? $"<{value} />" : $"<{value}></{value}>";
 
@@ -188,7 +193,7 @@ namespace Markupolation.Tests
 
                 if (!a.IsVoidElement)
                 {
-                    result.AppendLine($"    /// <inheritdoc cref=\"{value}\" />");
+                    result.AppendLine($"    /// <inheritdoc cref=\"{value}(Content[])\" />");
                     result.AppendLine($"    public static Element {value}(object content) => new(ElementType.{value}, false, content?.ToString()!);");
                     result.AppendLine();
                 }
@@ -201,6 +206,12 @@ namespace Markupolation.Tests
             {
                 var member = typeof(ElementType).GetMember(value.ToString()!).First();
                 return member.GetCustomAttributes(false).OfType<ElementAttribute>().Single();
+            }
+
+            static AttributeAttribute GetAttributeAttribute(object value)
+            {
+                var member = typeof(AttributeType).GetMember(value.ToString()!).First();
+                return member.GetCustomAttributes(false).OfType<AttributeAttribute>().First();
             }
         }
 
@@ -216,7 +227,7 @@ namespace Markupolation.Tests
             foreach (var value in values)
             {
                 var a = GetAttributeAttributes(value);
-                var remarks = string.Join(", ", a.SelectMany(x => x.Elements).Select(x => $"<see cref=\"Elements.{x}\"/>"));
+                var remarks = string.Join(", ", a.SelectMany(x => x.Elements).Select(x => $"<see cref=\"Elements.{x}(Content[])\"/>"));
                 var returns = a.Any(x => x.IsBooleanAttribute) ? $"{value}" : $"{value}=\"{{value}}\"";
 
                 result.AppendLine($"    /// <summary>");
@@ -247,7 +258,7 @@ namespace Markupolation.Tests
 
                 if (!a.Any(x => x.IsBooleanAttribute))
                 {
-                    result.AppendLine($"    /// <inheritdoc cref=\"{value}\" />");
+                    result.AppendLine($"    /// <inheritdoc cref=\"{value}(string)\" />");
                     result.AppendLine($"    public static Attribute {value}(object value) => new(AttributeType.{value}, value?.ToString());");
                     result.AppendLine();
                 }
@@ -275,7 +286,7 @@ namespace Markupolation.Tests
             foreach (var value in values)
             {
                 var a = GetEventHandlerContentAttributeAttribute(value);
-                var remarks = string.Join(", ", a.Elements.Select(x => $"<see cref=\"Elements.{x}\"/>"));
+                var remarks = string.Join(", ", a.Elements.Select(x => $"<see cref=\"Elements.{x}(Content[])\"/>"));
 
                 result.AppendLine($"    /// <summary>{a.Description}.</summary>");
                 if (a.Elements.Any())

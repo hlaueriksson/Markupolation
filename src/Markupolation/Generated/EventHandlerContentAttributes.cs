@@ -9,19 +9,19 @@ namespace Markupolation
         public static Attribute onauxclick(string value) => new("onauxclick", value);
 
         /// <summary>afterprint event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onafterprint="{value}"</code></returns>
         public static Attribute onafterprint(string value) => new("onafterprint", value);
 
         /// <summary>beforeprint event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onbeforeprint="{value}"</code></returns>
         public static Attribute onbeforeprint(string value) => new("onbeforeprint", value);
 
         /// <summary>beforeunload event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onbeforeunload="{value}"</code></returns>
         public static Attribute onbeforeunload(string value) => new("onbeforeunload", value);
@@ -162,7 +162,7 @@ namespace Markupolation
         public static Attribute onformdata(string value) => new("onformdata", value);
 
         /// <summary>hashchange event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onhashchange="{value}"</code></returns>
         public static Attribute onhashchange(string value) => new("onhashchange", value);
@@ -193,7 +193,7 @@ namespace Markupolation
         public static Attribute onkeyup(string value) => new("onkeyup", value);
 
         /// <summary>languagechange event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onlanguagechange="{value}"</code></returns>
         public static Attribute onlanguagechange(string value) => new("onlanguagechange", value);
@@ -219,13 +219,13 @@ namespace Markupolation
         public static Attribute onloadstart(string value) => new("onloadstart", value);
 
         /// <summary>message event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onmessage="{value}"</code></returns>
         public static Attribute onmessage(string value) => new("onmessage", value);
 
         /// <summary>messageerror event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onmessageerror="{value}"</code></returns>
         public static Attribute onmessageerror(string value) => new("onmessageerror", value);
@@ -266,25 +266,25 @@ namespace Markupolation
         public static Attribute onmouseup(string value) => new("onmouseup", value);
 
         /// <summary>offline event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onoffline="{value}"</code></returns>
         public static Attribute onoffline(string value) => new("onoffline", value);
 
         /// <summary>online event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>ononline="{value}"</code></returns>
         public static Attribute ononline(string value) => new("ononline", value);
 
         /// <summary>pagehide event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onpagehide="{value}"</code></returns>
         public static Attribute onpagehide(string value) => new("onpagehide", value);
 
         /// <summary>pageshow event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onpageshow="{value}"</code></returns>
         public static Attribute onpageshow(string value) => new("onpageshow", value);
@@ -310,7 +310,7 @@ namespace Markupolation
         public static Attribute onplaying(string value) => new("onplaying", value);
 
         /// <summary>popstate event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onpopstate="{value}"</code></returns>
         public static Attribute onpopstate(string value) => new("onpopstate", value);
@@ -336,7 +336,7 @@ namespace Markupolation
         public static Attribute onresize(string value) => new("onresize", value);
 
         /// <summary>rejectionhandled event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onrejectionhandled="{value}"</code></returns>
         public static Attribute onrejectionhandled(string value) => new("onrejectionhandled", value);
@@ -377,7 +377,7 @@ namespace Markupolation
         public static Attribute onstalled(string value) => new("onstalled", value);
 
         /// <summary>storage event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onstorage="{value}"</code></returns>
         public static Attribute onstorage(string value) => new("onstorage", value);
@@ -403,13 +403,13 @@ namespace Markupolation
         public static Attribute ontoggle(string value) => new("ontoggle", value);
 
         /// <summary>unhandledrejection event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onunhandledrejection="{value}"</code></returns>
         public static Attribute onunhandledrejection(string value) => new("onunhandledrejection", value);
 
         /// <summary>unload event handler for Window object.</summary>
-        /// <remarks>Elements: <see cref="Elements.body"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onunload="{value}"</code></returns>
         public static Attribute onunload(string value) => new("onunload", value);

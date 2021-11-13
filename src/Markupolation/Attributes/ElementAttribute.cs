@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 
 namespace Markupolation
 {
     [AttributeUsage(AttributeTargets.Field, Inherited = false)]
     internal sealed class ElementAttribute : System.Attribute
     {
-        public ElementAttribute(string description, bool isVoidElement, params string[] attributes)
+        public ElementAttribute(string description, bool isVoidElement, params AttributeType[] attributes)
         {
             Description = description;
             IsVoidElement = isVoidElement;
@@ -16,6 +16,6 @@ namespace Markupolation
 
         public bool IsVoidElement { get; }
 
-        public string[] Attributes { get; }
+        public AttributeType[] Attributes { get; }
     }
 }

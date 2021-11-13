@@ -5,7 +5,7 @@ namespace Markupolation
     [AttributeUsage(AttributeTargets.Field, Inherited = false)]
     internal sealed class EventHandlerContentAttributeAttribute : System.Attribute
     {
-        public EventHandlerContentAttributeAttribute(string description, params string[] elements)
+        public EventHandlerContentAttributeAttribute(string description, params ElementType[] elements)
         {
             Description = description;
             Elements = elements;
@@ -13,6 +13,6 @@ namespace Markupolation
 
         public string Description { get; }
 
-        public string[] Elements { get; }
+        public ElementType[] Elements { get; }
     }
 }

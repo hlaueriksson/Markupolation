@@ -1,11 +1,11 @@
-﻿using System;
+using System;
 
 namespace Markupolation
 {
     [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = true)]
     internal sealed class AttributeAttribute : System.Attribute
     {
-        public AttributeAttribute(string description, bool isGlobalAttribute, bool isBooleanAttribute, params string[] elements)
+        public AttributeAttribute(string description, bool isGlobalAttribute, bool isBooleanAttribute, params ElementType[] elements)
         {
             Description = description;
             IsGlobalAttribute = isGlobalAttribute;
@@ -19,6 +19,6 @@ namespace Markupolation
 
         public bool IsBooleanAttribute { get; }
 
-        public string[] Elements { get; }
+        public ElementType[] Elements { get; }
     }
 }

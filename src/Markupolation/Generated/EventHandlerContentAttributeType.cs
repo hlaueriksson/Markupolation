@@ -4,11 +4,11 @@ namespace Markupolation
     {
         [EventHandlerContentAttribute("auxclick event handler")]
         onauxclick,
-        [EventHandlerContentAttribute("afterprint event handler for Window object", "body")]
+        [EventHandlerContentAttribute("afterprint event handler for Window object", ElementType.body)]
         onafterprint,
-        [EventHandlerContentAttribute("beforeprint event handler for Window object", "body")]
+        [EventHandlerContentAttribute("beforeprint event handler for Window object", ElementType.body)]
         onbeforeprint,
-        [EventHandlerContentAttribute("beforeunload event handler for Window object", "body")]
+        [EventHandlerContentAttribute("beforeunload event handler for Window object", ElementType.body)]
         onbeforeunload,
         [EventHandlerContentAttribute("blur event handler")]
         onblur,
@@ -64,7 +64,7 @@ namespace Markupolation
         onfocus,
         [EventHandlerContentAttribute("formdata event handler")]
         onformdata,
-        [EventHandlerContentAttribute("hashchange event handler for Window object", "body")]
+        [EventHandlerContentAttribute("hashchange event handler for Window object", ElementType.body)]
         onhashchange,
         [EventHandlerContentAttribute("input event handler")]
         oninput,
@@ -76,7 +76,7 @@ namespace Markupolation
         onkeypress,
         [EventHandlerContentAttribute("keyup event handler")]
         onkeyup,
-        [EventHandlerContentAttribute("languagechange event handler for Window object", "body")]
+        [EventHandlerContentAttribute("languagechange event handler for Window object", ElementType.body)]
         onlanguagechange,
         [EventHandlerContentAttribute("load event handler")]
         onload,
@@ -86,9 +86,9 @@ namespace Markupolation
         onloadedmetadata,
         [EventHandlerContentAttribute("loadstart event handler")]
         onloadstart,
-        [EventHandlerContentAttribute("message event handler for Window object", "body")]
+        [EventHandlerContentAttribute("message event handler for Window object", ElementType.body)]
         onmessage,
-        [EventHandlerContentAttribute("messageerror event handler for Window object", "body")]
+        [EventHandlerContentAttribute("messageerror event handler for Window object", ElementType.body)]
         onmessageerror,
         [EventHandlerContentAttribute("mousedown event handler")]
         onmousedown,
@@ -104,13 +104,13 @@ namespace Markupolation
         onmouseover,
         [EventHandlerContentAttribute("mouseup event handler")]
         onmouseup,
-        [EventHandlerContentAttribute("offline event handler for Window object", "body")]
+        [EventHandlerContentAttribute("offline event handler for Window object", ElementType.body)]
         onoffline,
-        [EventHandlerContentAttribute("online event handler for Window object", "body")]
+        [EventHandlerContentAttribute("online event handler for Window object", ElementType.body)]
         ononline,
-        [EventHandlerContentAttribute("pagehide event handler for Window object", "body")]
+        [EventHandlerContentAttribute("pagehide event handler for Window object", ElementType.body)]
         onpagehide,
-        [EventHandlerContentAttribute("pageshow event handler for Window object", "body")]
+        [EventHandlerContentAttribute("pageshow event handler for Window object", ElementType.body)]
         onpageshow,
         [EventHandlerContentAttribute("paste event handler")]
         onpaste,
@@ -120,7 +120,7 @@ namespace Markupolation
         onplay,
         [EventHandlerContentAttribute("playing event handler")]
         onplaying,
-        [EventHandlerContentAttribute("popstate event handler for Window object", "body")]
+        [EventHandlerContentAttribute("popstate event handler for Window object", ElementType.body)]
         onpopstate,
         [EventHandlerContentAttribute("progress event handler")]
         onprogress,
@@ -130,7 +130,7 @@ namespace Markupolation
         onreset,
         [EventHandlerContentAttribute("resize event handler")]
         onresize,
-        [EventHandlerContentAttribute("rejectionhandled event handler for Window object", "body")]
+        [EventHandlerContentAttribute("rejectionhandled event handler for Window object", ElementType.body)]
         onrejectionhandled,
         [EventHandlerContentAttribute("scroll event handler")]
         onscroll,
@@ -146,7 +146,7 @@ namespace Markupolation
         onslotchange,
         [EventHandlerContentAttribute("stalled event handler")]
         onstalled,
-        [EventHandlerContentAttribute("storage event handler for Window object", "body")]
+        [EventHandlerContentAttribute("storage event handler for Window object", ElementType.body)]
         onstorage,
         [EventHandlerContentAttribute("submit event handler")]
         onsubmit,
@@ -156,9 +156,9 @@ namespace Markupolation
         ontimeupdate,
         [EventHandlerContentAttribute("toggle event handler")]
         ontoggle,
-        [EventHandlerContentAttribute("unhandledrejection event handler for Window object", "body")]
+        [EventHandlerContentAttribute("unhandledrejection event handler for Window object", ElementType.body)]
         onunhandledrejection,
-        [EventHandlerContentAttribute("unload event handler for Window object", "body")]
+        [EventHandlerContentAttribute("unload event handler for Window object", ElementType.body)]
         onunload,
         [EventHandlerContentAttribute("volumechange event handler")]
         onvolumechange,
