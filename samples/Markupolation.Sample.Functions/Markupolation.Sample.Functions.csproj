@@ -5,17 +5,18 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Humanizer" Version="2.11.10" />
+    <PackageReference Include="Markupolation" Version="1.0.0" />
+    <PackageReference Include="Markupolation.Extensions" Version="1.0.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" />
-    <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
-    <Using Include="Markupolation.Element" Alias="E" />
-    <Using Include="Markupolation.Elements" Alias="e" />
+    <Using Include="Markupolation" />
     <Using Include="Markupolation.Elements" Static="True" />
-    <Using Include="Markupolation.Attribute" Alias="A" />
-    <Using Include="Markupolation.Attributes" Alias="a" />
+    <Using Include="Markupolation.Elements" Alias="e" />
+    <Using Include="Markupolation.Element" Alias="E" />
     <Using Include="Markupolation.Attributes" Static="True" />
+    <Using Include="Markupolation.Attributes" Alias="a" />
+    <Using Include="Markupolation.Attribute" Alias="A" />
     <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
   </ItemGroup>
   <ItemGroup>

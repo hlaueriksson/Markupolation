@@ -10,8 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" />
-    <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
+    <PackageReference Include="Markupolation" Version="1.0.0" />
+    <PackageReference Include="Markupolation.Extensions" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
