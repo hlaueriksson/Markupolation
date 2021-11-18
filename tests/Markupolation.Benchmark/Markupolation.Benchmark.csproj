@@ -16,15 +16,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
     <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.13.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" />
-    <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
+    <PackageReference Include="Markupolation.Extensions" Version="1.0.0" />
     <Using Include="Markupolation.Elements" Static="True" />
+    <Using Include="Markupolation.Elements" Alias="e" />
     <Using Include="Markupolation.Attributes" Static="True" />
+    <Using Include="Markupolation.Attributes" Alias="a" />
   </ItemGroup>
 
 </Project>
