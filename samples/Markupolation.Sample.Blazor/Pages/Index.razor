@@ -5,10 +5,10 @@
 
 @((MarkupString)hello)
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<SurveyPrompt Title="How is Markupolation working for you?" />
 
 @code {
-    private string? hello;
+    private string hello = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
