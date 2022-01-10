@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using BenchmarkDotNet.Attributes;
+using HtmlTags;
 
 namespace Markupolation.Benchmark
 {
@@ -101,22 +102,45 @@ namespace Markupolation.Benchmark
                 ),
                 body(
                     ul(
-                        _numbers.Each(x => li(
-                            x.IfMatch(i => fizz(i) && buzz(i), i => strong("FizzBuzz")),
-                            x.IfMatch(i => fizz(i) && !buzz(i), i => em("Fizz")),
-                            x.IfMatch(i => !fizz(i) && buzz(i), i => em("Buzz")),
-                            x.IfMatch(i => !fizz(i) && !buzz(i), i => i.ToString())
+                        _numbers.Each(i => li(
+                            fizz(i) && buzz(i) ? strong("FizzBuzz") :
+                            fizz(i) && !buzz(i) ? em("Fizz") :
+                            !fizz(i) && buzz(i) ? em("Buzz") :
+                            i.ToString()
                         ))
                     )
                 )
             )}";
         }
 
+        [Benchmark]
+        public string HtmlTags()
+        {
+            var doc = new HtmlDocument();
+            doc.RootTag.Attr("lang", "en");
+            doc.Head.Add("meta").Attr("charset", "utf-8");
+            doc.Title = "Markupolation";
+            doc.Head.Add("meta").Attr("name", "description").Attr("content", "Sample of how to use Markupolation.Extensions");
+            doc.Head.Add("meta").Attr("name", "viewport").Attr("content", "width=device-width, initial-scale=1");
+            doc.Add("ul").Append(
+                _numbers.Select(i =>
+                    fizz(i) && buzz(i) ? new HtmlTag("li").Add("strong").Text("FizzBuzz").Parent :
+                    fizz(i) && !buzz(i) ? new HtmlTag("li").Add("em").Text("Fizz").Parent :
+                    !fizz(i) && buzz(i) ? new HtmlTag("li").Add("em").Text("Buzz").Parent :
+                    new HtmlTag("li").Text(i.ToString())
+                )
+            );
+            return doc.ToString();
+        }
+
         public static bool IsValid()
         {
             var benchmark = new AdvancedUsage();
             benchmark.GlobalSetup();
-            return benchmark.Markupolation() == benchmark.StringBuilder() && benchmark.Markupolation() == benchmark.StringFormat();
+            return
+                benchmark.Markupolation() == benchmark.StringBuilder() &&
+                benchmark.Markupolation() == benchmark.StringFormat();
+                //benchmark.Markupolation() == benchmark.HtmlTags().ReplaceLineEndings(string.Empty);
         }
     }
 }

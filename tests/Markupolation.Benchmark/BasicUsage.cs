@@ -1,5 +1,6 @@
 using System.Text;
 using BenchmarkDotNet.Attributes;
+using HtmlTags;
 
 namespace Markupolation.Benchmark
 {
@@ -39,11 +40,23 @@ namespace Markupolation.Benchmark
             return $"{DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))}";
         }
 
+        [Benchmark]
+        public string HtmlTags()
+        {
+            var doc = new HtmlDocument();
+            doc.Title = "Markupolation";
+            doc.Add("h1").Text("Hello, World!");
+            return doc.ToString();
+        }
+
         public static bool IsValid()
         {
             var benchmark = new BasicUsage();
             benchmark.GlobalSetup();
-            return benchmark.Markupolation() == benchmark.StringBuilder() && benchmark.Markupolation() == benchmark.StringFormat();
+            return
+                benchmark.Markupolation() == benchmark.StringBuilder() &&
+                benchmark.Markupolation() == benchmark.StringFormat() &&
+                benchmark.Markupolation() == benchmark.HtmlTags().ReplaceLineEndings(string.Empty);
         }
     }
 }
