@@ -22,7 +22,7 @@ Extensions for HTML templating in C# with a fluent API:
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\icon.png" Link="icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
     <None Include="..\..\Markupolation.Extensions.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
