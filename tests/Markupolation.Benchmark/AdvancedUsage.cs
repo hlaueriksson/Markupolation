@@ -12,10 +12,8 @@ namespace Markupolation.Benchmark
         readonly Func<int, bool> _fizz = (int i) => i % 3 == 0;
         readonly Func<int, bool> _buzz = (int i) => i % 5 == 0;
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        private IEnumerable<int> _numbers;
-        private StringBuilder _builder;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        private IEnumerable<int> _numbers = null!;
+        private StringBuilder _builder = null!;
 
         [GlobalSetup]
         public void GlobalSetup()

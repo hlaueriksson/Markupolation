@@ -6,9 +6,7 @@ namespace Markupolation.Benchmark
 {
     public class BasicUsage
     {
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        private StringBuilder _builder;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        private StringBuilder _builder = null!;
 
         [GlobalSetup]
         public void GlobalSetup()
@@ -29,19 +27,25 @@ namespace Markupolation.Benchmark
         }
 
         [Benchmark]
-        public static string StringFormat()
+#pragma warning disable CA1822 // Mark members as static
+        public string StringFormat()
+#pragma warning restore CA1822 // Mark members as static
         {
             return string.Format("<!DOCTYPE html><html><head><title>{0}</title></head><body><h1>{1}</h1></body></html>", "Markupolation", "Hello, World!");
         }
 
         [Benchmark]
-        public static string Markupolation()
+#pragma warning disable CA1822 // Mark members as static
+        public string Markupolation()
+#pragma warning restore CA1822 // Mark members as static
         {
             return $"{DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))}";
         }
 
         [Benchmark]
-        public static string HtmlTags()
+#pragma warning disable CA1822 // Mark members as static
+        public string HtmlTags()
+#pragma warning restore CA1822 // Mark members as static
         {
             var doc = new HtmlDocument
             {
@@ -56,9 +60,9 @@ namespace Markupolation.Benchmark
             var benchmark = new BasicUsage();
             benchmark.GlobalSetup();
             return
-                Markupolation() == benchmark.StringBuilder() &&
-                Markupolation() == StringFormat() &&
-                Markupolation() == HtmlTags().ReplaceLineEndings(string.Empty);
+                benchmark.Markupolation() == benchmark.StringBuilder() &&
+                benchmark.Markupolation() == benchmark.StringFormat() &&
+                benchmark.Markupolation() == benchmark.HtmlTags().ReplaceLineEndings(string.Empty);
         }
     }
 }
