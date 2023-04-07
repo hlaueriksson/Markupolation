@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Markupolation
 {
@@ -218,35 +217,35 @@ namespace Markupolation
         }
 
         /// <summary>
-        /// Returns <see cref="Content"/> if value match expression.
+        /// Returns <see cref="Content"/> if value match the condition.
         /// </summary>
         /// <typeparam name="T">Type of value.</typeparam>
         /// <param name="value">Value.</param>
-        /// <param name="predicate">Predicate.</param>
+        /// <param name="predicate">A function to test the value for a condition.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
         /// <returns>Content.</returns>
-        public static Content IfMatch<T>(this T value, Expression<Func<T, bool>> predicate, Func<T, Content> then)
+        public static Content IfMatch<T>(this T value, Func<T, bool> predicate, Func<T, Content> then)
         {
-            return predicate?.Compile()(value) == true && then != null ? then(value) : string.Empty;
+            return predicate != null && predicate(value) && then != null ? then(value) : string.Empty;
         }
 
         /// <summary>
-        /// Returns <see cref="Content"/> if value match expression; otherwise the fallback <see cref="Content"/>.
+        /// Returns <see cref="Content"/> if value match the condition; otherwise the fallback <see cref="Content"/>.
         /// </summary>
         /// <typeparam name="T">Type of value.</typeparam>
         /// <param name="value">Value.</param>
-        /// <param name="predicate">Predicate.</param>
+        /// <param name="predicate">A function to test the value for a condition.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
         /// <param name="otherwise">Fallback attribute, element or content delegate.</param>
         /// <returns>Content.</returns>
-        public static Content IfMatch<T>(this T value, Expression<Func<T, bool>> predicate, Func<T, Content> then, Func<T, Content> otherwise)
+        public static Content IfMatch<T>(this T value, Func<T, bool> predicate, Func<T, Content> then, Func<T, Content> otherwise)
         {
             if (predicate == null)
             {
                 return string.Empty;
             }
 
-            return predicate.Compile()(value) && then != null ? then(value) : !predicate.Compile()(value) && otherwise != null ? otherwise(value) : string.Empty;
+            return predicate(value) && then != null ? then(value) : !predicate(value) && otherwise != null ? otherwise(value) : string.Empty;
         }
     }
 }
