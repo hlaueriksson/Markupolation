@@ -9,8 +9,8 @@ namespace Markupolation.Benchmark
 {
     public class AdvancedUsage
     {
-        readonly Func<int, bool> fizz = (int i) => i % 3 == 0;
-        readonly Func<int, bool> buzz = (int i) => i % 5 == 0;
+        readonly Func<int, bool> _fizz = (int i) => i % 3 == 0;
+        readonly Func<int, bool> _buzz = (int i) => i % 5 == 0;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         private IEnumerable<int> _numbers;
@@ -32,19 +32,19 @@ namespace Markupolation.Benchmark
             foreach (int i in _numbers)
             {
                 _builder.Append("<li>");
-                if (fizz(i) && buzz(i))
+                if (_fizz(i) && _buzz(i))
                 {
                     _builder.Append("<strong>");
                     _builder.Append("FizzBuzz");
                     _builder.Append("</strong>");
                 }
-                else if (fizz(i))
+                else if (_fizz(i))
                 {
                     _builder.Append("<em>");
                     _builder.Append("Fizz");
                     _builder.Append("</em>");
                 }
-                else if (buzz(i))
+                else if (_buzz(i))
                 {
                     _builder.Append("<em>");
                     _builder.Append("Buzz");
@@ -67,15 +67,15 @@ namespace Markupolation.Benchmark
             foreach (int i in _numbers)
             {
                 result += "<li>";
-                if (fizz(i) && buzz(i))
+                if (_fizz(i) && _buzz(i))
                 {
                     result += string.Format("<strong>{0}</strong>", "FizzBuzz");
                 }
-                else if (fizz(i))
+                else if (_fizz(i))
                 {
                     result += string.Format("<em>{0}</em>", "Fizz");
                 }
-                else if (buzz(i))
+                else if (_buzz(i))
                 {
                     result += string.Format("<em>{0}</em>", "Buzz");
                 }
@@ -103,9 +103,9 @@ namespace Markupolation.Benchmark
                 body(
                     ul(
                         _numbers.Each(i => li(
-                            fizz(i) && buzz(i) ? strong("FizzBuzz") :
-                            fizz(i) && !buzz(i) ? em("Fizz") :
-                            !fizz(i) && buzz(i) ? em("Buzz") :
+                            _fizz(i) && _buzz(i) ? strong("FizzBuzz") :
+                            _fizz(i) && !_buzz(i) ? em("Fizz") :
+                            !_fizz(i) && _buzz(i) ? em("Buzz") :
                             i.ToString()
                         ))
                     )
@@ -124,9 +124,9 @@ namespace Markupolation.Benchmark
             doc.Head.Add("meta").Attr("name", "viewport").Attr("content", "width=device-width, initial-scale=1");
             doc.Add("ul").Append(
                 _numbers.Select(i =>
-                    fizz(i) && buzz(i) ? new HtmlTag("li").Add("strong").Text("FizzBuzz").Parent :
-                    fizz(i) && !buzz(i) ? new HtmlTag("li").Add("em").Text("Fizz").Parent :
-                    !fizz(i) && buzz(i) ? new HtmlTag("li").Add("em").Text("Buzz").Parent :
+                    _fizz(i) && _buzz(i) ? new HtmlTag("li").Add("strong").Text("FizzBuzz").Parent :
+                    _fizz(i) && !_buzz(i) ? new HtmlTag("li").Add("em").Text("Fizz").Parent :
+                    !_fizz(i) && _buzz(i) ? new HtmlTag("li").Add("em").Text("Buzz").Parent :
                     new HtmlTag("li").Text(i.ToString())
                 )
             );

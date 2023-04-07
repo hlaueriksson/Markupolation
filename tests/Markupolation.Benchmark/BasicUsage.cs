@@ -29,22 +29,24 @@ namespace Markupolation.Benchmark
         }
 
         [Benchmark]
-        public string StringFormat()
+        public static string StringFormat()
         {
             return string.Format("<!DOCTYPE html><html><head><title>{0}</title></head><body><h1>{1}</h1></body></html>", "Markupolation", "Hello, World!");
         }
 
         [Benchmark]
-        public string Markupolation()
+        public static string Markupolation()
         {
             return $"{DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))}";
         }
 
         [Benchmark]
-        public string HtmlTags()
+        public static string HtmlTags()
         {
-            var doc = new HtmlDocument();
-            doc.Title = "Markupolation";
+            var doc = new HtmlDocument
+            {
+                Title = "Markupolation"
+            };
             doc.Add("h1").Text("Hello, World!");
             return doc.ToString();
         }
@@ -54,9 +56,9 @@ namespace Markupolation.Benchmark
             var benchmark = new BasicUsage();
             benchmark.GlobalSetup();
             return
-                benchmark.Markupolation() == benchmark.StringBuilder() &&
-                benchmark.Markupolation() == benchmark.StringFormat() &&
-                benchmark.Markupolation() == benchmark.HtmlTags().ReplaceLineEndings(string.Empty);
+                Markupolation() == benchmark.StringBuilder() &&
+                Markupolation() == StringFormat() &&
+                Markupolation() == HtmlTags().ReplaceLineEndings(string.Empty);
         }
     }
 }
