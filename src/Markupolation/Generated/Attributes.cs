@@ -140,6 +140,17 @@ namespace Markupolation
         public static Attribute autoplay() => new(AttributeType.autoplay);
 
         /// <summary>
+        /// Whether the element is potentially render-blocking.
+        /// </summary>
+        /// <remarks>Elements: <see cref="Elements.link(Content[])"/>, <see cref="Elements.script(Content[])"/>, <see cref="Elements.style(Content[])"/>.</remarks>
+        /// <param name="value">Attribute value.</param>
+        /// <returns><code>blocking="{value}"</code></returns>
+        public static Attribute blocking(string value) => new(AttributeType.blocking, value);
+
+        /// <inheritdoc cref="blocking(string)" />
+        public static Attribute blocking(object value) => new(AttributeType.blocking, value?.ToString());
+
+        /// <summary>
         /// Character encoding declaration.
         /// </summary>
         /// <remarks>Elements: <see cref="Elements.meta(Content[])"/>.</remarks>
@@ -383,6 +394,17 @@ namespace Markupolation
         public static Attribute enterkeyhint(object value) => new(AttributeType.enterkeyhint, value?.ToString());
 
         /// <summary>
+        /// Sets the priority for fetches initiated by the element.
+        /// </summary>
+        /// <remarks>Elements: <see cref="Elements.img(Content[])"/>, <see cref="Elements.link(Content[])"/>, <see cref="Elements.script(Content[])"/>.</remarks>
+        /// <param name="value">Attribute value.</param>
+        /// <returns><code>fetchpriority="{value}"</code></returns>
+        public static Attribute fetchpriority(string value) => new(AttributeType.fetchpriority, value);
+
+        /// <inheritdoc cref="fetchpriority(string)" />
+        public static Attribute fetchpriority(object value) => new(AttributeType.fetchpriority, value?.ToString());
+
+        /// <summary>
         /// Associate the label with form control.
         /// Specifies controls from which the output was calculated.
         /// </summary>
@@ -446,7 +468,7 @@ namespace Markupolation
         public static Attribute formnovalidate() => new(AttributeType.formnovalidate);
 
         /// <summary>
-        /// Browsing context for form submission.
+        /// Navigable for form submission.
         /// </summary>
         /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
@@ -481,8 +503,12 @@ namespace Markupolation
         /// <summary>
         /// Whether the element is relevant.
         /// </summary>
-        /// <returns><code>hidden</code></returns>
-        public static Attribute hidden() => new(AttributeType.hidden);
+        /// <param name="value">Attribute value.</param>
+        /// <returns><code>hidden="{value}"</code></returns>
+        public static Attribute hidden(string value) => new(AttributeType.hidden, value);
+
+        /// <inheritdoc cref="hidden(string)" />
+        public static Attribute hidden(object value) => new(AttributeType.hidden, value?.ToString());
 
         /// <summary>
         /// Low limit of high range.
@@ -561,6 +587,12 @@ namespace Markupolation
 
         /// <inheritdoc cref="imagesrcset(string)" />
         public static Attribute imagesrcset(object value) => new(AttributeType.imagesrcset, value?.ToString());
+
+        /// <summary>
+        /// Whether the element is inert.
+        /// </summary>
+        /// <returns><code>inert</code></returns>
+        public static Attribute inert() => new(AttributeType.inert);
 
         /// <summary>
         /// Hint for selecting an input modality.
@@ -692,7 +724,7 @@ namespace Markupolation
         /// <summary>
         /// Used when determining loading deferral.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.img(Content[])"/>, <see cref="Elements.iframe(Content[])"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.img(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>loading="{value}"</code></returns>
         public static Attribute loading(string value) => new(AttributeType.loading, value);
@@ -803,13 +835,12 @@ namespace Markupolation
         /// <summary>
         /// Name of the element to use for form submission and in the form.elements API.
         /// Name of form to use in the document.forms API.
-        /// Name of nested browsing context.
+        /// Name of content navigable.
         /// Name of image map to reference from the usemap attribute.
         /// Metadata name.
-        /// Name of parameter.
         /// Name of shadow tree slot.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.fieldset(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.output(Content[])"/>, <see cref="Elements.select(Content[])"/>, <see cref="Elements.textarea(Content[])"/>, <see cref="Elements.form(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.object_(Content[])"/>, <see cref="Elements.map(Content[])"/>, <see cref="Elements.meta(Content[])"/>, <see cref="Elements.param(Content[])"/>, <see cref="Elements.slot(Content[])"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.fieldset(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.output(Content[])"/>, <see cref="Elements.select(Content[])"/>, <see cref="Elements.textarea(Content[])"/>, <see cref="Elements.form(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.object_(Content[])"/>, <see cref="Elements.map(Content[])"/>, <see cref="Elements.meta(Content[])"/>, <see cref="Elements.slot(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>name="{value}"</code></returns>
         public static Attribute name(string value) => new(AttributeType.name, value);
@@ -898,6 +929,36 @@ namespace Markupolation
         /// <remarks>Elements: <see cref="Elements.video(Content[])"/>.</remarks>
         /// <returns><code>playsinline</code></returns>
         public static Attribute playsinline() => new(AttributeType.playsinline);
+
+        /// <summary>
+        /// Makes the element a popover element.
+        /// </summary>
+        /// <param name="value">Attribute value.</param>
+        /// <returns><code>popover="{value}"</code></returns>
+        public static Attribute popover(string value) => new(AttributeType.popover, value);
+
+        /// <inheritdoc cref="popover(string)" />
+        public static Attribute popover(object value) => new(AttributeType.popover, value?.ToString());
+
+        /// <summary>
+        /// Targets a popover element to toggle, show, or hide.
+        /// </summary>
+        /// <param name="value">Attribute value.</param>
+        /// <returns><code>popovertarget="{value}"</code></returns>
+        public static Attribute popovertarget(string value) => new(AttributeType.popovertarget, value);
+
+        /// <inheritdoc cref="popovertarget(string)" />
+        public static Attribute popovertarget(object value) => new(AttributeType.popovertarget, value?.ToString());
+
+        /// <summary>
+        /// Indicates whether a targeted popover element is to be toggled, shown, or hidden.
+        /// </summary>
+        /// <param name="value">Attribute value.</param>
+        /// <returns><code>popovertargetaction="{value}"</code></returns>
+        public static Attribute popovertargetaction(string value) => new(AttributeType.popovertargetaction, value);
+
+        /// <inheritdoc cref="popovertargetaction(string)" />
+        public static Attribute popovertargetaction(object value) => new(AttributeType.popovertargetaction, value?.ToString());
 
         /// <summary>
         /// Poster frame to show prior to video playback.
@@ -1116,7 +1177,7 @@ namespace Markupolation
         public static Attribute srclang(object value) => new(AttributeType.srclang, value?.ToString());
 
         /// <summary>
-        /// Images to use in different situations, e.g., high-resolution displays, small monitors, etc..
+        /// Images to use in different situations, e.g., high-resolution displays, small monitors, etc.
         /// </summary>
         /// <remarks>Elements: <see cref="Elements.img(Content[])"/>, <see cref="Elements.source(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
@@ -1169,9 +1230,9 @@ namespace Markupolation
         public static Attribute tabindex(object value) => new(AttributeType.tabindex, value?.ToString());
 
         /// <summary>
-        /// Browsing context for hyperlink navigation.
-        /// Default browsing context for hyperlink navigation and form submission.
-        /// Browsing context for form submission.
+        /// Navigable for hyperlink navigation.
+        /// Default navigable for hyperlink navigation and form submission.
+        /// Navigable for form submission.
         /// </summary>
         /// <remarks>Elements: <see cref="Elements.a(Content[])"/>, <see cref="Elements.area(Content[])"/>, <see cref="Elements.base_(Content[])"/>, <see cref="Elements.form(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
@@ -1239,9 +1300,8 @@ namespace Markupolation
         /// Value of the form control.
         /// Ordinal value of the list item.
         /// Current value of the element.
-        /// Value of parameter.
         /// </summary>
-        /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.option(Content[])"/>, <see cref="Elements.data(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.li(Content[])"/>, <see cref="Elements.meter(Content[])"/>, <see cref="Elements.progress(Content[])"/>, <see cref="Elements.param(Content[])"/>.</remarks>
+        /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.option(Content[])"/>, <see cref="Elements.data(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.li(Content[])"/>, <see cref="Elements.meter(Content[])"/>, <see cref="Elements.progress(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
         /// <returns><code>value="{value}"</code></returns>
         public static Attribute value(string value) => new(AttributeType.value, value);

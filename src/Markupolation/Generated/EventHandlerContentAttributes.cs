@@ -14,6 +14,11 @@ namespace Markupolation
         /// <returns><code>onafterprint="{value}"</code></returns>
         public static Attribute onafterprint(string value) => new("onafterprint", value);
 
+        /// <summary>beforematch event handler.</summary>
+        /// <param name="value">Attribute value.</param>
+        /// <returns><code>onbeforematch="{value}"</code></returns>
+        public static Attribute onbeforematch(string value) => new("onbeforematch", value);
+
         /// <summary>beforeprint event handler for Window object.</summary>
         /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
         /// <param name="value">Attribute value.</param>
@@ -25,6 +30,11 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onbeforeunload="{value}"</code></returns>
         public static Attribute onbeforeunload(string value) => new("onbeforeunload", value);
+
+        /// <summary>beforetoggle event handler.</summary>
+        /// <param name="value">Attribute value.</param>
+        /// <returns><code>onbeforetoggle="{value}"</code></returns>
+        public static Attribute onbeforetoggle(string value) => new("onbeforetoggle", value);
 
         /// <summary>blur event handler.</summary>
         /// <param name="value">Attribute value.</param>
@@ -345,6 +355,11 @@ namespace Markupolation
         /// <param name="value">Attribute value.</param>
         /// <returns><code>onscroll="{value}"</code></returns>
         public static Attribute onscroll(string value) => new("onscroll", value);
+
+        /// <summary>scrollend event handler.</summary>
+        /// <param name="value">Attribute value.</param>
+        /// <returns><code>onscrollend="{value}"</code></returns>
+        public static Attribute onscrollend(string value) => new("onscrollend", value);
 
         /// <summary>securitypolicyviolation event handler.</summary>
         /// <param name="value">Attribute value.</param>
