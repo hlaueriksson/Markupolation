@@ -6,9 +6,7 @@ namespace Markupolation.Benchmark
 {
     public class BasicUsage
     {
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        private StringBuilder _builder;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        private StringBuilder _builder = null!;
 
         [GlobalSetup]
         public void GlobalSetup()
@@ -29,22 +27,30 @@ namespace Markupolation.Benchmark
         }
 
         [Benchmark]
+#pragma warning disable CA1822 // Mark members as static
         public string StringFormat()
+#pragma warning restore CA1822 // Mark members as static
         {
             return string.Format("<!DOCTYPE html><html><head><title>{0}</title></head><body><h1>{1}</h1></body></html>", "Markupolation", "Hello, World!");
         }
 
         [Benchmark]
+#pragma warning disable CA1822 // Mark members as static
         public string Markupolation()
+#pragma warning restore CA1822 // Mark members as static
         {
             return $"{DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))}";
         }
 
         [Benchmark]
+#pragma warning disable CA1822 // Mark members as static
         public string HtmlTags()
+#pragma warning restore CA1822 // Mark members as static
         {
-            var doc = new HtmlDocument();
-            doc.Title = "Markupolation";
+            var doc = new HtmlDocument
+            {
+                Title = "Markupolation"
+            };
             doc.Add("h1").Text("Hello, World!");
             return doc.ToString();
         }

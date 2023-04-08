@@ -45,6 +45,9 @@ namespace Markupolation
         [Attribute("Hint that the media resource can be started automatically when the page is loaded", false, true, ElementType.audio, ElementType.video)]
         autoplay,
 
+        [Attribute("Whether the element is potentially render-blocking", false, false, ElementType.link, ElementType.script, ElementType.style)]
+        blocking,
+
         [Attribute("Character encoding declaration", false, false, ElementType.meta)]
         charset,
 
@@ -121,6 +124,9 @@ namespace Markupolation
         [Attribute("Hint for selecting an enter key action", true, false)]
         enterkeyhint,
 
+        [Attribute("Sets the priority for fetches initiated by the element", false, false, ElementType.img, ElementType.link, ElementType.script)]
+        fetchpriority,
+
         [Attribute("Associate the label with form control", false, false, ElementType.label)]
         [Attribute("Specifies controls from which the output was calculated", false, false, ElementType.output)]
         for_,
@@ -140,7 +146,7 @@ namespace Markupolation
         [Attribute("Bypass form control validation for form submission", false, true, ElementType.button, ElementType.input)]
         formnovalidate,
 
-        [Attribute("Browsing context for form submission", false, false, ElementType.button, ElementType.input)]
+        [Attribute("Navigable for form submission", false, false, ElementType.button, ElementType.input)]
         formtarget,
 
         [Attribute("The header cells for this cell", false, false, ElementType.td, ElementType.th)]
@@ -149,7 +155,7 @@ namespace Markupolation
         [Attribute("Vertical dimension", false, false, ElementType.canvas, ElementType.embed, ElementType.iframe, ElementType.img, ElementType.input, ElementType.object_, ElementType.source, ElementType.video)]
         height,
 
-        [Attribute("Whether the element is relevant", true, true)]
+        [Attribute("Whether the element is relevant", true, false)]
         hidden,
 
         [Attribute("Low limit of high range", false, false, ElementType.meter)]
@@ -174,6 +180,9 @@ namespace Markupolation
 
         [Attribute("Images to use in different situations, e.g., high-resolution displays, small monitors, etc. (for rel=\"preload\")", false, false, ElementType.link)]
         imagesrcset,
+
+        [Attribute("Whether the element is inert.", true, true)]
+        inert,
 
         [Attribute("Hint for selecting an input modality", true, false)]
         inputmode,
@@ -214,7 +223,7 @@ namespace Markupolation
         [Attribute("List of autocomplete options", false, false, ElementType.input)]
         list,
 
-        [Attribute("Used when determining loading deferral", false, false, ElementType.img, ElementType.iframe)]
+        [Attribute("Used when determining loading deferral", false, false, ElementType.iframe, ElementType.img)]
         loading,
 
         [Attribute("Whether to loop the media resource", false, true, ElementType.audio, ElementType.video)]
@@ -251,10 +260,9 @@ namespace Markupolation
 
         [Attribute("Name of the element to use for form submission and in the form.elements API", false, false, ElementType.button, ElementType.fieldset, ElementType.input, ElementType.output, ElementType.select, ElementType.textarea)]
         [Attribute("Name of form to use in the document.forms API", false, false, ElementType.form)]
-        [Attribute("Name of nested browsing context", false, false, ElementType.iframe, ElementType.object_)]
+        [Attribute("Name of content navigable", false, false, ElementType.iframe, ElementType.object_)]
         [Attribute("Name of image map to reference from the usemap attribute", false, false, ElementType.map)]
         [Attribute("Metadata name", false, false, ElementType.meta)]
-        [Attribute("Name of parameter", false, false, ElementType.param)]
         [Attribute("Name of shadow tree slot", false, false, ElementType.slot)]
         name,
 
@@ -285,6 +293,15 @@ namespace Markupolation
 
         [Attribute("Encourage the user agent to display video content within the element's playback area", false, true, ElementType.video)]
         playsinline,
+
+        [Attribute("Makes the element a popover element", true, false)]
+        popover,
+
+        [Attribute("Targets a popover element to toggle, show, or hide", false, false)]
+        popovertarget,
+
+        [Attribute("Indicates whether a targeted popover element is to be toggled, shown, or hidden", false, false)]
+        popovertargetaction,
 
         [Attribute("Poster frame to show prior to video playback", false, false, ElementType.video)]
         poster,
@@ -367,9 +384,9 @@ namespace Markupolation
         [Attribute("Whether the element is focusable and sequentially focusable, and the relative order of the element for the purposes of sequential focus navigation", true, false)]
         tabindex,
 
-        [Attribute("Browsing context for hyperlink navigation", false, false, ElementType.a, ElementType.area)]
-        [Attribute("Default browsing context for hyperlink navigation and form submission", false, false, ElementType.base_)]
-        [Attribute("Browsing context for form submission", false, false, ElementType.form)]
+        [Attribute("Navigable for hyperlink navigation", false, false, ElementType.a, ElementType.area)]
+        [Attribute("Default navigable for hyperlink navigation and form submission", false, false, ElementType.base_)]
+        [Attribute("Navigable for form submission", false, false, ElementType.form)]
         target,
 
         [Attribute("Advisory information for the element", true, false)]
@@ -398,7 +415,6 @@ namespace Markupolation
         [Attribute("Value of the form control", false, false, ElementType.input)]
         [Attribute("Ordinal value of the list item", false, false, ElementType.li)]
         [Attribute("Current value of the element", false, false, ElementType.meter, ElementType.progress)]
-        [Attribute("Value of parameter", false, false, ElementType.param)]
         value,
 
         [Attribute("Horizontal dimension", false, false, ElementType.canvas, ElementType.embed, ElementType.iframe, ElementType.img, ElementType.input, ElementType.object_, ElementType.source, ElementType.video)]

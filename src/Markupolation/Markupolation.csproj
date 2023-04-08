@@ -21,8 +21,10 @@ HTML templating in C# with a fluent API:
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\icon.png" Link="icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
     <None Include="..\..\Markupolation.md" Pack="true" PackagePath="\" />
+    <None Include="buildTransitive\Markupolation.props" Pack="true" PackagePath="buildTransitive\Markupolation.props" />
+    <None Include="buildTransitive\Markupolation.props" Pack="true" PackagePath="build\Markupolation.props" />
   </ItemGroup>
 
   <Import Project="../../Analyzers.props" />

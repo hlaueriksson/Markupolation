@@ -26,7 +26,7 @@ namespace Markupolation
         [Element("Keywords", false)]
         b,
 
-        [Element("Base URL and default target browsing context for hyperlinks and forms", true, AttributeType.href, AttributeType.target)]
+        [Element("Base URL and default target navigable for hyperlinks and forms", true, AttributeType.href, AttributeType.target)]
         base_,
 
         [Element("Text directionality isolation", false)]
@@ -44,7 +44,7 @@ namespace Markupolation
         [Element("Line break, e.g. in poem or postal address", true)]
         br,
 
-        [Element("Button control", false, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.name, AttributeType.type, AttributeType.value)]
+        [Element("Button control", false, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.name, AttributeType.popovertarget, AttributeType.popovertargetaction, AttributeType.type, AttributeType.value)]
         button,
 
         [Element("Scriptable bitmap canvas", false, AttributeType.width, AttributeType.height)]
@@ -113,25 +113,25 @@ namespace Markupolation
         [Element("Footer for a page or section", false)]
         footer,
 
-        [Element("User-submittable form", false, AttributeType.accept_charset, AttributeType.action, AttributeType.autocomplete, AttributeType.enctype, AttributeType.method, AttributeType.name, AttributeType.novalidate, AttributeType.target)]
+        [Element("User-submittable form", false, AttributeType.accept_charset, AttributeType.action, AttributeType.autocomplete, AttributeType.enctype, AttributeType.method, AttributeType.name, AttributeType.novalidate, AttributeType.rel, AttributeType.target)]
         form,
 
-        [Element("Section heading", false)]
+        [Element("Heading", false)]
         h1,
 
-        [Element("Section heading", false)]
+        [Element("Heading", false)]
         h2,
 
-        [Element("Section heading", false)]
+        [Element("Heading", false)]
         h3,
 
-        [Element("Section heading", false)]
+        [Element("Heading", false)]
         h4,
 
-        [Element("Section heading", false)]
+        [Element("Heading", false)]
         h5,
 
-        [Element("Section heading", false)]
+        [Element("Heading", false)]
         h6,
 
         [Element("Container for document metadata", false)]
@@ -140,7 +140,7 @@ namespace Markupolation
         [Element("Introductory or navigational aids for a page or section", false)]
         header,
 
-        [Element("heading group", false)]
+        [Element("Heading container", false)]
         hgroup,
 
         [Element("Thematic break", true)]
@@ -152,13 +152,13 @@ namespace Markupolation
         [Element("Alternate voice", false)]
         i,
 
-        [Element("Nested browsing context", false, AttributeType.src, AttributeType.srcdoc, AttributeType.name, AttributeType.sandbox, AttributeType.allow, AttributeType.allowfullscreen, AttributeType.width, AttributeType.height, AttributeType.referrerpolicy, AttributeType.loading)]
+        [Element("Child navigable", false, AttributeType.src, AttributeType.srcdoc, AttributeType.name, AttributeType.sandbox, AttributeType.allow, AttributeType.allowfullscreen, AttributeType.width, AttributeType.height, AttributeType.referrerpolicy, AttributeType.loading)]
         iframe,
 
-        [Element("Image", true, AttributeType.alt, AttributeType.src, AttributeType.srcset, AttributeType.sizes, AttributeType.crossorigin, AttributeType.usemap, AttributeType.ismap, AttributeType.width, AttributeType.height, AttributeType.referrerpolicy, AttributeType.decoding, AttributeType.loading)]
+        [Element("Image", true, AttributeType.alt, AttributeType.src, AttributeType.srcset, AttributeType.sizes, AttributeType.crossorigin, AttributeType.usemap, AttributeType.ismap, AttributeType.width, AttributeType.height, AttributeType.referrerpolicy, AttributeType.decoding, AttributeType.loading, AttributeType.fetchpriority)]
         img,
 
-        [Element("Form control", true, AttributeType.accept, AttributeType.alt, AttributeType.autocomplete, AttributeType.checked_, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.height, AttributeType.list, AttributeType.max, AttributeType.maxlength, AttributeType.min, AttributeType.minlength, AttributeType.multiple, AttributeType.name, AttributeType.pattern, AttributeType.placeholder, AttributeType.readonly_, AttributeType.required, AttributeType.size, AttributeType.src, AttributeType.step, AttributeType.type, AttributeType.value, AttributeType.width)]
+        [Element("Form control", true, AttributeType.accept, AttributeType.alt, AttributeType.autocomplete, AttributeType.checked_, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.height, AttributeType.list, AttributeType.max, AttributeType.maxlength, AttributeType.min, AttributeType.minlength, AttributeType.multiple, AttributeType.name, AttributeType.pattern, AttributeType.placeholder, AttributeType.popovertarget, AttributeType.popovertargetaction, AttributeType.readonly_, AttributeType.required, AttributeType.size, AttributeType.src, AttributeType.step, AttributeType.type, AttributeType.value, AttributeType.width)]
         input,
 
         [Element("An addition to the document", false, AttributeType.cite, AttributeType.datetime)]
@@ -176,7 +176,7 @@ namespace Markupolation
         [Element("List item", false, AttributeType.value)]
         li,
 
-        [Element("Link metadata", true, AttributeType.href, AttributeType.crossorigin, AttributeType.rel, AttributeType.as_, AttributeType.media, AttributeType.hreflang, AttributeType.type, AttributeType.sizes, AttributeType.imagesrcset, AttributeType.imagesizes, AttributeType.referrerpolicy, AttributeType.integrity, AttributeType.color, AttributeType.disabled)]
+        [Element("Link metadata", true, AttributeType.href, AttributeType.crossorigin, AttributeType.rel, AttributeType.as_, AttributeType.media, AttributeType.hreflang, AttributeType.type, AttributeType.sizes, AttributeType.imagesrcset, AttributeType.imagesizes, AttributeType.referrerpolicy, AttributeType.integrity, AttributeType.blocking, AttributeType.color, AttributeType.disabled, AttributeType.fetchpriority)]
         link,
 
         [Element("Container for the dominant contents of the document", false)]
@@ -203,7 +203,7 @@ namespace Markupolation
         [Element("Fallback content for script", false)]
         noscript,
 
-        [Element("Image, nested browsing context, or plugin", false, AttributeType.data, AttributeType.type, AttributeType.name, AttributeType.form, AttributeType.width, AttributeType.height)]
+        [Element("Image, child navigable, or plugin", false, AttributeType.data, AttributeType.type, AttributeType.name, AttributeType.form, AttributeType.width, AttributeType.height)]
         object_,
 
         [Element("Ordered list", false, AttributeType.reversed, AttributeType.start, AttributeType.type)]
@@ -220,9 +220,6 @@ namespace Markupolation
 
         [Element("Paragraph", false)]
         p,
-
-        [Element("Parameter for object", true, AttributeType.name, AttributeType.value)]
-        param,
 
         [Element("Image", false)]
         picture,
@@ -251,8 +248,11 @@ namespace Markupolation
         [Element("Computer output", false)]
         samp,
 
-        [Element("Embedded script", false, AttributeType.src, AttributeType.type, AttributeType.async, AttributeType.defer, AttributeType.crossorigin, AttributeType.integrity, AttributeType.referrerpolicy)]
+        [Element("Embedded script", false, AttributeType.src, AttributeType.type, AttributeType.nomodule, AttributeType.async, AttributeType.defer, AttributeType.crossorigin, AttributeType.integrity, AttributeType.referrerpolicy, AttributeType.blocking, AttributeType.fetchpriority)]
         script,
+
+        [Element("Container for search controls", false)]
+        search,
 
         [Element("Generic document or application section", false)]
         section,
@@ -275,7 +275,7 @@ namespace Markupolation
         [Element("Importance", false)]
         strong,
 
-        [Element("Embedded styling information", false, AttributeType.media)]
+        [Element("Embedded styling information", false, AttributeType.media, AttributeType.blocking)]
         style,
 
         [Element("Subscript", false)]
@@ -299,7 +299,7 @@ namespace Markupolation
         [Element("Template", false)]
         template,
 
-        [Element("Multiline text controls", false, AttributeType.cols, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.maxlength, AttributeType.minlength, AttributeType.name, AttributeType.placeholder, AttributeType.readonly_, AttributeType.required, AttributeType.rows, AttributeType.wrap)]
+        [Element("Multiline text controls", false, AttributeType.autocomplete, AttributeType.cols, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.maxlength, AttributeType.minlength, AttributeType.name, AttributeType.placeholder, AttributeType.readonly_, AttributeType.required, AttributeType.rows, AttributeType.wrap)]
         textarea,
 
         [Element("Group of footer rows in a table", false)]

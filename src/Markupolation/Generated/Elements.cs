@@ -67,7 +67,7 @@ namespace Markupolation
         /// <inheritdoc cref="b(Content[])" />
         public static Element b(object content) => new(ElementType.b, false, content?.ToString()!);
 
-        /// <summary>Base URL and default target browsing context for hyperlinks and forms.</summary>
+        /// <summary>Base URL and default target navigable for hyperlinks and forms.</summary>
         /// <remarks>Attributes: <see cref="Attributes.href(string)"/>, <see cref="Attributes.target(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<base_ />]]></code></returns>
@@ -112,7 +112,7 @@ namespace Markupolation
         public static Element br(params Content[] content) => new(ElementType.br, true, content);
 
         /// <summary>Button control.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.popovertarget(string)"/>, <see cref="Attributes.popovertargetaction(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<button></button>]]></code></returns>
         public static Element button(params Content[] content) => new(ElementType.button, false, content);
@@ -300,7 +300,7 @@ namespace Markupolation
         public static Element footer(object content) => new(ElementType.footer, false, content?.ToString()!);
 
         /// <summary>User-submittable form.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.accept_charset(string)"/>, <see cref="Attributes.action(string)"/>, <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.enctype(string)"/>, <see cref="Attributes.method(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.novalidate()"/>, <see cref="Attributes.target(string)"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.accept_charset(string)"/>, <see cref="Attributes.action(string)"/>, <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.enctype(string)"/>, <see cref="Attributes.method(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.novalidate()"/>, <see cref="Attributes.rel(string)"/>, <see cref="Attributes.target(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<form></form>]]></code></returns>
         public static Element form(params Content[] content) => new(ElementType.form, false, content);
@@ -308,7 +308,7 @@ namespace Markupolation
         /// <inheritdoc cref="form(Content[])" />
         public static Element form(object content) => new(ElementType.form, false, content?.ToString()!);
 
-        /// <summary>Section heading.</summary>
+        /// <summary>Heading.</summary>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<h1></h1>]]></code></returns>
         public static Element h1(params Content[] content) => new(ElementType.h1, false, content);
@@ -316,7 +316,7 @@ namespace Markupolation
         /// <inheritdoc cref="h1(Content[])" />
         public static Element h1(object content) => new(ElementType.h1, false, content?.ToString()!);
 
-        /// <summary>Section heading.</summary>
+        /// <summary>Heading.</summary>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<h2></h2>]]></code></returns>
         public static Element h2(params Content[] content) => new(ElementType.h2, false, content);
@@ -324,7 +324,7 @@ namespace Markupolation
         /// <inheritdoc cref="h2(Content[])" />
         public static Element h2(object content) => new(ElementType.h2, false, content?.ToString()!);
 
-        /// <summary>Section heading.</summary>
+        /// <summary>Heading.</summary>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<h3></h3>]]></code></returns>
         public static Element h3(params Content[] content) => new(ElementType.h3, false, content);
@@ -332,7 +332,7 @@ namespace Markupolation
         /// <inheritdoc cref="h3(Content[])" />
         public static Element h3(object content) => new(ElementType.h3, false, content?.ToString()!);
 
-        /// <summary>Section heading.</summary>
+        /// <summary>Heading.</summary>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<h4></h4>]]></code></returns>
         public static Element h4(params Content[] content) => new(ElementType.h4, false, content);
@@ -340,7 +340,7 @@ namespace Markupolation
         /// <inheritdoc cref="h4(Content[])" />
         public static Element h4(object content) => new(ElementType.h4, false, content?.ToString()!);
 
-        /// <summary>Section heading.</summary>
+        /// <summary>Heading.</summary>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<h5></h5>]]></code></returns>
         public static Element h5(params Content[] content) => new(ElementType.h5, false, content);
@@ -348,7 +348,7 @@ namespace Markupolation
         /// <inheritdoc cref="h5(Content[])" />
         public static Element h5(object content) => new(ElementType.h5, false, content?.ToString()!);
 
-        /// <summary>Section heading.</summary>
+        /// <summary>Heading.</summary>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<h6></h6>]]></code></returns>
         public static Element h6(params Content[] content) => new(ElementType.h6, false, content);
@@ -372,7 +372,7 @@ namespace Markupolation
         /// <inheritdoc cref="header(Content[])" />
         public static Element header(object content) => new(ElementType.header, false, content?.ToString()!);
 
-        /// <summary>heading group.</summary>
+        /// <summary>Heading container.</summary>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<hgroup></hgroup>]]></code></returns>
         public static Element hgroup(params Content[] content) => new(ElementType.hgroup, false, content);
@@ -401,7 +401,7 @@ namespace Markupolation
         /// <inheritdoc cref="i(Content[])" />
         public static Element i(object content) => new(ElementType.i, false, content?.ToString()!);
 
-        /// <summary>Nested browsing context.</summary>
+        /// <summary>Child navigable.</summary>
         /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.srcdoc(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.sandbox(string)"/>, <see cref="Attributes.allow(string)"/>, <see cref="Attributes.allowfullscreen()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.loading(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<iframe></iframe>]]></code></returns>
@@ -411,13 +411,13 @@ namespace Markupolation
         public static Element iframe(object content) => new(ElementType.iframe, false, content?.ToString()!);
 
         /// <summary>Image.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.alt(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.srcset(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.usemap(string)"/>, <see cref="Attributes.ismap()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.decoding(string)"/>, <see cref="Attributes.loading(string)"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.alt(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.srcset(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.usemap(string)"/>, <see cref="Attributes.ismap()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.decoding(string)"/>, <see cref="Attributes.loading(string)"/>, <see cref="Attributes.fetchpriority(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<img />]]></code></returns>
         public static Element img(params Content[] content) => new(ElementType.img, true, content);
 
         /// <summary>Form control.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.accept(string)"/>, <see cref="Attributes.alt(string)"/>, <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.checked_()"/>, <see cref="Attributes.dirname(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.list(string)"/>, <see cref="Attributes.max(string)"/>, <see cref="Attributes.maxlength(string)"/>, <see cref="Attributes.min(string)"/>, <see cref="Attributes.minlength(string)"/>, <see cref="Attributes.multiple()"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.pattern(string)"/>, <see cref="Attributes.placeholder(string)"/>, <see cref="Attributes.readonly_()"/>, <see cref="Attributes.required()"/>, <see cref="Attributes.size(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.step(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>, <see cref="Attributes.width(string)"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.accept(string)"/>, <see cref="Attributes.alt(string)"/>, <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.checked_()"/>, <see cref="Attributes.dirname(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.list(string)"/>, <see cref="Attributes.max(string)"/>, <see cref="Attributes.maxlength(string)"/>, <see cref="Attributes.min(string)"/>, <see cref="Attributes.minlength(string)"/>, <see cref="Attributes.multiple()"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.pattern(string)"/>, <see cref="Attributes.placeholder(string)"/>, <see cref="Attributes.popovertarget(string)"/>, <see cref="Attributes.popovertargetaction(string)"/>, <see cref="Attributes.readonly_()"/>, <see cref="Attributes.required()"/>, <see cref="Attributes.size(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.step(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>, <see cref="Attributes.width(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<input />]]></code></returns>
         public static Element input(params Content[] content) => new(ElementType.input, true, content);
@@ -466,7 +466,7 @@ namespace Markupolation
         public static Element li(object content) => new(ElementType.li, false, content?.ToString()!);
 
         /// <summary>Link metadata.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.href(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.rel(string)"/>, <see cref="Attributes.as_(string)"/>, <see cref="Attributes.media(string)"/>, <see cref="Attributes.hreflang(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.imagesrcset(string)"/>, <see cref="Attributes.imagesizes(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.integrity(string)"/>, <see cref="Attributes.color(string)"/>, <see cref="Attributes.disabled()"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.href(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.rel(string)"/>, <see cref="Attributes.as_(string)"/>, <see cref="Attributes.media(string)"/>, <see cref="Attributes.hreflang(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.imagesrcset(string)"/>, <see cref="Attributes.imagesizes(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.integrity(string)"/>, <see cref="Attributes.blocking(string)"/>, <see cref="Attributes.color(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.fetchpriority(string)"/>.</remarks>
         /// <param name="content">Attributes.</param>
         /// <returns><code><![CDATA[<link />]]></code></returns>
         public static Element link(params Content[] content) => new(ElementType.link, true, content);
@@ -535,7 +535,7 @@ namespace Markupolation
         /// <inheritdoc cref="noscript(Content[])" />
         public static Element noscript(object content) => new(ElementType.noscript, false, content?.ToString()!);
 
-        /// <summary>Image, nested browsing context, or plugin.</summary>
+        /// <summary>Image, child navigable, or plugin.</summary>
         /// <remarks>Attributes: <see cref="Attributes.data(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<object_></object_>]]></code></returns>
@@ -587,12 +587,6 @@ namespace Markupolation
 
         /// <inheritdoc cref="p(Content[])" />
         public static Element p(object content) => new(ElementType.p, false, content?.ToString()!);
-
-        /// <summary>Parameter for object.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.name(string)"/>, <see cref="Attributes.value(string)"/>.</remarks>
-        /// <param name="content">Attributes.</param>
-        /// <returns><code><![CDATA[<param />]]></code></returns>
-        public static Element param(params Content[] content) => new(ElementType.param, true, content);
 
         /// <summary>Image.</summary>
         /// <param name="content">Attributes, elements and content.</param>
@@ -669,13 +663,21 @@ namespace Markupolation
         public static Element samp(object content) => new(ElementType.samp, false, content?.ToString()!);
 
         /// <summary>Embedded script.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.async()"/>, <see cref="Attributes.defer()"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.integrity(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.nomodule()"/>, <see cref="Attributes.async()"/>, <see cref="Attributes.defer()"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.integrity(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.blocking(string)"/>, <see cref="Attributes.fetchpriority(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<script></script>]]></code></returns>
         public static Element script(params Content[] content) => new(ElementType.script, false, content);
 
         /// <inheritdoc cref="script(Content[])" />
         public static Element script(object content) => new(ElementType.script, false, content?.ToString()!);
+
+        /// <summary>Container for search controls.</summary>
+        /// <param name="content">Attributes, elements and content.</param>
+        /// <returns><code><![CDATA[<search></search>]]></code></returns>
+        public static Element search(params Content[] content) => new(ElementType.search, false, content);
+
+        /// <inheritdoc cref="search(Content[])" />
+        public static Element search(object content) => new(ElementType.search, false, content?.ToString()!);
 
         /// <summary>Generic document or application section.</summary>
         /// <param name="content">Attributes, elements and content.</param>
@@ -734,7 +736,7 @@ namespace Markupolation
         public static Element strong(object content) => new(ElementType.strong, false, content?.ToString()!);
 
         /// <summary>Embedded styling information.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.media(string)"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.media(string)"/>, <see cref="Attributes.blocking(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<style></style>]]></code></returns>
         public static Element style(params Content[] content) => new(ElementType.style, false, content);
@@ -800,7 +802,7 @@ namespace Markupolation
         public static Element template(object content) => new(ElementType.template, false, content?.ToString()!);
 
         /// <summary>Multiline text controls.</summary>
-        /// <remarks>Attributes: <see cref="Attributes.cols(string)"/>, <see cref="Attributes.dirname(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.maxlength(string)"/>, <see cref="Attributes.minlength(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.placeholder(string)"/>, <see cref="Attributes.readonly_()"/>, <see cref="Attributes.required()"/>, <see cref="Attributes.rows(string)"/>, <see cref="Attributes.wrap(string)"/>.</remarks>
+        /// <remarks>Attributes: <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.cols(string)"/>, <see cref="Attributes.dirname(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.maxlength(string)"/>, <see cref="Attributes.minlength(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.placeholder(string)"/>, <see cref="Attributes.readonly_()"/>, <see cref="Attributes.required()"/>, <see cref="Attributes.rows(string)"/>, <see cref="Attributes.wrap(string)"/>.</remarks>
         /// <param name="content">Attributes, elements and content.</param>
         /// <returns><code><![CDATA[<textarea></textarea>]]></code></returns>
         public static Element textarea(params Content[] content) => new(ElementType.textarea, false, content);

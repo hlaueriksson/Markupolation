@@ -76,7 +76,7 @@ namespace Markupolation.Tests
             var page = await browser.NewPageAsync();
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/dom.html#global-attributes");
-            var attributes = await page.QuerySelectorAllAsync("ul.brief:nth-of-type(11) li code[id^='global-attributes'] a");
+            var attributes = await page.QuerySelectorAllAsync("h4#global-attributes ~ ul li code[id^='global-attributes'] a[href*='attr']");
             var globalAttributes = attributes.Select(async x => await x.InnerTextAsync()).Select(x => x.Result.CleanName()).ToList();
 
             await page.GotoAsync("https://html.spec.whatwg.org/dev/indices.html#attributes-3");
@@ -145,6 +145,7 @@ namespace Markupolation.Tests
 
                 result.AppendLine($"    [EventHandlerContentAttribute(\"{description}\"{elementTypes})]");
                 result.AppendLine($"    {name},");
+                result.AppendLine();
             }
             result.AppendLine("}");
 
