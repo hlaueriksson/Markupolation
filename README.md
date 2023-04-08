@@ -1,4 +1,4 @@
-# Markupolation <📜>
+# Markupolation <📜><!-- omit in toc -->
 
 [![build](https://github.com/hlaueriksson/Markupolation/actions/workflows/build.yml/badge.svg)](https://github.com/hlaueriksson/Markupolation/actions/workflows/build.yml)
 [![CodeFactor](https://codefactor.io/repository/github/hlaueriksson/markupolation/badge)](https://codefactor.io/repository/github/hlaueriksson/markupolation)
@@ -8,6 +8,17 @@
 
 > Markupolation = Markup + String Interpolation
 
+## Content<!-- omit in toc -->
+
+- [Installation](#installation)
+- [Introduction](#introduction)
+- [When should I use Markupolation?](#when-should-i-use-markupolation)
+- [Markupolation](#markupolation)
+- [Markupolation.Extensions](#markupolationextensions)
+- [Using directives](#using-directives)
+- [Performance](#performance)
+- [Samples](#samples)
+
 ## Installation
 
 Install via [NuGet](https://www.nuget.org/packages/Markupolation):
@@ -16,38 +27,25 @@ Install via [NuGet](https://www.nuget.org/packages/Markupolation):
 PM> Install-Package Markupolation
 ```
 
-and provide static using directives:
-
-```cs
-using static Markupolation.Elements;
-using e = Markupolation.Elements;
-using static Markupolation.Attributes;
-using a = Markupolation.Attributes;
-```
-
-Alternatively configure the `csproj` file _(in .NET 6)_:
+Enable `ImplicitUsings` in the `.csproj` file:
 
 ```xml
-<ItemGroup>
-  <PackageReference Include="Markupolation" Version="1.0.0" />
-  <Using Include="Markupolation.Elements" Static="True" />
-  <Using Include="Markupolation.Elements" Alias="e" />
-  <Using Include="Markupolation.Attributes" Static="True" />
-  <Using Include="Markupolation.Attributes" Alias="a" />
-</ItemGroup>
+<PropertyGroup>
+  <ImplicitUsings>enable</ImplicitUsings>
+</PropertyGroup>
 ```
 
 ## Introduction
 
 📦 [`Markupolation`](https://www.nuget.org/packages/Markupolation) is a library for HTML templating in C# with a fluent API.
 
-An interpolated `string` with expressions like:
+An expression like this:
 
 ```cs
-$"{DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))}";
+DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))
 ```
 
-is resolved to the following result:
+generates the following result:
 
 ```html
 <!DOCTYPE html><html><head><title>Markupolation</title></head><body><h1>Hello, World!</h1></body></html>
@@ -55,7 +53,7 @@ is resolved to the following result:
 
 📦 [`Markupolation.Extensions`](https://www.nuget.org/packages/Markupolation.Extensions) adds extension methods to control flow.
 
-Expressions like:
+Expressions like these:
 
 ```cs
 var links = new[] { new { Url = "#", Title = "Foo", Active = true }, new { Url = "#", Title = "Bar", Active = false } };
@@ -89,15 +87,13 @@ to
 
 In cases like these, `Markupolation` could be a good fit to generate HTML for you.
 
-### Hotwire (`HTML` Over The Wire)?
+### Hotwire (`HTML` Over The Wire)?<!-- omit in toc -->
 
 > Hotwire is an alternative approach to building modern web applications without using much JavaScript by sending HTML instead of JSON over the wire. This makes for fast first-load pages, keeps template rendering on the server, and allows for a simpler, more productive development experience in any programming language, without sacrificing any of the speed or responsiveness associated with a traditional single-page application.
 >
 > -- <cite>[hotwired.dev](https://hotwired.dev/)</cite>
 
-## Usage
-
-### Markupolation
+## Markupolation
 
 Interpolate strings with HTML elements and attributes:
 
@@ -178,9 +174,44 @@ Attributes:
 - `style`
 - `title`
 
-Provide [using directive](#using-directives) aliases to create explicit shorthands for the methods.
+Use the predefined aliases as shorthands for the methods:
 
-### Markupolation.Extensions
+- `e.title("Title element")`
+- `a.title("Title attribute")`
+
+ℹ️ Custom elements that are not available in the API can be created with the `Element` class:
+
+```cs
+new Element("""
+  <svg width="100" height="100">
+    <circle cx="50" cy="50" r="40" fill="blue" />
+  </svg>
+""")
+```
+
+Or via the `E` alias:
+
+```cs
+new E("""
+  <svg width="100" height="100">
+    <circle cx="50" cy="50" r="40" fill="blue" />
+  </svg>
+""")
+```
+
+ℹ️ Custom attributes that are not available in the API can be created with the `Attribute` class:
+
+```cs
+new Attribute("property", "og:title")
+```
+
+Or via the `A` alias:
+
+```cs
+new A("property", "og:title")
+```
+
+## Markupolation.Extensions
 
 📦 Available via NuGet as a separate package: [`Markupolation.Extensions`](https://www.nuget.org/packages/Markupolation.Extensions)
 
@@ -271,62 +302,49 @@ Conditionals on `T?`:
 
 - `IfHasValue<T>`
 
-### Using directives
+## Using directives
 
-*Static* using directives helps to archive a succinct and fluent syntax.
+When `ImplicitUsings` are enabled:
 
-`using` directive with [`static`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive#static-modifier) modifier in `cs` files:
-
-```cs
-using static Markupolation.Elements;
-using static Markupolation.Attributes;
-using static Markupolation.EventHandlerContentAttributes;
+```xml
+<PropertyGroup>
+  <ImplicitUsings>enable</ImplicitUsings>
+</PropertyGroup>
 ```
 
-`using` directive with [`global`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive#global-modifier) and [`static`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive#static-modifier) modifiers in a `cs` file _(C# 10)_:
-
-```cs
-global using static Markupolation.Elements;
-global using static Markupolation.Attributes;
-global using static Markupolation.EventHandlerContentAttributes;
-```
-
-[`Using`](https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#using) item in a `csproj` file _(.NET 6)_:
+These using directives are applied automatically:
 
 ```xml
 <ItemGroup>
+  <Using Include="Markupolation" />
   <Using Include="Markupolation.Elements" Static="True" />
+  <Using Include="Markupolation.Elements" Alias="e" />
+  <Using Include="Markupolation.Element" Alias="E" />
   <Using Include="Markupolation.Attributes" Static="True" />
+  <Using Include="Markupolation.Attributes" Alias="a" />
+  <Using Include="Markupolation.Attribute" Alias="A" />
   <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
 </ItemGroup>
 ```
 
-⚠️ Nine methods have the same name and become _ambiguous_ when providing static using directives for the `Elements` and `Attributes` class.
-One example is the `title` methods.
+If you do not want to enable `ImplicitUsings` in your project, you can copy and paste the above into your `.csproj` file.
 
-*Alias* using directives helps to archive succinct references to element or attribute methods.
-
-`using` directive with [`alias`](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive#using-alias) in `cs` files:
+Alternatively you can add the following using directives in a `.cs` file:
 
 ```cs
-using e = Markupolation.Elements;
-using a = Markupolation.Attributes;
+global using Markupolation;
+global using static Markupolation.Elements;
+global using e = Markupolation.Elements;
+global using E = Markupolation.Element;
+global using static Markupolation.Attributes;
+global using a = Markupolation.Attributes;
+global using A = Markupolation.Attribute;
+global using static Markupolation.EventHandlerContentAttributes;
 ```
-
-[`Using`](https://docs.microsoft.com/en-us/dotnet/core/project-sdk/msbuild-props#using) item with `alias` in a `csproj` file:
-
-```xml
-<ItemGroup>
-  <Using Include="Markupolation.Elements" Alias="e" />
-  <Using Include="Markupolation.Attributes" Alias="a" />
-</ItemGroup>
-```
-
-Aliases make it possible to succinctly distinguish between the `e.title("Title element")` and `a.title("Attribute title")`.
 
 ## Performance
 
-Strings concatenation in C# can be done in [different](https://docs.microsoft.com/en-us/dotnet/csharp/how-to/concatenate-multiple-strings) ways.
+String concatenation in C# can be done in [different](https://docs.microsoft.com/en-us/dotnet/csharp/how-to/concatenate-multiple-strings) ways.
 Conventional wisdom is to use the `StringBuilder` class.
 Jon Skeet offers advice on [Concatenating Strings Efficiently](https://jonskeet.uk/csharp/stringbuilder.html).
 
@@ -336,7 +354,7 @@ and
 [constant](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/proposals/csharp-10.0/constant_interpolated_strings)
 interpolated strings that you can benefit from when using `Markupolation`.
 
-The [tests](/tests/Markupolation.Benchmark) folder contains some benchmarks.
+The tests folder contains some [benchmarks](/tests/Markupolation.Benchmark).
 
 ## Samples
 
@@ -344,3 +362,4 @@ The [samples](/samples) folder contains examples with:
 
 - Minimal API
 - Azure Functions
+- Blazor WebAssembly and HTML Over The Wire
