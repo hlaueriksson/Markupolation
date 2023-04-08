@@ -3,22 +3,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <AzureFunctionsVersion>v4</AzureFunctionsVersion>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Humanizer" Version="2.11.10" />
-    <PackageReference Include="Markupolation" Version="1.0.0" />
-    <PackageReference Include="Markupolation.Extensions" Version="1.0.0" />
+    <PackageReference Include="Markupolation" Version="2.0.0" />
+    <PackageReference Include="Markupolation.Extensions" Version="2.0.0" />
     <PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.0.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Using Include="Markupolation" />
-    <Using Include="Markupolation.Elements" Static="True" />
-    <Using Include="Markupolation.Elements" Alias="e" />
-    <Using Include="Markupolation.Element" Alias="E" />
-    <Using Include="Markupolation.Attributes" Static="True" />
-    <Using Include="Markupolation.Attributes" Alias="a" />
-    <Using Include="Markupolation.Attribute" Alias="A" />
-    <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
   </ItemGroup>
   <ItemGroup>
     <None Update="host.json">

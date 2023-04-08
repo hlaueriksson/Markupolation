@@ -1,9 +1,3 @@
-using Markupolation;
-using static Markupolation.Elements;
-using static Markupolation.Attributes;
-using e = Markupolation.Elements;
-using a = Markupolation.Attributes;
-
 var result = $"{DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))}";
 Console.WriteLine(result);
 
