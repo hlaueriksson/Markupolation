@@ -1,15 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
-using System;
+using System.Net;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 
 namespace Markupolation.Sample.Functions
 {
-    public static class Weather
+    public class Weather
     {
-        [FunctionName("Weather")]
-        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req)
+        [Function("Weather")]
+        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
         {
             var forecasts = new[]
             {
@@ -20,31 +18,32 @@ namespace Markupolation.Sample.Functions
                 new { Date = DateTime.Parse("2018-05-10"), TemperatureC = -2, Summary = "Chilly" }
             };
 
-            return new ContentResult
-            {
-                Content =
-                    $@"<table class=""table"">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Temp. (C)</th>
-                                <th>Temp. (F)</th>
-                                <th>Summary</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {forecasts.Each(x => tr(
-                                td(x.Date.ToShortDateString()),
-                                td(x.TemperatureC),
-                                td(TemperatureF(x)),
-                                td(x.Summary)
-                            ))}
-                        </tbody>
-                    </table>",
-                ContentType = "text/html"
-            };
-        }
+            var response = req.CreateResponse(HttpStatusCode.OK);
+            response.Headers.Add("Content-Type", "text/html; charset=utf-8");
+            response.WriteString(
+                $@"<table class=""table"">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Temp. (C)</th>
+                            <th>Temp. (F)</th>
+                            <th>Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {forecasts.Each(x => tr(
+                            td(x.Date.ToShortDateString()),
+                            td(x.TemperatureC),
+                            td(TemperatureF(x)),
+                            td(x.Summary)
+                        ))}
+                    </tbody>
+                </table>"
+            );
 
-        static int TemperatureF(dynamic forecast) => 32 + (int)(forecast.TemperatureC / 0.5556);
+            return response;
+
+            static int TemperatureF(dynamic forecast) => 32 + (int)(forecast.TemperatureC / 0.5556);
+        }
     }
 }

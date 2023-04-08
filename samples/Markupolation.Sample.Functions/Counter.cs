@@ -1,20 +1,19 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
+using System.Net;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 
 namespace Markupolation.Sample.Functions
 {
-    public static class Counter
+    public class Counter
     {
-        [FunctionName("Counter")]
-        public static IActionResult Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Counter/{count:int}")] HttpRequest req, int count)
+        [Function("Counter")]
+        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Counter/{count:int}")] HttpRequestData req, int count)
         {
-            return new ContentResult
-            {
-                Content = $"{mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count))}",
-                ContentType = "text/html"
-            };
+            var response = req.CreateResponse(HttpStatusCode.OK);
+            response.Headers.Add("Content-Type", "text/html; charset=utf-8");
+            response.WriteString($"{mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count))}");
+
+            return response;
         }
     }
 }

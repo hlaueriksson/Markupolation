@@ -21,7 +21,7 @@ html(lang("en"),
 Console.WriteLine(result);
 
 string foo = "foo";
-string bar = null;
+string bar = null!;
 result = $@"{DOCTYPE() +
 html(
     body(
