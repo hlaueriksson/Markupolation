@@ -35,7 +35,9 @@ namespace Markupolation
         /// Converts <see cref="string"/> to <see cref="Content"/>.
         /// </summary>
         /// <param name="value">The string.</param>
+#pragma warning disable CA2225 // Operator overloads have named alternates
         public static implicit operator Content(string value)
+#pragma warning restore CA2225 // Operator overloads have named alternates
         {
             return new Content(value);
         }
