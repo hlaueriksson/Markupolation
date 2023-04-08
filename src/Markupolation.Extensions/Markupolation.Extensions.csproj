@@ -2,8 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0</Version>
-    <PackageReleaseNotes>Initial release 🎉</PackageReleaseNotes>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>
+IfMatch methods in ContentExtensions now use Func instead of Expression&lt;Func&gt; as predicate
+    </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>
 Markupolation = Markup + String Interpolation

@@ -2,8 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.0</Version>
-    <PackageReleaseNotes>Initial release 🎉</PackageReleaseNotes>
+    <Version>2.0.0</Version>
+    <PackageReleaseNotes>
+Regenerated elements and attributes from https://html.spec.whatwg.org/
+Living Standard — Last Updated 6 April 2023
+
+When ImplicitUsings are enabled, the following using directives are now applied:
+
+&lt;Using Include="Markupolation" /&gt;
+&lt;Using Include="Markupolation.Elements" Static="True" /&gt;
+&lt;Using Include="Markupolation.Elements" Alias="e" /&gt;
+&lt;Using Include="Markupolation.Element" Alias="E" /&gt;
+&lt;Using Include="Markupolation.Attributes" Static="True" /&gt;
+&lt;Using Include="Markupolation.Attributes" Alias="a" /&gt;
+&lt;Using Include="Markupolation.Attribute" Alias="A" /&gt;
+&lt;Using Include="Markupolation.EventHandlerContentAttributes" Static="True" /&gt;
+    </PackageReleaseNotes>
     <Authors>Henrik Lau Eriksson</Authors>
     <Description>
 Markupolation = Markup + String Interpolation
