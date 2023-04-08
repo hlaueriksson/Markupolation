@@ -44,12 +44,12 @@ Result (formatted):
 Configuration in `csproj` file:
 
 ```xml
+<PropertyGroup>
+  <ImplicitUsings>enable</ImplicitUsings>
+</PropertyGroup>
+
 <ItemGroup>
-  <PackageReference Include="Markupolation" Version="1.0.0" />
-  <Using Include="Markupolation.Elements" Static="True" />
-  <Using Include="Markupolation.Elements" Alias="e" />
-  <Using Include="Markupolation.Attributes" Static="True" />
-  <Using Include="Markupolation.Attributes" Alias="a" />
+  <PackageReference Include="Markupolation" Version="2.0.0" />
 </ItemGroup>
 ```
 
