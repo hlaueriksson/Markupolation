@@ -20,8 +20,8 @@ namespace Markupolation.Sample.Functions
 
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/html; charset=utf-8");
-            response.WriteString(
-                $@"<table class=""table"">
+            response.WriteString($$"""
+                <table class="table">
                     <thead>
                         <tr>
                             <th>Date</th>
@@ -31,15 +31,15 @@ namespace Markupolation.Sample.Functions
                         </tr>
                     </thead>
                     <tbody>
-                        {forecasts.Each(x => tr(
+                        {{forecasts.Each(x => tr(
                             td(x.Date.ToShortDateString()),
                             td(x.TemperatureC),
                             td(TemperatureF(x)),
                             td(x.Summary)
-                        ))}
+                        ))}}
                     </tbody>
-                </table>"
-            );
+                </table>
+            """);
 
             return response;
 

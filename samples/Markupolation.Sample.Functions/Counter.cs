@@ -11,7 +11,9 @@ namespace Markupolation.Sample.Functions
         {
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/html; charset=utf-8");
-            response.WriteString($"{mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count))}");
+            response.WriteString(
+                mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count))
+            );
 
             return response;
         }

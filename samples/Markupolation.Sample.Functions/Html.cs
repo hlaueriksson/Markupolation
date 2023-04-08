@@ -12,7 +12,7 @@ namespace Markupolation.Sample.Functions
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/html; charset=utf-8");
             response.WriteString(
-                $@"{DOCTYPE() +
+                DOCTYPE() +
                 html(lang("en"),
                     head(
                         meta(charset("utf-8")),
@@ -24,7 +24,7 @@ namespace Markupolation.Sample.Functions
                         h1("Hello, World!"),
                         p("This is ", mark(a.title("Markup with string interpolation"), "Markupolation"), " in action.")
                     )
-                )}"
+                )
             );
 
             return response;
