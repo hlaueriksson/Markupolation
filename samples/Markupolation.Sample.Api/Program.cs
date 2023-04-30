@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
@@ -21,9 +23,14 @@ app.MapGet("/hello", () => Results.Extensions.Html(
     h1("Hello, World!") + p("This is ", mark(title("Markup with string interpolation"), "Markupolation"), " in action.")
 ));
 
-app.MapGet("/counter/{count:int}", (int count) => Results.Extensions.Html(
-    mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count))
-));
+app.MapGet("/counter/{count:int?}", ([FromRoute(Name = "count")] int? routeCount, [FromQuery(Name = "count")] int? queryCount) =>
+{
+    int count = routeCount ?? queryCount ?? 0;
+
+    return Results.Extensions.Html(
+        mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count))
+    );
+});
 
 app.MapGet("/weather", () =>
 {
