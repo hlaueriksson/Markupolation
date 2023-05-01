@@ -83,7 +83,7 @@ to deliver
 to
 
 - a _Blazor WebAssembly_ app, or
-- an _Azure Static Web App_ site?
+- an _Azure Static Web App_ site with `Hotwire` or `HTMX`?
 
 In cases like these, `Markupolation` could be a good fit to generate HTML for you.
 
@@ -92,6 +92,18 @@ In cases like these, `Markupolation` could be a good fit to generate HTML for yo
 > Hotwire is an alternative approach to building modern web applications without using much JavaScript by sending HTML instead of JSON over the wire. This makes for fast first-load pages, keeps template rendering on the server, and allows for a simpler, more productive development experience in any programming language, without sacrificing any of the speed or responsiveness associated with a traditional single-page application.
 >
 > -- <cite>[hotwired.dev](https://hotwired.dev/)</cite>
+
+### HTMX?<!-- omit in toc -->
+
+> htmx is a library that allows you to access modern browser features directly from HTML, rather than using javascript.
+>
+> Note that when you are using htmx, on the server side you typically respond with HTML, not JSON.
+>
+> htmx expects responses to the AJAX requests it makes to be HTML, typically HTML fragments.
+> 
+> htmx will then swap the returned HTML into the document at the target specified and with the swap strategy specified.
+>
+> -- <cite>[htmx.org](https://htmx.org/)</cite>
 
 ## Markupolation
 
@@ -363,3 +375,4 @@ The [samples](/samples) folder contains examples with:
 - Minimal API
 - Azure Functions
 - Blazor WebAssembly and HTML Over The Wire
+- HTMX and HTML Over The Wire
