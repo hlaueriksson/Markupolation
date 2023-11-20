@@ -245,8 +245,7 @@ $@"<!DOCTYPE html><html><head>
   Feel free to play with this example if you're just learning, or trash it and
   start from scratch if you know enough to be dangerous. Have fun!
 -->
-{
-div(class_("min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"),
+{div(class_("min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"),
   div(class_("relative py-3 sm:max-w-xl sm:mx-auto"),
     div(class_("absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl")),
     div(class_("relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20"),
@@ -301,8 +300,7 @@ div(class_("min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
       )
     )
   )
-)
-}
+)}
 </body></html>";
 
             using var playwright = await Playwright.CreateAsync();
@@ -357,7 +355,7 @@ $@"Examples of the [archives](https://statiq.dev/web/content-and-data/archives) 
                 Body =
 $@"Examples demonstrating various aspects of [Statiq Web](https://statiq.dev/web).
 
-<div>{ListPages(new[] { input.archives_md })}</div>
+<div>{ListPages([input.archives_md])}</div>
 "
             };
 
@@ -385,8 +383,7 @@ $@"Examples demonstrating various aspects of [Statiq Web](https://statiq.dev/web
             static string layout(dynamic document, dynamic[] children)
             {
                 return
-$@"{
-html(
+$@"{html(
     head(
         meta(charset("utf-8")),
         meta(http_equiv("X-UA-Compatible"), content("IE=edge")),
@@ -419,8 +416,7 @@ html(
         ),
         "<script type=\"text/javascript\" src=\"/livereload.js?host=localhost&port=5080\"></script>"
     )
-)
-}";
+)}";
             }
 
             static string ListPages(dynamic[] children)

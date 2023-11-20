@@ -138,7 +138,7 @@ namespace Markupolation.Benchmark
             return
                 benchmark.Markupolation() == benchmark.StringBuilder() &&
                 benchmark.Markupolation() == benchmark.StringFormat();
-                //benchmark.Markupolation() == benchmark.HtmlTags().ReplaceLineEndings(string.Empty);
+            //benchmark.Markupolation() == benchmark.HtmlTags().ReplaceLineEndings(string.Empty);
         }
     }
 }

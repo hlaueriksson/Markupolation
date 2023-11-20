@@ -3,22 +3,14 @@ using System;
 namespace Markupolation
 {
     [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = true)]
-    internal sealed class AttributeAttribute : System.Attribute
+    internal sealed class AttributeAttribute(string description, bool isGlobalAttribute, bool isBooleanAttribute, params ElementType[] elements) : System.Attribute
     {
-        public AttributeAttribute(string description, bool isGlobalAttribute, bool isBooleanAttribute, params ElementType[] elements)
-        {
-            Description = description;
-            IsGlobalAttribute = isGlobalAttribute;
-            IsBooleanAttribute = isBooleanAttribute;
-            Elements = elements;
-        }
+        public string Description { get; } = description;
 
-        public string Description { get; }
+        public bool IsGlobalAttribute { get; } = isGlobalAttribute;
 
-        public bool IsGlobalAttribute { get; }
+        public bool IsBooleanAttribute { get; } = isBooleanAttribute;
 
-        public bool IsBooleanAttribute { get; }
-
-        public ElementType[] Elements { get; }
+        public ElementType[] Elements { get; } = elements;
     }
 }
