@@ -32,16 +32,21 @@ app.MapGet("/counter/{count:int?}", ([FromRoute(Name = "count")] int? routeCount
     );
 });
 
+var summaries = new[]
+{
+    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+};
+
 app.MapGet("/weather", () =>
 {
-    var forecasts = new[]
-    {
-        new { Date = DateTime.Parse("2018-05-06"), TemperatureC = 1, Summary = "Freezing" },
-        new { Date = DateTime.Parse("2018-05-07"), TemperatureC = 14, Summary = "Bracing" },
-        new { Date = DateTime.Parse("2018-05-08"), TemperatureC = -13, Summary = "Freezing" },
-        new { Date = DateTime.Parse("2018-05-09"), TemperatureC = -16, Summary = "Balmy" },
-        new { Date = DateTime.Parse("2018-05-10"), TemperatureC = -2, Summary = "Chilly" },
-    };
+    var forecasts = Enumerable.Range(1, 5).Select(index =>
+        new WeatherForecast
+        (
+            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+            Random.Shared.Next(-20, 55),
+            summaries[Random.Shared.Next(summaries.Length)]
+        ))
+        .ToArray();
 
     return Results.Extensions.Html($$"""
         <table class="table">
@@ -57,14 +62,17 @@ app.MapGet("/weather", () =>
                 {{forecasts.Each(x => tr(
                     td(x.Date.ToShortDateString()),
                     td(x.TemperatureC),
-                    td(TemperatureF(x)),
+                    td(x.TemperatureF),
                     td(x.Summary)
                 ))}}
             </tbody>
         </table>
     """);
-
-    static int TemperatureF(dynamic forecast) => 32 + (int)(forecast.TemperatureC / 0.5556);
 });
 
 app.Run();
+
+internal record WeatherForecast(DateOnly Date, int TemperatureC, string Summary)
+{
+    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+}
