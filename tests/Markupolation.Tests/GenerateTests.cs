@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,9 +8,30 @@ using NUnit.Framework;
 
 namespace Markupolation.Tests
 {
+    /// <summary>
+    /// 1. Run <see cref="All_enums"/>
+    /// 2. Compile
+    /// 3. Run <see cref="All_classes"/>
+    /// </summary>
     [Explicit]
     public class GenerateTests
     {
+        [Test]
+        public async Task All_enums()
+        {
+            await ElementType();
+            await AttributeType();
+            await EventHandlerContentAttributeType();
+        }
+
+        [Test]
+        public async Task All_classes()
+        {
+            await Elements();
+            await Attributes();
+            await EventHandlerContentAttributes();
+        }
+
         [Test]
         public async Task ElementType()
         {
@@ -25,6 +47,8 @@ namespace Markupolation.Tests
             elements = await page.QuerySelectorAllAsync("body > table:nth-child(7) tbody tr");
 
             var result = new StringBuilder();
+            result.AppendLine("namespace Markupolation;");
+            result.AppendLine();
             result.AppendLine("internal enum ElementType");
             result.AppendLine("{");
             foreach (var element in elements)
@@ -46,9 +70,11 @@ namespace Markupolation.Tests
                     result.AppendLine();
                 }
             }
+            result.Remove(result.Length - Environment.NewLine.Length, Environment.NewLine.Length); // last new line
             result.AppendLine("}");
 
-            Console.WriteLine(result.ToString());
+            var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\ElementType.cs";
+            await File.WriteAllTextAsync(path, result.ToString());
 
             async Task<string[]> GetNamesAsync(IElementHandle element)
             {
@@ -83,6 +109,8 @@ namespace Markupolation.Tests
             attributes = await page.QuerySelectorAllAsync("table#attributes-1 tbody tr");
 
             var result = new StringBuilder();
+            result.AppendLine("namespace Markupolation;");
+            result.AppendLine();
             result.AppendLine("internal enum AttributeType");
             result.AppendLine("{");
             for (int i = 0; i < attributes.Count; i++)
@@ -91,7 +119,7 @@ namespace Markupolation.Tests
                 var name = await GetNameAsync(attribute);
                 var nextName = await GetNameAsync(i < attributes.Count - 1 ? attributes[i + 1] : null);
 
-                var description = (await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(2)", "e => e.innerText")).Replace("\"", "\\\"");
+                var description = (await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(2)", "e => e.innerText")).Replace("\"", "\\\"").TrimEnd('.');
                 var isGlobalAttribute = globalAttributes.Contains(name!).ToString().ToLower();
                 var isBooleanAttribute = (await attribute.QuerySelectorAsync("td a[href$='boolean-attribute']") != null).ToString().ToLower();
                 var elements = await GetElementsAsync(attribute);
@@ -104,9 +132,11 @@ namespace Markupolation.Tests
                     result.AppendLine();
                 }
             }
+            result.Remove(result.Length - Environment.NewLine.Length, Environment.NewLine.Length); // last new line
             result.AppendLine("}");
 
-            Console.WriteLine(result.ToString());
+            var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\AttributeType.cs";
+            await File.WriteAllTextAsync(path, result.ToString());
 
             async Task<string?> GetNameAsync(IElementHandle? attribute)
             {
@@ -134,6 +164,8 @@ namespace Markupolation.Tests
             var attributes = await page.QuerySelectorAllAsync("table#ix-event-handlers tbody tr");
 
             var result = new StringBuilder();
+            result.AppendLine("namespace Markupolation;");
+            result.AppendLine();
             result.AppendLine("internal enum EventHandlerContentAttributeType");
             result.AppendLine("{");
             foreach (var attribute in attributes)
@@ -147,9 +179,11 @@ namespace Markupolation.Tests
                 result.AppendLine($"    {name},");
                 result.AppendLine();
             }
+            result.Remove(result.Length - Environment.NewLine.Length, Environment.NewLine.Length); // last new line
             result.AppendLine("}");
 
-            Console.WriteLine(result.ToString());
+            var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\EventHandlerContentAttributeType.cs";
+            await File.WriteAllTextAsync(path, result.ToString());
 
             async Task<string?> GetNameAsync(IElementHandle? attribute)
             {
@@ -167,11 +201,13 @@ namespace Markupolation.Tests
         }
 
         [Test]
-        public void Elements()
+        public async Task Elements()
         {
             var values = Enum.GetValues(typeof(ElementType));
 
             var result = new StringBuilder();
+            result.AppendLine("namespace Markupolation;");
+            result.AppendLine();
             result.AppendLine("/// <summary>HTML elements.</summary>");
             result.AppendLine("public static partial class Elements");
             result.AppendLine("{");
@@ -199,9 +235,11 @@ namespace Markupolation.Tests
                     result.AppendLine();
                 }
             }
+            result.Remove(result.Length - Environment.NewLine.Length, Environment.NewLine.Length); // last new line
             result.AppendLine("}");
 
-            Console.WriteLine(result.ToString());
+            var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\Elements.cs";
+            await File.WriteAllTextAsync(path, result.ToString());
 
             static ElementAttribute GetElementAttribute(object value)
             {
@@ -217,11 +255,13 @@ namespace Markupolation.Tests
         }
 
         [Test]
-        public void Attributes()
+        public async Task Attributes()
         {
             var values = Enum.GetValues(typeof(AttributeType));
 
             var result = new StringBuilder();
+            result.AppendLine("namespace Markupolation;");
+            result.AppendLine();
             result.AppendLine("/// <summary>HTML attributes.</summary>");
             result.AppendLine("public static partial class Attributes");
             result.AppendLine("{");
@@ -264,9 +304,11 @@ namespace Markupolation.Tests
                     result.AppendLine();
                 }
             }
+            result.Remove(result.Length - Environment.NewLine.Length, Environment.NewLine.Length); // last new line
             result.AppendLine("}");
 
-            Console.WriteLine(result.ToString());
+            var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\Attributes.cs";
+            await File.WriteAllTextAsync(path, result.ToString());
 
             static AttributeAttribute[] GetAttributeAttributes(object value)
             {
@@ -276,11 +318,13 @@ namespace Markupolation.Tests
         }
 
         [Test]
-        public void EventHandlerContentAttributes()
+        public async Task EventHandlerContentAttributes()
         {
             var values = Enum.GetValues(typeof(EventHandlerContentAttributeType));
 
             var result = new StringBuilder();
+            result.AppendLine("namespace Markupolation;");
+            result.AppendLine();
             result.AppendLine("/// <summary>HTML event handler content attributes.</summary>");
             result.AppendLine("public static class EventHandlerContentAttributes");
             result.AppendLine("{");
@@ -299,9 +343,11 @@ namespace Markupolation.Tests
                 result.AppendLine($"    public static Attribute {value}(string value) => new(\"{value}\", value);");
                 result.AppendLine();
             }
+            result.Remove(result.Length - Environment.NewLine.Length, Environment.NewLine.Length); // last new line
             result.AppendLine("}");
 
-            Console.WriteLine(result.ToString());
+            var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\EventHandlerContentAttributes.cs";
+            await File.WriteAllTextAsync(path, result.ToString());
 
             static EventHandlerContentAttributeAttribute GetEventHandlerContentAttributeAttribute(object value)
             {
@@ -319,7 +365,8 @@ namespace Markupolation.Tests
             return name.Replace('-', '_') + suffix;
         }
 
-        private static readonly string[] _keywords = new[] { "abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while" };
+        // https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/
+        private static readonly string[] _keywords = ["abstract", "as", "base", "bool", "break", "byte", "case", "catch", "char", "checked", "class", "const", "continue", "decimal", "default", "delegate", "do", "double", "else", "enum", "event", "explicit", "extern", "false", "finally", "fixed", "float", "for", "foreach", "goto", "if", "implicit", "in", "int", "interface", "internal", "is", "lock", "long", "namespace", "new", "null", "object", "operator", "out", "override", "params", "private", "protected", "public", "readonly", "ref", "return", "sbyte", "sealed", "short", "sizeof", "stackalloc", "static", "string", "struct", "switch", "this", "throw", "true", "try", "typeof", "uint", "ulong", "unchecked", "unsafe", "ushort", "using", "virtual", "void", "volatile", "while"];
 
         private static bool IsCsharpKeyword(this string name) => _keywords.Contains(name);
     }
