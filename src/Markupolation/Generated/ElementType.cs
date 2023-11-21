@@ -77,7 +77,7 @@ internal enum ElementType
     [Element("A removal from the document", false, AttributeType.cite, AttributeType.datetime)]
     del,
 
-    [Element("Disclosure control for hiding details", false, AttributeType.open)]
+    [Element("Disclosure control for hiding details", false, AttributeType.name, AttributeType.open)]
     details,
 
     [Element("Defining instance", false)]
@@ -266,7 +266,7 @@ internal enum ElementType
     [Element("Side comment", false)]
     small,
 
-    [Element("Image source for img or media source for video or audio", true, AttributeType.src, AttributeType.type, AttributeType.srcset, AttributeType.sizes, AttributeType.media, AttributeType.width, AttributeType.height)]
+    [Element("Image source for img or media source for video or audio", true, AttributeType.type, AttributeType.media, AttributeType.src, AttributeType.srcset, AttributeType.sizes, AttributeType.width, AttributeType.height)]
     source,
 
     [Element("Generic phrasing container", false)]

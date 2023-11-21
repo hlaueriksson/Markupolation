@@ -181,7 +181,7 @@ internal enum AttributeType
     [Attribute("Images to use in different situations, e.g., high-resolution displays, small monitors, etc. (for rel=\"preload\")", false, false, ElementType.link)]
     imagesrcset,
 
-    [Attribute("Whether the element is inert.", true, true)]
+    [Attribute("Whether the element is inert", true, true)]
     inert,
 
     [Attribute("Hint for selecting an input modality", true, false)]
@@ -259,6 +259,7 @@ internal enum AttributeType
     muted,
 
     [Attribute("Name of the element to use for form submission and in the form.elements API", false, false, ElementType.button, ElementType.fieldset, ElementType.input, ElementType.output, ElementType.select, ElementType.textarea)]
+    [Attribute("Name of group of mutually-exclusive details elements", false, false, ElementType.details)]
     [Attribute("Name of form to use in the document.forms API", false, false, ElementType.form)]
     [Attribute("Name of content navigable", false, false, ElementType.iframe, ElementType.object_)]
     [Attribute("Name of image map to reference from the usemap attribute", false, false, ElementType.map)]
@@ -297,10 +298,10 @@ internal enum AttributeType
     [Attribute("Makes the element a popover element", true, false)]
     popover,
 
-    [Attribute("Targets a popover element to toggle, show, or hide", false, false)]
+    [Attribute("Targets a popover element to toggle, show, or hide", false, false, ElementType.input, ElementType.button)]
     popovertarget,
 
-    [Attribute("Indicates whether a targeted popover element is to be toggled, shown, or hidden", false, false)]
+    [Attribute("Indicates whether a targeted popover element is to be toggled, shown, or hidden", false, false, ElementType.input, ElementType.button)]
     popovertargetaction,
 
     [Attribute("Poster frame to show prior to video playback", false, false, ElementType.video)]
@@ -341,6 +342,12 @@ internal enum AttributeType
     [Attribute("Whether the option is selected by default", false, true, ElementType.option)]
     selected,
 
+    [Attribute("Enables streaming declarative shadow roots", false, false, ElementType.template)]
+    shadowrootmode,
+
+    [Attribute("Sets delegates focus on a declarative shadow root", false, true, ElementType.template)]
+    shadowrootdelegatesfocus,
+
     [Attribute("The kind of shape to be created in an image map", false, false, ElementType.area)]
     shape,
 
@@ -369,7 +376,7 @@ internal enum AttributeType
     [Attribute("Language of the text track", false, false, ElementType.track)]
     srclang,
 
-    [Attribute("Images to use in different situations, e.g., high-resolution displays, small monitors, etc.", false, false, ElementType.img, ElementType.source)]
+    [Attribute("Images to use in different situations, e.g., high-resolution displays, small monitors, etc", false, false, ElementType.img, ElementType.source)]
     srcset,
 
     [Attribute("Starting value of the list", false, false, ElementType.ol)]

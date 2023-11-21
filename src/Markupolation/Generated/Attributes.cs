@@ -834,13 +834,14 @@ public static partial class Attributes
 
     /// <summary>
     /// Name of the element to use for form submission and in the form.elements API.
+    /// Name of group of mutually-exclusive details elements.
     /// Name of form to use in the document.forms API.
     /// Name of content navigable.
     /// Name of image map to reference from the usemap attribute.
     /// Metadata name.
     /// Name of shadow tree slot.
     /// </summary>
-    /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.fieldset(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.output(Content[])"/>, <see cref="Elements.select(Content[])"/>, <see cref="Elements.textarea(Content[])"/>, <see cref="Elements.form(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.object_(Content[])"/>, <see cref="Elements.map(Content[])"/>, <see cref="Elements.meta(Content[])"/>, <see cref="Elements.slot(Content[])"/>.</remarks>
+    /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.fieldset(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.output(Content[])"/>, <see cref="Elements.select(Content[])"/>, <see cref="Elements.textarea(Content[])"/>, <see cref="Elements.details(Content[])"/>, <see cref="Elements.form(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.object_(Content[])"/>, <see cref="Elements.map(Content[])"/>, <see cref="Elements.meta(Content[])"/>, <see cref="Elements.slot(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
     /// <returns><code>name="{value}"</code></returns>
     public static Attribute name(string value) => new(AttributeType.name, value);
@@ -943,6 +944,7 @@ public static partial class Attributes
     /// <summary>
     /// Targets a popover element to toggle, show, or hide.
     /// </summary>
+    /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.button(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
     /// <returns><code>popovertarget="{value}"</code></returns>
     public static Attribute popovertarget(string value) => new(AttributeType.popovertarget, value);
@@ -953,6 +955,7 @@ public static partial class Attributes
     /// <summary>
     /// Indicates whether a targeted popover element is to be toggled, shown, or hidden.
     /// </summary>
+    /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.button(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
     /// <returns><code>popovertargetaction="{value}"</code></returns>
     public static Attribute popovertargetaction(string value) => new(AttributeType.popovertargetaction, value);
@@ -1077,6 +1080,24 @@ public static partial class Attributes
     /// <remarks>Elements: <see cref="Elements.option(Content[])"/>.</remarks>
     /// <returns><code>selected</code></returns>
     public static Attribute selected() => new(AttributeType.selected);
+
+    /// <summary>
+    /// Enables streaming declarative shadow roots.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><code>shadowrootmode="{value}"</code></returns>
+    public static Attribute shadowrootmode(string value) => new(AttributeType.shadowrootmode, value);
+
+    /// <inheritdoc cref="shadowrootmode(string)" />
+    public static Attribute shadowrootmode(object value) => new(AttributeType.shadowrootmode, value?.ToString());
+
+    /// <summary>
+    /// Sets delegates focus on a declarative shadow root.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
+    /// <returns><code>shadowrootdelegatesfocus</code></returns>
+    public static Attribute shadowrootdelegatesfocus() => new(AttributeType.shadowrootdelegatesfocus);
 
     /// <summary>
     /// The kind of shape to be created in an image map.

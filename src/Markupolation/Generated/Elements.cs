@@ -203,7 +203,7 @@ public static partial class Elements
     public static Element del(object content) => new(ElementType.del, false, content?.ToString()!);
 
     /// <summary>Disclosure control for hiding details.</summary>
-    /// <remarks>Attributes: <see cref="Attributes.open()"/>.</remarks>
+    /// <remarks>Attributes: <see cref="Attributes.name(string)"/>, <see cref="Attributes.open()"/>.</remarks>
     /// <param name="content">Attributes, elements and content.</param>
     /// <returns><code><![CDATA[<details></details>]]></code></returns>
     public static Element details(params Content[] content) => new(ElementType.details, false, content);
@@ -714,7 +714,7 @@ public static partial class Elements
     public static Element small(object content) => new(ElementType.small, false, content?.ToString()!);
 
     /// <summary>Image source for img or media source for video or audio.</summary>
-    /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.srcset(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.media(string)"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
+    /// <remarks>Attributes: <see cref="Attributes.type(string)"/>, <see cref="Attributes.media(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.srcset(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
     /// <param name="content">Attributes.</param>
     /// <returns><code><![CDATA[<source />]]></code></returns>
     public static Element source(params Content[] content) => new(ElementType.source, true, content);
