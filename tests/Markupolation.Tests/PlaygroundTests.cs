@@ -1,5 +1,4 @@
 using System;
-using System.Dynamic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -443,40 +442,39 @@ div(class_("relative flex min-h-screen flex-col justify-center overflow-hidden b
             // cd /examples/Statiq.Web.Examples
             // dotnet run -- preview
 
-            dynamic input = new ExpandoObject();
-            input.archives = new[]
+            var archives = new[]
             {
-                new { Filename = "/archives/simple-archive.cshtml", Body = "" },
-                new { Filename = "/archives/ordered-archive.cshtml", Body = "" },
-                new { Filename = "/archives/paged-archive.cshtml", Body = "" },
-                new { Filename = "/archives/grouped-archive.cshtml", Body = "" },
-                new { Filename = "/archives/computed-order-archive.cshtml", Body = "" },
-                new { Filename = "/archives/filtered-archive.cshtml", Body = "" },
-                new { Filename = "/archives/computed-grouped-archive.cshtml", Body = "" },
+                new { Filename = "/archives/paged-archive.cshtml" },
+                new { Filename = "/archives/simple-archive.cshtml" },
+                new { Filename = "/archives/ordered-archive.cshtml" },
+                new { Filename = "/archives/filtered-archive.cshtml" },
+                new { Filename = "/archives/grouped-archive.cshtml" },
+                new { Filename = "/archives/computed-order-archive.cshtml" },
+                new { Filename = "/archives/computed-grouped-archive.cshtml" },
             };
-            input.archives_md = new
+            var archivesPage = new
             {
                 Filename = "archives.md",
                 Title = "Archives Examples",
                 Body =
-$@"Examples of the [archives](https://statiq.dev/web/content-and-data/archives) feature.
-
-<div>{ListPages(input.archives)}</div>
-"
+                    $"""
+                    Examples of the [archives](https://statiq.dev/web/content-and-data/archives) feature.
+                    <div>{ListPages(archives)}</div>
+                    """
             };
-            input.index_md = new
+            var indexPage = new
             {
                 Filename = "index.md",
-                Title = "Examples",
+                Title = "Statiq Web Examples",
                 Body =
-$@"Examples demonstrating various aspects of [Statiq Web](https://statiq.dev/web).
-
-<div>{ListPages([input.archives_md])}</div>
-"
+                    $"""
+                    Examples demonstrating various aspects of [Statiq Web](https://statiq.dev/web).
+                    <div>{ListPages([archivesPage])}</div>
+                    """
             };
 
             // index
-            var actual = layout(input.index_md, new[] { input.archives_md });
+            var actual = layout(indexPage, new[] { archivesPage });
             using var client = new HttpClient();
             var expected = await client.GetStringAsync("http://localhost:5080/");
             DiffBuilder
@@ -487,7 +485,7 @@ $@"Examples demonstrating various aspects of [Statiq Web](https://statiq.dev/web
                 .Should().BeEmpty();
 
             // archives
-            actual = layout(input.archives_md, new[] { input.archives_md });
+            actual = layout(archivesPage, new[] { archivesPage });
             expected = await client.GetStringAsync("http://localhost:5080/archives");
             DiffBuilder
                 .Compare(expected)
@@ -574,6 +572,8 @@ $@"{html(
 
             static string Excerpt(dynamic document)
             {
+                if (!Has(document, "Body")) return string.Empty;
+
                 var newLineIndex = document.Body.IndexOf('\n');
 
                 return Markdown.ToHtml(newLineIndex > 0 ? document.Body.Substring(0, newLineIndex) : document.Body);
