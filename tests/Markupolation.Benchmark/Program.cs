@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using BenchmarkDotNet.Running;
 
 namespace Markupolation.Benchmark
@@ -12,6 +13,14 @@ namespace Markupolation.Benchmark
 
             BenchmarkRunner.Run<BasicUsage>();
             BenchmarkRunner.Run<AdvancedUsage>();
+        }
+    }
+
+    public static class StringExtensions
+    {
+        public static string Minify(this string html)
+        {
+            return string.Join(string.Empty, html.Split(["\n", Environment.NewLine], StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()));
         }
     }
 }

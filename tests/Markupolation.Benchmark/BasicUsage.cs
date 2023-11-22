@@ -1,6 +1,7 @@
 using System.Text;
 using BenchmarkDotNet.Attributes;
 using HtmlTags;
+using static HyperTextExpression.HtmlExp;
 
 namespace Markupolation.Benchmark
 {
@@ -55,6 +56,22 @@ namespace Markupolation.Benchmark
             return doc.ToString();
         }
 
+        [Benchmark]
+#pragma warning disable CA1822 // Mark members as static
+        public string HyperTextExpression()
+#pragma warning restore CA1822 // Mark members as static
+        {
+            var doc = HtmlDoc(
+                Head(
+                    ("title", "Markupolation")
+                ),
+                Body(
+                    ("h1", "Hello, World!")
+                )
+            );
+            return doc.ToString();
+        }
+
         public static bool IsValid()
         {
             var benchmark = new BasicUsage();
@@ -62,7 +79,8 @@ namespace Markupolation.Benchmark
             return
                 benchmark.Markupolation() == benchmark.StringBuilder() &&
                 benchmark.Markupolation() == benchmark.StringFormat() &&
-                benchmark.Markupolation() == benchmark.HtmlTags().ReplaceLineEndings(string.Empty);
+                benchmark.Markupolation() == benchmark.HtmlTags().Minify() &&
+                benchmark.Markupolation() == benchmark.HyperTextExpression().Minify();
         }
     }
 }
