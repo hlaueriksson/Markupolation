@@ -23,38 +23,28 @@ $@"{DOCTYPE() +
 html(class_("no-js"), lang(""),
     head(
         meta(charset("utf-8")),
-        Elements.title(""),
-        meta(name("description"), content("")),
         meta(name("viewport"), content("width=device-width, initial-scale=1")),
+        Elements.title(""),
+        link(rel("stylesheet"), href("css/style.css")),
+        meta(name("description"), content("")),
 
         meta(new Attribute("property", "og:title"), content("")),
         meta(new Attribute("property", "og:type"), content("")),
         meta(new Attribute("property", "og:url"), content("")),
         meta(new Attribute("property", "og:image"), content("")),
 
-        link(rel("manifest"), href("site.webmanifest")),
+        link(rel("icon"), href("/favicon.ico"), sizes("any")),
+        link(rel("icon"), href("/icon.svg"), type("image/svg+xml")),
         link(rel("apple-touch-icon"), href("icon.png")),
-        "<!-- Place favicon.ico in the root directory -->",
 
-        link(rel("stylesheet"), href("css/normalize.css")),
-        link(rel("stylesheet"), href("css/style.css")),
-
+        link(rel("manifest"), href("site.webmanifest")),
         meta(name("theme-color"), content("#fafafa"))
     ),
     body(
 
         "<!-- Add your site or application content here -->",
         p("Hello world! This is HTML5 Boilerplate."),
-        script(src("js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js")),
-        script(src("js/app.js")),
-
-        "<!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->",
-        script(
-@"
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
-  "),
-        script(src("https://www.google-analytics.com/analytics.js"), async())
+        script(src("js/app.js"))
     )
 )}";
 
@@ -75,99 +65,273 @@ html(class_("no-js"), lang(""),
         {
             var actual =
 $@"{DOCTYPE() +
-html(lang("en"),
+html(lang("en"), data("bs-theme", "auto"),
     head(
+        script(src("/docs/5.3/assets/js/color-modes.js")),
         meta(charset("utf-8")),
         meta(name("viewport"), content("width=device-width, initial-scale=1")),
         meta(name("description"), content("")),
         meta(name("author"), content("Mark Otto, Jacob Thornton, and Bootstrap contributors")),
-        meta(name("generator"), content("Hugo 0.88.1")),
-        Elements.title("Starter Template · Bootstrap v5.1"),
+        meta(name("generator"), content("Hugo 0.118.2")),
+        Elements.title("Starter Template · Bootstrap v5.3"),
 
-        link(rel("canonical"), href("https://getbootstrap.com/docs/5.1/examples/starter-template/")),
+        link(rel("canonical"), href("https://getbootstrap.com/docs/5.3/examples/starter-template/")),
 
-        "<!-- Bootstrap core CSS -->",
-        link(href("/docs/5.1/dist/css/bootstrap.min.css"), rel("stylesheet"), integrity("sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"), crossorigin("anonymous")),
+        link(rel("stylesheet"), href("https://cdn.jsdelivr.net/npm/@docsearch/css@3")),
+
+        link(href("/docs/5.3/dist/css/bootstrap.min.css"), rel("stylesheet"), integrity("sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"), crossorigin("anonymous")),
 
         "<!-- Favicons -->",
-        link(rel("apple-touch-icon"), href("/docs/5.1/assets/img/favicons/apple-touch-icon.png"), sizes("180x180")),
-        link(rel("icon"), href("/docs/5.1/assets/img/favicons/favicon-32x32.png"), sizes("32x32"), type("image/png")),
-        link(rel("icon"), href("/docs/5.1/assets/img/favicons/favicon-16x16.png"), sizes("16x16"), type("image/png")),
-        link(rel("manifest"), href("/docs/5.1/assets/img/favicons/manifest.json")),
-        link(rel("mask-icon"), href("/docs/5.1/assets/img/favicons/safari-pinned-tab.svg"), color("#7952b3")),
-        link(rel("icon"), href("/docs/5.1/assets/img/favicons/favicon.ico")),
-        meta(name("theme-color"), content("#7952b3")),
+        link(rel("apple-touch-icon"), href("/docs/5.3/assets/img/favicons/apple-touch-icon.png"), sizes("180x180")),
+        link(rel("icon"), href("/docs/5.3/assets/img/favicons/favicon-32x32.png"), sizes("32x32"), type("image/png")),
+        link(rel("icon"), href("/docs/5.3/assets/img/favicons/favicon-16x16.png"), sizes("16x16"), type("image/png")),
+        link(rel("manifest"), href("/docs/5.3/assets/img/favicons/manifest.json")),
+        link(rel("mask-icon"), href("/docs/5.3/assets/img/favicons/safari-pinned-tab.svg"), color("#712cf9")),
+        link(rel("icon"), href("/docs/5.3/assets/img/favicons/favicon.ico")),
+        meta(name("theme-color"), content("#712cf9")),
 
         Elements.style(
-@"
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+            """
+            .bd-placeholder-img {
+              font-size: 1.125rem;
+              text-anchor: middle;
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              user-select: none;
+            }
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-"
-        ),
+            @media (min-width: 768px) {
+              .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+              }
+            }
 
-        "<!-- Custom styles for this template -->",
-        link(href("starter-template.css"), rel("stylesheet"))
+            .b-example-divider {
+              width: 100%;
+              height: 3rem;
+              background-color: rgba(0, 0, 0, .1);
+              border: solid rgba(0, 0, 0, .15);
+              border-width: 1px 0;
+              box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+            }
+
+            .b-example-vr {
+              flex-shrink: 0;
+              width: 1.5rem;
+              height: 100vh;
+            }
+
+            .bi {
+              vertical-align: -.125em;
+              fill: currentColor;
+            }
+
+            .nav-scroller {
+              position: relative;
+              z-index: 2;
+              height: 2.75rem;
+              overflow-y: hidden;
+            }
+
+            .nav-scroller .nav {
+              display: flex;
+              flex-wrap: nowrap;
+              padding-bottom: 1rem;
+              margin-top: -1px;
+              overflow-x: auto;
+              text-align: center;
+              white-space: nowrap;
+              -webkit-overflow-scrolling: touch;
+            }
+
+            .btn-bd-primary {
+              --bd-violet-bg: #712cf9;
+              --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
+
+              --bs-btn-font-weight: 600;
+              --bs-btn-color: var(--bs-white);
+              --bs-btn-bg: var(--bd-violet-bg);
+              --bs-btn-border-color: var(--bd-violet-bg);
+              --bs-btn-hover-color: var(--bs-white);
+              --bs-btn-hover-bg: #6528e0;
+              --bs-btn-hover-border-color: #6528e0;
+              --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
+              --bs-btn-active-color: var(--bs-btn-hover-color);
+              --bs-btn-active-bg: #5a23c8;
+              --bs-btn-active-border-color: #5a23c8;
+            }
+
+            .bd-mode-toggle {
+              z-index: 1500;
+            }
+
+            .bd-mode-toggle .dropdown-menu .active .bi {
+              display: block !important;
+            }
+            """
+        )
     ),
     body(
-        div(class_("col-lg-8 mx-auto p-3 py-md-5"),
-            header(class_("d-flex align-items-center pb-3 mb-5 border-bottom"),
-                a(href("/"), class_("d-flex align-items-center text-dark text-decoration-none"),
-                    new Element("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"40\" height=\"32\" class=\"me-2\" viewBox=\"0 0 118 94\" role=\"img\"><title>Bootstrap</title><path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z\" fill=\"currentColor\"></path></svg>"),
-                    span(class_("fs-4"), "Starter template")
-                )
+        """
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+          <symbol id="check2" viewBox="0 0 16 16">
+            <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+          </symbol>
+          <symbol id="circle-half" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+          </symbol>
+          <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+            <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"/>
+            <path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"/>
+          </symbol>
+          <symbol id="sun-fill" viewBox="0 0 16 16">
+            <path d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"/>
+          </symbol>
+        </svg>
+        """,
+        div(class_("dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle"),
+          button(class_("btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"),
+                  id("bd-theme"),
+                  type("button"),
+                  new Attribute("aria-expanded", "false"),
+                  data("bs-toggle", "dropdown"),
+                  new Attribute("aria-label", "Toggle theme (auto)"),
+            @"<svg class=""bi my-1 theme-icon-active"" width=""1em"" height=""1em""><use href=""#circle-half""></use></svg>",
+            span(class_("visually-hidden"), id("bd-theme-text"), "Toggle theme")
+          ),
+          ul(class_("dropdown-menu dropdown-menu-end shadow"), new Attribute("aria-labelledby", "bd-theme-text"),
+            li(
+              button(type("button"), class_("dropdown-item d-flex align-items-center"), data("bs-theme-value", "light"), new Attribute("aria-pressed", "false"),
+                @"<svg class=""bi me-2 opacity-50 theme-icon"" width=""1em"" height=""1em""><use href=""#sun-fill""></use></svg>",
+                "Light",
+                @"<svg class=""bi ms-auto d-none"" width=""1em"" height=""1em""><use href=""#check2""></use></svg>"
+              )
             ),
-            main(
-                h1("Get started with Bootstrap"),
-                p(class_("fs-5 col-md-8"), "Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started."),
-
-                div(class_("mb-5"),
-                    a(href("/docs/5.1/examples/"), class_("btn btn-primary btn-lg px-4"), "Download examples")
-                ),
-
-                hr(class_("col-3 col-md-2 mb-5")),
-
-                div(class_("row g-5"),
-                    div(class_("col-md-6"),
-                        h2("Starter projects"),
-                        p("Ready to beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository."),
-                        ul(class_("icon-list"),
-                            li(a(href("https://github.com/twbs/bootstrap-npm-starter"), rel("noopener"), target("_blank"), "Bootstrap npm starter")),
-                            li(class_("text-muted"), "Bootstrap Parcel starter (coming soon!)")
-                        )
-                    ),
-                    div(class_("col-md-6"),
-                        h2("Guides"),
-                        p("Read more detailed instructions and documentation on using or contributing to Bootstrap."),
-                        ul(class_("icon-list"),
-                            li(a(href("/docs/5.1/getting-started/introduction/"), "Bootstrap quick start guide")),
-                            li(a(href("/docs/5.1/getting-started/webpack/"), "Bootstrap Webpack guide")),
-                            li(a(href("/docs/5.1/getting-started/parcel/"), "Bootstrap Parcel guide")),
-                            li(a(href("/docs/5.1/getting-started/contribute/"), "Contributing to Bootstrap"))
-                        )
-                    )
-                )
+            li(
+              button(type("button"), class_("dropdown-item d-flex align-items-center"), data("bs-theme-value", "dark"), new Attribute("aria-pressed", "false"),
+                @"<svg class=""bi me-2 opacity-50 theme-icon"" width=""1em"" height=""1em""><use href=""#moon-stars-fill""></use></svg>",
+                "Dark",
+                @"<svg class=""bi ms-auto d-none"" width=""1em"" height=""1em""><use href=""#check2""></use></svg>"
+              )
             ),
-            footer(class_("pt-5 my-5 text-muted border-top"),
-                "Created by the Bootstrap team &middot; &copy; 2021"
+            li(
+              button(type("button"), class_("dropdown-item d-flex align-items-center active"), data("bs-theme-value", "auto"), new Attribute("aria-pressed", "true"),
+                @"<svg class=""bi me-2 opacity-50 theme-icon"" width=""1em"" height=""1em""><use href=""#circle-half""></use></svg>",
+                "Auto",
+                @"<svg class=""bi ms-auto d-none"" width=""1em"" height=""1em""><use href=""#check2""></use></svg>"
+              )
             )
+          )
         ),
-        script(src("/docs/5.1/dist/js/bootstrap.bundle.min.js"), integrity("sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"), crossorigin("anonymous"))
+        """
+        <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+          <symbol id="arrow-right-circle" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+          </symbol>
+          <symbol id="bootstrap" viewBox="0 0 118 94">
+            <title>Bootstrap</title>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
+          </symbol>
+        </svg>
+        """,
+        div(class_("col-lg-8 mx-auto p-4 py-md-5"),
+          header(class_("d-flex align-items-center pb-3 mb-5 border-bottom"),
+            a(href("/"), class_("d-flex align-items-center text-body-emphasis text-decoration-none"),
+              @"<svg class=""bi me-2"" width=""40"" height=""32""><use xlink:href=""#bootstrap""/></svg>",
+              span(class_("fs-4"), "Starter template")
+            )
+          ),
+
+          main(
+            h1(class_("text-body-emphasis"), "Get started with Bootstrap"),
+            p(class_("fs-5 col-md-8"), "Quickly and easily get started with Bootstrap's compiled, production-ready files with this barebones example featuring some basic HTML and helpful links. Download all our examples to get started."),
+
+            div(class_("mb-5"),
+              a(href("/docs/5.3/examples/"), class_("btn btn-primary btn-lg px-4"), "Download examples")
+            ),
+
+            hr(class_("col-3 col-md-2 mb-5")),
+
+            div(class_("row g-5"),
+              div(class_("col-md-6"),
+                h2(class_("text-body-emphasis"), "Starter projects"),
+                p("Ready to go beyond the starter template? Check out these open source projects that you can quickly duplicate to a new GitHub repository."),
+                ul(class_("list-unstyled ps-0"),
+                  li(
+                    a(class_("icon-link mb-1"), href("https://github.com/twbs/examples/tree/main/icons-font"), rel("noopener"), target("_blank"),
+                      @"<svg class=""bi"" width=""16"" height=""16""><use xlink:href=""#arrow-right-circle""/></svg>",
+                      "Bootstrap npm starter"
+                    )
+                  ),
+                  li(
+                    a(class_("icon-link mb-1"), href("https://github.com/twbs/examples/tree/main/parcel"), rel("noopener"), target("_blank"),
+                      @"<svg class=""bi"" width=""16"" height=""16""><use xlink:href=""#arrow-right-circle""/></svg>",
+                      "Bootstrap Parcel starter"
+                    )
+                  ),
+                  li(
+                    a(class_("icon-link mb-1"), href("https://github.com/twbs/examples/tree/main/vite"), rel("noopener"), target("_blank"),
+                      @"<svg class=""bi"" width=""16"" height=""16""><use xlink:href=""#arrow-right-circle""/></svg>",
+                      "Bootstrap Vite starter"
+                    )
+                  ),
+                  li(
+                    a(class_("icon-link mb-1"), href("https://github.com/twbs/examples/tree/main/webpack"), rel("noopener"), target("_blank"),
+                      @"<svg class=""bi"" width=""16"" height=""16""><use xlink:href=""#arrow-right-circle""/></svg>",
+                      "Bootstrap Webpack starter"
+                    )
+                  )
+                )
+              ),
+
+              div(class_("col-md-6"),
+                h2(class_("text-body-emphasis"), "Guides"),
+                p("Read more detailed instructions and documentation on using or contributing to Bootstrap."),
+                ul(class_("list-unstyled ps-0"),
+                  li(
+                    a(class_("icon-link mb-1"), href("/docs/5.3/getting-started/introduction/"),
+                      @"<svg class=""bi"" width=""16"" height=""16""><use xlink:href=""#arrow-right-circle""/></svg>",
+                      "Bootstrap quick start guide"
+                    )
+                  ),
+                  li(
+                    a(class_("icon-link mb-1"), href("/docs/5.3/getting-started/webpack/"),
+                      @"<svg class=""bi"" width=""16"" height=""16""><use xlink:href=""#arrow-right-circle""/></svg>",
+                      "Bootstrap Webpack guide"
+                    )
+                  ),
+                  li(
+                    a(class_("icon-link mb-1"), href("/docs/5.3/getting-started/parcel/"),
+                      @"<svg class=""bi"" width=""16"" height=""16""><use xlink:href=""#arrow-right-circle""/></svg>",
+                      "Bootstrap Parcel guide"
+                    )
+                  ),
+                  li(
+                    a(class_("icon-link mb-1"), href("/docs/5.3/getting-started/vite/"),
+                      @"<svg class=""bi"" width=""16"" height=""16""><use xlink:href=""#arrow-right-circle""/></svg>",
+                      "Bootstrap Vite guide"
+                    )
+                  ),
+                  li(
+                    a(class_("icon-link mb-1"), href("/docs/5.3/getting-started/contribute/"),
+                      @"<svg class=""bi"" width=""16"" height=""16""><use xlink:href=""#arrow-right-circle""/></svg>",
+                      "Contributing to Bootstrap"
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          footer(class_("pt-5 my-5 text-body-secondary border-top"),
+            "Created by the Bootstrap team &middot; &copy; 2023"
+          )
+        ),
+        script(src("/docs/5.3/dist/js/bootstrap.bundle.min.js"), integrity("sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"), crossorigin("anonymous"))
     )
 )}";
 
             using var client = new HttpClient();
-            var expected = await client.GetStringAsync("https://getbootstrap.com/docs/5.1/examples/starter-template/");
+            var expected = await client.GetStringAsync("https://getbootstrap.com/docs/5.3/examples/starter-template/");
 
             var diffs = DiffBuilder
                 .Compare(expected)
@@ -182,60 +346,8 @@ html(lang("en"),
         public async Task tailwind_play()
         {
             var actual =
-$@"<!DOCTYPE html><html><head>
-                    <meta charset=""utf-8"">
-                    <meta name=""viewport"" content=""width=device-width, initial-scale=1"">
-                    <style id=""_style"">/*! tailwindcss v2.2.7 | MIT License | https://tailwindcss.com*/
-
-/*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */html{{-moz-tab-size:4;-o-tab-size:4;tab-size:4;line-height:1.15;-webkit-text-size-adjust:100%}}body{{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji}}code{{font-family:ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;font-size:1em}}p,ul{{margin:0}}ul{{list-style:none;padding:0}}html{{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;line-height:1.5}}body{{font-family:inherit;line-height:inherit}}*,:after,:before{{box-sizing:border-box;border:0 solid}}img{{border-style:solid}}a{{color:inherit;text-decoration:inherit}}code{{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}}img,svg{{display:block;vertical-align:middle}}img{{max-width:100%;height:auto}}*,:after,:before{{--tw-border-opacity:1;border-color:rgba(229,231,235,var(--tw-border-opacity))}}.absolute{{position:absolute}}.relative{{position:relative}}.inset-0{{top:0;right:0;bottom:0;left:0}}.mx-auto{{margin-left:auto;margin-right:auto}}.ml-2{{margin-left:.5rem}}.flex{{display:flex}}.h-5{{height:1.25rem}}.h-6{{height:1.5rem}}.h-7{{height:1.75rem}}.min-h-screen{{min-height:100vh}}.w-5{{width:1.25rem}}.max-w-md{{max-width:28rem}}.flex-shrink-0{{flex-shrink:0}}.transform{{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}}.-skew-y-6{{--tw-skew-y:-6deg}}.list-disc{{list-style-type:disc}}.flex-col{{flex-direction:column}}.items-start{{align-items:flex-start}}.items-center{{align-items:center}}.justify-center{{justify-content:center}}.space-y-2>:not([hidden])~:not([hidden]){{--tw-space-y-reverse:0;margin-top:calc(0.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem*var(--tw-space-y-reverse))}}.space-y-4>:not([hidden])~:not([hidden]){{--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}}.divide-y>:not([hidden])~:not([hidden]){{--tw-divide-y-reverse:0;border-top-width:calc(1px*(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px*var(--tw-divide-y-reverse))}}.divide-gray-200>:not([hidden])~:not([hidden]){{--tw-divide-opacity:1;border-color:rgba(229,231,235,var(--tw-divide-opacity))}}.bg-white{{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}}.bg-gray-100{{--tw-bg-opacity:1;background-color:rgba(243,244,246,var(--tw-bg-opacity))}}.bg-gradient-to-r{{background-image:linear-gradient(90deg,var(--tw-gradient-stops))}}.from-cyan-400{{--tw-gradient-from:#22d3ee;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to,rgba(34,211,238,0))}}.to-sky-500{{--tw-gradient-to:#0ea5e9}}.px-4{{padding-left:1rem;padding-right:1rem}}.py-3{{padding-top:.75rem;padding-bottom:.75rem}}.py-6{{padding-top:1.5rem;padding-bottom:1.5rem}}.py-8{{padding-top:2rem;padding-bottom:2rem}}.py-10{{padding-top:2.5rem;padding-bottom:2.5rem}}.pt-6{{padding-top:1.5rem}}.text-sm{{font-size:.875rem;line-height:1.25rem}}.text-base{{font-size:1rem;line-height:1.5rem}}.font-bold{{font-weight:700}}.leading-6{{line-height:1.5rem}}.text-gray-700{{--tw-text-opacity:1;color:rgba(55,65,81,var(--tw-text-opacity))}}.text-gray-900{{--tw-text-opacity:1;color:rgba(17,24,39,var(--tw-text-opacity))}}.text-cyan-500{{--tw-text-opacity:1;color:rgba(6,182,212,var(--tw-text-opacity))}}.text-cyan-600{{--tw-text-opacity:1;color:rgba(8,145,178,var(--tw-text-opacity))}}.hover\:text-cyan-700:hover{{--tw-text-opacity:1;color:rgba(14,116,144,var(--tw-text-opacity))}}*,:after,:before{{--tw-shadow:0 0 transparent}}.shadow-lg{{--tw-shadow:0 10px 15px -3px rgba(0,0,0,0.1),0 4px 6px -2px rgba(0,0,0,0.05);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow)}}*,:after,:before{{--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,0.5);--tw-ring-offset-shadow:0 0 transparent;--tw-ring-shadow:0 0 transparent}}@media (min-width:640px){{.sm\:mx-auto{{margin-left:auto;margin-right:auto}}.sm\:h-7{{height:1.75rem}}.sm\:h-8{{height:2rem}}.sm\:max-w-xl{{max-width:36rem}}.sm\:-rotate-6{{--tw-rotate:-6deg}}.sm\:skew-y-0{{--tw-skew-y:0deg}}.sm\:rounded-3xl{{border-radius:1.5rem}}.sm\:p-20{{padding:5rem}}.sm\:py-12{{padding-top:3rem;padding-bottom:3rem}}.sm\:text-lg{{font-size:1.125rem}}.sm\:leading-7,.sm\:text-lg{{line-height:1.75rem}}}}</style>
-                    <script>
-                    var hasHtml = false
-                    var hasCss = false
-                    var visible = false
-                    window.addEventListener('message', (e) => {{
-                      if (typeof e.data.clear !== 'undefined') {{
-                        setHtml()
-                        setCss()
-                        checkVisibility()
-                        return
-                      }}
-                      if (typeof e.data.css !== 'undefined') {{
-                        setCss(e.data.css)
-                      }}
-                      if (typeof e.data.html !== 'undefined') {{
-                        setHtml(e.data.html)
-                      }}
-                      checkVisibility()
-                    }})
-                    function checkVisibility() {{
-                      if (!visible && hasHtml && hasCss) {{
-                        visible = true
-                        document.body.style.display = ''
-                      }} else if (visible && (!hasHtml || !hasCss)) {{
-                        visible = false
-                        document.body.style.display = 'none'
-                      }}
-                    }}
-                    function setHtml(html) {{
-                      if (typeof html === 'undefined') {{
-                        document.body.innerHTML = ''
-                        hasHtml = false
-                      }} else {{
-                        document.body.innerHTML = html
-                        hasHtml = true
-                      }}
-                    }}
-                    function setCss(css) {{
-                      const style = document.getElementById('_style')
-                      const newStyle = document.createElement('style')
-                      newStyle.id = '_style'
-                      newStyle.innerHTML = typeof css === 'undefined' ? '' : css
-                      style.parentNode.replaceChild(newStyle, style)
-                      hasCss = typeof css === 'undefined' ? false : true
-                    }}
-                    </script>
-                  </head>
-                  <body style=""""><!--
+$@"
+<!--
   Welcome to Tailwind Play, the official Tailwind CSS playground!
 
   Everything here works just like it does when you're running Tailwind locally
@@ -245,71 +357,75 @@ $@"<!DOCTYPE html><html><head>
   Feel free to play with this example if you're just learning, or trash it and
   start from scratch if you know enough to be dangerous. Have fun!
 -->
-{div(class_("min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12"),
-  div(class_("relative py-3 sm:max-w-xl sm:mx-auto"),
-    div(class_("absolute inset-0 bg-gradient-to-r from-cyan-400 to-sky-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl")),
-    div(class_("relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20"),
-      div(class_("max-w-md mx-auto"),
-        div(
-          img(src("/img/logo.svg"), class_("h-7 sm:h-8"))
-        ),
-        div(class_("divide-y divide-gray-200"),
-          div(class_("py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7"),
-            p("An advanced online playground for Tailwind CSS, including support for things like:"),
-            ul(class_("list-disc space-y-2"),
-              li(class_("flex items-start"),
-                span(class_("h-6 flex items-center sm:h-7"),
-                  @"<svg class=""flex-shrink-0 h-5 w-5 text-cyan-500"" viewBox=""0 0 20 20"" fill=""currentColor"">
-                    <path fill-rule=""evenodd"" d=""M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"" clip-rule=""evenodd"" />
-                  </svg>"
-                ),
-                p(class_("ml-2"),
-                  "Customizing your",
-                  code(class_("text-sm font-bold text-gray-900"), "tailwind.config.js"), "file"
-                )
-              ),
-              li(class_("flex items-start"),
-                span(class_("h-6 flex items-center sm:h-7"),
-                  @"<svg class=""flex-shrink-0 h-5 w-5 text-cyan-500"" viewBox=""0 0 20 20"" fill=""currentColor"">
-                    <path fill-rule=""evenodd"" d=""M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"" clip-rule=""evenodd"" />
-                  </svg>"
-                ),
-                p(class_("ml-2"),
-                  "Extracting classes with",
-                  code(class_("text-sm font-bold text-gray-900"), "@apply")
-                )
-              ),
-              li(class_("flex items-start"),
-                span(class_("h-6 flex items-center sm:h-7"),
-                  @"<svg class=""flex-shrink-0 h-5 w-5 text-cyan-500"" viewBox=""0 0 20 20"" fill=""currentColor"">
-                    <path fill-rule=""evenodd"" d=""M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"" clip-rule=""evenodd"" />
-                  </svg>"
-                ),
-                p(class_("ml-2"), "Code completion with instant preview")
+{
+div(class_("relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12"),
+  img(src("/img/beams.jpg"), alt(""), class_("absolute top-1/2 left-1/2 max-w-none -translate-x-1/2 -translate-y-1/2"), width("1308")),
+  div(class_("absolute inset-0 bg-[url(/img/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]")),
+  div(class_("relative bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10"),
+    div(class_("mx-auto max-w-md"),
+      img(src("/img/logo.svg"), class_("h-6"), alt("Tailwind Play")),
+      div(class_("divide-y divide-gray-300/50"),
+        div(class_("space-y-6 py-8 text-base leading-7 text-gray-600"),
+          p("An advanced online playground for Tailwind CSS, including support for things like:"),
+          ul(class_("space-y-4"),
+            li(class_("flex items-center"),
+                """
+                <svg class="h-6 w-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="11" />
+                  <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
+                </svg>
+                """,
+              p(class_("ml-4"),
+                "Customizing your",
+                code(class_("text-sm font-bold text-gray-900"), "tailwind.config.js"), "file"
               )
             ),
-            p("Perfect for learning how the framework works, prototyping a new idea, or creating a demo to share online.")
-          ),
-          div(class_("pt-6 text-base leading-6 font-bold sm:text-lg sm:leading-7"),
-            p("Want to dig deeper into Tailwind?"),
-            p(
-              a(href("https://tailwindcss.com/docs"), class_("text-cyan-600 hover:text-cyan-700"), "Read the docs →")
+            li(class_("flex items-center"),
+                """
+                <svg class="h-6 w-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="11" />
+                  <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
+                </svg>
+                """,
+              p(class_("ml-4"),
+                "Extracting classes with",
+                code(class_("text-sm font-bold text-gray-900"), "@apply")
+              )
+            ),
+            li(class_("flex items-center"),
+                """
+                <svg class="h-6 w-6 flex-none fill-sky-100 stroke-sky-500 stroke-2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="11" />
+                  <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
+                </svg>
+                """,
+              p(class_("ml-4"), "Code completion with instant preview")
             )
+          ),
+          p("Perfect for learning how the framework works, prototyping a new idea, or creating a demo to share online.")
+        ),
+        div(class_("pt-8 text-base font-semibold leading-7"),
+          p(class_("text-gray-900"), "Want to dig deeper into Tailwind?"),
+          p(
+            a(href("https://tailwindcss.com/docs"), class_("text-sky-500 hover:text-sky-600"), "Read the docs &rarr;")
           )
         )
       )
     )
   )
-)}
-</body></html>";
+)
+}";
 
             using var playwright = await Playwright.CreateAsync();
             await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions { Headless = true });
-            var page = await browser.NewPageAsync();
+            var context = await browser.NewContextAsync();
+            await context.GrantPermissionsAsync(["clipboard-read", "clipboard-write"]);
+            var page = await context.NewPageAsync();
 
             await page.GotoAsync("https://play.tailwindcss.com/");
-            var iframe = await page.QuerySelectorAsync("iframe");
-            var expected = await (await iframe!.ContentFrameAsync())!.ContentAsync();
+            await page.Locator(".SplitPane.horizontal").HoverAsync();
+            await page.Locator("button :text('Copy')").First.ClickAsync();
+            var expected = await page.EvaluateAsync<string>("navigator.clipboard.readText()");
 
             var diffs = DiffBuilder
                 .Compare(expected)
