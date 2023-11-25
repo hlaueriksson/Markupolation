@@ -1,0 +1,7 @@
+# editorconfig.org
+
+# top-most EditorConfig file
+root = false
+
+[*.cs]
+dotnet_diagnostic.CS8981.severity = none

@@ -55,11 +55,11 @@ namespace Markupolation.Tests
             {
                 var names = await GetNamesAsync(element);
 
-                if (!names.Any()) continue;
+                if (names.Length == 0) continue;
 
                 var description = await element.EvalOnSelectorAsync<string>("td", "e => e.innerText");
                 var attributes = await GetAttributesAsync(element);
-                var attributeTypes = attributes.Any() ? ", " + string.Join(", ", attributes.Select(x => $"AttributeType.{x.CleanName()}")) : string.Empty;
+                var attributeTypes = attributes.Length != 0 ? ", " + string.Join(", ", attributes.Select(x => $"AttributeType.{x.CleanName()}")) : string.Empty;
 
                 foreach (var name in names)
                 {
@@ -123,7 +123,7 @@ namespace Markupolation.Tests
                 var isGlobalAttribute = globalAttributes.Contains(name!).ToString().ToLower();
                 var isBooleanAttribute = (await attribute.QuerySelectorAsync("td a[href$='boolean-attribute']") != null).ToString().ToLower();
                 var elements = await GetElementsAsync(attribute);
-                var elementTypes = elements.Any() ? ", " + string.Join(", ", elements.Select(x => $"ElementType.{x.CleanName()}")) : string.Empty;
+                var elementTypes = elements.Length != 0 ? ", " + string.Join(", ", elements.Select(x => $"ElementType.{x.CleanName()}")) : string.Empty;
 
                 result.AppendLine($"    [Attribute(\"{description}\", {isGlobalAttribute}, {isBooleanAttribute}{elementTypes})]");
                 if (name != nextName)
@@ -173,7 +173,7 @@ namespace Markupolation.Tests
                 var name = await GetNameAsync(attribute);
                 var description = (await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(2)", "e => e.innerText")).Replace("\"", "\\\"");
                 var elements = await GetElementsAsync(attribute);
-                var elementTypes = elements.Any() ? ", " + string.Join(", ", elements.Select(x => $"ElementType.{x}")) : string.Empty;
+                var elementTypes = elements.Length != 0 ? ", " + string.Join(", ", elements.Select(x => $"ElementType.{x}")) : string.Empty;
 
                 result.AppendLine($"    [EventHandlerContentAttribute(\"{description}\"{elementTypes})]");
                 result.AppendLine($"    {name},");
@@ -219,7 +219,7 @@ namespace Markupolation.Tests
                 var returns = a.IsVoidElement ? $"<{value} />" : $"<{value}></{value}>";
 
                 result.AppendLine($"    /// <summary>{a.Description}.</summary>");
-                if (a.Attributes.Any())
+                if (a.Attributes.Length != 0)
                 {
                     result.AppendLine($"    /// <remarks>Attributes: {remarks}.</remarks>");
                 }
@@ -334,7 +334,7 @@ namespace Markupolation.Tests
                 var remarks = string.Join(", ", a.Elements.Select(x => $"<see cref=\"Elements.{x}(Content[])\"/>"));
 
                 result.AppendLine($"    /// <summary>{a.Description}.</summary>");
-                if (a.Elements.Any())
+                if (a.Elements.Length != 0)
                 {
                     result.AppendLine($"    /// <remarks>Elements: {remarks}.</remarks>");
                 }

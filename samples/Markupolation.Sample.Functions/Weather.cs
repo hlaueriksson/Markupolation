@@ -7,7 +7,7 @@ namespace Markupolation.Sample.Functions
     public class Weather
     {
         [Function("Weather")]
-        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
+        public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
         {
             var forecasts = new[]
             {

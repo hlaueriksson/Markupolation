@@ -13,7 +13,7 @@ namespace Markupolation.Tests
             var elementValues = Enum.GetValues(typeof(ElementType)).Cast<ElementType>().Select(x => x.ToString());
             var attributeValues = Enum.GetValues(typeof(AttributeType)).Cast<AttributeType>().Select(x => x.ToString());
             var result = elementValues.Intersect(attributeValues);
-            result.Should().BeEquivalentTo(new[] { "abbr", "cite", "data", "form", "label", "slot", "span", "style", "title" });
+            result.Should().BeEquivalentTo(["abbr", "cite", "data", "form", "label", "slot", "span", "style", "title"]);
         }
 
         [Test]

@@ -7,7 +7,7 @@ namespace Markupolation.Sample.Functions
     public class Counter
     {
         [Function("Counter")]
-        public HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Counter/{count:int}")] HttpRequestData req, int count)
+        public static HttpResponseData Run([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Counter/{count:int}")] HttpRequestData req, int count)
         {
             var response = req.CreateResponse(HttpStatusCode.OK);
             response.Headers.Add("Content-Type", "text/html; charset=utf-8");
