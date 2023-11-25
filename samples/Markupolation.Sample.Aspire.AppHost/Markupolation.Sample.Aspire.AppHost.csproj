@@ -12,4 +12,9 @@
     <PackageReference Include="Aspire.Hosting" Version="8.0.0-preview.1.23557.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Markupolation.Sample.Api\Markupolation.Sample.Api.csproj" />
+    <ProjectReference Include="..\Markupolation.Sample.Htmx\Markupolation.Sample.Htmx.csproj" />
+  </ItemGroup>
+
 </Project>

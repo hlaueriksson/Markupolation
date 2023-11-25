@@ -1,6 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+builder.AddServiceDefaults();
 
+var app = builder.Build();
+app.MapDefaultEndpoints();
 app.UseDefaultFiles();
 app.UseStaticFiles();
 

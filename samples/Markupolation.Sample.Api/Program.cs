@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.AddServiceDefaults();
+
 var app = builder.Build();
+app.MapDefaultEndpoints();
 
 app.MapGet("/", () => Results.Extensions.Html(
     DOCTYPE() +
