@@ -341,6 +341,12 @@ html(lang("en"), data("bs-theme", "auto"),
             diffs.Should().BeEmpty();
         }
 
+        /// <summary>
+        /// Prerequisites:
+        /// 1. Build
+        /// 2. Install Playwright:
+        ///    - pwsh bin/Debug/net8.0/playwright.ps1 install
+        /// </summary>
         [Test]
         public async Task tailwind_play()
         {

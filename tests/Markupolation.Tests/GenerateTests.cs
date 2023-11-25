@@ -9,6 +9,12 @@ using NUnit.Framework;
 namespace Markupolation.Tests
 {
     /// <summary>
+    /// Prerequisites:
+    /// 1. Build
+    /// 2. Install Playwright:
+    ///    - pwsh bin/Debug/net8.0/playwright.ps1 install
+    ///
+    /// Generate:
     /// 1. Run <see cref="All_enums"/>
     /// 2. Compile
     /// 3. Run <see cref="All_classes"/>
