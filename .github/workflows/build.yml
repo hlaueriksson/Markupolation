@@ -19,6 +19,8 @@ jobs:
         dotnet-version: |
           6.0.x
           8.0.x
+    - name: Install workload
+      run: dotnet workload install aspire
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
