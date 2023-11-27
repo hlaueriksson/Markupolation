@@ -8,7 +8,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.th(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>abbr="{value}"</code></returns>
+    /// <returns><c>abbr="{value}"</c></returns>
     public static Attribute abbr(string value) => new(AttributeType.abbr, value);
 
     /// <inheritdoc cref="abbr(string)" />
@@ -19,7 +19,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>accept="{value}"</code></returns>
+    /// <returns><c>accept="{value}"</c></returns>
     public static Attribute accept(string value) => new(AttributeType.accept, value);
 
     /// <inheritdoc cref="accept(string)" />
@@ -30,7 +30,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.form(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>accept_charset="{value}"</code></returns>
+    /// <returns><c>accept_charset="{value}"</c></returns>
     public static Attribute accept_charset(string value) => new(AttributeType.accept_charset, value);
 
     /// <inheritdoc cref="accept_charset(string)" />
@@ -40,7 +40,7 @@ public static partial class Attributes
     /// Keyboard shortcut to activate or focus element.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>accesskey="{value}"</code></returns>
+    /// <returns><c>accesskey="{value}"</c></returns>
     public static Attribute accesskey(string value) => new(AttributeType.accesskey, value);
 
     /// <inheritdoc cref="accesskey(string)" />
@@ -51,7 +51,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.form(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>action="{value}"</code></returns>
+    /// <returns><c>action="{value}"</c></returns>
     public static Attribute action(string value) => new(AttributeType.action, value);
 
     /// <inheritdoc cref="action(string)" />
@@ -62,7 +62,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.iframe(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>allow="{value}"</code></returns>
+    /// <returns><c>allow="{value}"</c></returns>
     public static Attribute allow(string value) => new(AttributeType.allow, value);
 
     /// <inheritdoc cref="allow(string)" />
@@ -72,7 +72,7 @@ public static partial class Attributes
     /// Whether to allow the iframe's contents to use requestFullscreen().
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.iframe(Content[])"/>.</remarks>
-    /// <returns><code>allowfullscreen</code></returns>
+    /// <returns><c>allowfullscreen</c></returns>
     public static Attribute allowfullscreen() => new(AttributeType.allowfullscreen);
 
     /// <summary>
@@ -80,7 +80,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.area(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>alt="{value}"</code></returns>
+    /// <returns><c>alt="{value}"</c></returns>
     public static Attribute alt(string value) => new(AttributeType.alt, value);
 
     /// <inheritdoc cref="alt(string)" />
@@ -91,7 +91,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>as_="{value}"</code></returns>
+    /// <returns><c>as_="{value}"</c></returns>
     public static Attribute as_(string value) => new(AttributeType.as_, value);
 
     /// <inheritdoc cref="as_(string)" />
@@ -101,14 +101,14 @@ public static partial class Attributes
     /// Execute script when available, without blocking while fetching.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.script(Content[])"/>.</remarks>
-    /// <returns><code>async</code></returns>
+    /// <returns><c>async</c></returns>
     public static Attribute async() => new(AttributeType.async);
 
     /// <summary>
     /// Recommended autocapitalization behavior (for supported input methods).
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>autocapitalize="{value}"</code></returns>
+    /// <returns><c>autocapitalize="{value}"</c></returns>
     public static Attribute autocapitalize(string value) => new(AttributeType.autocapitalize, value);
 
     /// <inheritdoc cref="autocapitalize(string)" />
@@ -120,7 +120,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.form(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.select(Content[])"/>, <see cref="Elements.textarea(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>autocomplete="{value}"</code></returns>
+    /// <returns><c>autocomplete="{value}"</c></returns>
     public static Attribute autocomplete(string value) => new(AttributeType.autocomplete, value);
 
     /// <inheritdoc cref="autocomplete(string)" />
@@ -129,14 +129,14 @@ public static partial class Attributes
     /// <summary>
     /// Automatically focus the element when the page is loaded.
     /// </summary>
-    /// <returns><code>autofocus</code></returns>
+    /// <returns><c>autofocus</c></returns>
     public static Attribute autofocus() => new(AttributeType.autofocus);
 
     /// <summary>
     /// Hint that the media resource can be started automatically when the page is loaded.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
-    /// <returns><code>autoplay</code></returns>
+    /// <returns><c>autoplay</c></returns>
     public static Attribute autoplay() => new(AttributeType.autoplay);
 
     /// <summary>
@@ -144,7 +144,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>, <see cref="Elements.script(Content[])"/>, <see cref="Elements.style(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>blocking="{value}"</code></returns>
+    /// <returns><c>blocking="{value}"</c></returns>
     public static Attribute blocking(string value) => new(AttributeType.blocking, value);
 
     /// <inheritdoc cref="blocking(string)" />
@@ -155,7 +155,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.meta(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>charset="{value}"</code></returns>
+    /// <returns><c>charset="{value}"</c></returns>
     public static Attribute charset(string value) => new(AttributeType.charset, value);
 
     /// <inheritdoc cref="charset(string)" />
@@ -165,7 +165,7 @@ public static partial class Attributes
     /// Whether the control is checked.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>.</remarks>
-    /// <returns><code>checked_</code></returns>
+    /// <returns><c>checked_</c></returns>
     public static Attribute checked_() => new(AttributeType.checked_);
 
     /// <summary>
@@ -173,7 +173,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.blockquote(Content[])"/>, <see cref="Elements.del(Content[])"/>, <see cref="Elements.ins(Content[])"/>, <see cref="Elements.q(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>cite="{value}"</code></returns>
+    /// <returns><c>cite="{value}"</c></returns>
     public static Attribute cite(string value) => new(AttributeType.cite, value);
 
     /// <inheritdoc cref="cite(string)" />
@@ -183,7 +183,7 @@ public static partial class Attributes
     /// Classes to which the element belongs.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>class_="{value}"</code></returns>
+    /// <returns><c>class_="{value}"</c></returns>
     public static Attribute class_(string value) => new(AttributeType.class_, value);
 
     /// <inheritdoc cref="class_(string)" />
@@ -194,7 +194,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>color="{value}"</code></returns>
+    /// <returns><c>color="{value}"</c></returns>
     public static Attribute color(string value) => new(AttributeType.color, value);
 
     /// <inheritdoc cref="color(string)" />
@@ -205,7 +205,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.textarea(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>cols="{value}"</code></returns>
+    /// <returns><c>cols="{value}"</c></returns>
     public static Attribute cols(string value) => new(AttributeType.cols, value);
 
     /// <inheritdoc cref="cols(string)" />
@@ -216,7 +216,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.td(Content[])"/>, <see cref="Elements.th(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>colspan="{value}"</code></returns>
+    /// <returns><c>colspan="{value}"</c></returns>
     public static Attribute colspan(string value) => new(AttributeType.colspan, value);
 
     /// <inheritdoc cref="colspan(string)" />
@@ -227,7 +227,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.meta(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>content="{value}"</code></returns>
+    /// <returns><c>content="{value}"</c></returns>
     public static Attribute content(string value) => new(AttributeType.content, value);
 
     /// <inheritdoc cref="content(string)" />
@@ -237,7 +237,7 @@ public static partial class Attributes
     /// Whether the element is editable.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>contenteditable="{value}"</code></returns>
+    /// <returns><c>contenteditable="{value}"</c></returns>
     public static Attribute contenteditable(string value) => new(AttributeType.contenteditable, value);
 
     /// <inheritdoc cref="contenteditable(string)" />
@@ -247,7 +247,7 @@ public static partial class Attributes
     /// Show user agent controls.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
-    /// <returns><code>controls</code></returns>
+    /// <returns><c>controls</c></returns>
     public static Attribute controls() => new(AttributeType.controls);
 
     /// <summary>
@@ -255,7 +255,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.area(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>coords="{value}"</code></returns>
+    /// <returns><c>coords="{value}"</c></returns>
     public static Attribute coords(string value) => new(AttributeType.coords, value);
 
     /// <inheritdoc cref="coords(string)" />
@@ -266,7 +266,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.link(Content[])"/>, <see cref="Elements.script(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>crossorigin="{value}"</code></returns>
+    /// <returns><c>crossorigin="{value}"</c></returns>
     public static Attribute crossorigin(string value) => new(AttributeType.crossorigin, value);
 
     /// <inheritdoc cref="crossorigin(string)" />
@@ -277,7 +277,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.object_(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>data="{value}"</code></returns>
+    /// <returns><c>data="{value}"</c></returns>
     public static Attribute data(string value) => new(AttributeType.data, value);
 
     /// <inheritdoc cref="data(string)" />
@@ -289,7 +289,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.del(Content[])"/>, <see cref="Elements.ins(Content[])"/>, <see cref="Elements.time(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>datetime="{value}"</code></returns>
+    /// <returns><c>datetime="{value}"</c></returns>
     public static Attribute datetime(string value) => new(AttributeType.datetime, value);
 
     /// <inheritdoc cref="datetime(string)" />
@@ -300,7 +300,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.img(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>decoding="{value}"</code></returns>
+    /// <returns><c>decoding="{value}"</c></returns>
     public static Attribute decoding(string value) => new(AttributeType.decoding, value);
 
     /// <inheritdoc cref="decoding(string)" />
@@ -310,14 +310,14 @@ public static partial class Attributes
     /// Enable the track if no other text track is more suitable.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.track(Content[])"/>.</remarks>
-    /// <returns><code>default_</code></returns>
+    /// <returns><c>default_</c></returns>
     public static Attribute default_() => new(AttributeType.default_);
 
     /// <summary>
     /// Defer script execution.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.script(Content[])"/>.</remarks>
-    /// <returns><code>defer</code></returns>
+    /// <returns><c>defer</c></returns>
     public static Attribute defer() => new(AttributeType.defer);
 
     /// <summary>
@@ -325,7 +325,7 @@ public static partial class Attributes
     /// The text directionality of the element.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>dir="{value}"</code></returns>
+    /// <returns><c>dir="{value}"</c></returns>
     public static Attribute dir(string value) => new(AttributeType.dir, value);
 
     /// <inheritdoc cref="dir(string)" />
@@ -336,7 +336,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.textarea(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>dirname="{value}"</code></returns>
+    /// <returns><c>dirname="{value}"</c></returns>
     public static Attribute dirname(string value) => new(AttributeType.dirname, value);
 
     /// <inheritdoc cref="dirname(string)" />
@@ -348,7 +348,7 @@ public static partial class Attributes
     /// Whether the link is disabled.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.optgroup(Content[])"/>, <see cref="Elements.option(Content[])"/>, <see cref="Elements.select(Content[])"/>, <see cref="Elements.textarea(Content[])"/>, <see cref="Elements.fieldset(Content[])"/>, <see cref="Elements.link(Content[])"/>.</remarks>
-    /// <returns><code>disabled</code></returns>
+    /// <returns><c>disabled</c></returns>
     public static Attribute disabled() => new(AttributeType.disabled);
 
     /// <summary>
@@ -356,7 +356,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.a(Content[])"/>, <see cref="Elements.area(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>download="{value}"</code></returns>
+    /// <returns><c>download="{value}"</c></returns>
     public static Attribute download(string value) => new(AttributeType.download, value);
 
     /// <inheritdoc cref="download(string)" />
@@ -366,7 +366,7 @@ public static partial class Attributes
     /// Whether the element is draggable.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>draggable="{value}"</code></returns>
+    /// <returns><c>draggable="{value}"</c></returns>
     public static Attribute draggable(string value) => new(AttributeType.draggable, value);
 
     /// <inheritdoc cref="draggable(string)" />
@@ -377,7 +377,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.form(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>enctype="{value}"</code></returns>
+    /// <returns><c>enctype="{value}"</c></returns>
     public static Attribute enctype(string value) => new(AttributeType.enctype, value);
 
     /// <inheritdoc cref="enctype(string)" />
@@ -387,7 +387,7 @@ public static partial class Attributes
     /// Hint for selecting an enter key action.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>enterkeyhint="{value}"</code></returns>
+    /// <returns><c>enterkeyhint="{value}"</c></returns>
     public static Attribute enterkeyhint(string value) => new(AttributeType.enterkeyhint, value);
 
     /// <inheritdoc cref="enterkeyhint(string)" />
@@ -398,7 +398,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.img(Content[])"/>, <see cref="Elements.link(Content[])"/>, <see cref="Elements.script(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>fetchpriority="{value}"</code></returns>
+    /// <returns><c>fetchpriority="{value}"</c></returns>
     public static Attribute fetchpriority(string value) => new(AttributeType.fetchpriority, value);
 
     /// <inheritdoc cref="fetchpriority(string)" />
@@ -410,7 +410,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.label(Content[])"/>, <see cref="Elements.output(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>for_="{value}"</code></returns>
+    /// <returns><c>for_="{value}"</c></returns>
     public static Attribute for_(string value) => new(AttributeType.for_, value);
 
     /// <inheritdoc cref="for_(string)" />
@@ -421,7 +421,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.fieldset(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.object_(Content[])"/>, <see cref="Elements.output(Content[])"/>, <see cref="Elements.select(Content[])"/>, <see cref="Elements.textarea(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>form="{value}"</code></returns>
+    /// <returns><c>form="{value}"</c></returns>
     public static Attribute form(string value) => new(AttributeType.form, value);
 
     /// <inheritdoc cref="form(string)" />
@@ -432,7 +432,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>formaction="{value}"</code></returns>
+    /// <returns><c>formaction="{value}"</c></returns>
     public static Attribute formaction(string value) => new(AttributeType.formaction, value);
 
     /// <inheritdoc cref="formaction(string)" />
@@ -443,7 +443,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>formenctype="{value}"</code></returns>
+    /// <returns><c>formenctype="{value}"</c></returns>
     public static Attribute formenctype(string value) => new(AttributeType.formenctype, value);
 
     /// <inheritdoc cref="formenctype(string)" />
@@ -454,7 +454,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>formmethod="{value}"</code></returns>
+    /// <returns><c>formmethod="{value}"</c></returns>
     public static Attribute formmethod(string value) => new(AttributeType.formmethod, value);
 
     /// <inheritdoc cref="formmethod(string)" />
@@ -464,7 +464,7 @@ public static partial class Attributes
     /// Bypass form control validation for form submission.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
-    /// <returns><code>formnovalidate</code></returns>
+    /// <returns><c>formnovalidate</c></returns>
     public static Attribute formnovalidate() => new(AttributeType.formnovalidate);
 
     /// <summary>
@@ -472,7 +472,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>formtarget="{value}"</code></returns>
+    /// <returns><c>formtarget="{value}"</c></returns>
     public static Attribute formtarget(string value) => new(AttributeType.formtarget, value);
 
     /// <inheritdoc cref="formtarget(string)" />
@@ -483,7 +483,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.td(Content[])"/>, <see cref="Elements.th(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>headers="{value}"</code></returns>
+    /// <returns><c>headers="{value}"</c></returns>
     public static Attribute headers(string value) => new(AttributeType.headers, value);
 
     /// <inheritdoc cref="headers(string)" />
@@ -494,7 +494,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.canvas(Content[])"/>, <see cref="Elements.embed(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.object_(Content[])"/>, <see cref="Elements.source(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>height="{value}"</code></returns>
+    /// <returns><c>height="{value}"</c></returns>
     public static Attribute height(string value) => new(AttributeType.height, value);
 
     /// <inheritdoc cref="height(string)" />
@@ -504,7 +504,7 @@ public static partial class Attributes
     /// Whether the element is relevant.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>hidden="{value}"</code></returns>
+    /// <returns><c>hidden="{value}"</c></returns>
     public static Attribute hidden(string value) => new(AttributeType.hidden, value);
 
     /// <inheritdoc cref="hidden(string)" />
@@ -515,7 +515,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.meter(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>high="{value}"</code></returns>
+    /// <returns><c>high="{value}"</c></returns>
     public static Attribute high(string value) => new(AttributeType.high, value);
 
     /// <inheritdoc cref="high(string)" />
@@ -528,7 +528,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.a(Content[])"/>, <see cref="Elements.area(Content[])"/>, <see cref="Elements.link(Content[])"/>, <see cref="Elements.base_(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>href="{value}"</code></returns>
+    /// <returns><c>href="{value}"</c></returns>
     public static Attribute href(string value) => new(AttributeType.href, value);
 
     /// <inheritdoc cref="href(string)" />
@@ -539,7 +539,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.a(Content[])"/>, <see cref="Elements.link(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>hreflang="{value}"</code></returns>
+    /// <returns><c>hreflang="{value}"</c></returns>
     public static Attribute hreflang(string value) => new(AttributeType.hreflang, value);
 
     /// <inheritdoc cref="hreflang(string)" />
@@ -550,7 +550,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.meta(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>http_equiv="{value}"</code></returns>
+    /// <returns><c>http_equiv="{value}"</c></returns>
     public static Attribute http_equiv(string value) => new(AttributeType.http_equiv, value);
 
     /// <inheritdoc cref="http_equiv(string)" />
@@ -560,7 +560,7 @@ public static partial class Attributes
     /// The element's ID.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>id="{value}"</code></returns>
+    /// <returns><c>id="{value}"</c></returns>
     public static Attribute id(string value) => new(AttributeType.id, value);
 
     /// <inheritdoc cref="id(string)" />
@@ -571,7 +571,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>imagesizes="{value}"</code></returns>
+    /// <returns><c>imagesizes="{value}"</c></returns>
     public static Attribute imagesizes(string value) => new(AttributeType.imagesizes, value);
 
     /// <inheritdoc cref="imagesizes(string)" />
@@ -582,7 +582,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>imagesrcset="{value}"</code></returns>
+    /// <returns><c>imagesrcset="{value}"</c></returns>
     public static Attribute imagesrcset(string value) => new(AttributeType.imagesrcset, value);
 
     /// <inheritdoc cref="imagesrcset(string)" />
@@ -591,14 +591,14 @@ public static partial class Attributes
     /// <summary>
     /// Whether the element is inert.
     /// </summary>
-    /// <returns><code>inert</code></returns>
+    /// <returns><c>inert</c></returns>
     public static Attribute inert() => new(AttributeType.inert);
 
     /// <summary>
     /// Hint for selecting an input modality.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>inputmode="{value}"</code></returns>
+    /// <returns><c>inputmode="{value}"</c></returns>
     public static Attribute inputmode(string value) => new(AttributeType.inputmode, value);
 
     /// <inheritdoc cref="inputmode(string)" />
@@ -609,7 +609,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>, <see cref="Elements.script(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>integrity="{value}"</code></returns>
+    /// <returns><c>integrity="{value}"</c></returns>
     public static Attribute integrity(string value) => new(AttributeType.integrity, value);
 
     /// <inheritdoc cref="integrity(string)" />
@@ -619,7 +619,7 @@ public static partial class Attributes
     /// Creates a customized built-in element.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>is_="{value}"</code></returns>
+    /// <returns><c>is_="{value}"</c></returns>
     public static Attribute is_(string value) => new(AttributeType.is_, value);
 
     /// <inheritdoc cref="is_(string)" />
@@ -629,14 +629,14 @@ public static partial class Attributes
     /// Whether the image is a server-side image map.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.img(Content[])"/>.</remarks>
-    /// <returns><code>ismap</code></returns>
+    /// <returns><c>ismap</c></returns>
     public static Attribute ismap() => new(AttributeType.ismap);
 
     /// <summary>
     /// Global identifier for a microdata item.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>itemid="{value}"</code></returns>
+    /// <returns><c>itemid="{value}"</c></returns>
     public static Attribute itemid(string value) => new(AttributeType.itemid, value);
 
     /// <inheritdoc cref="itemid(string)" />
@@ -646,7 +646,7 @@ public static partial class Attributes
     /// Property names of a microdata item.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>itemprop="{value}"</code></returns>
+    /// <returns><c>itemprop="{value}"</c></returns>
     public static Attribute itemprop(string value) => new(AttributeType.itemprop, value);
 
     /// <inheritdoc cref="itemprop(string)" />
@@ -656,7 +656,7 @@ public static partial class Attributes
     /// Referenced elements.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>itemref="{value}"</code></returns>
+    /// <returns><c>itemref="{value}"</c></returns>
     public static Attribute itemref(string value) => new(AttributeType.itemref, value);
 
     /// <inheritdoc cref="itemref(string)" />
@@ -665,14 +665,14 @@ public static partial class Attributes
     /// <summary>
     /// Introduces a microdata item.
     /// </summary>
-    /// <returns><code>itemscope</code></returns>
+    /// <returns><c>itemscope</c></returns>
     public static Attribute itemscope() => new(AttributeType.itemscope);
 
     /// <summary>
     /// Item types of a microdata item.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>itemtype="{value}"</code></returns>
+    /// <returns><c>itemtype="{value}"</c></returns>
     public static Attribute itemtype(string value) => new(AttributeType.itemtype, value);
 
     /// <inheritdoc cref="itemtype(string)" />
@@ -683,7 +683,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.track(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>kind="{value}"</code></returns>
+    /// <returns><c>kind="{value}"</c></returns>
     public static Attribute kind(string value) => new(AttributeType.kind, value);
 
     /// <inheritdoc cref="kind(string)" />
@@ -694,7 +694,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.optgroup(Content[])"/>, <see cref="Elements.option(Content[])"/>, <see cref="Elements.track(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>label="{value}"</code></returns>
+    /// <returns><c>label="{value}"</c></returns>
     public static Attribute label(string value) => new(AttributeType.label, value);
 
     /// <inheritdoc cref="label(string)" />
@@ -704,7 +704,7 @@ public static partial class Attributes
     /// Language of the element.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>lang="{value}"</code></returns>
+    /// <returns><c>lang="{value}"</c></returns>
     public static Attribute lang(string value) => new(AttributeType.lang, value);
 
     /// <inheritdoc cref="lang(string)" />
@@ -715,7 +715,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>list="{value}"</code></returns>
+    /// <returns><c>list="{value}"</c></returns>
     public static Attribute list(string value) => new(AttributeType.list, value);
 
     /// <inheritdoc cref="list(string)" />
@@ -726,7 +726,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.img(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>loading="{value}"</code></returns>
+    /// <returns><c>loading="{value}"</c></returns>
     public static Attribute loading(string value) => new(AttributeType.loading, value);
 
     /// <inheritdoc cref="loading(string)" />
@@ -736,7 +736,7 @@ public static partial class Attributes
     /// Whether to loop the media resource.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
-    /// <returns><code>loop</code></returns>
+    /// <returns><c>loop</c></returns>
     public static Attribute loop() => new(AttributeType.loop);
 
     /// <summary>
@@ -744,7 +744,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.meter(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>low="{value}"</code></returns>
+    /// <returns><c>low="{value}"</c></returns>
     public static Attribute low(string value) => new(AttributeType.low, value);
 
     /// <inheritdoc cref="low(string)" />
@@ -756,7 +756,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.meter(Content[])"/>, <see cref="Elements.progress(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>max="{value}"</code></returns>
+    /// <returns><c>max="{value}"</c></returns>
     public static Attribute max(string value) => new(AttributeType.max, value);
 
     /// <inheritdoc cref="max(string)" />
@@ -767,7 +767,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.textarea(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>maxlength="{value}"</code></returns>
+    /// <returns><c>maxlength="{value}"</c></returns>
     public static Attribute maxlength(string value) => new(AttributeType.maxlength, value);
 
     /// <inheritdoc cref="maxlength(string)" />
@@ -778,7 +778,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>, <see cref="Elements.meta(Content[])"/>, <see cref="Elements.source(Content[])"/>, <see cref="Elements.style(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>media="{value}"</code></returns>
+    /// <returns><c>media="{value}"</c></returns>
     public static Attribute media(string value) => new(AttributeType.media, value);
 
     /// <inheritdoc cref="media(string)" />
@@ -789,7 +789,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.form(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>method="{value}"</code></returns>
+    /// <returns><c>method="{value}"</c></returns>
     public static Attribute method(string value) => new(AttributeType.method, value);
 
     /// <inheritdoc cref="method(string)" />
@@ -801,7 +801,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.meter(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>min="{value}"</code></returns>
+    /// <returns><c>min="{value}"</c></returns>
     public static Attribute min(string value) => new(AttributeType.min, value);
 
     /// <inheritdoc cref="min(string)" />
@@ -812,7 +812,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.textarea(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>minlength="{value}"</code></returns>
+    /// <returns><c>minlength="{value}"</c></returns>
     public static Attribute minlength(string value) => new(AttributeType.minlength, value);
 
     /// <inheritdoc cref="minlength(string)" />
@@ -822,14 +822,14 @@ public static partial class Attributes
     /// Whether to allow multiple values.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.select(Content[])"/>.</remarks>
-    /// <returns><code>multiple</code></returns>
+    /// <returns><c>multiple</c></returns>
     public static Attribute multiple() => new(AttributeType.multiple);
 
     /// <summary>
     /// Whether to mute the media resource by default.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
-    /// <returns><code>muted</code></returns>
+    /// <returns><c>muted</c></returns>
     public static Attribute muted() => new(AttributeType.muted);
 
     /// <summary>
@@ -843,7 +843,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.fieldset(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.output(Content[])"/>, <see cref="Elements.select(Content[])"/>, <see cref="Elements.textarea(Content[])"/>, <see cref="Elements.details(Content[])"/>, <see cref="Elements.form(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.object_(Content[])"/>, <see cref="Elements.map(Content[])"/>, <see cref="Elements.meta(Content[])"/>, <see cref="Elements.slot(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>name="{value}"</code></returns>
+    /// <returns><c>name="{value}"</c></returns>
     public static Attribute name(string value) => new(AttributeType.name, value);
 
     /// <inheritdoc cref="name(string)" />
@@ -853,14 +853,14 @@ public static partial class Attributes
     /// Prevents execution in user agents that support module scripts.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.script(Content[])"/>.</remarks>
-    /// <returns><code>nomodule</code></returns>
+    /// <returns><c>nomodule</c></returns>
     public static Attribute nomodule() => new(AttributeType.nomodule);
 
     /// <summary>
     /// Cryptographic nonce used in Content Security Policy checks [CSP].
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>nonce="{value}"</code></returns>
+    /// <returns><c>nonce="{value}"</c></returns>
     public static Attribute nonce(string value) => new(AttributeType.nonce, value);
 
     /// <inheritdoc cref="nonce(string)" />
@@ -870,7 +870,7 @@ public static partial class Attributes
     /// Bypass form control validation for form submission.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.form(Content[])"/>.</remarks>
-    /// <returns><code>novalidate</code></returns>
+    /// <returns><c>novalidate</c></returns>
     public static Attribute novalidate() => new(AttributeType.novalidate);
 
     /// <summary>
@@ -878,7 +878,7 @@ public static partial class Attributes
     /// Whether the dialog box is showing.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.details(Content[])"/>, <see cref="Elements.dialog(Content[])"/>.</remarks>
-    /// <returns><code>open</code></returns>
+    /// <returns><c>open</c></returns>
     public static Attribute open() => new(AttributeType.open);
 
     /// <summary>
@@ -886,7 +886,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.meter(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>optimum="{value}"</code></returns>
+    /// <returns><c>optimum="{value}"</c></returns>
     public static Attribute optimum(string value) => new(AttributeType.optimum, value);
 
     /// <inheritdoc cref="optimum(string)" />
@@ -897,7 +897,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>pattern="{value}"</code></returns>
+    /// <returns><c>pattern="{value}"</c></returns>
     public static Attribute pattern(string value) => new(AttributeType.pattern, value);
 
     /// <inheritdoc cref="pattern(string)" />
@@ -907,7 +907,7 @@ public static partial class Attributes
     /// URLs to ping.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>ping="{value}"</code></returns>
+    /// <returns><c>ping="{value}"</c></returns>
     public static Attribute ping(string value) => new(AttributeType.ping, value);
 
     /// <inheritdoc cref="ping(string)" />
@@ -918,7 +918,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.textarea(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>placeholder="{value}"</code></returns>
+    /// <returns><c>placeholder="{value}"</c></returns>
     public static Attribute placeholder(string value) => new(AttributeType.placeholder, value);
 
     /// <inheritdoc cref="placeholder(string)" />
@@ -928,14 +928,14 @@ public static partial class Attributes
     /// Encourage the user agent to display video content within the element's playback area.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.video(Content[])"/>.</remarks>
-    /// <returns><code>playsinline</code></returns>
+    /// <returns><c>playsinline</c></returns>
     public static Attribute playsinline() => new(AttributeType.playsinline);
 
     /// <summary>
     /// Makes the element a popover element.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>popover="{value}"</code></returns>
+    /// <returns><c>popover="{value}"</c></returns>
     public static Attribute popover(string value) => new(AttributeType.popover, value);
 
     /// <inheritdoc cref="popover(string)" />
@@ -946,7 +946,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.button(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>popovertarget="{value}"</code></returns>
+    /// <returns><c>popovertarget="{value}"</c></returns>
     public static Attribute popovertarget(string value) => new(AttributeType.popovertarget, value);
 
     /// <inheritdoc cref="popovertarget(string)" />
@@ -957,7 +957,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.button(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>popovertargetaction="{value}"</code></returns>
+    /// <returns><c>popovertargetaction="{value}"</c></returns>
     public static Attribute popovertargetaction(string value) => new(AttributeType.popovertargetaction, value);
 
     /// <inheritdoc cref="popovertargetaction(string)" />
@@ -968,7 +968,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.video(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>poster="{value}"</code></returns>
+    /// <returns><c>poster="{value}"</c></returns>
     public static Attribute poster(string value) => new(AttributeType.poster, value);
 
     /// <inheritdoc cref="poster(string)" />
@@ -979,7 +979,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>preload="{value}"</code></returns>
+    /// <returns><c>preload="{value}"</c></returns>
     public static Attribute preload(string value) => new(AttributeType.preload, value);
 
     /// <inheritdoc cref="preload(string)" />
@@ -990,7 +990,7 @@ public static partial class Attributes
     /// Affects willValidate, plus any behavior added by the custom element author.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.textarea(Content[])"/>.</remarks>
-    /// <returns><code>readonly_</code></returns>
+    /// <returns><c>readonly_</c></returns>
     public static Attribute readonly_() => new(AttributeType.readonly_);
 
     /// <summary>
@@ -998,7 +998,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.a(Content[])"/>, <see cref="Elements.area(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.link(Content[])"/>, <see cref="Elements.script(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>referrerpolicy="{value}"</code></returns>
+    /// <returns><c>referrerpolicy="{value}"</c></returns>
     public static Attribute referrerpolicy(string value) => new(AttributeType.referrerpolicy, value);
 
     /// <inheritdoc cref="referrerpolicy(string)" />
@@ -1010,7 +1010,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.a(Content[])"/>, <see cref="Elements.area(Content[])"/>, <see cref="Elements.link(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>rel="{value}"</code></returns>
+    /// <returns><c>rel="{value}"</c></returns>
     public static Attribute rel(string value) => new(AttributeType.rel, value);
 
     /// <inheritdoc cref="rel(string)" />
@@ -1020,14 +1020,14 @@ public static partial class Attributes
     /// Whether the control is required for form submission.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.select(Content[])"/>, <see cref="Elements.textarea(Content[])"/>.</remarks>
-    /// <returns><code>required</code></returns>
+    /// <returns><c>required</c></returns>
     public static Attribute required() => new(AttributeType.required);
 
     /// <summary>
     /// Number the list backwards.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.ol(Content[])"/>.</remarks>
-    /// <returns><code>reversed</code></returns>
+    /// <returns><c>reversed</c></returns>
     public static Attribute reversed() => new(AttributeType.reversed);
 
     /// <summary>
@@ -1035,7 +1035,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.textarea(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>rows="{value}"</code></returns>
+    /// <returns><c>rows="{value}"</c></returns>
     public static Attribute rows(string value) => new(AttributeType.rows, value);
 
     /// <inheritdoc cref="rows(string)" />
@@ -1046,7 +1046,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.td(Content[])"/>, <see cref="Elements.th(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>rowspan="{value}"</code></returns>
+    /// <returns><c>rowspan="{value}"</c></returns>
     public static Attribute rowspan(string value) => new(AttributeType.rowspan, value);
 
     /// <inheritdoc cref="rowspan(string)" />
@@ -1057,7 +1057,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.iframe(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>sandbox="{value}"</code></returns>
+    /// <returns><c>sandbox="{value}"</c></returns>
     public static Attribute sandbox(string value) => new(AttributeType.sandbox, value);
 
     /// <inheritdoc cref="sandbox(string)" />
@@ -1068,7 +1068,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.th(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>scope="{value}"</code></returns>
+    /// <returns><c>scope="{value}"</c></returns>
     public static Attribute scope(string value) => new(AttributeType.scope, value);
 
     /// <inheritdoc cref="scope(string)" />
@@ -1078,7 +1078,7 @@ public static partial class Attributes
     /// Whether the option is selected by default.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.option(Content[])"/>.</remarks>
-    /// <returns><code>selected</code></returns>
+    /// <returns><c>selected</c></returns>
     public static Attribute selected() => new(AttributeType.selected);
 
     /// <summary>
@@ -1086,7 +1086,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>shadowrootmode="{value}"</code></returns>
+    /// <returns><c>shadowrootmode="{value}"</c></returns>
     public static Attribute shadowrootmode(string value) => new(AttributeType.shadowrootmode, value);
 
     /// <inheritdoc cref="shadowrootmode(string)" />
@@ -1096,7 +1096,7 @@ public static partial class Attributes
     /// Sets delegates focus on a declarative shadow root.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
-    /// <returns><code>shadowrootdelegatesfocus</code></returns>
+    /// <returns><c>shadowrootdelegatesfocus</c></returns>
     public static Attribute shadowrootdelegatesfocus() => new(AttributeType.shadowrootdelegatesfocus);
 
     /// <summary>
@@ -1104,7 +1104,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.area(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>shape="{value}"</code></returns>
+    /// <returns><c>shape="{value}"</c></returns>
     public static Attribute shape(string value) => new(AttributeType.shape, value);
 
     /// <inheritdoc cref="shape(string)" />
@@ -1115,7 +1115,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.select(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>size="{value}"</code></returns>
+    /// <returns><c>size="{value}"</c></returns>
     public static Attribute size(string value) => new(AttributeType.size, value);
 
     /// <inheritdoc cref="size(string)" />
@@ -1127,7 +1127,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.source(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>sizes="{value}"</code></returns>
+    /// <returns><c>sizes="{value}"</c></returns>
     public static Attribute sizes(string value) => new(AttributeType.sizes, value);
 
     /// <inheritdoc cref="sizes(string)" />
@@ -1137,7 +1137,7 @@ public static partial class Attributes
     /// The element's desired slot.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>slot="{value}"</code></returns>
+    /// <returns><c>slot="{value}"</c></returns>
     public static Attribute slot(string value) => new(AttributeType.slot, value);
 
     /// <inheritdoc cref="slot(string)" />
@@ -1148,7 +1148,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.col(Content[])"/>, <see cref="Elements.colgroup(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>span="{value}"</code></returns>
+    /// <returns><c>span="{value}"</c></returns>
     public static Attribute span(string value) => new(AttributeType.span, value);
 
     /// <inheritdoc cref="span(string)" />
@@ -1158,7 +1158,7 @@ public static partial class Attributes
     /// Whether the element is to have its spelling and grammar checked.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>spellcheck="{value}"</code></returns>
+    /// <returns><c>spellcheck="{value}"</c></returns>
     public static Attribute spellcheck(string value) => new(AttributeType.spellcheck, value);
 
     /// <inheritdoc cref="spellcheck(string)" />
@@ -1169,7 +1169,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.embed(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.script(Content[])"/>, <see cref="Elements.source(Content[])"/>, <see cref="Elements.track(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>src="{value}"</code></returns>
+    /// <returns><c>src="{value}"</c></returns>
     public static Attribute src(string value) => new(AttributeType.src, value);
 
     /// <inheritdoc cref="src(string)" />
@@ -1180,7 +1180,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.iframe(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>srcdoc="{value}"</code></returns>
+    /// <returns><c>srcdoc="{value}"</c></returns>
     public static Attribute srcdoc(string value) => new(AttributeType.srcdoc, value);
 
     /// <inheritdoc cref="srcdoc(string)" />
@@ -1191,7 +1191,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.track(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>srclang="{value}"</code></returns>
+    /// <returns><c>srclang="{value}"</c></returns>
     public static Attribute srclang(string value) => new(AttributeType.srclang, value);
 
     /// <inheritdoc cref="srclang(string)" />
@@ -1202,7 +1202,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.img(Content[])"/>, <see cref="Elements.source(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>srcset="{value}"</code></returns>
+    /// <returns><c>srcset="{value}"</c></returns>
     public static Attribute srcset(string value) => new(AttributeType.srcset, value);
 
     /// <inheritdoc cref="srcset(string)" />
@@ -1213,7 +1213,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.ol(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>start="{value}"</code></returns>
+    /// <returns><c>start="{value}"</c></returns>
     public static Attribute start(string value) => new(AttributeType.start, value);
 
     /// <inheritdoc cref="start(string)" />
@@ -1224,7 +1224,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>step="{value}"</code></returns>
+    /// <returns><c>step="{value}"</c></returns>
     public static Attribute step(string value) => new(AttributeType.step, value);
 
     /// <inheritdoc cref="step(string)" />
@@ -1234,7 +1234,7 @@ public static partial class Attributes
     /// Presentational and formatting instructions.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>style="{value}"</code></returns>
+    /// <returns><c>style="{value}"</c></returns>
     public static Attribute style(string value) => new(AttributeType.style, value);
 
     /// <inheritdoc cref="style(string)" />
@@ -1244,7 +1244,7 @@ public static partial class Attributes
     /// Whether the element is focusable and sequentially focusable, and the relative order of the element for the purposes of sequential focus navigation.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>tabindex="{value}"</code></returns>
+    /// <returns><c>tabindex="{value}"</c></returns>
     public static Attribute tabindex(string value) => new(AttributeType.tabindex, value);
 
     /// <inheritdoc cref="tabindex(string)" />
@@ -1257,7 +1257,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.a(Content[])"/>, <see cref="Elements.area(Content[])"/>, <see cref="Elements.base_(Content[])"/>, <see cref="Elements.form(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>target="{value}"</code></returns>
+    /// <returns><c>target="{value}"</c></returns>
     public static Attribute target(string value) => new(AttributeType.target, value);
 
     /// <inheritdoc cref="target(string)" />
@@ -1272,7 +1272,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.abbr(Content[])"/>, <see cref="Elements.dfn(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.link(Content[])"/>, <see cref="Elements.link(Content[])"/>, <see cref="Elements.style(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>title="{value}"</code></returns>
+    /// <returns><c>title="{value}"</c></returns>
     public static Attribute title(string value) => new(AttributeType.title, value);
 
     /// <inheritdoc cref="title(string)" />
@@ -1282,7 +1282,7 @@ public static partial class Attributes
     /// Whether the element is to be translated when the page is localized.
     /// </summary>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>translate="{value}"</code></returns>
+    /// <returns><c>translate="{value}"</c></returns>
     public static Attribute translate(string value) => new(AttributeType.translate, value);
 
     /// <inheritdoc cref="translate(string)" />
@@ -1298,7 +1298,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.a(Content[])"/>, <see cref="Elements.link(Content[])"/>, <see cref="Elements.button(Content[])"/>, <see cref="Elements.embed(Content[])"/>, <see cref="Elements.object_(Content[])"/>, <see cref="Elements.source(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.ol(Content[])"/>, <see cref="Elements.script(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>type="{value}"</code></returns>
+    /// <returns><c>type="{value}"</c></returns>
     public static Attribute type(string value) => new(AttributeType.type, value);
 
     /// <inheritdoc cref="type(string)" />
@@ -1309,7 +1309,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.img(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>usemap="{value}"</code></returns>
+    /// <returns><c>usemap="{value}"</c></returns>
     public static Attribute usemap(string value) => new(AttributeType.usemap, value);
 
     /// <inheritdoc cref="usemap(string)" />
@@ -1324,7 +1324,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.option(Content[])"/>, <see cref="Elements.data(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.li(Content[])"/>, <see cref="Elements.meter(Content[])"/>, <see cref="Elements.progress(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>value="{value}"</code></returns>
+    /// <returns><c>value="{value}"</c></returns>
     public static Attribute value(string value) => new(AttributeType.value, value);
 
     /// <inheritdoc cref="value(string)" />
@@ -1335,7 +1335,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.canvas(Content[])"/>, <see cref="Elements.embed(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.object_(Content[])"/>, <see cref="Elements.source(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>width="{value}"</code></returns>
+    /// <returns><c>width="{value}"</c></returns>
     public static Attribute width(string value) => new(AttributeType.width, value);
 
     /// <inheritdoc cref="width(string)" />
@@ -1346,7 +1346,7 @@ public static partial class Attributes
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.textarea(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
-    /// <returns><code>wrap="{value}"</code></returns>
+    /// <returns><c>wrap="{value}"</c></returns>
     public static Attribute wrap(string value) => new(AttributeType.wrap, value);
 
     /// <inheritdoc cref="wrap(string)" />
