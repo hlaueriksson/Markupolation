@@ -230,7 +230,7 @@ namespace Markupolation.Tests
                     result.AppendLine($"    /// <remarks>Attributes: {remarks}.</remarks>");
                 }
                 result.AppendLine($"    /// <param name=\"content\">{param}</param>");
-                result.AppendLine($"    /// <returns><code><![CDATA[{returns}]]></code></returns>");
+                result.AppendLine($"    /// <returns><c><![CDATA[{returns}]]></c></returns>");
                 result.AppendLine($"    public static Element {value}(params Content[] content) => new(ElementType.{value}, {a.IsVoidElement.ToString().ToLower()}, content);");
                 result.AppendLine();
 
@@ -291,7 +291,7 @@ namespace Markupolation.Tests
                 {
                     result.AppendLine($"    /// <param name=\"value\">Attribute value.</param>");
                 }
-                result.AppendLine($"    /// <returns><code>{returns}</code></returns>");
+                result.AppendLine($"    /// <returns><c>{returns}</c></returns>");
 
                 if (a.Any(x => x.IsBooleanAttribute))
                 {
@@ -345,7 +345,7 @@ namespace Markupolation.Tests
                     result.AppendLine($"    /// <remarks>Elements: {remarks}.</remarks>");
                 }
                 result.AppendLine($"    /// <param name=\"value\">Attribute value.</param>");
-                result.AppendLine($"    /// <returns><code>{value}=\"{{value}}\"</code></returns>");
+                result.AppendLine($"    /// <returns><c>{value}=\"{{value}}\"</c></returns>");
                 result.AppendLine($"    public static Attribute {value}(string value) => new(\"{value}\", value);");
                 result.AppendLine();
             }
