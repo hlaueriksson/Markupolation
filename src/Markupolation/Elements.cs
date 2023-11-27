@@ -8,7 +8,7 @@ namespace Markupolation
         /// <summary>
         /// DOCTYPE.
         /// </summary>
-        /// <returns><code><![CDATA[<!DOCTYPE html>]]></code></returns>
+        /// <returns><c><![CDATA[<!DOCTYPE html>]]></c></returns>
         public static string DOCTYPE() => "<!DOCTYPE html>";
     }
 }

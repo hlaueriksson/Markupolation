@@ -10,7 +10,7 @@ namespace Markupolation
         /// </summary>
         /// <param name="name">Attribute name suffix.</param>
         /// <param name="value">Attribute value.</param>
-        /// <returns><code>data-{name}="{value}"</code></returns>
+        /// <returns><c>data-{name}="{value}"</c></returns>
         public static Attribute data(string name, string value) => new($"data-{name}", value);
     }
 }

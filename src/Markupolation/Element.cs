@@ -11,7 +11,8 @@ namespace Markupolation
         /// Initializes a new instance of the <see cref="Element"/> class.
         /// </summary>
         /// <param name="value">Element value.</param>
-        public Element(string value) : base(value)
+        public Element(string value)
+            : base(value)
         {
         }
 
@@ -21,11 +22,13 @@ namespace Markupolation
         /// <param name="name">Element name.</param>
         /// <param name="isVoidElement"><c>true</c> to mark the element as self-closing; otherwise, <c>false</c>.</param>
         /// <param name="content">Attributes, elements and content.</param>
-        public Element(string name, bool isVoidElement, params Content[] content) : base(ToString(name, isVoidElement, content))
+        public Element(string name, bool isVoidElement, params Content[] content)
+            : base(ToString(name, isVoidElement, content))
         {
         }
 
-        internal Element(ElementType type, bool isVoidElement, params Content[] content) : base(ToString(type, isVoidElement, content))
+        internal Element(ElementType type, bool isVoidElement, params Content[] content)
+            : base(ToString(type, isVoidElement, content))
         {
             Type = type;
         }

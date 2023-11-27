@@ -3,20 +3,20 @@ namespace Markupolation
     /// <summary>
     /// HTML attribute.
     /// </summary>
-#pragma warning disable CA1711 // Identifiers should not have incorrect suffix
     public sealed record Attribute : Content
-#pragma warning restore CA1711 // Identifiers should not have incorrect suffix
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Attribute"/> class.
         /// </summary>
         /// <param name="name">Attribute name.</param>
         /// <param name="value">Attribute value.</param>
-        public Attribute(string name, string? value = null) : base(ToString(name, value))
+        public Attribute(string name, string? value = null)
+            : base(ToString(name, value))
         {
         }
 
-        internal Attribute(AttributeType type, string? value = null) : base(ToString(type, value))
+        internal Attribute(AttributeType type, string? value = null)
+            : base(ToString(type, value))
         {
             Type = type;
         }

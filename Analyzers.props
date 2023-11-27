@@ -2,7 +2,6 @@
   <PropertyGroup>
     <RunWithWarnings>true</RunWithWarnings>
     <StyleCopTreatErrorsAsWarnings>false</StyleCopTreatErrorsAsWarnings>
-    <CodeAnalysisRuleSet>../../Markupolation.ruleset</CodeAnalysisRuleSet>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <EnablePackageValidation>true</EnablePackageValidation>
