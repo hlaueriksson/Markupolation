@@ -15,7 +15,7 @@ namespace Markupolation
         /// <typeparam name="T">Type of elements.</typeparam>
         /// <param name="values">Elements.</param>
         /// <param name="content">Attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content Each<T>(this IEnumerable<T> values, Func<T, Content> content)
         {
             if (values == null)
@@ -32,7 +32,7 @@ namespace Markupolation
         /// <typeparam name="T">Type of elements.</typeparam>
         /// <param name="values">Elements.</param>
         /// <param name="content">Attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content Each<T>(this IEnumerable<T> values, Func<T, int, Content> content)
         {
             if (values == null)
@@ -49,7 +49,7 @@ namespace Markupolation
         /// <typeparam name="T">Type of value.</typeparam>
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNull<T>(this T value, Content then)
         {
             return value == null ? then : string.Empty;
@@ -62,7 +62,7 @@ namespace Markupolation
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content.</param>
         /// <param name="otherwise">Fallback attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNull<T>(this T value, Content then, Func<T, Content> otherwise)
         {
             return value == null ? then : otherwise != null ? otherwise(value) : string.Empty;
@@ -74,7 +74,7 @@ namespace Markupolation
         /// <typeparam name="T">Type of value.</typeparam>
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNotNull<T>(this T value, Func<T, Content> then)
         {
             return value != null && then != null ? then(value) : string.Empty;
@@ -87,7 +87,7 @@ namespace Markupolation
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
         /// <param name="otherwise">Fallback attribute, element or content.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNotNull<T>(this T value, Func<T, Content> then, Content otherwise)
         {
             return value != null && then != null ? then(value) : value == null ? otherwise : string.Empty;
@@ -98,7 +98,7 @@ namespace Markupolation
         /// </summary>
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNullOrEmpty(this string value, Content then)
         {
             return string.IsNullOrEmpty(value) ? then : string.Empty;
@@ -110,7 +110,7 @@ namespace Markupolation
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content.</param>
         /// <param name="otherwise">Fallback attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNullOrEmpty(this string value, Content then, Func<string, Content> otherwise)
         {
             return string.IsNullOrEmpty(value) ? then : otherwise != null ? otherwise(value) : string.Empty;
@@ -121,7 +121,7 @@ namespace Markupolation
         /// </summary>
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNotNullOrEmpty(this string value, Func<string, Content> then)
         {
             return !string.IsNullOrEmpty(value) && then != null ? then(value) : string.Empty;
@@ -133,7 +133,7 @@ namespace Markupolation
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
         /// <param name="otherwise">Fallback attribute, element or content.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNotNullOrEmpty(this string value, Func<string, Content> then, Content otherwise)
         {
             return !string.IsNullOrEmpty(value) && then != null ? then(value) : string.IsNullOrEmpty(value) ? otherwise : string.Empty;
@@ -145,7 +145,7 @@ namespace Markupolation
         /// <typeparam name="T">Type of elements.</typeparam>
         /// <param name="values">Elements.</param>
         /// <param name="then">Attribute, element or content.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfEmpty<T>(this IEnumerable<T> values, Content then)
         {
             return values?.Any() != true ? then : string.Empty;
@@ -158,7 +158,7 @@ namespace Markupolation
         /// <param name="values">Elements.</param>
         /// <param name="then">Attribute, element or content.</param>
         /// <param name="otherwise">Fallback attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfEmpty<T>(this IEnumerable<T> values, Content then, Func<IEnumerable<T>, Content> otherwise)
         {
             return values?.Any() != true ? then : otherwise != null ? otherwise(values) : string.Empty;
@@ -170,7 +170,7 @@ namespace Markupolation
         /// <typeparam name="T">Type of elements.</typeparam>
         /// <param name="values">Elements.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNotEmpty<T>(this IEnumerable<T> values, Func<IEnumerable<T>, Content> then)
         {
             return values?.Any() == true && then != null ? then(values) : string.Empty;
@@ -183,7 +183,7 @@ namespace Markupolation
         /// <param name="values">Elements.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
         /// <param name="otherwise">Fallback attribute, element or content.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfNotEmpty<T>(this IEnumerable<T> values, Func<IEnumerable<T>, Content> then, Content otherwise)
         {
             return values?.Any() == true && then != null ? then(values) : values?.Any() != true ? otherwise : string.Empty;
@@ -195,7 +195,7 @@ namespace Markupolation
         /// <typeparam name="T">Type of value.</typeparam>
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfHasValue<T>(this T? value, Func<T, Content> then)
             where T : struct
         {
@@ -209,7 +209,7 @@ namespace Markupolation
         /// <param name="value">Value.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
         /// <param name="otherwise">Fallback attribute, element or content.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfHasValue<T>(this T? value, Func<T, Content> then, Content otherwise)
             where T : struct
         {
@@ -223,7 +223,7 @@ namespace Markupolation
         /// <param name="value">Value.</param>
         /// <param name="predicate">A function to test the value for a condition.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfMatch<T>(this T value, Func<T, bool> predicate, Func<T, Content> then)
         {
             return predicate != null && predicate(value) && then != null ? then(value) : string.Empty;
@@ -237,7 +237,7 @@ namespace Markupolation
         /// <param name="predicate">A function to test the value for a condition.</param>
         /// <param name="then">Attribute, element or content delegate.</param>
         /// <param name="otherwise">Fallback attribute, element or content delegate.</param>
-        /// <returns>Content.</returns>
+        /// <returns><see cref="Content"/></returns>
         public static Content IfMatch<T>(this T value, Func<T, bool> predicate, Func<T, Content> then, Func<T, Content> otherwise)
         {
             if (predicate == null)
