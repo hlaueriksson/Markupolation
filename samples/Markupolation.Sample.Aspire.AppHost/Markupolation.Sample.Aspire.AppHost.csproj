@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Markupolation.Sample.ApiGateway\Markupolation.Sample.ApiGateway.csproj" />
     <ProjectReference Include="..\Markupolation.Sample.Api\Markupolation.Sample.Api.csproj" />
     <ProjectReference Include="..\Markupolation.Sample.Htmx\Markupolation.Sample.Htmx.csproj" />
   </ItemGroup>
