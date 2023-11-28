@@ -370,9 +370,8 @@ The tests folder contains some [benchmarks](/tests/Markupolation.Benchmark).
 
 ## Samples
 
-The [samples](/samples) folder contains examples with:
+The [samples](/samples) folder contains examples of `Markupolation` together with:
 
-- Minimal API
-- Azure Functions
-- Blazor WebAssembly and HTML Over The Wire
-- HTMX and HTML Over The Wire
+- Blazor + Functions + Tye
+- HTMX + Api + YARP + Aspire
+- Console + Playwright

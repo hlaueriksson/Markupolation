@@ -1,5 +1,7 @@
 # Markupolation Sample Code<!-- omit in toc -->
 
+> `Markupolation` and HTML Over The Wire
+
 Content:
 
 - [Blazor + Functions + Tye](#blazor--functions--tye)
