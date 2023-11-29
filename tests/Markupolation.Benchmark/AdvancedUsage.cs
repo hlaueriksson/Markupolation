@@ -91,25 +91,26 @@ namespace Markupolation.Benchmark
         [Benchmark]
         public string Markupolation()
         {
-            return $@"{DOCTYPE() +
-            html(lang("en"),
-                head(
-                    meta(charset("utf-8")),
-                    e.title("Markupolation.Extensions"),
-                    meta(name("description"), content("Sample of how to use Markupolation.Extensions")),
-                    meta(name("viewport"), content("width=device-width, initial-scale=1"))
-                ),
-                body(
-                    ul(
-                        _numbers.Each(i => li(
-                            _fizz(i) && _buzz(i) ? strong("FizzBuzz") :
-                            _fizz(i) && !_buzz(i) ? em("Fizz") :
-                            !_fizz(i) && _buzz(i) ? em("Buzz") :
-                            i.ToString()
-                        ))
+            return
+                DOCTYPE() +
+                html(lang("en"),
+                    head(
+                        meta(charset("utf-8")),
+                        e.title("Markupolation.Extensions"),
+                        meta(name("description"), content("Sample of how to use Markupolation.Extensions")),
+                        meta(name("viewport"), content("width=device-width, initial-scale=1"))
+                    ),
+                    body(
+                        ul(
+                            _numbers.Each(i => li(
+                                _fizz(i) && _buzz(i) ? strong("FizzBuzz") :
+                                _fizz(i) && !_buzz(i) ? em("Fizz") :
+                                !_fizz(i) && _buzz(i) ? em("Buzz") :
+                                i.ToString()
+                            ))
+                        )
                     )
-                )
-            )}";
+                );
         }
 
         [Benchmark]

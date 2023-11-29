@@ -11,7 +11,7 @@ AnsiConsole.MarkupLine(string.Empty);
 AnsiConsole.MarkupLine("Instructions:");
 AnsiConsole.MarkupLine("- Use [blue]Up[/]⬆️ and [blue]Down[/]⬇️ keys to scroll through examples");
 AnsiConsole.MarkupLine("- Press [blue]Enter[/]↩️ to select an example");
-AnsiConsole.MarkupLine("- Exit with [blue]Ctrl + c[/] or select the [blue]Exit[/] example");
+AnsiConsole.MarkupLine("- Exit with [blue]Ctrl+C[/] or select the [blue]Exit[/] example");
 AnsiConsole.MarkupLine(string.Empty);
 
 var links = new[]
@@ -62,10 +62,11 @@ string GetHtml(Example example) => example switch
     _ => string.Empty,
 };
 
-string Simple() => $"{DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))}";
+string Simple() => DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")));
 
 string Elaborate() =>
-    $@"{DOCTYPE() +
+    $"""
+    {DOCTYPE() +
     html(lang("en"),
         head(
             meta(charset("utf-8")),
@@ -88,15 +89,16 @@ string Elaborate() =>
                 )
             )
         )
-    )}";
+    )}
+    """;
 
 string FizzBuzz()
 {
     bool Fizz(int i) => i % 3 == 0;
     bool Buzz(int i) => i % 5 == 0;
     var numbers = Enumerable.Range(1, 15);
-    return
-        $@"{DOCTYPE() +
+    return $"{
+        DOCTYPE() +
         html(lang("en"),
             head(
                 meta(charset("utf-8")),
