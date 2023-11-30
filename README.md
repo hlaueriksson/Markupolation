@@ -22,8 +22,8 @@ A library for generating `HTML` in `C#`
 - [When should I use Markupolation?](#when-should-i-use-markupolation)
 - [Markupolation](#markupolation)
 - [Markupolation.Extensions](#markupolationextensions)
-- [String interpolation](#string-interpolation)
-- [Using directives](#using-directives)
+- [String Interpolation](#string-interpolation)
+- [Using Directives](#using-directives)
 - [Performance](#performance)
 - [Samples](#samples)
 
@@ -177,7 +177,7 @@ The `Markupolation` API consists of static methods for `HTML` elements and attri
 These methods are chainable and together they can be used to generate whole or parts of `HTML` documents.
 The `C#` compiler makes sure that the generated `HTML` is well-formed.
 
-The API:
+### The API<!-- omit in toc -->
 
 > Click to expand the sections 👆
 
@@ -185,7 +185,7 @@ The API:
 
 <summary>View all Elements</summary>
 
-### Elements<!-- omit in toc -->
+#### Elements<!-- omit in toc -->
 
 Code:
 
@@ -312,7 +312,7 @@ Code:
 
 <summary>View all Attributes</summary>
 
-### Attributes<!-- omit in toc -->
+#### Attributes<!-- omit in toc -->
 
 Code:
 
@@ -458,7 +458,7 @@ Code:
 
 <summary>View all EventHandlerContentAttributes</summary>
 
-### EventHandlerContentAttributes<!-- omit in toc -->
+#### EventHandlerContentAttributes<!-- omit in toc -->
 
 Code:
 
@@ -554,7 +554,9 @@ Code:
 
 </details>
 
-- ℹ️ The names of element and attribut methods are in *lowercase* to reflect the `HTML` Specification:
+### Naming Convention<!-- omit in toc -->
+
+- ℹ️ The names of element and attribute methods are in *lowercase* to reflect the `HTML` Specification:
   - <https://html.spec.whatwg.org>
 - ℹ️ Names that conflict with the [`C#` keywords](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/) are suffixed with an underscore (`_`)
 - ℹ️ Attributes that contain hyphen (`-`) are converted to [snake_case](https://en.wikipedia.org/wiki/Snake_case)
@@ -592,7 +594,7 @@ Ambiguous methods for both elements and attributes:
 - `style`
 - `title`
 
-Use the predefined `e` and `a` aliases as shorthands for these methods:
+Use the predefined `e` and `a` aliases as shorthands for these ambiguous methods:
 
 - `e.title("Title element")`
 - `a.title("Title attribute")`
@@ -727,7 +729,7 @@ Conditionals on `T?`:
 
 - `IfHasValue<T>`
 
-## String interpolation
+## String Interpolation
 
 You can interpolate strings and string literals with the methods of `Markupolation`.
 
@@ -738,7 +740,7 @@ These concepts in .NET are of interest:
 - [Verbatim text](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/verbatim)
 - [Raw string literal text](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/raw-string)
 
-## Using directives
+## Using Directives
 
 When `ImplicitUsings` are enabled:
 
