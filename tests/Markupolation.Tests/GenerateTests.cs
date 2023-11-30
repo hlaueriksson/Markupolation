@@ -18,6 +18,7 @@ namespace Markupolation.Tests
     /// 1. Run <see cref="All_enums"/>
     /// 2. Compile
     /// 3. Run <see cref="All_classes"/>
+    /// 4. Run <see cref="All_markdown"/>
     /// </summary>
     [Explicit]
     public class GenerateTests
@@ -36,6 +37,14 @@ namespace Markupolation.Tests
             await Elements();
             await Attributes();
             await EventHandlerContentAttributes();
+        }
+
+        [Test]
+        public void All_markdown()
+        {
+            Markdown_Elements();
+            Markdown_Attributes();
+            Markdown_EventHandlerContentAttributes();
         }
 
         [Test]
@@ -354,6 +363,105 @@ namespace Markupolation.Tests
 
             var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\EventHandlerContentAttributes.cs";
             await File.WriteAllTextAsync(path, result.ToString());
+
+            static EventHandlerContentAttributeAttribute GetEventHandlerContentAttributeAttribute(object value)
+            {
+                var member = typeof(EventHandlerContentAttributeType).GetMember(value.ToString()!).First();
+                return member.GetCustomAttributes(false).OfType<EventHandlerContentAttributeAttribute>().Single();
+            }
+        }
+
+        [Test]
+        public void Markdown_Elements()
+        {
+            var result = new StringBuilder();
+            result.AppendLine("<details>");
+            result.AppendLine();
+            result.AppendLine("<summary>View all Elements</summary>");
+            result.AppendLine();
+            result.AppendLine("### Elements<!-- omit in toc -->");
+            result.AppendLine();
+            result.AppendLine("Code:");
+            result.AppendLine();
+            result.AppendLine("- [`Elements.cs`](https://github.com/hlaueriksson/Markupolation/blob/main/src/Markupolation/Generated/Elements.cs)");
+            result.AppendLine();
+            result.AppendLine("| Element | Description | Attributes |");
+            result.AppendLine("| --- | --- | --- |");
+            foreach (var value in Enum.GetValues(typeof(ElementType)))
+            {
+                var a = GetElementAttribute(value);
+                result.AppendLine($"| `{value}` | {a.Description} | {string.Join(", ", a.Attributes.Select(x => $"`{x}`"))} |");
+            }
+            result.AppendLine();
+            result.AppendLine("</details>");
+
+            Console.WriteLine(result.ToString());
+
+            static ElementAttribute GetElementAttribute(object value)
+            {
+                var member = typeof(ElementType).GetMember(value.ToString()!).First();
+                return member.GetCustomAttributes(false).OfType<ElementAttribute>().Single();
+            }
+        }
+
+        [Test]
+        public void Markdown_Attributes()
+        {
+            var result = new StringBuilder();
+            result.AppendLine("<details>");
+            result.AppendLine();
+            result.AppendLine("<summary>View all Attributes</summary>");
+            result.AppendLine();
+            result.AppendLine("### Attributes<!-- omit in toc -->");
+            result.AppendLine();
+            result.AppendLine("Code:");
+            result.AppendLine();
+            result.AppendLine("- [`Attributes.cs`](https://github.com/hlaueriksson/Markupolation/blob/main/src/Markupolation/Generated/Attributes.cs)");
+            result.AppendLine();
+            result.AppendLine("| Attribute | Description | Elements |");
+            result.AppendLine("| --- | --- | --- |");
+            foreach (var value in Enum.GetValues(typeof(AttributeType)))
+            {
+                var a = GetAttributeAttributes(value);
+                result.AppendLine($"| `{value}` | {string.Join("<br/>", a.Select(x => x.Description))} | {string.Join(", ", a.SelectMany(x => x.Elements).Select(x => $"`{x}`"))} |");
+            }
+            result.AppendLine();
+            result.AppendLine("</details>");
+
+            Console.WriteLine(result.ToString());
+
+            static AttributeAttribute[] GetAttributeAttributes(object value)
+            {
+                var member = typeof(AttributeType).GetMember(value.ToString()!).First();
+                return member.GetCustomAttributes(false).OfType<AttributeAttribute>().ToArray();
+            }
+        }
+
+        [Test]
+        public void Markdown_EventHandlerContentAttributes()
+        {
+            var result = new StringBuilder();
+            result.AppendLine("<details>");
+            result.AppendLine();
+            result.AppendLine("<summary>View all EventHandlerContentAttributes</summary>");
+            result.AppendLine();
+            result.AppendLine("### EventHandlerContentAttributes<!-- omit in toc -->");
+            result.AppendLine();
+            result.AppendLine("Code:");
+            result.AppendLine();
+            result.AppendLine("- [`EventHandlerContentAttributes.cs`](https://github.com/hlaueriksson/Markupolation/blob/main/src/Markupolation/Generated/EventHandlerContentAttributes.cs)");
+            result.AppendLine();
+            result.AppendLine("| Attribute | Description | Elements |");
+            result.AppendLine("| --- | --- | --- |");
+            foreach (var value in Enum.GetValues(typeof(EventHandlerContentAttributeType)))
+            {
+                var a = GetEventHandlerContentAttributeAttribute(value);
+                result.AppendLine($"| `{value}` | {a.Description} | {string.Join(", ", a.Elements.Select(x => $"`{x}`"))} |");
+            }
+            result.AppendLine();
+            result.AppendLine("</details>");
+
+            Console.WriteLine(result.ToString());
 
             static EventHandlerContentAttributeAttribute GetEventHandlerContentAttributeAttribute(object value)
             {
