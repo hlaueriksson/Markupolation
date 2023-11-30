@@ -379,7 +379,7 @@ namespace Markupolation.Tests
             result.AppendLine();
             result.AppendLine("<summary>View all Elements</summary>");
             result.AppendLine();
-            result.AppendLine("### Elements<!-- omit in toc -->");
+            result.AppendLine("#### Elements<!-- omit in toc -->");
             result.AppendLine();
             result.AppendLine("Code:");
             result.AppendLine();
@@ -412,7 +412,7 @@ namespace Markupolation.Tests
             result.AppendLine();
             result.AppendLine("<summary>View all Attributes</summary>");
             result.AppendLine();
-            result.AppendLine("### Attributes<!-- omit in toc -->");
+            result.AppendLine("#### Attributes<!-- omit in toc -->");
             result.AppendLine();
             result.AppendLine("Code:");
             result.AppendLine();
@@ -445,7 +445,7 @@ namespace Markupolation.Tests
             result.AppendLine();
             result.AppendLine("<summary>View all EventHandlerContentAttributes</summary>");
             result.AppendLine();
-            result.AppendLine("### EventHandlerContentAttributes<!-- omit in toc -->");
+            result.AppendLine("#### EventHandlerContentAttributes<!-- omit in toc -->");
             result.AppendLine();
             result.AppendLine("Code:");
             result.AppendLine();
