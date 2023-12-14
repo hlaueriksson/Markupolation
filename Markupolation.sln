@@ -31,7 +31,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markupolation.Sample.Aspire
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markupolation.Sample.Aspire.ServiceDefaults", "samples\Markupolation.Sample.Aspire.ServiceDefaults\Markupolation.Sample.Aspire.ServiceDefaults.csproj", "{EE073FAF-A07C-4E57-AAB1-8EEBDE435F64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Markupolation.Sample.ApiGateway", "samples\Markupolation.Sample.ApiGateway\Markupolation.Sample.ApiGateway.csproj", "{165ABD2F-8BA9-4591-9BEF-3CEBE20665B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Markupolation.Sample.ApiGateway", "samples\Markupolation.Sample.ApiGateway\Markupolation.Sample.ApiGateway.csproj", "{165ABD2F-8BA9-4591-9BEF-3CEBE20665B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Markupolation.Razor", "tests\Markupolation.Razor\Markupolation.Razor.csproj", "{45F8CA4B-B958-42AF-A927-5AD6E50A7047}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{165ABD2F-8BA9-4591-9BEF-3CEBE20665B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{165ABD2F-8BA9-4591-9BEF-3CEBE20665B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{165ABD2F-8BA9-4591-9BEF-3CEBE20665B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45F8CA4B-B958-42AF-A927-5AD6E50A7047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F8CA4B-B958-42AF-A927-5AD6E50A7047}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F8CA4B-B958-42AF-A927-5AD6E50A7047}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F8CA4B-B958-42AF-A927-5AD6E50A7047}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{5B1AF412-2078-4C90-96C2-66E960DFF59D} = {FD331EA4-9F0D-4DD3-BDE0-F5A14DBFB42D}
 		{EE073FAF-A07C-4E57-AAB1-8EEBDE435F64} = {FD331EA4-9F0D-4DD3-BDE0-F5A14DBFB42D}
 		{165ABD2F-8BA9-4591-9BEF-3CEBE20665B0} = {FD331EA4-9F0D-4DD3-BDE0-F5A14DBFB42D}
+		{45F8CA4B-B958-42AF-A927-5AD6E50A7047} = {950F23E7-76D3-44CA-B730-4F4D0C35E32B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {07E18CD0-C1C9-41F1-A41D-7E9721A2B045}

@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using HtmlTags;
+using RazorSlices;
 using static HyperTextExpression.HtmlExp;
 
 namespace Markupolation.Benchmark
@@ -158,15 +160,25 @@ namespace Markupolation.Benchmark
             return doc.ToString();
         }
 
-        public static bool IsValid()
+        [Benchmark]
+        public async Task<string> RazorSlices()
+        {
+            _builder.Clear();
+            await RazorSlice.Create("AdvancedUsage.cshtml", _numbers).RenderAsync(_builder);
+            return _builder.ToString();
+        }
+
+        public static async Task<bool> IsValid()
         {
             var benchmark = new AdvancedUsage();
             benchmark.GlobalSetup();
+            var expected = benchmark.Markupolation();
             return
-                benchmark.Markupolation() == benchmark.StringBuilder() &&
-                benchmark.Markupolation() == benchmark.StringFormat(); /*&&
-                benchmark.Markupolation() == benchmark.HtmlTags().Minify() &&
-                benchmark.Markupolation() == benchmark.HyperTextExpression().Minify();*/
+                expected.IsEquivalentTo(benchmark.StringBuilder()) &&
+                expected.IsEquivalentTo(benchmark.StringFormat()) &&
+                //expected.IsEquivalentTo(benchmark.HtmlTags()) &&
+                //expected.IsEquivalentTo(benchmark.HyperTextExpression()) &&
+                expected.IsEquivalentTo(await benchmark.RazorSlices());
         }
     }
 }

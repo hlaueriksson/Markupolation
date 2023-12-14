@@ -1,0 +1,43 @@
+@inherits RazorSliceHttpResult<IEnumerable<int>>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Markupolation.Extensions</title>
+    <meta name="description" content="Sample of how to use Markupolation.Extensions" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body>
+    <ul>
+        @foreach (var i in Model)
+        {
+            @if (_fizz(i) && _buzz(i))
+            {
+                <li>
+                    <strong>FizzBuzz</strong>
+                </li>
+            }
+            else if (_fizz(i))
+            {
+                <li>
+                    <em>Fizz</em>
+                </li>
+            }
+            else if (_buzz(i))
+            {
+                <li>
+                    <em>Buzz</em>
+                </li>
+            }
+            else
+            {
+                <li>@i</li>
+            }
+        }
+    </ul>
+</body>
+</html>
+@functions {
+    Func<int, bool> _fizz = (int i) => i % 3 == 0;
+    Func<int, bool> _buzz = (int i) => i % 5 == 0;
+}
