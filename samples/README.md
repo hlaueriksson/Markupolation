@@ -26,9 +26,8 @@ Blazor WebAssembly + Azure Functions:
 Prerequisite:
 
 1. [Install .NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
-2. [Install .NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
-3. [Install the Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local)
-4. [Install Tye](https://github.com/dotnet/tye/blob/main/docs/getting_started.md#installing-tye)
+2. [Install the Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local)
+3. [Install Tye](https://github.com/dotnet/tye/blob/main/docs/getting_started.md#installing-tye)
 
 Run sample:
 
