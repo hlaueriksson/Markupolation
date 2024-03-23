@@ -2,10 +2,12 @@ using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+builder.Services.AddProblemDetails();
 builder.AddServiceDefaults();
 
 var app = builder.Build();
 app.UseCors();
+app.UseExceptionHandler();
 app.UseHttpsRedirection();
 app.MapDefaultEndpoints();
 
