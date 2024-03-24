@@ -1,11 +1,12 @@
 @page "/weather"
-@inject HttpClient Http
+@attribute [StreamRendering]
+@inject IHttpClientFactory ClientFactory
 
 <PageTitle>Weather</PageTitle>
 
 <h1>Weather</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>This component demonstrates showing data.</p>
 
 @if (forecasts == null)
 {
@@ -21,6 +22,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await Http.GetStringAsync("/api/weather");
+        var client = ClientFactory.CreateClient("Functions");
+        forecasts = await client.GetStringAsync("/api/weather");
     }
 }

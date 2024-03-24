@@ -5,12 +5,8 @@
       "samplingSettings": {
         "isEnabled": true,
         "excludedTypes": "Request"
-      }
-    }
-  },
-  "extensions": {
-    "http": {
-      "routePrefix": ""
+      },
+      "enableLiveMetricsFilters": true
     }
   }
 }

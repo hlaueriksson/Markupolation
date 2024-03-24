@@ -15,6 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Markupolation.Sample.ApiGateway\Markupolation.Sample.ApiGateway.csproj" />
     <ProjectReference Include="..\Markupolation.Sample.Api\Markupolation.Sample.Api.csproj" />
+    <ProjectReference Include="..\Markupolation.Sample.Blazor\Markupolation.Sample.Blazor.csproj" />
+    <ProjectReference Include="..\Markupolation.Sample.Functions\Markupolation.Sample.Functions.csproj" />
     <ProjectReference Include="..\Markupolation.Sample.Htmx\Markupolation.Sample.Htmx.csproj" />
   </ItemGroup>
 

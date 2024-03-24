@@ -1,5 +1,5 @@
 @page "/"
-@inject HttpClient Http
+@inject IHttpClientFactory ClientFactory
 
 <PageTitle>Home</PageTitle>
 
@@ -10,6 +10,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        hello = await Http.GetStringAsync("/api/hello");
+        var client = ClientFactory.CreateClient("Functions");
+        hello = await client.GetStringAsync("/api/hello");
     }
 }

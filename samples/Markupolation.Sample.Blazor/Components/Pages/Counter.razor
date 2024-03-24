@@ -1,5 +1,6 @@
 @page "/counter"
-@inject HttpClient Http
+@rendermode InteractiveServer
+@inject IHttpClientFactory ClientFactory
 
 <PageTitle>Counter</PageTitle>
 
@@ -10,12 +11,18 @@
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
+    private HttpClient client = null!;
     private int currentCount = 0;
     private string words = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        client = ClientFactory.CreateClient("Functions");
+    }
 
     private async Task IncrementCount()
     {
         currentCount++;
-        words = await Http.GetStringAsync($"/api/counter/{currentCount}");
+        words = await client.GetStringAsync($"/api/counter/{currentCount}");
     }
 }

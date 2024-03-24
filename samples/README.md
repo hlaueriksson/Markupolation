@@ -4,44 +4,46 @@
 
 Content:
 
-- [Blazor + Functions + Tye](#blazor--functions--tye)
+- [Blazor + Functions + Aspire](#blazor--functions--aspire)
 - [HTMX + Api + YARP + Aspire](#htmx--api--yarp--aspire)
 - [Console + Playwright](#console--playwright)
 
 This code has been written with *Visual Studio 2022 [Preview](https://visualstudio.microsoft.com/vs/preview/)*.
 
-## Blazor + Functions + Tye
+## Blazor + Functions + Aspire
 
 > [Blazor](https://learn.microsoft.com/en-us/aspnet/core/blazor/) is a .NET frontend web framework that supports both server-side rendering and client interactivity in a single programming model.
 >
 > [Azure Functions](https://learn.microsoft.com/en-us/azure/azure-functions/functions-overview) is a serverless solution that allows you to write less code, maintain less infrastructure, and save on costs.
 >
-> [Tye](https://github.com/dotnet/tye) is a developer tool that makes developing, testing, and deploying microservices and distributed applications easier.
+> [.NET Aspire](https://github.com/dotnet/aspire) is an opinionated, cloud ready stack for building observable, production ready, distributed applications.
 
-Blazor WebAssembly + Azure Functions:
+Blazor Web App + Azure Functions + .NET Aspire:
 
 - `Markupolation.Sample.Blazor`
 - `Markupolation.Sample.Functions`
+- `Markupolation.Sample.Aspire.AppHost`
+- `Markupolation.Sample.Aspire.ServiceDefaults`
 
 Prerequisite:
 
 1. [Install .NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
 2. [Install the Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local)
-3. [Install Tye](https://github.com/dotnet/tye/blob/main/docs/getting_started.md#installing-tye)
+3. [Install .NET Aspire workload](https://learn.microsoft.com/en-us/dotnet/aspire/setup-tooling)
 
 Run sample:
 
 ```cmd
-tye run
+dotnet run --project Markupolation.Sample.Aspire.AppHost
 ```
 
-Blazor Site (Ingress):
+Blazor Site:
 
-- <https://localhost:8080>
+- <http://localhost:5039/>
 
-Tye Dashboard:
+Aspire Dashboard:
 
-- <http://localhost:8000>
+- <http://localhost:15228/>
 
 ![Markupolation.Sample.Blazor](Markupolation.Sample.Blazor.gif)
 
