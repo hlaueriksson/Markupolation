@@ -21,8 +21,7 @@ public static class Extensions
             debugPort.ToString()
         };
 
-        return builder.AddResource(new ExecutableResource(name, "func", projectDirectory))
-            .WithArgs(args)
+        return builder.AddExecutable(name, "func", projectDirectory, args)
             .WithOtlpExporter();
     }
 }
