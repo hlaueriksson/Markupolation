@@ -1,31 +1,28 @@
-namespace Markupolation.Sample.Aspire.AppHost
+public static class Extensions
 {
-    public static class Extensions
+    public static IResourceBuilder<ExecutableResource> AddAzureFunction<TProjectMetadata>(
+        this IDistributedApplicationBuilder builder,
+        string name,
+        int port,
+        int debugPort)
+        where TProjectMetadata : IProjectMetadata, new()
     {
-        public static IResourceBuilder<ExecutableResource> AddAzureFunction<TProjectMetadata>(
-            this IDistributedApplicationBuilder builder,
-            string name,
-            int port,
-            int debugPort)
-            where TProjectMetadata : IProjectMetadata, new()
-        {
-            var projectMetadata = new TProjectMetadata();
-            var projectPath = projectMetadata.ProjectPath;
-            var projectDirectory = Path.GetDirectoryName(projectPath)!;
+        var projectMetadata = new TProjectMetadata();
+        var projectPath = projectMetadata.ProjectPath;
+        var projectDirectory = Path.GetDirectoryName(projectPath)!;
 
-            var args = new[]
-            {
+        var args = new[]
+        {
             "host",
             "start",
             "--port",
             port.ToString(),
             "--nodeDebugPort",
-            debugPort.ToString(),
-            "--pause-on-error"
+            debugPort.ToString()
         };
 
-            return builder.AddResource(new ExecutableResource(name, "func", projectDirectory, args))
-                .WithOtlpExporter();
-        }
+        return builder.AddResource(new ExecutableResource(name, "func", projectDirectory))
+            .WithArgs(args)
+            .WithOtlpExporter();
     }
 }

@@ -9,15 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Aspire.Hosting" Version="8.0.0-preview.4.24156.9" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Markupolation.Sample.ApiGateway\Markupolation.Sample.ApiGateway.csproj" />
     <ProjectReference Include="..\Markupolation.Sample.Api\Markupolation.Sample.Api.csproj" />
     <ProjectReference Include="..\Markupolation.Sample.Blazor\Markupolation.Sample.Blazor.csproj" />
     <ProjectReference Include="..\Markupolation.Sample.Functions\Markupolation.Sample.Functions.csproj" />
     <ProjectReference Include="..\Markupolation.Sample.Htmx\Markupolation.Sample.Htmx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.0-preview.5.24201.12" />
   </ItemGroup>
 
 </Project>

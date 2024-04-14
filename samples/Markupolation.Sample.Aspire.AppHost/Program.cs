@@ -1,5 +1,3 @@
-using Markupolation.Sample.Aspire.AppHost;
-
 var builder = DistributedApplication.CreateBuilder(args);
 
 var api = builder.AddProject<Projects.Markupolation_Sample_Api>("api");
