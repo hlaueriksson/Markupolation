@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="Markupolation.Sample.Blazor.styles.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <title>Counter</title>
+  </head>
+  <body>
+    <div class="page" b-c8bafha7iy="">
+      <div class="sidebar" b-c8bafha7iy="">
+        <div class="top-row ps-3 navbar navbar-dark" b-iyzaop6e7n="">
+          <div class="container-fluid" b-iyzaop6e7n="">
+            <a class="navbar-brand" href="" b-iyzaop6e7n="">Blazor</a>
+          </div>
+        </div>
+        <input type="checkbox" title="Navigation menu" class="navbar-toggler" b-iyzaop6e7n="">
+        <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()" b-iyzaop6e7n="">
+          <nav class="flex-column" b-iyzaop6e7n="">
+            <div class="nav-item px-3" b-iyzaop6e7n="">
+              <a href="" class="nav-link">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true" b-iyzaop6e7n=""></span>
+                Home
+              </a>
+            </div>
+            <div class="nav-item px-3" b-iyzaop6e7n="">
+              <a href="counter" class="nav-link active" aria-current="page">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true" b-iyzaop6e7n=""></span>
+                Counter
+              </a>
+            </div>
+            <div class="nav-item px-3" b-iyzaop6e7n="">
+              <a href="weather" class="nav-link">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true" b-iyzaop6e7n=""></span>
+                Weather
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <main b-c8bafha7iy="">
+        <div class="top-row px-4" b-c8bafha7iy="">
+          <a href="https://github.com/hlaueriksson/Markupolation" target="_blank" b-c8bafha7iy="">About</a>
+        </div>
+        <article class="content px-4" b-c8bafha7iy="">
+          <!--Blazor:{"type":"server","prerenderId":"8b97c8e6610448e5bf7270f86164d5df","key":{"locationHash":"1E6B535327332BAC28238446C66A2011C653C01AB40376FB49D76D07FA83E4A0:0","formattedComponentKey":""},"sequence":0,"descriptor":"CfDJ8LfUv1c\u002BJe9DlruMg8NlNz1j7KpuRoMFYuC11zjP6B5iM/ynEYJVLVB7zrhb2N66c4\u002BGEMf0YtLAUtNju75IPD/\u002B1Fsujonr4/yrIrNSgkCpz\u002BeiM4/yMVHX2CLRt5gkcUwAz80/9MLDzNX8GkG6XON6bF4l6T2hZLEvz3YZlJnm7xq/odt5WOBwCXsC0x\u002BUbPUwW8sOS0EVCVRa4zPte4JjhSx\u002B7CVOxIjLbkppeK1YMKq0gLjfiAYWxUdcyxXF9I5aNDvHMxGbF6UA9cW20uL6TABKFqvSzYI1c71XZAZSOval3l5RsiURUpoNoWC02jX0xIQ9sNCw21a\u002BU27alouu0GcjL/CQlS8nJ\u002B6wMHBHaPHTHlVxT/akfhinUy8pgft2qdTAok7GUv9S1a2K5ed6fO3VGCrnisQsLOhYXi7ySVOxb1wAUmKt99Mo3kyQyWL8oQwXCefwr4fbAwHTHiFKH4q8\u002BU29ljDeknyxKylwkAPzxOABFgKE2Cfu9twZSZB10qGWyFiZUc0qG/qnK/yAW\u002BsYodINd/TWZ8HSreRjLTmLxgWnGMX7QVDlG6AIknwiqqRKyoclsEMtdmSFZ2g="}-->
+          <h1>Counter</h1>
+          <p role="status">Current count:
+          </p>
+          <button class="btn btn-primary">Click me</button>
+          <!--Blazor:{"prerenderId":"8b97c8e6610448e5bf7270f86164d5df"}-->
+        </article>
+      </main>
+    </div>
+    <div id="blazor-error-ui" b-c8bafha7iy="">
+      An unhandled error has occurred.
+      <a href="" class="reload" b-c8bafha7iy="">Reload</a>
+      <a class="dismiss" b-c8bafha7iy="">🗙</a>
+    </div>
+    <script src="_framework/blazor.web.js"></script>
+  </body>
+</html>
+<!--Blazor-Server-Component-State:CfDJ8LfUv1c+Je9DlruMg8NlNz0zd8vzJhnU5TDCqhFRVA9aqSZ0C3d0fHyjR2/jMmyqwjRSSDHUoUTMzTiunW/2yN4ruuNZkrOFkzTTSIaspNAzZKORgvR/qbVTh8FUzm/LXXosIJmH2fd/45ypr5+Z56ISKgNSst4urQNU2o0cncXSDGx4IetI4J64Lfu2GNxblG6tZZzUl8Ih2/I0qlGwjkEksvsuSIzoW4ggeL5Sr+Rv9HLRWalV8Feq7vljFEEEm+hsx6w2gYBA0Yi0c5E56PFqgnWDTVLFi0hUE/cp5R5gP6JpUgX5WTWNrcHV48nx69XX5y+hvbBReIUnyO2ICplwixpspvJDoMZ78MPVyfi5iOSyxb2gn8PV1aCypPwB/wtb9gsMWbqm1spGV8hg6Z79kznEnoc4NhveRB1F6JFo5/sJkhtr15mdvEaaU8ewzi1DahGxaPeH1MEkvT+26cpYxjlZk1NNnYw1TQAI8cy3n71qwAHkckRbIOCtldVIIhgkB6yxckEYbVvydnmYfyTDwbCZiMbW0XnkTd0ZJEll-->

@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/">
+    <link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="Markupolation.Sample.Blazor.styles.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    
+    <!--bl:19-->
+    <title>Weather</title>
+    <!--/bl:19-->
+  </head>
+  <body>
+    <div class="page" b-c8bafha7iy="">
+      <div class="sidebar" b-c8bafha7iy="">
+        <div class="top-row ps-3 navbar navbar-dark" b-iyzaop6e7n="">
+          <div class="container-fluid" b-iyzaop6e7n="">
+            <a class="navbar-brand" href="" b-iyzaop6e7n="">Blazor</a>
+          </div>
+        </div>
+        <input type="checkbox" title="Navigation menu" class="navbar-toggler" b-iyzaop6e7n="">
+        <div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()" b-iyzaop6e7n="">
+          <nav class="flex-column" b-iyzaop6e7n="">
+            <div class="nav-item px-3" b-iyzaop6e7n="">
+              <a href="" class="nav-link">
+                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true" b-iyzaop6e7n=""></span>
+                Home
+              </a>
+            </div>
+            <div class="nav-item px-3" b-iyzaop6e7n="">
+              <a href="counter" class="nav-link">
+                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true" b-iyzaop6e7n=""></span>
+                Counter
+              </a>
+            </div>
+            <div class="nav-item px-3" b-iyzaop6e7n="">
+              <a href="weather" class="nav-link active" aria-current="page">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true" b-iyzaop6e7n=""></span>
+                Weather
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <main b-c8bafha7iy="">
+        <div class="top-row px-4" b-c8bafha7iy="">
+          <a href="https://github.com/hlaueriksson/Markupolation" target="_blank" b-c8bafha7iy="">About</a>
+        </div>
+        <article class="content px-4" b-c8bafha7iy="">
+          <!--bl:13-->
+          <!--bl:17-->
+          <!--bl:18-->
+          <!--/bl:18-->
+          <!--/bl:17-->
+          <h1>Weather</h1>
+          <p>This component demonstrates showing data.</p>
+          <p>
+            <em>Loading...</em>
+          </p>
+          <!--/bl:13-->
+        </article>
+      </main>
+    </div>
+    <div id="blazor-error-ui" b-c8bafha7iy="">
+      An unhandled error has occurred.
+      <a href="" class="reload" b-c8bafha7iy="">Reload</a>
+      <a class="dismiss" b-c8bafha7iy="">🗙</a>
+    </div>
+    <script src="_framework/blazor.web.js"></script>
+    <blazor-ssr>
+      <template blazor-component-id="19"><title>Weather</title></template>
+      <template blazor-component-id="13">
+        <!--bl:17-->
+        <!--bl:18-->
+        <!--/bl:18-->
+        <!--/bl:17--><h1>Weather</h1><p>This component demonstrates showing data.</p><table class="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Temp. (C)</th>
+              <th>Temp. (F)</th>
+              <th>Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>2018-05-06</td>
+              <td>1</td>
+              <td>33</td>
+              <td>Freezing</td>
+            </tr>
+            <tr>
+              <td>2018-05-07</td>
+              <td>14</td>
+              <td>57</td>
+              <td>Bracing</td>
+            </tr>
+            <tr>
+              <td>2018-05-08</td>
+              <td>-13</td>
+              <td>9</td>
+              <td>Freezing</td>
+            </tr>
+            <tr>
+              <td>2018-05-09</td>
+              <td>-16</td>
+              <td>4</td>
+              <td>Balmy</td>
+            </tr>
+            <tr>
+              <td>2018-05-10</td>
+              <td>-2</td>
+              <td>29</td>
+              <td>Chilly</td>
+            </tr>
+          </tbody>
+        </table></template>
+      <blazor-ssr-end></blazor-ssr-end>
+    </blazor-ssr>
+    <!--Blazor-Server-Component-State:CfDJ8LfUv1c+Je9DlruMg8NlNz0UZoQgEsHEnk2Os6nSQLkjVdtUt2oofBaFAO9MHqTvi5OkKfPR4CIkOeUt/NGzG5dUf18moNBWyRQgHIDQ/4YTw9hGQK2EqtkL8pfV/mPXLCXeTmmoehwa2IzeT/qV7sHzvh92rcOJ0dYVxpQ5qljvnes+Se17o1oETgQqGU33uB7y6tuBmLr5cZaanvVY/9MNy20p7lyQulLpvEX64HpuI4E7luvuvPryJUxOS36pybrOBMDSW7ecjmc74wdlbg/GIBPzYkxrdrIrehZQzMLoAfqr/E8yzVeiKrBfikiwv7ta0EL9B+gbbo0njEO/aJKm75wqAdhKdm6inyzYbiDMkU6CUzHJ9cbEAV1Sk5RrSesfXkGCbM1nzw3V611mKfb067CU599XbYOi1tygwuIPc/UOwL8J/s0t2Gt3xF0W28qZkat6dbaAhaS6xaq3LNB3jkoB3k2y1DHXoG1wecRxJpXHEkS2lQpQL2NYCP4dpwPNtD14GAGaXszZZjuIHqVghWL4tTeka4LVGzxIRPPe-->
+  </body>
+</html>

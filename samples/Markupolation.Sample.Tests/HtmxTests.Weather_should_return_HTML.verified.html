@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href=".">
+    <link href="bootstrap.min.css" rel="stylesheet">
+    <link href="app.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+    <title>Weather</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="page">
+        <div class="sidebar">
+          <div class="top-row ps-3 navbar navbar-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/">HTMX</a>
+              <button title="Navigation menu" class="navbar-toggler">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+          </div>
+          <div class="nav-scrollable">
+            <nav class="flex-column">
+              <div class="nav-item px-3">
+                <a href="index.html" class="nav-link">
+                  <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span>
+                  Home
+                </a>
+              </div>
+              <div class="nav-item px-3">
+                <a href="counter.html" class="nav-link">
+                  <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span>
+                  Counter
+                </a>
+              </div>
+              <div class="nav-item px-3">
+                <a href="weather.html" class="nav-link active">
+                  <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span>
+                  Weather
+                </a>
+              </div>
+            </nav>
+          </div>
+        </div>
+        <main>
+          <div class="top-row px-4">
+            <a href="https://github.com/hlaueriksson/Markupolation" target="_blank">About</a>
+          </div>
+          <article class="content px-4">
+            <h1>Weather</h1>
+            <p>This component demonstrates fetching data from the server.</p>
+            
+            <!-- Lazy Loading -->
+            <div hx-get="/api/weather" hx-trigger="load">
+              <p>
+                <em>Loading...</em>
+              </p>
+            </div>
+          </article>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>
