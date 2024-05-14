@@ -7,14 +7,8 @@
     <link href="bootstrap.min.css" rel="stylesheet">
     <link href="app.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
-    <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <title>Counter</title>
-    <script>
-        let currentCount = 0;
-        function incrementCount() {
-            return ++currentCount;
-        }
-    </script>
 </head>
 <body>
     <div id="app">
@@ -53,13 +47,16 @@
                     <a href="https://github.com/hlaueriksson/Markupolation" target="_blank">About</a>
                 </div>
                 <article class="content px-4">
-                    <h1>Counter</h1>
-                    <p role="status">Current count: <output id="result"></output></p>
-                    <!-- Click to Load -->
-                    <button class="btn btn-primary"
-                            hx-vals='javascript:{count: incrementCount()}'
-                            hx-get="/api/counter/"
-                            hx-target="#result">Click me</button>
+                    <output id="result">
+                        <h1>Counter</h1>
+                        <p role="status">Current count: </p>
+                        <!-- Click to Load -->
+                        <button class="btn btn-primary"
+                                hx-get="/api/counter/1"
+                                hx-target="#result">
+                            Click me
+                        </button>
+                    </output>
                 </article>
             </main>
         </div>

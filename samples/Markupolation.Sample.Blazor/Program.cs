@@ -8,7 +8,7 @@ builder.AddServiceDefaults();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddHttpClient("Functions", client => client.BaseAddress = new("http://localhost:7074")); // http://functions
+builder.Services.AddHttpClient("Functions", client => client.BaseAddress = new("http://localhost:7071")); // http://functions
 
 var app = builder.Build();
 

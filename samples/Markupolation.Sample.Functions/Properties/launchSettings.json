@@ -2,7 +2,7 @@
   "profiles": {
     "Markupolation.Sample.Functions": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7261",
+      "commandLineArgs": "--port 7071",
       "launchBrowser": false
     }
   }
