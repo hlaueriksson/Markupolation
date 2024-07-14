@@ -2,11 +2,14 @@ namespace Markupolation;
 
 internal enum EventHandlerContentAttributeType
 {
+    [EventHandlerContentAttribute("afterprint event handler for Window object", ElementType.body)]
+    onafterprint,
+
     [EventHandlerContentAttribute("auxclick event handler")]
     onauxclick,
 
-    [EventHandlerContentAttribute("afterprint event handler for Window object", ElementType.body)]
-    onafterprint,
+    [EventHandlerContentAttribute("beforeinput event handler")]
+    onbeforeinput,
 
     [EventHandlerContentAttribute("beforematch event handler")]
     onbeforematch,
@@ -170,8 +173,14 @@ internal enum EventHandlerContentAttributeType
     [EventHandlerContentAttribute("pagehide event handler for Window object", ElementType.body)]
     onpagehide,
 
+    [EventHandlerContentAttribute("pagereveal event handler for Window object", ElementType.body)]
+    onpagereveal,
+
     [EventHandlerContentAttribute("pageshow event handler for Window object", ElementType.body)]
     onpageshow,
+
+    [EventHandlerContentAttribute("pageswap event handler for Window object", ElementType.body)]
+    onpageswap,
 
     [EventHandlerContentAttribute("paste event handler")]
     onpaste,

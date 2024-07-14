@@ -298,10 +298,10 @@ internal enum AttributeType
     [Attribute("Makes the element a popover element", true, false)]
     popover,
 
-    [Attribute("Targets a popover element to toggle, show, or hide", false, false, ElementType.input, ElementType.button)]
+    [Attribute("Targets a popover element to toggle, show, or hide", false, false, ElementType.button, ElementType.input)]
     popovertarget,
 
-    [Attribute("Indicates whether a targeted popover element is to be toggled, shown, or hidden", false, false, ElementType.input, ElementType.button)]
+    [Attribute("Indicates whether a targeted popover element is to be toggled, shown, or hidden", false, false, ElementType.button, ElementType.input)]
     popovertargetaction,
 
     [Attribute("Poster frame to show prior to video playback", false, false, ElementType.video)]
@@ -342,11 +342,17 @@ internal enum AttributeType
     [Attribute("Whether the option is selected by default", false, true, ElementType.option)]
     selected,
 
-    [Attribute("Enables streaming declarative shadow roots", false, false, ElementType.template)]
-    shadowrootmode,
+    [Attribute("Sets clonable on a declarative shadow root", false, true, ElementType.template)]
+    shadowrootclonable,
 
     [Attribute("Sets delegates focus on a declarative shadow root", false, true, ElementType.template)]
     shadowrootdelegatesfocus,
+
+    [Attribute("Enables streaming declarative shadow roots", false, false, ElementType.template)]
+    shadowrootmode,
+
+    [Attribute("Sets serializable on a declarative shadow root", false, true, ElementType.template)]
+    shadowrootserializable,
 
     [Attribute("The kind of shape to be created in an image map", false, false, ElementType.area)]
     shape,
@@ -429,4 +435,7 @@ internal enum AttributeType
 
     [Attribute("How the value of the form control is to be wrapped for form submission", false, false, ElementType.textarea)]
     wrap,
+
+    [Attribute("Whether the element can offer writing suggestions or not", true, false)]
+    writingsuggestions,
 }

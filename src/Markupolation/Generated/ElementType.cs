@@ -296,7 +296,7 @@ internal enum ElementType
     [Element("Table cell", false, AttributeType.colspan, AttributeType.rowspan, AttributeType.headers)]
     td,
 
-    [Element("Template", false)]
+    [Element("Template", false, AttributeType.shadowrootmode, AttributeType.shadowrootdelegatesfocus, AttributeType.shadowrootclonable, AttributeType.shadowrootserializable)]
     template,
 
     [Element("Multiline text controls", false, AttributeType.autocomplete, AttributeType.cols, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.maxlength, AttributeType.minlength, AttributeType.name, AttributeType.placeholder, AttributeType.readonly_, AttributeType.required, AttributeType.rows, AttributeType.wrap)]

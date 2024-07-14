@@ -794,6 +794,7 @@ public static partial class Elements
     public static Element td(object content) => new(ElementType.td, false, content?.ToString()!);
 
     /// <summary>Template.</summary>
+    /// <remarks>Attributes: <see cref="Attributes.shadowrootmode(string)"/>, <see cref="Attributes.shadowrootdelegatesfocus()"/>, <see cref="Attributes.shadowrootclonable()"/>, <see cref="Attributes.shadowrootserializable()"/>.</remarks>
     /// <param name="content">Attributes, elements and content.</param>
     /// <returns><c><![CDATA[<template></template>]]></c></returns>
     public static Element template(params Content[] content) => new(ElementType.template, false, content);

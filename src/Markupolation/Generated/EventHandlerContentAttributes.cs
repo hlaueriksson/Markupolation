@@ -3,16 +3,21 @@ namespace Markupolation;
 /// <summary>HTML event handler content attributes.</summary>
 public static class EventHandlerContentAttributes
 {
-    /// <summary>auxclick event handler.</summary>
-    /// <param name="value">Attribute value.</param>
-    /// <returns><c>onauxclick="{value}"</c></returns>
-    public static Attribute onauxclick(string value) => new("onauxclick", value);
-
     /// <summary>afterprint event handler for Window object.</summary>
     /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
     /// <returns><c>onafterprint="{value}"</c></returns>
     public static Attribute onafterprint(string value) => new("onafterprint", value);
+
+    /// <summary>auxclick event handler.</summary>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>onauxclick="{value}"</c></returns>
+    public static Attribute onauxclick(string value) => new("onauxclick", value);
+
+    /// <summary>beforeinput event handler.</summary>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>onbeforeinput="{value}"</c></returns>
+    public static Attribute onbeforeinput(string value) => new("onbeforeinput", value);
 
     /// <summary>beforematch event handler.</summary>
     /// <param name="value">Attribute value.</param>
@@ -293,11 +298,23 @@ public static class EventHandlerContentAttributes
     /// <returns><c>onpagehide="{value}"</c></returns>
     public static Attribute onpagehide(string value) => new("onpagehide", value);
 
+    /// <summary>pagereveal event handler for Window object.</summary>
+    /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>onpagereveal="{value}"</c></returns>
+    public static Attribute onpagereveal(string value) => new("onpagereveal", value);
+
     /// <summary>pageshow event handler for Window object.</summary>
     /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
     /// <returns><c>onpageshow="{value}"</c></returns>
     public static Attribute onpageshow(string value) => new("onpageshow", value);
+
+    /// <summary>pageswap event handler for Window object.</summary>
+    /// <remarks>Elements: <see cref="Elements.body(Content[])"/>.</remarks>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>onpageswap="{value}"</c></returns>
+    public static Attribute onpageswap(string value) => new("onpageswap", value);
 
     /// <summary>paste event handler.</summary>
     /// <param name="value">Attribute value.</param>

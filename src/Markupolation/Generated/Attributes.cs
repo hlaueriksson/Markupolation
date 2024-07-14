@@ -944,7 +944,7 @@ public static partial class Attributes
     /// <summary>
     /// Targets a popover element to toggle, show, or hide.
     /// </summary>
-    /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.button(Content[])"/>.</remarks>
+    /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
     /// <returns><c>popovertarget="{value}"</c></returns>
     public static Attribute popovertarget(string value) => new(AttributeType.popovertarget, value);
@@ -955,7 +955,7 @@ public static partial class Attributes
     /// <summary>
     /// Indicates whether a targeted popover element is to be toggled, shown, or hidden.
     /// </summary>
-    /// <remarks>Elements: <see cref="Elements.input(Content[])"/>, <see cref="Elements.button(Content[])"/>.</remarks>
+    /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
     /// <returns><c>popovertargetaction="{value}"</c></returns>
     public static Attribute popovertargetaction(string value) => new(AttributeType.popovertargetaction, value);
@@ -1082,6 +1082,20 @@ public static partial class Attributes
     public static Attribute selected() => new(AttributeType.selected);
 
     /// <summary>
+    /// Sets clonable on a declarative shadow root.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
+    /// <returns><c>shadowrootclonable</c></returns>
+    public static Attribute shadowrootclonable() => new(AttributeType.shadowrootclonable);
+
+    /// <summary>
+    /// Sets delegates focus on a declarative shadow root.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
+    /// <returns><c>shadowrootdelegatesfocus</c></returns>
+    public static Attribute shadowrootdelegatesfocus() => new(AttributeType.shadowrootdelegatesfocus);
+
+    /// <summary>
     /// Enables streaming declarative shadow roots.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
@@ -1093,11 +1107,11 @@ public static partial class Attributes
     public static Attribute shadowrootmode(object value) => new(AttributeType.shadowrootmode, value?.ToString());
 
     /// <summary>
-    /// Sets delegates focus on a declarative shadow root.
+    /// Sets serializable on a declarative shadow root.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
-    /// <returns><c>shadowrootdelegatesfocus</c></returns>
-    public static Attribute shadowrootdelegatesfocus() => new(AttributeType.shadowrootdelegatesfocus);
+    /// <returns><c>shadowrootserializable</c></returns>
+    public static Attribute shadowrootserializable() => new(AttributeType.shadowrootserializable);
 
     /// <summary>
     /// The kind of shape to be created in an image map.
@@ -1351,4 +1365,14 @@ public static partial class Attributes
 
     /// <inheritdoc cref="wrap(string)" />
     public static Attribute wrap(object value) => new(AttributeType.wrap, value?.ToString());
+
+    /// <summary>
+    /// Whether the element can offer writing suggestions or not.
+    /// </summary>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>writingsuggestions="{value}"</c></returns>
+    public static Attribute writingsuggestions(string value) => new(AttributeType.writingsuggestions, value);
+
+    /// <inheritdoc cref="writingsuggestions(string)" />
+    public static Attribute writingsuggestions(object value) => new(AttributeType.writingsuggestions, value?.ToString());
 }
