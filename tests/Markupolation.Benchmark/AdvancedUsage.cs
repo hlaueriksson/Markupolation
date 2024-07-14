@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using HtmlTags;
+using Markupolation.Razor;
+using Microsoft.AspNetCore.Http;
 using RazorSlices;
 using static HyperTextExpression.HtmlExp;
 
@@ -17,12 +21,15 @@ namespace Markupolation.Benchmark
 
         private IEnumerable<int> _numbers = null!;
         private StringBuilder _builder = null!;
+        private DefaultHttpContext _httpContext = null!;
 
         [GlobalSetup]
         public void GlobalSetup()
         {
             _numbers = Enumerable.Range(1, 100);
             _builder = new StringBuilder();
+            _httpContext = new DefaultHttpContext();
+            _httpContext.Response.Body = new MemoryStream();
         }
 
         [Benchmark]
@@ -163,9 +170,15 @@ namespace Markupolation.Benchmark
         [Benchmark]
         public async Task<string> RazorSlices()
         {
-            _builder.Clear();
-            await RazorSlice.Create("AdvancedUsage.cshtml", _numbers).RenderAsync(_builder);
-            return _builder.ToString();
+            _httpContext.Response.Body.SetLength(0); // Clear
+            var slice = Results.Extensions.RazorSlice<Razor.AdvancedUsage, IEnumerable<int>>(_numbers);
+            await slice.ExecuteAsync(_httpContext);
+
+            _httpContext.Response.Body.Position = 0;
+            using (var reader = new StreamReader(_httpContext.Response.Body))
+            {
+                return await reader.ReadToEndAsync();
+            }
         }
 
         public static async Task<bool> IsValid()

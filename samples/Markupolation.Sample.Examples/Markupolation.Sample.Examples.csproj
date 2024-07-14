@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Markupolation" Version="2.0.0" />
     <PackageReference Include="Markupolation.Extensions" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Playwright" Version="1.44.0" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.45.0" />
     <PackageReference Include="Spectre.Console" Version="0.49.1" />
   </ItemGroup>
 

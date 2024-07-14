@@ -1,9 +1,10 @@
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using HtmlTags;
 using Markupolation.Razor;
-using RazorSlices;
+using Microsoft.AspNetCore.Http;
 using static HyperTextExpression.HtmlExp;
 
 namespace Markupolation.Benchmark
@@ -11,11 +12,14 @@ namespace Markupolation.Benchmark
     public class BasicUsage
     {
         private StringBuilder _builder = null!;
+        private DefaultHttpContext _httpContext = null!;
 
         [GlobalSetup]
         public void GlobalSetup()
         {
             _builder = new StringBuilder();
+            _httpContext = new DefaultHttpContext();
+            _httpContext.Response.Body = new MemoryStream();
         }
 
         [Benchmark]
@@ -78,9 +82,15 @@ namespace Markupolation.Benchmark
         [Benchmark]
         public async Task<string> RazorSlices()
         {
-            _builder.Clear();
-            await RazorSlice.Create("BasicUsage.cshtml", new BasicModel { Title = "Markupolation", Body = "Hello, World!" }).RenderAsync(_builder);
-            return _builder.ToString();
+            _httpContext.Response.Body.SetLength(0); // Clear
+            var slice = Results.Extensions.RazorSlice<Razor.BasicUsage, BasicModel>(new BasicModel { Title = "Markupolation", Body = "Hello, World!" });
+            await slice.ExecuteAsync(_httpContext);
+
+            _httpContext.Response.Body.Position = 0;
+            using (var reader = new StreamReader(_httpContext.Response.Body))
+            {
+                return await reader.ReadToEndAsync();
+            }
         }
 
         public static async Task<bool> IsValid()
