@@ -179,7 +179,7 @@ The `C#` compiler makes sure that the generated `HTML` is well-formed.
 
 ### The API<!-- omit in toc -->
 
-> Click to expand the sections 👆
+> Click to expand the sections 👇
 
 <details>
 
@@ -291,7 +291,7 @@ Code:
 | `table` | Table |  |
 | `tbody` | Group of rows in a table |  |
 | `td` | Table cell | `colspan`, `rowspan`, `headers` |
-| `template` | Template |  |
+| `template` | Template | `shadowrootmode`, `shadowrootdelegatesfocus`, `shadowrootclonable`, `shadowrootserializable` |
 | `textarea` | Multiline text controls | `autocomplete`, `cols`, `dirname`, `disabled`, `form`, `maxlength`, `minlength`, `name`, `placeholder`, `readonly_`, `required`, `rows`, `wrap` |
 | `tfoot` | Group of footer rows in a table |  |
 | `th` | Table header cell | `colspan`, `rowspan`, `headers`, `scope`, `abbr` |
@@ -413,8 +413,8 @@ Code:
 | `placeholder` | User-visible label to be placed within the form control | `input`, `textarea` |
 | `playsinline` | Encourage the user agent to display video content within the element's playback area | `video` |
 | `popover` | Makes the element a popover element |  |
-| `popovertarget` | Targets a popover element to toggle, show, or hide | `input`, `button` |
-| `popovertargetaction` | Indicates whether a targeted popover element is to be toggled, shown, or hidden | `input`, `button` |
+| `popovertarget` | Targets a popover element to toggle, show, or hide | `button`, `input` |
+| `popovertargetaction` | Indicates whether a targeted popover element is to be toggled, shown, or hidden | `button`, `input` |
 | `poster` | Poster frame to show prior to video playback | `video` |
 | `preload` | Hints how much buffering the media resource will likely need | `audio`, `video` |
 | `readonly_` | Whether to allow the value to be edited by the user<br/>Affects willValidate, plus any behavior added by the custom element author | `input`, `textarea` |
@@ -427,8 +427,10 @@ Code:
 | `sandbox` | Security rules for nested content | `iframe` |
 | `scope` | Specifies which cells the header cell applies to | `th` |
 | `selected` | Whether the option is selected by default | `option` |
-| `shadowrootmode` | Enables streaming declarative shadow roots | `template` |
+| `shadowrootclonable` | Sets clonable on a declarative shadow root | `template` |
 | `shadowrootdelegatesfocus` | Sets delegates focus on a declarative shadow root | `template` |
+| `shadowrootmode` | Enables streaming declarative shadow roots | `template` |
+| `shadowrootserializable` | Sets serializable on a declarative shadow root | `template` |
 | `shape` | The kind of shape to be created in an image map | `area` |
 | `size` | Size of the control | `input`, `select` |
 | `sizes` | Sizes of the icons (for rel="icon")<br/>Image sizes for different page layouts | `link`, `img`, `source` |
@@ -451,6 +453,7 @@ Code:
 | `value` | Value to be used for form submission<br/>Machine-readable value<br/>Value of the form control<br/>Ordinal value of the list item<br/>Current value of the element | `button`, `option`, `data`, `input`, `li`, `meter`, `progress` |
 | `width` | Horizontal dimension | `canvas`, `embed`, `iframe`, `img`, `input`, `object_`, `source`, `video` |
 | `wrap` | How the value of the form control is to be wrapped for form submission | `textarea` |
+| `writingsuggestions` | Whether the element can offer writing suggestions or not |  |
 
 </details>
 
@@ -466,8 +469,9 @@ Code:
 
 | Attribute | Description | Elements |
 | --- | --- | --- |
-| `onauxclick` | auxclick event handler |  |
 | `onafterprint` | afterprint event handler for Window object | `body` |
+| `onauxclick` | auxclick event handler |  |
+| `onbeforeinput` | beforeinput event handler |  |
 | `onbeforematch` | beforematch event handler |  |
 | `onbeforeprint` | beforeprint event handler for Window object | `body` |
 | `onbeforeunload` | beforeunload event handler for Window object | `body` |
@@ -522,7 +526,9 @@ Code:
 | `onoffline` | offline event handler for Window object | `body` |
 | `ononline` | online event handler for Window object | `body` |
 | `onpagehide` | pagehide event handler for Window object | `body` |
+| `onpagereveal` | pagereveal event handler for Window object | `body` |
 | `onpageshow` | pageshow event handler for Window object | `body` |
+| `onpageswap` | pageswap event handler for Window object | `body` |
 | `onpaste` | paste event handler |  |
 | `onpause` | pause event handler |  |
 | `onplay` | play event handler |  |
