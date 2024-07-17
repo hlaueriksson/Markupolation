@@ -58,12 +58,12 @@ namespace Markupolation
 
             if (isVoidElement)
             {
-                return $"<{name}{attributes.Join(" ").Pad()} />";
+                return Constants.LessThanSign + name + attributes.Join(Constants.Space).Pad() + Constants.Space + Constants.Slash + Constants.GreaterThanSign;
             }
 
             var children = content.Where(x => x.GetType() != typeof(Attribute));
 
-            return $"<{name}{attributes.Join(" ").Pad()}>{children.Join()}</{name}>";
+            return Constants.LessThanSign + name + attributes.Join(Constants.Space).Pad() + Constants.GreaterThanSign + children.Join() + Constants.LessThanSign + Constants.Slash + name + Constants.GreaterThanSign;
         }
     }
 }

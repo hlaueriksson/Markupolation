@@ -42,7 +42,7 @@ namespace Markupolation
 
         private static string ToString(string name, string? value = null)
         {
-            return value != null ? $"{name}=\"{value}\"" : $"{name}";
+            return value != null ? name + Constants.EqualsSign + Constants.QuotationMark + value + Constants.QuotationMark : name;
         }
     }
 }
