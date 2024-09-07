@@ -17,7 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="AngleSharp.Diffing" Version="0.18.2" />
-    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.13.12" />
+    <PackageReference Include="BenchmarkDotNet.Diagnostics.Windows" Version="0.14.0" />
     <PackageReference Include="HtmlTags" Version="9.0.0" />
     <PackageReference Include="HyperTextExpression" Version="0.0.7" />
   </ItemGroup>
