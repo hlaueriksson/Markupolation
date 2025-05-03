@@ -1,5 +1,42 @@
 # Markupolation <📜><!-- omit in toc -->
 
+TODO:
+
+- Common Patterns
+  - build a DSL for you markup domain
+  - templating
+  - middleware
+  - Funcs and Actions, delegates, events?, page objects, static methods, operator converters, local functions, return tuples, raw string literals
+  - <https://github.com/giraffe-fsharp/Giraffe.ViewEngine#common-patterns>
+
+self closing elements without /
+
+Components (Razor/Blazor):
+- Content to MarkupString
+- Component with model and code behind Markupolation
+
+Transport:
+- gRPC?
+- SignalR?
+- WebSockets?
+
+Competitors:
+- https://github.com/T0shik/HyperTextExpression
+- https://github.com/giraffe-fsharp/Giraffe.ViewEngine
+- https://github.com/Lanayx/Oxpecker/tree/develop/src/Oxpecker.ViewEngine
+- https://github.com/falcoframework/Falco.Markup
+- https://github.com/weavejester/hiccup/
+
+Semantic Web:
+- https://schema.org/
+- https://microformats.org/
+- https://ogp.me/
+- https://www.w3.org/TR/html-aria/
+  - Accessible Rich Internet Applications (ARIA)
+  - accessibility attributes
+
+---
+
 [![build](https://github.com/hlaueriksson/Markupolation/actions/workflows/build.yml/badge.svg)](https://github.com/hlaueriksson/Markupolation/actions/workflows/build.yml)
 [![CodeFactor](https://codefactor.io/repository/github/hlaueriksson/markupolation/badge)](https://codefactor.io/repository/github/hlaueriksson/markupolation)
 
