@@ -1,5 +1,73 @@
 # Markupolation <📜><!-- omit in toc -->
 
+# Silent traps in Markupolation
+
+1. **`data(name, value)` doesn't encode the attribute name — only the value.**
+   `src/Markupolation/Attributes.cs:14` — `data(userField, "1")` with a dynamic `userField` can break out of the tag and inject markup/script. This is the one "everyday" API (not marked raw) where that's exploitable.
+
+2. **Numeric/date conversions use `CultureInfo.CurrentCulture`, not invariant.**
+   `Content.Conversions.cs` — on a server running under `de-DE`/`sv-SE`/etc., `$"{price}"` or `meter(value(price))` silently renders `3,14` instead of `3.14`, breaking numeric HTML attributes and embedded JSON with no error — and only shows up depending on where you deploy. `Guid` is the only type that correctly uses invariant culture.
+
+3. **A `null` attribute value renders as a *bare* attribute, not an omitted one.**
+   `Attribute.cs:36` — `a.href(user.Website)` with a null `Website` silently emits `<a href>` instead of dropping the attribute or throwing. For `<progress value>`/`<meter value>` this changes browser behavior (indeterminate vs. zero) since presence vs. absence matters.
+
+4. **Duplicate attributes are never merged.**
+   `div(class_("a"), class_("b"))` renders both — code that reads like "override the class" silently does nothing, since browsers resolve duplicates to the *first* occurrence.
+
+5. **`ContentExtensions.IfNull<T>` is a permanent no-op for non-nullable value types.**
+   Due to how C# generics box value types, `myInt.IfNull(...)` compiles fine but the `then` branch can never run (only `int?` works). Untested in the current suite too.
+
+6. **Interpolation holes silently bypass the curated conversions list via `object.ToString()`.**
+   `$"{somePoco}"` compiles even though `Content c = somePoco;` correctly doesn't — a POCO without a `ToString()` override renders its CLR type name onto the page.
+
+7. **`HxPushUrl(false.ToString())`-style calls send `"False"` (capital F), which htmx's protocol doesn't recognize as falsy** — the push happens anyway, silently.
+
+8. **The `markupolation convert` CLI emits non-compiling code for a common pattern.**
+   HTML like `disabled="disabled"` (rather than `disabled=""`) converts to `disabled("disabled")`, but the generated method takes no arguments — immediate `CS1501`.
+
+9. **`Content.Raw(...) + "text"` can lose the raw-text fallback.**
+   If that combined value ends up inside `script`/`style`, it renders the encoded form instead of the original — easy to hit when building a script body with `+=` starting from `Content.Raw`.
+
+TODO:
+
+- Common Patterns
+  - build a DSL for you markup domain
+  - templating
+  - middleware
+  - Funcs and Actions, delegates, events?, page objects, static methods, operator converters, local functions, return tuples, raw string literals
+  - <https://github.com/giraffe-fsharp/Giraffe.ViewEngine#common-patterns>
+
+self closing elements without /
+
+Components (Razor/Blazor):
+- Content to MarkupString
+- Component with model and code behind Markupolation
+
+Transport:
+- gRPC?
+- SignalR?
+- WebSockets?
+
+Competitors:
+- https://github.com/T0shik/HyperTextExpression
+- https://github.com/giraffe-fsharp/Giraffe.ViewEngine
+- https://github.com/Lanayx/Oxpecker/tree/develop/src/Oxpecker.ViewEngine
+- https://github.com/falcoframework/Falco.Markup
+- https://github.com/weavejester/hiccup/
+
+Semantic Web:
+- https://schema.org/
+- https://microformats.org/
+- https://ogp.me/
+- https://www.w3.org/TR/html-aria/
+  - Accessible Rich Internet Applications (ARIA)
+  - accessibility attributes
+
+Converting html to Markupolation
+https://github.com/weavejester/hiccup/wiki/Converting-html-to-hiccup
+
+---
+
 [![build](https://github.com/hlaueriksson/Markupolation/actions/workflows/build.yml/badge.svg)](https://github.com/hlaueriksson/Markupolation/actions/workflows/build.yml)
 [![CodeFactor](https://codefactor.io/repository/github/hlaueriksson/markupolation/badge)](https://codefactor.io/repository/github/hlaueriksson/markupolation)
 
