@@ -804,8 +804,6 @@ The tests folder contains some [benchmarks](/tests/Markupolation.Benchmark).
 
 The [samples](/samples) folder contains examples of `Markupolation` together with:
 
-- Blazor + Functions + Tye
-- HTMX + Api + YARP + Aspire
-- Console + Playwright
-
-The [PlaygroundTests](/tests/Markupolation.Tests/PlaygroundTests.cs) also contains some templating code that you may find interesting.
+- Aspire + Blazor + Azure Functions
+- Aspire + HTMX + Minimal API + YARP
+- Spectre.Console + Playwright

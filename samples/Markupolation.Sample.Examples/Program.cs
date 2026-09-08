@@ -6,7 +6,7 @@ AnsiConsole.MarkupLine(string.Empty);
 AnsiConsole.MarkupLine("Prerequisites:");
 AnsiConsole.MarkupLine("1. Install Playwright:");
 AnsiConsole.MarkupLine("   - Open a PowerShell terminal and run:");
-AnsiConsole.MarkupLine("   - [lime].\\bin\\Debug\\net8.0\\playwright.ps1 install[/]");
+AnsiConsole.MarkupLine("   - [lime].\\bin\\Debug\\net10.0\\playwright.ps1 install[/]");
 AnsiConsole.MarkupLine(string.Empty);
 AnsiConsole.MarkupLine("Instructions:");
 AnsiConsole.MarkupLine("- Use [blue]Up[/]⬆️ and [blue]Down[/]⬇️ keys to scroll through examples");

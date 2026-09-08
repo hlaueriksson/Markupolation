@@ -1,13 +1,13 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Functions.Worker;
-using Microsoft.Azure.Functions.Worker.Http;
 
 namespace Markupolation.Sample.Functions
 {
     public class Functions
     {
         [Function(nameof(Html))]
-        public IActionResult Html([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req) => new ContentResult
+        public IActionResult Html([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req) => new ContentResult
         {
             ContentType = "text/html; charset=utf-8",
             Content =
@@ -27,21 +27,21 @@ namespace Markupolation.Sample.Functions
         };
 
         [Function(nameof(Hello))]
-        public IActionResult Hello([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req) => new ContentResult
+        public IActionResult Hello([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req) => new ContentResult
         {
             ContentType = "text/html; charset=utf-8",
             Content = h1("Hello, World!") + p("This is ", mark(title("Markup with string interpolation"), "Markupolation"), " in action."),
         };
 
         [Function(nameof(Counter))]
-        public IActionResult Counter([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Counter/{count:int}")] HttpRequestData req, int count)
+        public IActionResult Counter([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "Counter/{count:int}")] HttpRequest req, int count)
         {
             var result = mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count));
 
             return new ContentResult
             {
                 ContentType = "text/html; charset=utf-8",
-                Content = req.Headers.Contains("HX-Request") ?
+                Content = req.Headers["HX-Request"].Count > 0 ?
                     h1("Counter") +
                     p(new A("role", "status"), $"Current count: {result}") +
                     button(
@@ -71,7 +71,7 @@ namespace Markupolation.Sample.Functions
             .ToArray();
 
         [Function(nameof(Weather))]
-        public IActionResult Weather([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req) => new ContentResult
+        public IActionResult Weather([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req) => new ContentResult
         {
             ContentType = "text/html; charset=utf-8",
             Content =

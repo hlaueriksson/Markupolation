@@ -2,14 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using HtmlTags;
-using Markupolation.Razor;
 using Microsoft.AspNetCore.Http;
-using RazorSlices;
 using static HyperTextExpression.HtmlExp;
 
 namespace Markupolation.Benchmark
@@ -171,7 +168,7 @@ namespace Markupolation.Benchmark
         public async Task<string> RazorSlices()
         {
             _httpContext.Response.Body.SetLength(0); // Clear
-            var slice = Results.Extensions.RazorSlice<Razor.AdvancedUsage, IEnumerable<int>>(_numbers);
+            var slice = Results.RazorSlice<Razor.AdvancedUsage, IEnumerable<int>>(_numbers);
             await slice.ExecuteAsync(_httpContext);
 
             _httpContext.Response.Body.Position = 0;

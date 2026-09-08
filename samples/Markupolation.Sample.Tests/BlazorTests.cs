@@ -6,23 +6,12 @@ namespace Markupolation.Sample.Tests
 {
     public class BlazorTests
     {
-        private DistributedApplication _app = null!;
         private HttpClient _httpClient = null!;
 
-        [OneTimeSetUp]
-        public async Task Init()
+        [SetUp]
+        public void Setup()
         {
-            var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.Markupolation_Sample_Aspire_AppHost>();
-            _app = await appHost.BuildAsync();
-            await _app.StartAsync();
-
-            _httpClient = _app.CreateHttpClient("blazor");
-        }
-
-        [OneTimeTearDown]
-        public async Task Cleanup()
-        {
-            await _app.DisposeAsync();
+            _httpClient = GlobalSetup.App.CreateHttpClient("blazor");
         }
 
         [Test]

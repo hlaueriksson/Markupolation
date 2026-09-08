@@ -83,7 +83,7 @@ namespace Markupolation.Benchmark
         public async Task<string> RazorSlices()
         {
             _httpContext.Response.Body.SetLength(0); // Clear
-            var slice = Results.Extensions.RazorSlice<Razor.BasicUsage, BasicModel>(new BasicModel { Title = "Markupolation", Body = "Hello, World!" });
+            var slice = Results.RazorSlice<Razor.BasicUsage, BasicModel>(new BasicModel { Title = "Markupolation", Body = "Hello, World!" });
             await slice.ExecuteAsync(_httpContext);
 
             _httpContext.Response.Body.Position = 0;

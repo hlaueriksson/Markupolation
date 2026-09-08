@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -7,7 +7,7 @@
     <link href="bootstrap.min.css" rel="stylesheet">
     <link href="app.css" rel="stylesheet">
     <link href="styles.css" rel="stylesheet">
-    <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.10/dist/htmx.min.js" integrity="sha384-H5SrcfygHmAuTDZphMHqBJLc3FhssKjG7w/CeCpFReSfwBWDTKpkzPP8c+cLsK+V" crossorigin="anonymous"></script>
     <title>Counter</title>
   </head>
   <body>
@@ -51,11 +51,11 @@
           </div>
           <article class="content px-4">
             <output id="result">
-            <h1>Counter</h1>
-            <p role="status">Current count:
-            </p>
-            
-            <!-- Click to Load -->
+              <h1>Counter</h1>
+              <p role="status">Current count:
+              </p>
+              
+              <!-- Click to Load -->
               <button class="btn btn-primary" hx-get="/api/counter/1" hx-target="#result">
                 Click me
               </button>
