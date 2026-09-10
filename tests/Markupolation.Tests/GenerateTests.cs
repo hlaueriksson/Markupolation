@@ -12,7 +12,7 @@ namespace Markupolation.Tests
     /// Prerequisites:
     /// 1. Build
     /// 2. Install Playwright:
-    ///    - pwsh bin/Debug/net8.0/playwright.ps1 install
+    ///    - pwsh bin/Debug/net10.0/playwright.ps1 install
     ///
     /// Generate:
     /// 1. Run <see cref="All_enums"/>

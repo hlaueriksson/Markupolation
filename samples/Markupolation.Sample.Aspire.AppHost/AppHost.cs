@@ -9,7 +9,7 @@ builder.AddProject<Projects.Markupolation_Sample_Htmx>("htmx")
     .WithExternalHttpEndpoints()
     .WithReference(api);
 
-var functions = builder.AddProject<Projects.Markupolation_Sample_Functions>("functions");
+var functions = builder.AddAzureFunctionsProject<Projects.Markupolation_Sample_Functions>("functions");
 
 builder.AddProject<Projects.Markupolation_Sample_Blazor>("blazor")
     .WithExternalHttpEndpoints()

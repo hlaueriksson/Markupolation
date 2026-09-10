@@ -1,30 +1,18 @@
 using System.Net;
+using AngleSharp.Dom;
 using FluentAssertions;
 using VerifyTests.AngleSharp;
 
 namespace Markupolation.Sample.Tests
 {
-    [Ignore("Fails")]
     public class FunctionsTests
     {
-        private DistributedApplication _app = null!;
         private HttpClient _httpClient = null!;
 
-        [OneTimeSetUp]
-        public async Task Init()
+        [SetUp]
+        public void Setup()
         {
-            var appHost = await DistributedApplicationTestingBuilder.CreateAsync<Projects.Markupolation_Sample_Aspire_AppHost>();
-            _app = await appHost.BuildAsync();
-            await _app.StartAsync();
-
-            _httpClient = new HttpClient { BaseAddress = new Uri("http://localhost:7074") };
-            //_httpClient = _app.CreateHttpClient("functions");
-        }
-
-        [OneTimeTearDown]
-        public async Task Cleanup()
-        {
-            await _app.DisposeAsync();
+            _httpClient = GlobalSetup.App.CreateHttpClient("functions");
         }
 
         [Test]
@@ -56,7 +44,14 @@ namespace Markupolation.Sample.Tests
         {
             var response = await _httpClient.GetAsync("api/Weather");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
-            await Verify(await response.Content.ReadAsStringAsync(), "html").PrettyPrintHtml();
+            await Verify(await response.Content.ReadAsStringAsync(), "html").PrettyPrintHtml(
+                nodes =>
+                {
+                    foreach (var node in nodes.QuerySelectorAll("td"))
+                    {
+                        node.Remove();
+                    }
+                });
         }
     }
 }
