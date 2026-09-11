@@ -1,0 +1,20 @@
+#nullable enable
+Markupolation.ContentExtensions
+static Markupolation.ContentExtensions.Each<T>(this System.Collections.Generic.IEnumerable<T>! values, System.Func<T, Markupolation.Content!>! content) -> Markupolation.Content!
+static Markupolation.ContentExtensions.Each<T>(this System.Collections.Generic.IEnumerable<T>! values, System.Func<T, int, Markupolation.Content!>! content) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfEmpty<T>(this System.Collections.Generic.IEnumerable<T>! values, Markupolation.Content! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfEmpty<T>(this System.Collections.Generic.IEnumerable<T>! values, Markupolation.Content! then, System.Func<System.Collections.Generic.IEnumerable<T>!, Markupolation.Content!>! otherwise) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfHasValue<T>(this T? value, System.Func<T, Markupolation.Content!>! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfHasValue<T>(this T? value, System.Func<T, Markupolation.Content!>! then, Markupolation.Content! otherwise) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfMatch<T>(this T value, System.Func<T, bool>! predicate, System.Func<T, Markupolation.Content!>! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfMatch<T>(this T value, System.Func<T, bool>! predicate, System.Func<T, Markupolation.Content!>! then, System.Func<T, Markupolation.Content!>! otherwise) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNotEmpty<T>(this System.Collections.Generic.IEnumerable<T>! values, System.Func<System.Collections.Generic.IEnumerable<T>!, Markupolation.Content!>! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNotEmpty<T>(this System.Collections.Generic.IEnumerable<T>! values, System.Func<System.Collections.Generic.IEnumerable<T>!, Markupolation.Content!>! then, Markupolation.Content! otherwise) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNotNull<T>(this T value, System.Func<T, Markupolation.Content!>! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNotNull<T>(this T value, System.Func<T, Markupolation.Content!>! then, Markupolation.Content! otherwise) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNotNullOrEmpty(this string! value, System.Func<string!, Markupolation.Content!>! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNotNullOrEmpty(this string! value, System.Func<string!, Markupolation.Content!>! then, Markupolation.Content! otherwise) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNull<T>(this T value, Markupolation.Content! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNull<T>(this T value, Markupolation.Content! then, System.Func<T, Markupolation.Content!>! otherwise) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNullOrEmpty(this string! value, Markupolation.Content! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNullOrEmpty(this string! value, Markupolation.Content! then, System.Func<string!, Markupolation.Content!>! otherwise) -> Markupolation.Content!
