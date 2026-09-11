@@ -97,8 +97,7 @@ string FizzBuzz()
     bool Fizz(int i) => i % 3 == 0;
     bool Buzz(int i) => i % 5 == 0;
     var numbers = Enumerable.Range(1, 15);
-    return $"{
-        DOCTYPE() +
+    return $"{DOCTYPE() +
         html(lang("en"),
             head(
                 meta(charset("utf-8")),
