@@ -49,7 +49,7 @@ Configuration in `csproj` file:
 </PropertyGroup>
 
 <ItemGroup>
-  <PackageReference Include="Markupolation" Version="2.0.0" />
+  <PackageReference Include="Markupolation" Version="2.1.0" />
 </ItemGroup>
 ```
 
