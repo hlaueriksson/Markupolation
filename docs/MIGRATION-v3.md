@@ -103,6 +103,8 @@ Consumers on .NET Core 3.0+, .NET 5+, Mono 6.4+, Xamarin and Unity 2021.2+ are u
 
 ## Also new
 
+- New package **`Markupolation.Htmx`**: the htmx attributes as `hx_get`, `hx_target`, `hx_swap` and
+  the rest, imported as `hx`.
 - New package **`Markupolation.AspNetCore`**: `Results.Extensions.Html(...)`, `HtmlResults`, `HtmlResult`
   (usable as both `IResult` and `IActionResult`), `ToHtmlContent()` for Razor, and htmx request and
   response headers.

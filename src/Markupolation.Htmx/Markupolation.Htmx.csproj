@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;net10.0</TargetFrameworks>
+    <IsAotCompatible Condition="'$(TargetFramework)' != 'netstandard2.1'">true</IsAotCompatible>
+    <Version>1.0.0</Version>
+    <PackageReleaseNotes>
+    </PackageReleaseNotes>
+    <Authors>Henrik Lau Eriksson</Authors>
+    <Description>
+Markupolation = Markup + String Interpolation
+htmx attributes for HTML templating in C# with a fluent API:
+⌨️ button(hx_get("/counter/1"), hx_target("#result"), hx_swap("outerHTML"), "Click me");
+🖨️ &lt;button hx-get="/counter/1" hx-target="#result" hx-swap="outerHTML"&gt;Click me&lt;/button&gt;
+    </Description>
+    <PackageId>Markupolation.Htmx</PackageId>
+    <PackageProjectUrl>https://github.com/hlaueriksson/Markupolation</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>Markupolation.Htmx.md</PackageReadmeFile>
+    <PackageTags>HTML;HTML5;Markup;htmx</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\Markupolation.Htmx.md" Pack="true" PackagePath="\" />
+    <None Include="buildTransitive\Markupolation.Htmx.props" Pack="true" PackagePath="buildTransitive\Markupolation.Htmx.props" />
+    <None Include="buildTransitive\Markupolation.Htmx.props" Pack="true" PackagePath="build\Markupolation.Htmx.props" />
+  </ItemGroup>
+
+  <Import Project="../../Analyzers.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\Markupolation\Markupolation.csproj" />
+  </ItemGroup>
+
+</Project>
