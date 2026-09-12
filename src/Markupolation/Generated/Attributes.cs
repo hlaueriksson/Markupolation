@@ -76,6 +76,13 @@ public static partial class Attributes
     public static Attribute allowfullscreen() => new(AttributeType.allowfullscreen);
 
     /// <summary>
+    /// Allow the color's alpha component to be set.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.input(Content[])"/>.</remarks>
+    /// <returns><c>alpha</c></returns>
+    public static Attribute alpha() => new(AttributeType.alpha);
+
+    /// <summary>
     /// Replacement text for use when images are not available.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.area(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
@@ -87,7 +94,7 @@ public static partial class Attributes
     public static Attribute alt(object value) => new(AttributeType.alt, value?.ToString());
 
     /// <summary>
-    /// Potential destination for a preload request (for rel="preload" and rel="modulepreload").
+    /// Destination for a preload request (for rel="preload" and rel="modulepreload").
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
@@ -125,6 +132,16 @@ public static partial class Attributes
 
     /// <inheritdoc cref="autocomplete(string)" />
     public static Attribute autocomplete(object value) => new(AttributeType.autocomplete, value?.ToString());
+
+    /// <summary>
+    /// Recommended autocorrection behavior (for supported input methods).
+    /// </summary>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>autocorrect="{value}"</c></returns>
+    public static Attribute autocorrect(string value) => new(AttributeType.autocorrect, value);
+
+    /// <inheritdoc cref="autocorrect(string)" />
+    public static Attribute autocorrect(object value) => new(AttributeType.autocorrect, value?.ToString());
 
     /// <summary>
     /// Automatically focus the element when the page is loaded.
@@ -190,6 +207,17 @@ public static partial class Attributes
     public static Attribute class_(object value) => new(AttributeType.class_, value?.ToString());
 
     /// <summary>
+    /// Which user actions will close the dialog.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.dialog(Content[])"/>.</remarks>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>closedby="{value}"</c></returns>
+    public static Attribute closedby(string value) => new(AttributeType.closedby, value);
+
+    /// <inheritdoc cref="closedby(string)" />
+    public static Attribute closedby(object value) => new(AttributeType.closedby, value?.ToString());
+
+    /// <summary>
     /// Color to use when customizing a site's icon (for rel="mask-icon").
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.link(Content[])"/>.</remarks>
@@ -199,6 +227,17 @@ public static partial class Attributes
 
     /// <inheritdoc cref="color(string)" />
     public static Attribute color(object value) => new(AttributeType.color, value?.ToString());
+
+    /// <summary>
+    /// The color space of the serialized color.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.input(Content[])"/>.</remarks>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>colorspace="{value}"</c></returns>
+    public static Attribute colorspace(string value) => new(AttributeType.colorspace, value);
+
+    /// <inheritdoc cref="colorspace(string)" />
+    public static Attribute colorspace(object value) => new(AttributeType.colorspace, value?.ToString());
 
     /// <summary>
     /// Maximum number of characters per line.
@@ -221,6 +260,28 @@ public static partial class Attributes
 
     /// <inheritdoc cref="colspan(string)" />
     public static Attribute colspan(object value) => new(AttributeType.colspan, value?.ToString());
+
+    /// <summary>
+    /// Indicates to the targeted element which action to take.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.button(Content[])"/>.</remarks>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>command="{value}"</c></returns>
+    public static Attribute command(string value) => new(AttributeType.command, value);
+
+    /// <inheritdoc cref="command(string)" />
+    public static Attribute command(object value) => new(AttributeType.command, value?.ToString());
+
+    /// <summary>
+    /// Targets another element to be invoked.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.button(Content[])"/>.</remarks>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>commandfor="{value}"</c></returns>
+    public static Attribute commandfor(string value) => new(AttributeType.commandfor, value);
+
+    /// <inheritdoc cref="commandfor(string)" />
+    public static Attribute commandfor(object value) => new(AttributeType.commandfor, value?.ToString());
 
     /// <summary>
     /// Value of the element.
@@ -246,7 +307,7 @@ public static partial class Attributes
     /// <summary>
     /// Show user agent controls.
     /// </summary>
-    /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
+    /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.video(Content[])"/>, <see cref="Elements.img(Content[])"/>.</remarks>
     /// <returns><c>controls</c></returns>
     public static Attribute controls() => new(AttributeType.controls);
 
@@ -407,8 +468,9 @@ public static partial class Attributes
     /// <summary>
     /// Associate the label with form control.
     /// Specifies controls from which the output was calculated.
+    /// Updates existing content.
     /// </summary>
-    /// <remarks>Elements: <see cref="Elements.label(Content[])"/>, <see cref="Elements.output(Content[])"/>.</remarks>
+    /// <remarks>Elements: <see cref="Elements.label(Content[])"/>, <see cref="Elements.output(Content[])"/>, <see cref="Elements.template(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
     /// <returns><c>for_="{value}"</c></returns>
     public static Attribute for_(string value) => new(AttributeType.for_, value);
@@ -488,6 +550,22 @@ public static partial class Attributes
 
     /// <inheritdoc cref="headers(string)" />
     public static Attribute headers(object value) => new(AttributeType.headers, value?.ToString());
+
+    /// <summary>
+    /// Offsets heading levels for descendants.
+    /// </summary>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>headingoffset="{value}"</c></returns>
+    public static Attribute headingoffset(string value) => new(AttributeType.headingoffset, value);
+
+    /// <inheritdoc cref="headingoffset(string)" />
+    public static Attribute headingoffset(object value) => new(AttributeType.headingoffset, value?.ToString());
+
+    /// <summary>
+    /// Prevents a heading offset computation from traversing beyond the element with the attribute.
+    /// </summary>
+    /// <returns><c>headingreset</c></returns>
+    public static Attribute headingreset() => new(AttributeType.headingreset);
 
     /// <summary>
     /// Vertical dimension.
@@ -724,7 +802,7 @@ public static partial class Attributes
     /// <summary>
     /// Used when determining loading deferral.
     /// </summary>
-    /// <remarks>Elements: <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.img(Content[])"/>.</remarks>
+    /// <remarks>Elements: <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.audio(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
     /// <param name="value">Attribute value.</param>
     /// <returns><c>loading="{value}"</c></returns>
     public static Attribute loading(string value) => new(AttributeType.loading, value);
@@ -1089,6 +1167,13 @@ public static partial class Attributes
     public static Attribute shadowrootclonable() => new(AttributeType.shadowrootclonable);
 
     /// <summary>
+    /// Enables declarative shadow roots to indicate they will use a custom element registry.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
+    /// <returns><c>shadowrootcustomelementregistry</c></returns>
+    public static Attribute shadowrootcustomelementregistry() => new(AttributeType.shadowrootcustomelementregistry);
+
+    /// <summary>
     /// Sets delegates focus on a declarative shadow root.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
@@ -1112,6 +1197,17 @@ public static partial class Attributes
     /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
     /// <returns><c>shadowrootserializable</c></returns>
     public static Attribute shadowrootserializable() => new(AttributeType.shadowrootserializable);
+
+    /// <summary>
+    /// Sets slot assignment on a declarative shadow root.
+    /// </summary>
+    /// <remarks>Elements: <see cref="Elements.template(Content[])"/>.</remarks>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>shadowrootslotassignment="{value}"</c></returns>
+    public static Attribute shadowrootslotassignment(string value) => new(AttributeType.shadowrootslotassignment, value);
+
+    /// <inheritdoc cref="shadowrootslotassignment(string)" />
+    public static Attribute shadowrootslotassignment(object value) => new(AttributeType.shadowrootslotassignment, value?.ToString());
 
     /// <summary>
     /// The kind of shape to be created in an image map.
