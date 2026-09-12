@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>markupolation</ToolCommandName>
+    <Version>1.0.0</Version>
+    <Authors>Henrik Lau Eriksson</Authors>
+    <Description>
+Markupolation = Markup + String Interpolation
+A dotnet tool that converts HTML into Markupolation source:
+⌨️ markupolation convert index.html
+    </Description>
+    <PackageId>Markupolation.Cli</PackageId>
+    <PackageProjectUrl>https://github.com/hlaueriksson/Markupolation</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>Markupolation.Cli.md</PackageReadmeFile>
+    <PackageTags>HTML;HTML5;Markup;dotnet-tool</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\Markupolation.Cli.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <Import Project="../../Analyzers.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="..\Markupolation.Converter\Markupolation.Converter.csproj" />
+  </ItemGroup>
+
+</Project>

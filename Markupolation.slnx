@@ -12,6 +12,8 @@
   </Folder>
   <Folder Name="/src/">
     <Project Path="src/Markupolation.AspNetCore/Markupolation.AspNetCore.csproj" />
+    <Project Path="src/Markupolation.Cli/Markupolation.Cli.csproj" />
+    <Project Path="src/Markupolation.Converter/Markupolation.Converter.csproj" />
     <Project Path="src/Markupolation.Extensions/Markupolation.Extensions.csproj" />
     <Project Path="src/Markupolation.Htmx/Markupolation.Htmx.csproj" />
     <Project Path="src/Markupolation/Markupolation.csproj" />

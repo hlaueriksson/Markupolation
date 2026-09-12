@@ -47,6 +47,13 @@ div(markup)                  // encodes the <i> too
 div(Content.Raw(markup))     // opt out
 ```
 
+An HTML **comment** is the same case, and an easy one to miss — it looks like text but is markup:
+
+```cs
+body("<!-- content here -->")                 // shows up on the page as literal text
+body(Content.Raw("<!-- content here -->"))    // a comment
+```
+
 ### Opting out
 
 | | |
@@ -103,6 +110,8 @@ Consumers on .NET Core 3.0+, .NET 5+, Mono 6.4+, Xamarin and Unity 2021.2+ are u
 
 ## Also new
 
+- New tool **`Markupolation.Cli`**: `dotnet tool install --global Markupolation.Cli`, then
+  `markupolation convert index.html` to turn existing HTML into Markupolation source.
 - New package **`Markupolation.Htmx`**: the htmx attributes as `hx_get`, `hx_target`, `hx_swap` and
   the rest, imported as `hx`.
 - New package **`Markupolation.AspNetCore`**: `Results.Extensions.Html(...)`, `HtmlResults`, `HtmlResult`
