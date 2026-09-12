@@ -289,4 +289,251 @@ public class ContentExtensionsTests
         item.IfMatch(m => m.EndsWith("Foo"), then: x => div(x), otherwise: null).ToString()
             .Should().BeEmpty();
     }
+
+    [Test]
+    public void If()
+    {
+        true.If(div("yes")).ToString()
+            .Should().Be("<div>yes</div>");
+
+        false.If(div("yes")).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void If_otherwise()
+    {
+        true.If(then: div("yes"), otherwise: div("no")).ToString()
+            .Should().Be("<div>yes</div>");
+
+        false.If(then: div("yes"), otherwise: div("no")).ToString()
+            .Should().Be("<div>no</div>");
+    }
+
+    [Test]
+    public void If_lazy()
+    {
+        var then = 0;
+
+        true.If(() => { then++; return div("yes"); }).ToString()
+            .Should().Be("<div>yes</div>");
+        then.Should().Be(1);
+
+        false.If(() => { then++; return div("yes"); }).ToString()
+            .Should().BeEmpty();
+        then.Should().Be(1, "the delegate must not be invoked when the condition is not met");
+
+        true.If((Func<Content>)null).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void If_lazy_otherwise()
+    {
+        int then = 0, otherwise = 0;
+
+        true.If(() => { then++; return div("yes"); }, () => { otherwise++; return div("no"); }).ToString()
+            .Should().Be("<div>yes</div>");
+        then.Should().Be(1);
+        otherwise.Should().Be(0, "only the branch that is taken is invoked");
+
+        false.If(() => { then++; return div("yes"); }, () => { otherwise++; return div("no"); }).ToString()
+            .Should().Be("<div>no</div>");
+        then.Should().Be(1, "only the branch that is taken is invoked");
+        otherwise.Should().Be(1);
+
+        true.If(null, () => div("no")).ToString()
+            .Should().BeEmpty();
+        false.If(() => div("yes"), null).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfNull_lazy()
+    {
+        var then = 0;
+        int? item = null;
+
+        item.IfNull(() => { then++; return div("null"); }).ToString()
+            .Should().Be("<div>null</div>");
+        then.Should().Be(1);
+
+        item = 1;
+        item.IfNull(() => { then++; return div("null"); }).ToString()
+            .Should().BeEmpty();
+        then.Should().Be(1, "the delegate must not be invoked when the value is not null");
+
+        item = null;
+        item.IfNull((Func<Content>)null).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfNull_lazy_otherwise()
+    {
+        int then = 0, otherwise = 0;
+        int? item = null;
+
+        item.IfNull(() => { then++; return div("null"); }, x => { otherwise++; return div(x); }).ToString()
+            .Should().Be("<div>null</div>");
+        then.Should().Be(1);
+        otherwise.Should().Be(0);
+
+        item = 1;
+        item.IfNull(() => { then++; return div("null"); }, x => { otherwise++; return div(x); }).ToString()
+            .Should().Be("<div>1</div>");
+        then.Should().Be(1, "only the branch that is taken is invoked");
+        otherwise.Should().Be(1);
+
+        item.IfNull(() => div("null"), null).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfNotNull_lazy_otherwise()
+    {
+        var otherwise = 0;
+        int? item = null;
+
+        item.IfNotNull(x => div(x), () => { otherwise++; return div("null"); }).ToString()
+            .Should().Be("<div>null</div>");
+        otherwise.Should().Be(1);
+
+        item = 1;
+        item.IfNotNull(x => div(x), () => { otherwise++; return div("null"); }).ToString()
+            .Should().Be("<div>1</div>");
+        otherwise.Should().Be(1, "the fallback must not be invoked when the value is not null");
+
+        item.IfNotNull(null, () => div("null")).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfNullOrEmpty_lazy()
+    {
+        var then = 0;
+
+        ((string)null).IfNullOrEmpty(() => { then++; return div("null"); }).ToString()
+            .Should().Be("<div>null</div>");
+        "".IfNullOrEmpty(() => { then++; return div("null"); }).ToString()
+            .Should().Be("<div>null</div>");
+        then.Should().Be(2);
+
+        "foo".IfNullOrEmpty(() => { then++; return div("null"); }).ToString()
+            .Should().BeEmpty();
+        then.Should().Be(2, "the delegate must not be invoked when the value is not empty");
+
+        "".IfNullOrEmpty((Func<Content>)null).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfNullOrEmpty_lazy_otherwise()
+    {
+        int then = 0, otherwise = 0;
+
+        ((string)null).IfNullOrEmpty(() => { then++; return div("null"); }, x => { otherwise++; return div(x); }).ToString()
+            .Should().Be("<div>null</div>");
+        then.Should().Be(1);
+        otherwise.Should().Be(0);
+
+        "foo".IfNullOrEmpty(() => { then++; return div("null"); }, x => { otherwise++; return div(x); }).ToString()
+            .Should().Be("<div>foo</div>");
+        then.Should().Be(1, "only the branch that is taken is invoked");
+        otherwise.Should().Be(1);
+
+        "foo".IfNullOrEmpty(() => div("null"), null).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfNotNullOrEmpty_lazy_otherwise()
+    {
+        var otherwise = 0;
+
+        ((string)null).IfNotNullOrEmpty(x => div(x), () => { otherwise++; return div("null"); }).ToString()
+            .Should().Be("<div>null</div>");
+        otherwise.Should().Be(1);
+
+        "foo".IfNotNullOrEmpty(x => div(x), () => { otherwise++; return div("null"); }).ToString()
+            .Should().Be("<div>foo</div>");
+        otherwise.Should().Be(1, "the fallback must not be invoked when the value is not empty");
+
+        "foo".IfNotNullOrEmpty(null, () => div("null")).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfEmpty_lazy()
+    {
+        var then = 0;
+
+        Enumerable.Empty<int>().IfEmpty(() => { then++; return div("empty"); }).ToString()
+            .Should().Be("<div>empty</div>");
+        ((IEnumerable<int>)null).IfEmpty(() => { then++; return div("empty"); }).ToString()
+            .Should().Be("<div>empty</div>");
+        then.Should().Be(2);
+
+        new[] { 1 }.IfEmpty(() => { then++; return div("empty"); }).ToString()
+            .Should().BeEmpty();
+        then.Should().Be(2, "the delegate must not be invoked when the sequence is not empty");
+
+        Enumerable.Empty<int>().IfEmpty((Func<Content>)null).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfEmpty_lazy_otherwise()
+    {
+        int then = 0, otherwise = 0;
+
+        Enumerable.Empty<int>().IfEmpty(() => { then++; return div("empty"); }, x => { otherwise++; return div(x.Count()); }).ToString()
+            .Should().Be("<div>empty</div>");
+        then.Should().Be(1);
+        otherwise.Should().Be(0);
+
+        new[] { 1, 2 }.IfEmpty(() => { then++; return div("empty"); }, x => { otherwise++; return div(x.Count()); }).ToString()
+            .Should().Be("<div>2</div>");
+        then.Should().Be(1, "only the branch that is taken is invoked");
+        otherwise.Should().Be(1);
+
+        new[] { 1 }.IfEmpty(() => div("empty"), null).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfNotEmpty_lazy_otherwise()
+    {
+        var otherwise = 0;
+
+        Enumerable.Empty<int>().IfNotEmpty(x => div(x.Count()), () => { otherwise++; return div("empty"); }).ToString()
+            .Should().Be("<div>empty</div>");
+        otherwise.Should().Be(1);
+
+        new[] { 1, 2 }.IfNotEmpty(x => div(x.Count()), () => { otherwise++; return div("empty"); }).ToString()
+            .Should().Be("<div>2</div>");
+        otherwise.Should().Be(1, "the fallback must not be invoked when the sequence is not empty");
+
+        new[] { 1 }.IfNotEmpty(null, () => div("empty")).ToString()
+            .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfHasValue_lazy_otherwise()
+    {
+        var otherwise = 0;
+        int? item = null;
+
+        item.IfHasValue(x => div(x), () => { otherwise++; return div("null"); }).ToString()
+            .Should().Be("<div>null</div>");
+        otherwise.Should().Be(1);
+
+        item = 1;
+        item.IfHasValue(x => div(x), () => { otherwise++; return div("null"); }).ToString()
+            .Should().Be("<div>1</div>");
+        otherwise.Should().Be(1, "the fallback must not be invoked when the value has a value");
+
+        item.IfHasValue(null, () => div("null")).ToString()
+            .Should().BeEmpty();
+    }
 }

@@ -96,9 +96,17 @@ Extensions on `string`:
 * `IfNullOrEmpty`
 * `IfNotNullOrEmpty`
 
+Extensions on `bool`:
+
+* `If`
+
 Extensions on `T?`:
 
 * `IfHasValue<T>`
+
+Every conditional comes in two forms: a concise `Content` form, and a `Func<Content>` form that
+defers the branch so only the one actually taken is built. A null sequence, value or delegate
+yields empty content rather than throwing.
 
 ### Would you like to know more? 🤔
 
