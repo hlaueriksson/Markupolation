@@ -7,6 +7,8 @@ using System.Text;
 
 namespace Markupolation;
 
+#pragma warning disable SA1124 // Do not use regions
+
 /// <summary>
 /// HTML content.
 /// </summary>
@@ -31,7 +33,6 @@ public record Content
 {
     private readonly StringBuilder? _builder;
     private string? _text;
-
     private string? _value;
 
     /// <summary>
@@ -90,6 +91,8 @@ public record Content
     /// because the HTML parser does not decode character references inside them.
     /// </remarks>
     internal string? Unencoded => _text;
+
+    #region Conversions
 
     /// <summary>
     /// Converts <see cref="Content"/> to <see cref="string"/>.
@@ -154,6 +157,8 @@ public record Content
         return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
     }
 
+    #endregion
+
     /// <summary>
     /// Wraps a string that is already markup, without encoding it.
     /// </summary>
@@ -168,6 +173,8 @@ public record Content
     /// <param name="value">Text.</param>
     /// <returns><see cref="Content"/></returns>
     public static Content Text(string? value) => new(HtmlEncoder.Encode(value));
+
+    #region InterpolatedStringHandler
 
     /// <summary>
     /// Appends a literal part of an interpolated string. Author-written, so it stays raw.
@@ -231,6 +238,8 @@ public record Content
         _builder.Append(HtmlEncoder.Encode(text));
     }
 
+    #endregion
+
     /// <summary>
     /// Determines whether two pieces of content have the same value.
     /// </summary>
@@ -261,3 +270,5 @@ public record Content
     /// <returns><see cref="Content"/></returns>
     private static Content FromText(string? text) => new() { _text = text };
 }
+
+#pragma warning restore SA1124 // Do not use regions
