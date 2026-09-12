@@ -113,7 +113,7 @@ public class AdvancedUsage
                             _fizz(i) && _buzz(i) ? strong("FizzBuzz") :
                             _fizz(i) && !_buzz(i) ? em("Fizz") :
                             !_fizz(i) && _buzz(i) ? em("Buzz") :
-                            i.ToString()
+                            i
                         ))
                     )
                 )

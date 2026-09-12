@@ -773,6 +773,89 @@ items.IfEmpty(() => EmptyState(), x => table(x.Each(Row)))
 
 A null sequence, value or delegate yields empty content rather than throwing.
 
+## Encoding
+
+Text is encoded. A `string` that becomes `Content`, and every attribute value, has its `&`, `<`,
+`>` and `"` encoded, so a value coming from a user cannot break out of the markup around it:
+
+```cs
+var name = "<script>alert('xss')</script>";
+
+div(name)                       // <div>&lt;script&gt;alert('xss')&lt;/script&gt;</div>
+a(href("/x?a=1&b=2"))           // <a href="/x?a=1&amp;b=2"></a>
+```
+
+Elements and attributes are already markup and are never re-encoded, so composing them is
+unaffected, and so is `DOCTYPE() + html(...)`.
+
+Interpolation keeps working, because `Content` is an interpolated string handler: the literal parts
+of an interpolated string are written by you and stay raw, an element or attribute in a hole stays
+raw, and every other hole is encoded.
+
+```cs
+div($"<i>{name}</i>")           // <div><i>&lt;script&gt;</i></div>
+div($"see {b("bold")} here")    // <div>see <b>bold</b> here</div>
+```
+
+To opt out, say so:
+
+| | |
+|---|---|
+| `Content.Raw(s)` | the string is already markup — use as is |
+| `Content.Text(s)` | encode explicitly; the same as an implicit conversion |
+| `new Content(s)`, `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
+
+One thing to watch for: markup assembled into a `string` before it reaches an element is encoded
+whole, because the library can no longer tell which parts you wrote.
+
+```cs
+var markup = $"<i>{name}</i>";
+div(markup)                    // encodes the <i> too
+div(Content.Raw(markup))       // opt out
+```
+
+The same applies to a ternary whose other branch is a string, since that makes `string` the
+conditional's natural type — the element is rendered and then encoded as text:
+
+```cs
+numbers.Each(i => li(Fizz(i) ? strong("Fizz") : "not fizz"))   // <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
+```
+
+Use `If` instead. It takes `Content` parameters, so each branch converts on its own and there is no
+common type to infer:
+
+```cs
+numbers.Each(i => li(Fizz(i).If(strong("Fizz"), "not fizz")))   // <li><strong>Fizz</strong></li>
+```
+
+The whole `If*` / `IfMatch` family behaves this way. If you prefer a ternary, it is enough for one
+branch to be `Content` — and every numeric type, `char`, `bool`, `DateTime`, `DateTimeOffset`,
+`TimeSpan`, `Guid` and any `enum` convert directly, so `Fizz(i) ? strong("Fizz") : i` is already
+correct.
+
+Two things encoding deliberately does not do.
+
+`<script>` and `<style>` are *raw text* elements — the HTML parser does not decode character
+references inside them — so their content is **not** encoded. That is handled for you; the two
+elements are marked as raw text in the generated metadata:
+
+```cs
+e.style("a > b { color: red }")     // <style>a > b { color: red }</style>
+script("if (a < b) x();")           // <script>if (a < b) x();</script>
+```
+
+Their *attribute* values are still encoded. `<title>` and `<textarea>` are escapable raw text —
+references there are decoded — so their content is encoded normally. Because script and style
+bodies are raw, never build one out of data from a user; serialise it to JSON instead.
+
+And there is no URL encoding. Encoding an attribute value makes it safe to *place* in the
+attribute; composing the URL is the caller's job, since only you know which parts are components
+(`Uri.EscapeDataString`). `&` becoming `&amp;` in an `href` is correct HTML — the browser decodes
+it back. Note that encoding does not make `href("javascript:...")` safe; nothing here validates
+URL schemes.
+
+See [the migration guide](/docs/MIGRATION-v3.md) for the details.
+
 ## String Interpolation
 
 You can interpolate strings and string literals with the methods of `Markupolation`.

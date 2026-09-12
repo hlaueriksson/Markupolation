@@ -1,45 +1,121 @@
+using System;
 using System.Diagnostics;
+using System.Text;
 
 namespace Markupolation;
 
 /// <summary>
 /// HTML content.
 /// </summary>
+/// <remarks>
+/// <para>
+/// Text is encoded. A <see cref="string"/> converted to <see cref="Content"/> has its
+/// <c>&amp;</c>, <c>&lt;</c>, <c>&gt;</c> and <c>"</c> encoded, so a value coming from a user
+/// cannot break out of the markup around it. Use <see cref="Raw"/> for a string that is already
+/// markup.
+/// </para>
+/// <para>
+/// <see cref="Content"/> is also an interpolated string handler, which is what keeps
+/// <c>$"Read the {b("HTML")} standard"</c> working: the literal parts of an interpolated string
+/// are written by the author and stay raw, an <see cref="Element"/> or <see cref="Attribute"/>
+/// in a hole is already markup and stays raw, and every other hole is encoded. Only a
+/// <see cref="string"/> built up separately and then converted is encoded whole.
+/// </para>
+/// </remarks>
 [DebuggerDisplay("{ToString()}")]
-public record Content
+public partial record Content
 {
+    private readonly StringBuilder? _builder;
+    private string? _text;
+    private string? _value;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="Content"/> class.
     /// </summary>
+    /// <remarks>The value is used as it is; it is not encoded.</remarks>
     /// <param name="value">Content value.</param>
     public Content(string? value)
     {
-        Value = value;
+        _value = value;
+    }
+
+    private Content()
+    {
     }
 
     /// <summary>
     /// Gets content value.
     /// </summary>
-    public string? Value { get; }
-
-    /// <summary>
-    /// Converts <see cref="Content"/> to <see cref="string"/>.
-    /// </summary>
-    /// <param name="value">The content.</param>
-    public static implicit operator string(Content value)
+    public string? Value
     {
-        return value != null ? value.ToString() : string.Empty;
+        get
+        {
+            if (_value != null)
+            {
+                return _value;
+            }
+
+            if (_builder != null)
+            {
+                return _value = _builder.ToString();
+            }
+
+            return _text == null ? null : (_value = HtmlEncoder.Encode(_text));
+        }
     }
 
     /// <summary>
-    /// Converts <see cref="string"/> to <see cref="Content"/>.
+    /// Gets the text this content was created from, before encoding, or <c>null</c> when the
+    /// content is already markup.
     /// </summary>
-    /// <param name="value">The string.</param>
-    public static implicit operator Content(string value)
+    /// <remarks>
+    /// Raw text elements (<c>script</c>, <c>style</c>) render this instead of <see cref="Value"/>,
+    /// because the HTML parser does not decode character references inside them.
+    /// </remarks>
+    internal string? Unencoded => _text;
+
+    /// <summary>
+    /// Wraps a string that is already markup, without encoding it.
+    /// </summary>
+    /// <param name="value">Markup.</param>
+    /// <returns><see cref="Content"/></returns>
+    public static Content Raw(string? value) => new(value);
+
+    /// <summary>
+    /// Encodes a string as text.
+    /// </summary>
+    /// <remarks>The same as converting a <see cref="string"/> to <see cref="Content"/>.</remarks>
+    /// <param name="value">Text.</param>
+    /// <returns><see cref="Content"/></returns>
+    public static Content Text(string? value) => FromText(value);
+
+    /// <summary>
+    /// Determines whether two pieces of content have the same value.
+    /// </summary>
+    /// <remarks>
+    /// Hand-written because synthesized record equality compares fields, and content built from
+    /// an interpolated string holds a builder rather than a value until it is first read.
+    /// </remarks>
+    /// <param name="other">The content to compare with.</param>
+    /// <returns><c>true</c> if the content is equal; otherwise, <c>false</c>.</returns>
+    public virtual bool Equals(Content? other)
     {
-        return new Content(value);
+        return other is not null
+            && EqualityContract == other.EqualityContract
+            && string.Equals(Value, other.Value, StringComparison.Ordinal);
     }
 
     /// <inheritdoc/>
+    public override int GetHashCode() => Value == null ? 0 : StringComparer.Ordinal.GetHashCode(Value);
+
+    /// <inheritdoc/>
     public override string ToString() => Value ?? string.Empty;
+
+    /// <summary>
+    /// Creates content from text, encoding it lazily so that a raw text element can render the
+    /// original instead.
+    /// </summary>
+    /// <param name="text">Text.</param>
+    /// <returns><see cref="Content"/></returns>
+    private static Content FromText(string? text) => new() { _text = text };
 }

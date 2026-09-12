@@ -42,6 +42,6 @@ public sealed record Attribute : Content
 
     private static string ToString(string name, string? value = null)
     {
-        return value != null ? string.Concat(name, "=\"", value, "\"") : name;
+        return value != null ? string.Concat(name, "=\"", HtmlEncoder.Encode(value), "\"") : name;
     }
 }

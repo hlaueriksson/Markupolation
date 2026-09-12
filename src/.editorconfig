@@ -18,3 +18,7 @@ dotnet_diagnostic.CA1711.severity = none
 
 # Provide a method named 'ToContent' or 'FromString' as an alternate for operator op_Implicit
 dotnet_diagnostic.CA2225.severity = none
+
+# Field should not begin with an underscore. _camelCase is the .NET convention and the style
+# already used elsewhere in this repo (for example the benchmark fixtures).
+dotnet_diagnostic.SA1309.severity = none
