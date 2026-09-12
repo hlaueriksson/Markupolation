@@ -23,10 +23,13 @@ internal enum AttributeType
     [Attribute("Whether to allow the iframe's contents to use requestFullscreen()", false, true, ElementType.iframe)]
     allowfullscreen,
 
+    [Attribute("Allow the color's alpha component to be set", false, true, ElementType.input)]
+    alpha,
+
     [Attribute("Replacement text for use when images are not available", false, false, ElementType.area, ElementType.img, ElementType.input)]
     alt,
 
-    [Attribute("Potential destination for a preload request (for rel=\"preload\" and rel=\"modulepreload\")", false, false, ElementType.link)]
+    [Attribute("Destination for a preload request (for rel=\"preload\" and rel=\"modulepreload\")", false, false, ElementType.link)]
     as_,
 
     [Attribute("Execute script when available, without blocking while fetching", false, true, ElementType.script)]
@@ -38,6 +41,9 @@ internal enum AttributeType
     [Attribute("Default setting for autofill feature for controls in the form", false, false, ElementType.form)]
     [Attribute("Hint for form autofill feature", false, false, ElementType.input, ElementType.select, ElementType.textarea)]
     autocomplete,
+
+    [Attribute("Recommended autocorrection behavior (for supported input methods)", true, false)]
+    autocorrect,
 
     [Attribute("Automatically focus the element when the page is loaded", true, true)]
     autofocus,
@@ -60,8 +66,14 @@ internal enum AttributeType
     [Attribute("Classes to which the element belongs", false, false)]
     class_,
 
+    [Attribute("Which user actions will close the dialog", false, false, ElementType.dialog)]
+    closedby,
+
     [Attribute("Color to use when customizing a site's icon (for rel=\"mask-icon\")", false, false, ElementType.link)]
     color,
+
+    [Attribute("The color space of the serialized color", false, false, ElementType.input)]
+    colorspace,
 
     [Attribute("Maximum number of characters per line", false, false, ElementType.textarea)]
     cols,
@@ -69,13 +81,19 @@ internal enum AttributeType
     [Attribute("Number of columns that the cell is to span", false, false, ElementType.td, ElementType.th)]
     colspan,
 
+    [Attribute("Indicates to the targeted element which action to take", false, false, ElementType.button)]
+    command,
+
+    [Attribute("Targets another element to be invoked", false, false, ElementType.button)]
+    commandfor,
+
     [Attribute("Value of the element", false, false, ElementType.meta)]
     content,
 
     [Attribute("Whether the element is editable", true, false)]
     contenteditable,
 
-    [Attribute("Show user agent controls", false, true, ElementType.audio, ElementType.video)]
+    [Attribute("Show user agent controls", false, true, ElementType.audio, ElementType.video, ElementType.img)]
     controls,
 
     [Attribute("Coordinates for the shape to be created in an image map", false, false, ElementType.area)]
@@ -129,6 +147,7 @@ internal enum AttributeType
 
     [Attribute("Associate the label with form control", false, false, ElementType.label)]
     [Attribute("Specifies controls from which the output was calculated", false, false, ElementType.output)]
+    [Attribute("Updates existing content", false, false, ElementType.template)]
     for_,
 
     [Attribute("Associates the element with a form element", false, false, ElementType.button, ElementType.fieldset, ElementType.input, ElementType.object_, ElementType.output, ElementType.select, ElementType.textarea)]
@@ -151,6 +170,12 @@ internal enum AttributeType
 
     [Attribute("The header cells for this cell", false, false, ElementType.td, ElementType.th)]
     headers,
+
+    [Attribute("Offsets heading levels for descendants", true, false)]
+    headingoffset,
+
+    [Attribute("Prevents a heading offset computation from traversing beyond the element with the attribute", true, true)]
+    headingreset,
 
     [Attribute("Vertical dimension", false, false, ElementType.canvas, ElementType.embed, ElementType.iframe, ElementType.img, ElementType.input, ElementType.object_, ElementType.source, ElementType.video)]
     height,
@@ -223,7 +248,7 @@ internal enum AttributeType
     [Attribute("List of autocomplete options", false, false, ElementType.input)]
     list,
 
-    [Attribute("Used when determining loading deferral", false, false, ElementType.iframe, ElementType.img)]
+    [Attribute("Used when determining loading deferral", false, false, ElementType.iframe, ElementType.img, ElementType.audio, ElementType.video)]
     loading,
 
     [Attribute("Whether to loop the media resource", false, true, ElementType.audio, ElementType.video)]
@@ -345,6 +370,9 @@ internal enum AttributeType
     [Attribute("Sets clonable on a declarative shadow root", false, true, ElementType.template)]
     shadowrootclonable,
 
+    [Attribute("Enables declarative shadow roots to indicate they will use a custom element registry", false, true, ElementType.template)]
+    shadowrootcustomelementregistry,
+
     [Attribute("Sets delegates focus on a declarative shadow root", false, true, ElementType.template)]
     shadowrootdelegatesfocus,
 
@@ -353,6 +381,9 @@ internal enum AttributeType
 
     [Attribute("Sets serializable on a declarative shadow root", false, true, ElementType.template)]
     shadowrootserializable,
+
+    [Attribute("Sets slot assignment on a declarative shadow root", false, false, ElementType.template)]
+    shadowrootslotassignment,
 
     [Attribute("The kind of shape to be created in an image map", false, false, ElementType.area)]
     shape,

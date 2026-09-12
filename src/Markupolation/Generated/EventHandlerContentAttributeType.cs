@@ -44,6 +44,9 @@ internal enum EventHandlerContentAttributeType
     [EventHandlerContentAttribute("close event handler")]
     onclose,
 
+    [EventHandlerContentAttribute("command event handler")]
+    oncommand,
+
     [EventHandlerContentAttribute("contextlost event handler")]
     oncontextlost,
 
