@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsAotCompatible>true</IsAotCompatible>
+    <Version>3.0.0</Version>
+    <PackageReleaseNotes>
+    </PackageReleaseNotes>
+    <Authors>Henrik Lau Eriksson</Authors>
+    <Description>
+Markupolation = Markup + String Interpolation
+ASP.NET Core integration for HTML templating in C#:
+⌨️ app.MapGet("/", () =&gt; Results.Extensions.Html(html(body(h1("Hello, World!")))));
+🖨️ Content-Type: text/html; charset=utf-8
+    </Description>
+    <PackageId>Markupolation.AspNetCore</PackageId>
+    <PackageProjectUrl>https://github.com/hlaueriksson/Markupolation</PackageProjectUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>Markupolation.AspNetCore.md</PackageReadmeFile>
+    <PackageTags>HTML;HTML5;Markup;AspNetCore;htmx</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\Markupolation.AspNetCore.md" Pack="true" PackagePath="\" />
+    <None Include="buildTransitive\Markupolation.AspNetCore.props" Pack="true" PackagePath="buildTransitive\Markupolation.AspNetCore.props" />
+    <None Include="buildTransitive\Markupolation.AspNetCore.props" Pack="true" PackagePath="build\Markupolation.AspNetCore.props" />
+  </ItemGroup>
+
+  <Import Project="../../Analyzers.props" />
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="..\Markupolation\Markupolation.csproj" />
+  </ItemGroup>
+
+</Project>

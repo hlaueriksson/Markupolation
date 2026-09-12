@@ -9,7 +9,7 @@ app.UseExceptionHandler();
 app.UseHttpsRedirection();
 app.MapDefaultEndpoints();
 
-app.MapGet("/", () => Results.Text(contentType: "text/html; charset=utf-8", content:
+app.MapGet("/", () => Results.Extensions.Html(
     DOCTYPE() +
     html(lang("en"),
         head(
@@ -25,7 +25,7 @@ app.MapGet("/", () => Results.Text(contentType: "text/html; charset=utf-8", cont
     )
 ));
 
-app.MapGet("/hello", () => Results.Text(contentType: "text/html; charset=utf-8", content:
+app.MapGet("/hello", () => Results.Extensions.Html(
     h1("Hello, World!") + p("This is ", mark(title("Markup with string interpolation"), "Markupolation"), " in action.")
 ));
 
@@ -33,7 +33,7 @@ app.MapGet("/counter/{count}", (HttpRequest request, int count) =>
 {
     var result = mark(a.title(count), Humanizer.NumberToWordsExtension.ToWords(count));
 
-    return Results.Text(contentType: "text/html; charset=utf-8", content: request.Headers.ContainsKey("HX-Request") ?
+    return Results.Extensions.Html(request.IsHtmx() ?
         h1("Counter") +
         p(new A("role", "status"), $"Current count: {result}") +
         button(
@@ -62,7 +62,7 @@ Func<WeatherForecast[]> forecasts = () =>
     )
     .ToArray();
 
-app.MapGet("/weather", () => Results.Text(contentType: "text/html; charset=utf-8", content:
+app.MapGet("/weather", () => Results.Extensions.Html(
     $$"""
     <table class="table">
         <thead>

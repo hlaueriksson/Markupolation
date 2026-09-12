@@ -11,6 +11,7 @@
     <Project Path="samples/Markupolation.Sample.Tests/Markupolation.Sample.Tests.csproj" />
   </Folder>
   <Folder Name="/src/">
+    <Project Path="src/Markupolation.AspNetCore/Markupolation.AspNetCore.csproj" />
     <Project Path="src/Markupolation.Extensions/Markupolation.Extensions.csproj" />
     <Project Path="src/Markupolation/Markupolation.csproj" />
   </Folder>

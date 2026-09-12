@@ -15,8 +15,14 @@
     <PackageReference Include="NUnit3TestAdapter" Version="6.3.0" />
   </ItemGroup>
 
+  <!-- Markupolation.AspNetCore is net10.0 only; the net8.0 leg covers the netstandard2.1 build. -->
+  <ItemGroup Condition="'$(TargetFramework)' != 'net10.0'">
+    <Compile Remove="AspNetCore\**" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\Markupolation.AspNetCore\Markupolation.AspNetCore.csproj" Condition="'$(TargetFramework)' == 'net10.0'" />
     <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
     <Using Include="Markupolation.Elements" Static="True" />
     <Using Include="Markupolation.Attributes" Static="True" />
