@@ -829,8 +829,9 @@ numbers.Each(i => li(Fizz(i).If(strong("Fizz"), "not fizz")))   // <li><strong>F
 ```
 
 The whole `If*` / `IfMatch` family behaves this way. If you prefer a ternary, it is enough for one
-branch to be `Content` — and `int`, `long`, `double`, `decimal` and `DateTime` convert directly, so
-`Fizz(i) ? strong("Fizz") : i` is already correct.
+branch to be `Content` — and every numeric type, `char`, `bool`, `DateTime`, `DateTimeOffset`,
+`TimeSpan`, `Guid` and any `enum` convert directly, so `Fizz(i) ? strong("Fizz") : i` is already
+correct.
 
 Two things encoding deliberately does not do.
 

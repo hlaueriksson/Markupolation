@@ -1,3 +1,5 @@
+using System;
+using System.Globalization;
 using e = Markupolation.Elements;
 using FluentAssertions;
 using NUnit.Framework;
@@ -249,5 +251,68 @@ public class EncodingTests
         // original text to fall back to and it renders the same in both places.
         div(Content.Raw("a > b")).ToString().Should().Be("<div>a > b</div>");
         e.style(Content.Raw("a > b")).ToString().Should().Be("<style>a > b</style>");
+    }
+
+    [Test]
+    public void Value_types_that_would_otherwise_widen_to_the_wrong_conversion()
+    {
+        // Each of these three has to be declared explicitly. Without it the value widens to
+        // another conversion and renders wrong - or does not compile at all.
+        div('a').ToString().Should().Be("<div>a</div>", "a char would widen to int and render 97");
+        div(0.1f).ToString().Should().Be("<div>" + 0.1f.ToString(CultureInfo.CurrentCulture) + "</div>",
+            "a float would widen to double and render its binary artefacts");
+        div(ulong.MaxValue).ToString().Should().Be("<div>18446744073709551615</div>",
+            "a ulong would be ambiguous between the double and decimal conversions");
+
+        Content fromChar = 'a';
+        Content fromFloat = 0.1f;
+        Content fromULong = ulong.MaxValue;
+        fromChar.ToString().Should().Be("a");
+        fromFloat.ToString().Should().Be(0.1f.ToString(CultureInfo.CurrentCulture));
+        fromULong.ToString().Should().Be("18446744073709551615");
+    }
+
+    [Test]
+    public void Smaller_integer_types_convert()
+    {
+        // Each integer type is declared: once ulong exists, int and ulong are incomparable and
+        // the smaller types have no unique conversion to widen through.
+        Content fromShort = (short)-5;
+        Content fromByte = (byte)5;
+        Content fromUInt = uint.MaxValue;
+
+        fromShort.ToString().Should().Be("-5");
+        fromByte.ToString().Should().Be("5");
+        fromUInt.ToString().Should().Be("4294967295");
+    }
+
+    [Test]
+    public void Other_value_types_convert()
+    {
+        Content fromBool = true;
+        Content fromGuid = Guid.Empty;
+        Content fromTimeSpan = TimeSpan.FromMinutes(90);
+        Content fromEnum = StringComparison.Ordinal;
+        Content fromOffset = new DateTimeOffset(2026, 9, 12, 0, 0, 0, TimeSpan.Zero);
+
+        fromBool.ToString().Should().Be("True");
+        fromGuid.ToString().Should().Be("00000000-0000-0000-0000-000000000000");
+        fromTimeSpan.ToString().Should().Be("01:30:00");
+        fromEnum.ToString().Should().Be("Ordinal");
+        fromOffset.ToString().Should().NotBeEmpty();
+    }
+
+    [Test]
+    public void Conversions_keep_elements_raw_in_a_conditional()
+    {
+        // The point of these conversions: the conditional has no natural type, so it is
+        // target-typed to Content and the element branch stays markup.
+        li(true ? strong("Fizz") : StringComparison.Ordinal).ToString()
+            .Should().Be("<li><strong>Fizz</strong></li>");
+        li(false ? strong("Fizz") : StringComparison.Ordinal).ToString()
+            .Should().Be("<li>Ordinal</li>");
+
+        li(true ? strong("Fizz") : 'x').ToString().Should().Be("<li><strong>Fizz</strong></li>");
+        li(false ? strong("Fizz") : 'x').ToString().Should().Be("<li>x</li>");
     }
 }

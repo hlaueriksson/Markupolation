@@ -103,7 +103,7 @@ Consumers on .NET Core 3.0+, .NET 5+, Mono 6.4+, Xamarin and Unity 2021.2+ are u
 
 ## Also new
 
-- `int`, `long`, `double`, `decimal` and `DateTime` convert to `Content` implicitly.
+- Value types convert to `Content` implicitly: every numeric type, `char`, `bool`, `DateTime`, `DateTimeOffset`, `TimeSpan`, `Guid` and any `enum`.
 - `Markupolation.Extensions` gained `If` on `bool`, and a lazy `Func<Content>` form of every
   conditional so an unused branch is not built. See the README.
 
