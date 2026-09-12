@@ -47,6 +47,13 @@ div(markup)                  // encodes the <i> too
 div(Content.Raw(markup))     // opt out
 ```
 
+An HTML **comment** is the same case, and an easy one to miss — it looks like text but is markup:
+
+```cs
+body("<!-- content here -->")                 // shows up on the page as literal text
+body(Content.Raw("<!-- content here -->"))    // a comment
+```
+
 ### Opting out
 
 | | |
