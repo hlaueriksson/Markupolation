@@ -12,9 +12,11 @@ public class Program
     {
         if (!await BasicUsage.IsValid()) throw new Exception("BasicUsage is not valid");
         if (!await AdvancedUsage.IsValid()) throw new Exception("AdvancedUsage is not valid");
+        if (!DeepNesting.IsValid()) throw new Exception("DeepNesting is not valid");
 
-        BenchmarkRunner.Run<BasicUsage>();
-        BenchmarkRunner.Run<AdvancedUsage>();
+        BenchmarkRunner.Run<BasicUsage>(null, args);
+        BenchmarkRunner.Run<AdvancedUsage>(null, args);
+        BenchmarkRunner.Run<DeepNesting>(null, args);
     }
 }
 

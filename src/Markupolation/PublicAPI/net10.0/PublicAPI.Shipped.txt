@@ -1,0 +1,604 @@
+#nullable enable
+Markupolation.Attribute
+Markupolation.Attribute.Attribute(string! name, string? value = null) -> void
+Markupolation.Attribute.Equals(Markupolation.Attribute? other) -> bool
+Markupolation.Attributes
+Markupolation.Content
+Markupolation.Content.Content(Markupolation.Content! original) -> void
+Markupolation.Content.Content(string? value) -> void
+Markupolation.Content.Value.get -> string?
+Markupolation.Element
+Markupolation.Element.Element(string! name, bool isVoidElement, params Markupolation.Content![]! content) -> void
+Markupolation.Element.Element(string! value) -> void
+Markupolation.Element.Equals(Markupolation.Element? other) -> bool
+Markupolation.Elements
+Markupolation.EventHandlerContentAttributes
+override Markupolation.Attribute.<Clone>$() -> Markupolation.Attribute!
+override Markupolation.Attribute.Equals(object? obj) -> bool
+override Markupolation.Attribute.GetHashCode() -> int
+override Markupolation.Attribute.ToString() -> string!
+override Markupolation.Content.Equals(object? obj) -> bool
+override Markupolation.Content.GetHashCode() -> int
+override Markupolation.Content.ToString() -> string!
+override Markupolation.Element.<Clone>$() -> Markupolation.Element!
+override Markupolation.Element.Equals(object? obj) -> bool
+override Markupolation.Element.GetHashCode() -> int
+override Markupolation.Element.ToString() -> string!
+override sealed Markupolation.Attribute.Equals(Markupolation.Content? other) -> bool
+override sealed Markupolation.Element.Equals(Markupolation.Content? other) -> bool
+static Markupolation.Attribute.implicit operator string!(Markupolation.Attribute! value) -> string!
+static Markupolation.Attribute.operator !=(Markupolation.Attribute? left, Markupolation.Attribute? right) -> bool
+static Markupolation.Attribute.operator ==(Markupolation.Attribute? left, Markupolation.Attribute? right) -> bool
+static Markupolation.Attributes.abbr(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.abbr(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.accept(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.accept(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.accept_charset(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.accept_charset(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.accesskey(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.accesskey(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.action(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.action(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.allow(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.allow(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.allowfullscreen() -> Markupolation.Attribute!
+static Markupolation.Attributes.alpha() -> Markupolation.Attribute!
+static Markupolation.Attributes.alt(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.alt(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.async() -> Markupolation.Attribute!
+static Markupolation.Attributes.as_(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.as_(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autocapitalize(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autocapitalize(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autocomplete(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autocomplete(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autocorrect(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autocorrect(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autofocus() -> Markupolation.Attribute!
+static Markupolation.Attributes.autoplay() -> Markupolation.Attribute!
+static Markupolation.Attributes.blocking(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.blocking(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.charset(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.charset(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.checked_() -> Markupolation.Attribute!
+static Markupolation.Attributes.cite(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.cite(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.class_(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.class_(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.closedby(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.closedby(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.color(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.color(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.colorspace(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.colorspace(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.cols(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.cols(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.colspan(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.colspan(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.command(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.command(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.commandfor(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.commandfor(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.content(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.content(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.contenteditable(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.contenteditable(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.controls() -> Markupolation.Attribute!
+static Markupolation.Attributes.coords(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.coords(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.crossorigin(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.crossorigin(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.data(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.data(string! name, string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.data(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.datetime(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.datetime(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.decoding(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.decoding(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.default_() -> Markupolation.Attribute!
+static Markupolation.Attributes.defer() -> Markupolation.Attribute!
+static Markupolation.Attributes.dir(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.dir(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.dirname(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.dirname(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.disabled() -> Markupolation.Attribute!
+static Markupolation.Attributes.download(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.download(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.draggable(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.draggable(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.enctype(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.enctype(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.enterkeyhint(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.enterkeyhint(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.fetchpriority(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.fetchpriority(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.form(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.form(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.formaction(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.formaction(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.formenctype(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.formenctype(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.formmethod(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.formmethod(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.formnovalidate() -> Markupolation.Attribute!
+static Markupolation.Attributes.formtarget(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.formtarget(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.for_(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.for_(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headers(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headers(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headingoffset(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headingoffset(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headingreset() -> Markupolation.Attribute!
+static Markupolation.Attributes.height(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.height(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.hidden(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.hidden(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.high(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.high(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.href(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.href(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.hreflang(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.hreflang(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.http_equiv(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.http_equiv(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.id(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.id(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.imagesizes(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.imagesizes(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.imagesrcset(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.imagesrcset(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.inert() -> Markupolation.Attribute!
+static Markupolation.Attributes.inputmode(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.inputmode(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.integrity(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.integrity(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.ismap() -> Markupolation.Attribute!
+static Markupolation.Attributes.is_(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.is_(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.itemid(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.itemid(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.itemprop(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.itemprop(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.itemref(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.itemref(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.itemscope() -> Markupolation.Attribute!
+static Markupolation.Attributes.itemtype(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.itemtype(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.kind(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.kind(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.label(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.label(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.lang(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.lang(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.list(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.list(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.loading(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.loading(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.loop() -> Markupolation.Attribute!
+static Markupolation.Attributes.low(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.low(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.max(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.max(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.maxlength(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.maxlength(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.media(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.media(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.method(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.method(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.min(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.min(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.minlength(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.minlength(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.multiple() -> Markupolation.Attribute!
+static Markupolation.Attributes.muted() -> Markupolation.Attribute!
+static Markupolation.Attributes.name(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.name(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.nomodule() -> Markupolation.Attribute!
+static Markupolation.Attributes.nonce(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.nonce(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.novalidate() -> Markupolation.Attribute!
+static Markupolation.Attributes.open() -> Markupolation.Attribute!
+static Markupolation.Attributes.optimum(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.optimum(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.pattern(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.pattern(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.ping(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.ping(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.placeholder(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.placeholder(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.playsinline() -> Markupolation.Attribute!
+static Markupolation.Attributes.popover(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.popover(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.popovertarget(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.popovertarget(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.popovertargetaction(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.popovertargetaction(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.poster(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.poster(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.preload(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.preload(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.readonly_() -> Markupolation.Attribute!
+static Markupolation.Attributes.referrerpolicy(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.referrerpolicy(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.rel(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.rel(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.required() -> Markupolation.Attribute!
+static Markupolation.Attributes.reversed() -> Markupolation.Attribute!
+static Markupolation.Attributes.rows(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.rows(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.rowspan(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.rowspan(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.sandbox(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.sandbox(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.scope(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.scope(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.selected() -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootclonable() -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootcustomelementregistry() -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootdelegatesfocus() -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootmode(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootmode(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootserializable() -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootslotassignment(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootslotassignment(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.shape(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.shape(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.size(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.size(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.sizes(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.sizes(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.slot(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.slot(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.span(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.span(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.spellcheck(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.spellcheck(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.src(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.src(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.srcdoc(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.srcdoc(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.srclang(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.srclang(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.srcset(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.srcset(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.start(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.start(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.step(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.step(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.style(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.style(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.tabindex(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.tabindex(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.target(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.target(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.title(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.title(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.translate(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.translate(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.type(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.type(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.usemap(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.usemap(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.value(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.value(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.width(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.width(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.wrap(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.wrap(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.writingsuggestions(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.writingsuggestions(string! value) -> Markupolation.Attribute!
+static Markupolation.Content.implicit operator Markupolation.Content!(string! value) -> Markupolation.Content!
+static Markupolation.Content.implicit operator string!(Markupolation.Content! value) -> string!
+static Markupolation.Content.operator !=(Markupolation.Content? left, Markupolation.Content? right) -> bool
+static Markupolation.Content.operator ==(Markupolation.Content? left, Markupolation.Content? right) -> bool
+static Markupolation.Element.implicit operator string!(Markupolation.Element! value) -> string!
+static Markupolation.Element.operator !=(Markupolation.Element? left, Markupolation.Element? right) -> bool
+static Markupolation.Element.operator ==(Markupolation.Element? left, Markupolation.Element? right) -> bool
+static Markupolation.Elements.a(object! content) -> Markupolation.Element!
+static Markupolation.Elements.a(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.abbr(object! content) -> Markupolation.Element!
+static Markupolation.Elements.abbr(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.address(object! content) -> Markupolation.Element!
+static Markupolation.Elements.address(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.area(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.article(object! content) -> Markupolation.Element!
+static Markupolation.Elements.article(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.aside(object! content) -> Markupolation.Element!
+static Markupolation.Elements.aside(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.audio(object! content) -> Markupolation.Element!
+static Markupolation.Elements.audio(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.b(object! content) -> Markupolation.Element!
+static Markupolation.Elements.b(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.base_(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.bdi(object! content) -> Markupolation.Element!
+static Markupolation.Elements.bdi(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.bdo(object! content) -> Markupolation.Element!
+static Markupolation.Elements.bdo(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.blockquote(object! content) -> Markupolation.Element!
+static Markupolation.Elements.blockquote(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.body(object! content) -> Markupolation.Element!
+static Markupolation.Elements.body(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.br(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.button(object! content) -> Markupolation.Element!
+static Markupolation.Elements.button(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.canvas(object! content) -> Markupolation.Element!
+static Markupolation.Elements.canvas(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.caption(object! content) -> Markupolation.Element!
+static Markupolation.Elements.caption(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.cite(object! content) -> Markupolation.Element!
+static Markupolation.Elements.cite(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.code(object! content) -> Markupolation.Element!
+static Markupolation.Elements.code(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.col(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.colgroup(object! content) -> Markupolation.Element!
+static Markupolation.Elements.colgroup(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.data(object! content) -> Markupolation.Element!
+static Markupolation.Elements.data(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.datalist(object! content) -> Markupolation.Element!
+static Markupolation.Elements.datalist(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.dd(object! content) -> Markupolation.Element!
+static Markupolation.Elements.dd(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.del(object! content) -> Markupolation.Element!
+static Markupolation.Elements.del(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.details(object! content) -> Markupolation.Element!
+static Markupolation.Elements.details(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.dfn(object! content) -> Markupolation.Element!
+static Markupolation.Elements.dfn(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.dialog(object! content) -> Markupolation.Element!
+static Markupolation.Elements.dialog(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.div(object! content) -> Markupolation.Element!
+static Markupolation.Elements.div(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.dl(object! content) -> Markupolation.Element!
+static Markupolation.Elements.dl(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.DOCTYPE() -> string!
+static Markupolation.Elements.dt(object! content) -> Markupolation.Element!
+static Markupolation.Elements.dt(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.em(object! content) -> Markupolation.Element!
+static Markupolation.Elements.em(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.embed(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.fieldset(object! content) -> Markupolation.Element!
+static Markupolation.Elements.fieldset(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.figcaption(object! content) -> Markupolation.Element!
+static Markupolation.Elements.figcaption(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.figure(object! content) -> Markupolation.Element!
+static Markupolation.Elements.figure(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.footer(object! content) -> Markupolation.Element!
+static Markupolation.Elements.footer(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.form(object! content) -> Markupolation.Element!
+static Markupolation.Elements.form(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.h1(object! content) -> Markupolation.Element!
+static Markupolation.Elements.h1(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.h2(object! content) -> Markupolation.Element!
+static Markupolation.Elements.h2(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.h3(object! content) -> Markupolation.Element!
+static Markupolation.Elements.h3(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.h4(object! content) -> Markupolation.Element!
+static Markupolation.Elements.h4(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.h5(object! content) -> Markupolation.Element!
+static Markupolation.Elements.h5(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.h6(object! content) -> Markupolation.Element!
+static Markupolation.Elements.h6(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.head(object! content) -> Markupolation.Element!
+static Markupolation.Elements.head(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.header(object! content) -> Markupolation.Element!
+static Markupolation.Elements.header(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.hgroup(object! content) -> Markupolation.Element!
+static Markupolation.Elements.hgroup(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.hr(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.html(object! content) -> Markupolation.Element!
+static Markupolation.Elements.html(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.i(object! content) -> Markupolation.Element!
+static Markupolation.Elements.i(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.iframe(object! content) -> Markupolation.Element!
+static Markupolation.Elements.iframe(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.img(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.input(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.ins(object! content) -> Markupolation.Element!
+static Markupolation.Elements.ins(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.kbd(object! content) -> Markupolation.Element!
+static Markupolation.Elements.kbd(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.label(object! content) -> Markupolation.Element!
+static Markupolation.Elements.label(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.legend(object! content) -> Markupolation.Element!
+static Markupolation.Elements.legend(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.li(object! content) -> Markupolation.Element!
+static Markupolation.Elements.li(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.link(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.main(object! content) -> Markupolation.Element!
+static Markupolation.Elements.main(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.map(object! content) -> Markupolation.Element!
+static Markupolation.Elements.map(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.mark(object! content) -> Markupolation.Element!
+static Markupolation.Elements.mark(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.menu(object! content) -> Markupolation.Element!
+static Markupolation.Elements.menu(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.meta(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.meter(object! content) -> Markupolation.Element!
+static Markupolation.Elements.meter(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.nav(object! content) -> Markupolation.Element!
+static Markupolation.Elements.nav(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.noscript(object! content) -> Markupolation.Element!
+static Markupolation.Elements.noscript(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.object_(object! content) -> Markupolation.Element!
+static Markupolation.Elements.object_(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.ol(object! content) -> Markupolation.Element!
+static Markupolation.Elements.ol(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.optgroup(object! content) -> Markupolation.Element!
+static Markupolation.Elements.optgroup(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.option(object! content) -> Markupolation.Element!
+static Markupolation.Elements.option(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.output(object! content) -> Markupolation.Element!
+static Markupolation.Elements.output(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.p(object! content) -> Markupolation.Element!
+static Markupolation.Elements.p(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.picture(object! content) -> Markupolation.Element!
+static Markupolation.Elements.picture(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.pre(object! content) -> Markupolation.Element!
+static Markupolation.Elements.pre(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.progress(object! content) -> Markupolation.Element!
+static Markupolation.Elements.progress(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.q(object! content) -> Markupolation.Element!
+static Markupolation.Elements.q(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.rp(object! content) -> Markupolation.Element!
+static Markupolation.Elements.rp(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.rt(object! content) -> Markupolation.Element!
+static Markupolation.Elements.rt(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.ruby(object! content) -> Markupolation.Element!
+static Markupolation.Elements.ruby(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.s(object! content) -> Markupolation.Element!
+static Markupolation.Elements.s(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.samp(object! content) -> Markupolation.Element!
+static Markupolation.Elements.samp(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.script(object! content) -> Markupolation.Element!
+static Markupolation.Elements.script(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.search(object! content) -> Markupolation.Element!
+static Markupolation.Elements.search(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.section(object! content) -> Markupolation.Element!
+static Markupolation.Elements.section(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.select(object! content) -> Markupolation.Element!
+static Markupolation.Elements.select(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.selectedcontent(object! content) -> Markupolation.Element!
+static Markupolation.Elements.selectedcontent(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.slot(object! content) -> Markupolation.Element!
+static Markupolation.Elements.slot(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.small(object! content) -> Markupolation.Element!
+static Markupolation.Elements.small(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.source(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.span(object! content) -> Markupolation.Element!
+static Markupolation.Elements.span(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.strong(object! content) -> Markupolation.Element!
+static Markupolation.Elements.strong(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.style(object! content) -> Markupolation.Element!
+static Markupolation.Elements.style(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.sub(object! content) -> Markupolation.Element!
+static Markupolation.Elements.sub(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.summary(object! content) -> Markupolation.Element!
+static Markupolation.Elements.summary(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.sup(object! content) -> Markupolation.Element!
+static Markupolation.Elements.sup(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.table(object! content) -> Markupolation.Element!
+static Markupolation.Elements.table(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.tbody(object! content) -> Markupolation.Element!
+static Markupolation.Elements.tbody(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.td(object! content) -> Markupolation.Element!
+static Markupolation.Elements.td(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.template(object! content) -> Markupolation.Element!
+static Markupolation.Elements.template(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.textarea(object! content) -> Markupolation.Element!
+static Markupolation.Elements.textarea(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.tfoot(object! content) -> Markupolation.Element!
+static Markupolation.Elements.tfoot(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.th(object! content) -> Markupolation.Element!
+static Markupolation.Elements.th(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.thead(object! content) -> Markupolation.Element!
+static Markupolation.Elements.thead(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.time(object! content) -> Markupolation.Element!
+static Markupolation.Elements.time(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.title(object! content) -> Markupolation.Element!
+static Markupolation.Elements.title(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.tr(object! content) -> Markupolation.Element!
+static Markupolation.Elements.tr(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.track(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.u(object! content) -> Markupolation.Element!
+static Markupolation.Elements.u(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.ul(object! content) -> Markupolation.Element!
+static Markupolation.Elements.ul(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.var(object! content) -> Markupolation.Element!
+static Markupolation.Elements.var(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.video(object! content) -> Markupolation.Element!
+static Markupolation.Elements.video(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.wbr(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.EventHandlerContentAttributes.onafterprint(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onauxclick(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onbeforeinput(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onbeforematch(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onbeforeprint(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onbeforetoggle(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onbeforeunload(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onblur(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncancel(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncanplay(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncanplaythrough(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onchange(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onclick(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onclose(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncommand(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncontextlost(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncontextmenu(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncontextrestored(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncopy(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncuechange(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncut(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ondblclick(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ondrag(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ondragend(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ondragenter(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ondragleave(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ondragover(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ondragstart(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ondrop(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ondurationchange(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onemptied(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onended(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onerror(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onfocus(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onformdata(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onhashchange(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oninput(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oninvalid(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onkeydown(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onkeypress(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onkeyup(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onlanguagechange(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onload(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onloadeddata(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onloadedmetadata(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onloadstart(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onmessage(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onmessageerror(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onmousedown(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onmouseenter(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onmouseleave(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onmousemove(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onmouseout(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onmouseover(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onmouseup(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onoffline(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ononline(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onpagehide(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onpagereveal(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onpageshow(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onpageswap(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onpaste(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onpause(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onplay(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onplaying(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onpopstate(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onprogress(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onratechange(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onrejectionhandled(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onreset(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onresize(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onscroll(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onscrollend(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onsecuritypolicyviolation(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onseeked(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onseeking(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onselect(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onslotchange(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onstalled(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onstorage(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onsubmit(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onsuspend(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ontimeupdate(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.ontoggle(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onunhandledrejection(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onunload(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onvolumechange(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onwaiting(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.onwheel(string! value) -> Markupolation.Attribute!
+virtual Markupolation.Content.<Clone>$() -> Markupolation.Content!
+virtual Markupolation.Content.EqualityContract.get -> System.Type!
+virtual Markupolation.Content.Equals(Markupolation.Content? other) -> bool
+virtual Markupolation.Content.PrintMembers(System.Text.StringBuilder! builder) -> bool

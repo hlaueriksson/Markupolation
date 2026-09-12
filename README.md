@@ -727,6 +727,10 @@ Looping on `IEnumerable<T>`:
 
 - `Each<T>`
 
+Conditionals on `bool`:
+
+- `If`
+
 Conditionals on `IEnumerable<T>`:
 
 - `IfEmpty<T>`
@@ -746,6 +750,28 @@ Conditionals on `string`:
 Conditionals on `T?`:
 
 - `IfHasValue<T>`
+
+`If` replaces the `IfMatch` idiom you would otherwise need for a plain condition:
+
+```cs
+x.IfMatch(i => i.Active, i => class_("active"))   // before
+x.Active.If(class_("active"))                     // with If
+```
+
+Every conditional comes in two forms. The `Content` form is the concise one, and is what you
+want when the branches are cheap to build:
+
+```cs
+items.IfEmpty(p("Nothing here"), x => table(x.Each(Row)))
+```
+
+The `Func<Content>` form defers the branches, so only the one that is actually taken is built:
+
+```cs
+items.IfEmpty(() => EmptyState(), x => table(x.Each(Row)))
+```
+
+A null sequence, value or delegate yields empty content rather than throwing.
 
 ## String Interpolation
 

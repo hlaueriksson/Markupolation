@@ -1,0 +1,20 @@
+# editorconfig.org
+
+# top-most EditorConfig file
+root = false
+
+# Multi-targeting turns on the .NET code-quality (CA) analyzers, which are off for a
+# netstandard target alone. Three of them are incompatible with this library's deliberate
+# design: the API mirrors the WHATWG HTML specification, so member names are lowercase
+# and keyword-escaped, one public type is literally an HTML "attribute", and the whole
+# point of Content is that strings convert to it implicitly.
+[*.cs]
+
+# Remove the underscores from member name -- base_, class_, for_, http_equiv, ...
+dotnet_diagnostic.CA1707.severity = none
+
+# Rename type name Attribute so that it does not end in 'Attribute'
+dotnet_diagnostic.CA1711.severity = none
+
+# Provide a method named 'ToContent' or 'FromString' as an alternate for operator op_Implicit
+dotnet_diagnostic.CA2225.severity = none

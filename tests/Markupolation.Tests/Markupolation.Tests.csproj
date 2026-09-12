@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <NoWarn>$(NoWarn);CS8600;CS8604;CS8625</NoWarn>
   </PropertyGroup>
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -40,6 +41,8 @@ public class GenerateTests
         await Elements();
         await Attributes();
         await EventHandlerContentAttributes();
+        ElementNames();
+        AttributeNames();
     }
 
     [Test]
@@ -471,6 +474,47 @@ public class GenerateTests
             var member = typeof(EventHandlerContentAttributeType).GetMember(value.ToString()!).First();
             return member.GetCustomAttributes(false).OfType<EventHandlerContentAttributeAttribute>().Single();
         }
+    }
+
+    [Test]
+    public void ElementNames()
+    {
+        // Element.ToString() would otherwise pay Enum.ToString() + TrimEnd('_') on every call.
+        var names = Enum.GetNames(typeof(ElementType)).Select(x => x.TrimEnd('_'));
+
+        var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\ElementNames.cs";
+        File.WriteAllText(path, Names("ElementNames", "ElementType", names));
+    }
+
+    [Test]
+    public void AttributeNames()
+    {
+        // Attribute.ToString() would otherwise pay Enum.ToString() + TrimEnd('_') + Replace() on every call.
+        var names = Enum.GetNames(typeof(AttributeType)).Select(x => x.TrimEnd('_').Replace("_", "-"));
+
+        var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\AttributeNames.cs";
+        File.WriteAllText(path, Names("AttributeNames", "AttributeType", names));
+    }
+
+    private static string Names(string className, string enumName, IEnumerable<string> names)
+    {
+        var result = new StringBuilder();
+        result.AppendLine("namespace Markupolation;");
+        result.AppendLine();
+        result.AppendLine($"internal static class {className}");
+        result.AppendLine("{");
+        result.AppendLine("    private static readonly string[] Values =");
+        result.AppendLine("    [");
+        foreach (var name in names)
+        {
+            result.AppendLine($"        \"{name}\",");
+        }
+
+        result.AppendLine("    ];");
+        result.AppendLine();
+        result.AppendLine($"    internal static string Get({enumName} type) => Values[(int)type];");
+        result.AppendLine("}");
+        return result.ToString();
     }
 }
 

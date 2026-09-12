@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.1;net10.0</TargetFrameworks>
+    <IsAotCompatible Condition="'$(TargetFramework)' != 'netstandard2.1'">true</IsAotCompatible>
     <Version>2.1.0</Version>
     <PackageReleaseNotes>
 Regenerated elements and attributes from https://html.spec.whatwg.org/
@@ -21,6 +22,7 @@ HTML templating in C# with a fluent API:
     <PackageTags>HTML;HTML5;Markup</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageValidationBaselineVersion>2.1.0</PackageValidationBaselineVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -28,6 +30,16 @@ HTML templating in C# with a fluent API:
     <None Include="..\..\Markupolation.md" Pack="true" PackagePath="\" />
     <None Include="buildTransitive\Markupolation.props" Pack="true" PackagePath="buildTransitive\Markupolation.props" />
     <None Include="buildTransitive\Markupolation.props" Pack="true" PackagePath="build\Markupolation.props" />
+  </ItemGroup>
+
+  <!--
+    Records get covariant return types for the compiler-synthesized <Clone>$ on runtimes that
+    support them, so the public API surface differs per target framework. The analyzer only
+    auto-includes PublicAPI.*.txt from the project directory, so keep them in per-TFM folders.
+  -->
+  <ItemGroup>
+    <AdditionalFiles Include="PublicAPI\$(TargetFramework)\PublicAPI.Shipped.txt" />
+    <AdditionalFiles Include="PublicAPI\$(TargetFramework)\PublicAPI.Unshipped.txt" />
   </ItemGroup>
 
   <Import Project="../../Analyzers.props" />

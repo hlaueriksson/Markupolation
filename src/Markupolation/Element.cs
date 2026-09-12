@@ -1,4 +1,4 @@
-using System.Linq;
+using System;
 
 namespace Markupolation;
 
@@ -28,7 +28,7 @@ public sealed record Element : Content
     }
 
     internal Element(ElementType type, bool isVoidElement, params Content[] content)
-        : base(ToString(type, isVoidElement, content))
+        : base(ToString(ElementNames.Get(type), isVoidElement, content))
     {
         Type = type;
     }
@@ -47,22 +47,84 @@ public sealed record Element : Content
     /// <inheritdoc/>
     public override string ToString() => base.ToString();
 
-    private static string ToString(ElementType type, bool isVoidElement, Content[] content)
-    {
-        return ToString(type.ToString().TrimEnd('_'), isVoidElement, content);
-    }
-
     private static string ToString(string name, bool isVoidElement, Content[] content)
     {
-        var attributes = content.OfType<Attribute>();
+        return string.Create(
+            Length(name, isVoidElement, content),
+            (name, isVoidElement, content),
+            static (destination, state) => Write(destination, state.name, state.isVoidElement, state.content));
+    }
+
+    private static void Write(Span<char> destination, string name, bool isVoidElement, Content[] content)
+    {
+        var position = 0;
+
+        destination[position++] = '<';
+        name.AsSpan().CopyTo(destination.Slice(position));
+        position += name.Length;
+
+        for (var i = 0; i < content.Length; i++)
+        {
+            if (content[i] is Attribute attribute && attribute.Value is { } attributeValue)
+            {
+                destination[position++] = ' ';
+                attributeValue.AsSpan().CopyTo(destination.Slice(position));
+                position += attributeValue.Length;
+            }
+        }
 
         if (isVoidElement)
         {
-            return $"<{name}{attributes.Join(" ").Pad()} />";
+            " />".AsSpan().CopyTo(destination.Slice(position));
+            return;
         }
 
-        var children = content.Where(x => x.GetType() != typeof(Attribute));
+        destination[position++] = '>';
 
-        return $"<{name}{attributes.Join(" ").Pad()}>{children.Join()}</{name}>";
+        for (var i = 0; i < content.Length; i++)
+        {
+            if (content[i] is not Attribute && content[i]?.Value is { } childValue)
+            {
+                childValue.AsSpan().CopyTo(destination.Slice(position));
+                position += childValue.Length;
+            }
+        }
+
+        "</".AsSpan().CopyTo(destination.Slice(position));
+        position += 2;
+        name.AsSpan().CopyTo(destination.Slice(position));
+        position += name.Length;
+        destination[position] = '>';
+    }
+
+    /// <summary>
+    /// Calculates the exact rendered length, so the buffer is allocated once and never grows.
+    /// <see cref="Write"/> must skip exactly what this skips.
+    /// </summary>
+    private static int Length(string name, bool isVoidElement, Content[] content)
+    {
+        // <name /> or <name></name>
+        var length = isVoidElement ? name.Length + 4 : (name.Length * 2) + 5;
+
+        for (var i = 0; i < content.Length; i++)
+        {
+            var value = content[i]?.Value;
+
+            if (value == null)
+            {
+                continue;
+            }
+
+            if (content[i] is Attribute)
+            {
+                length += value.Length + 1; // separating space
+            }
+            else if (!isVoidElement)
+            {
+                length += value.Length;
+            }
+        }
+
+        return length;
     }
 }
