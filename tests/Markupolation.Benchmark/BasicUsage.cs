@@ -9,6 +9,7 @@ using static HyperTextExpression.HtmlExp;
 
 namespace Markupolation.Benchmark;
 
+[MemoryDiagnoser]
 public class BasicUsage
 {
     private StringBuilder _builder = null!;
@@ -22,7 +23,7 @@ public class BasicUsage
         _httpContext.Response.Body = new MemoryStream();
     }
 
-    [Benchmark]
+    [Benchmark(Baseline = true)]
     public string StringBuilder()
     {
         _builder.Clear();
@@ -86,11 +87,8 @@ public class BasicUsage
         var slice = Results.RazorSlice<Razor.BasicUsage, BasicModel>(new BasicModel { Title = "Markupolation", Body = "Hello, World!" });
         await slice.ExecuteAsync(_httpContext);
 
-        _httpContext.Response.Body.Position = 0;
-        using (var reader = new StreamReader(_httpContext.Response.Body))
-        {
-            return await reader.ReadToEndAsync();
-        }
+        var body = (MemoryStream)_httpContext.Response.Body;
+        return Encoding.UTF8.GetString(body.GetBuffer(), 0, (int)body.Length);
     }
 
     public static async Task<bool> IsValid()

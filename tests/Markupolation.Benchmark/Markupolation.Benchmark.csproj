@@ -24,7 +24,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Markupolation.Extensions" Version="2.1.0" />
+    <!--
+      Set the MarkupolationLocal environment variable to measure the working tree instead of the
+      published package. It has to be an environment variable, not -p:, because BenchmarkDotNet
+      builds its own generated project in a child process that does not inherit -p: properties.
+        pwsh: $env:MarkupolationLocal='true'; dotnet run -c Release
+        cmd:  set MarkupolationLocal=true && dotnet run -c Release
+    -->
+    <PackageReference Include="Markupolation.Extensions" Version="2.1.0" Condition="'$(MarkupolationLocal)' != 'true'" />
+    <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" Condition="'$(MarkupolationLocal)' == 'true'" />
     <Using Include="Markupolation.Elements" Static="True" />
     <Using Include="Markupolation.Elements" Alias="e" />
     <Using Include="Markupolation.Attributes" Static="True" />

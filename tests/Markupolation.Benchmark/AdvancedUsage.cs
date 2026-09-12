@@ -11,6 +11,7 @@ using static HyperTextExpression.HtmlExp;
 
 namespace Markupolation.Benchmark;
 
+[MemoryDiagnoser]
 public class AdvancedUsage
 {
     readonly Func<int, bool> _fizz = (int i) => i % 3 == 0;
@@ -29,7 +30,7 @@ public class AdvancedUsage
         _httpContext.Response.Body = new MemoryStream();
     }
 
-    [Benchmark]
+    [Benchmark(Baseline = true)]
     public string StringBuilder()
     {
         _builder.Clear();
@@ -171,11 +172,8 @@ public class AdvancedUsage
         var slice = Results.RazorSlice<Razor.AdvancedUsage, IEnumerable<int>>(_numbers);
         await slice.ExecuteAsync(_httpContext);
 
-        _httpContext.Response.Body.Position = 0;
-        using (var reader = new StreamReader(_httpContext.Response.Body))
-        {
-            return await reader.ReadToEndAsync();
-        }
+        var body = (MemoryStream)_httpContext.Response.Body;
+        return Encoding.UTF8.GetString(body.GetBuffer(), 0, (int)body.Length);
     }
 
     public static async Task<bool> IsValid()

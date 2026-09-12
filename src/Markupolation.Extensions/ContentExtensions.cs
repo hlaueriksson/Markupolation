@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Markupolation;
 
@@ -23,7 +24,7 @@ public static class ContentExtensions
             return string.Empty;
         }
 
-        return values.Select(x => content(x)).Join();
+        return Join(values, content);
     }
 
     /// <summary>
@@ -40,7 +41,7 @@ public static class ContentExtensions
             return string.Empty;
         }
 
-        return values.Select((x, index) => content(x, index)).Join();
+        return Join(values, content);
     }
 
     /// <summary>
@@ -136,7 +137,9 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotNullOrEmpty(this string value, Func<string, Content> then, Content otherwise)
     {
-        return !string.IsNullOrEmpty(value) && then != null ? then(value) : string.IsNullOrEmpty(value) ? otherwise : string.Empty;
+        var any = !string.IsNullOrEmpty(value);
+
+        return any && then != null ? then(value) : !any ? otherwise : string.Empty;
     }
 
     /// <summary>
@@ -186,7 +189,9 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotEmpty<T>(this IEnumerable<T> values, Func<IEnumerable<T>, Content> then, Content otherwise)
     {
-        return values?.Any() == true && then != null ? then(values) : values?.Any() != true ? otherwise : string.Empty;
+        var any = values?.Any() == true;
+
+        return any && then != null ? then(values!) : !any ? otherwise : string.Empty;
     }
 
     /// <summary>
@@ -245,6 +250,33 @@ public static class ContentExtensions
             return string.Empty;
         }
 
-        return predicate(value) && then != null ? then(value) : !predicate(value) && otherwise != null ? otherwise(value) : string.Empty;
+        var match = predicate(value);
+
+        return match && then != null ? then(value) : !match && otherwise != null ? otherwise(value) : string.Empty;
+    }
+
+    private static string Join<T>(IEnumerable<T> values, Func<T, Content> content)
+    {
+        var builder = new StringBuilder();
+
+        foreach (var value in values)
+        {
+            builder.Append(content(value)?.Value);
+        }
+
+        return builder.ToString();
+    }
+
+    private static string Join<T>(IEnumerable<T> values, Func<T, int, Content> content)
+    {
+        var builder = new StringBuilder();
+        var index = 0;
+
+        foreach (var value in values)
+        {
+            builder.Append(content(value, index++)?.Value);
+        }
+
+        return builder.ToString();
     }
 }

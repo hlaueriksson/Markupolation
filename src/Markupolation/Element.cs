@@ -1,4 +1,8 @@
-using System.Linq;
+#if NET
+using System;
+#else
+using System.Text;
+#endif
 
 namespace Markupolation;
 
@@ -28,7 +32,7 @@ public sealed record Element : Content
     }
 
     internal Element(ElementType type, bool isVoidElement, params Content[] content)
-        : base(ToString(type, isVoidElement, content))
+        : base(ToString(ElementNames.Get(type), isVoidElement, content))
     {
         Type = type;
     }
@@ -47,22 +51,115 @@ public sealed record Element : Content
     /// <inheritdoc/>
     public override string ToString() => base.ToString();
 
-    private static string ToString(ElementType type, bool isVoidElement, Content[] content)
-    {
-        return ToString(type.ToString().TrimEnd('_'), isVoidElement, content);
-    }
-
     private static string ToString(string name, bool isVoidElement, Content[] content)
     {
-        var attributes = content.OfType<Attribute>();
+        var length = Length(name, isVoidElement, content);
+
+#if NET
+        return string.Create(length, (name, isVoidElement, content), static (destination, state) => Write(destination, state.name, state.isVoidElement, state.content));
+#else
+        var builder = new StringBuilder(length);
+
+        builder.Append('<').Append(name);
+
+        for (var i = 0; i < content.Length; i++)
+        {
+            if (content[i] is Attribute attribute && attribute.Value != null)
+            {
+                builder.Append(' ').Append(attribute.Value);
+            }
+        }
 
         if (isVoidElement)
         {
-            return $"<{name}{attributes.Join(" ").Pad()} />";
+            return builder.Append(" />").ToString();
         }
 
-        var children = content.Where(x => x.GetType() != typeof(Attribute));
+        builder.Append('>');
 
-        return $"<{name}{attributes.Join(" ").Pad()}>{children.Join()}</{name}>";
+        for (var i = 0; i < content.Length; i++)
+        {
+            if (content[i] is not Attribute)
+            {
+                builder.Append(content[i]?.Value);
+            }
+        }
+
+        return builder.Append("</").Append(name).Append('>').ToString();
+#endif
+    }
+
+#if NET
+    private static void Write(Span<char> destination, string name, bool isVoidElement, Content[] content)
+    {
+        var position = 0;
+
+        destination[position++] = '<';
+        name.AsSpan().CopyTo(destination.Slice(position));
+        position += name.Length;
+
+        for (var i = 0; i < content.Length; i++)
+        {
+            if (content[i] is Attribute attribute && attribute.Value is { } attributeValue)
+            {
+                destination[position++] = ' ';
+                attributeValue.AsSpan().CopyTo(destination.Slice(position));
+                position += attributeValue.Length;
+            }
+        }
+
+        if (isVoidElement)
+        {
+            " />".AsSpan().CopyTo(destination.Slice(position));
+            return;
+        }
+
+        destination[position++] = '>';
+
+        for (var i = 0; i < content.Length; i++)
+        {
+            if (content[i] is not Attribute && content[i]?.Value is { } childValue)
+            {
+                childValue.AsSpan().CopyTo(destination.Slice(position));
+                position += childValue.Length;
+            }
+        }
+
+        "</".AsSpan().CopyTo(destination.Slice(position));
+        position += 2;
+        name.AsSpan().CopyTo(destination.Slice(position));
+        position += name.Length;
+        destination[position] = '>';
+    }
+#endif
+
+    /// <summary>
+    /// Calculates the exact rendered length, so the buffer is allocated once and never grows.
+    /// </summary>
+    private static int Length(string name, bool isVoidElement, Content[] content)
+    {
+        // <name /> or <name></name>
+        var length = isVoidElement ? name.Length + 4 : (name.Length * 2) + 5;
+
+        for (var i = 0; i < content.Length; i++)
+        {
+            var value = content[i]?.Value;
+
+            if (value == null)
+            {
+                continue;
+            }
+
+            if (content[i] is Attribute)
+            {
+                length += value.Length + 1; // separating space
+            }
+            else if (!isVoidElement)
+            {
+                length += value.Length;
+            }
+        }
+
+        return length;
     }
 }
