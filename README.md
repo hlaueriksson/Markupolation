@@ -814,16 +814,23 @@ div(markup)                    // encodes the <i> too
 div(Content.Raw(markup))       // opt out
 ```
 
-The same applies to a conditional whose other branch is a string, since that makes `string` the
-conditional's natural type. `int`, `long`, `double`, `decimal` and `DateTime` convert to `Content`
-directly, so dropping the `ToString()` is usually the whole fix:
+The same applies to a ternary whose other branch is a string, since that makes `string` the
+conditional's natural type — the element is rendered and then encoded as text:
 
 ```cs
-numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i.ToString()))   // <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
-numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i))              // <li><strong>Fizz</strong></li>
+numbers.Each(i => li(Fizz(i) ? strong("Fizz") : "not fizz"))   // <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
 ```
 
-For any other type, cast the text branch with `(Content)`.
+Use `If` instead. It takes `Content` parameters, so each branch converts on its own and there is no
+common type to infer:
+
+```cs
+numbers.Each(i => li(Fizz(i).If(strong("Fizz"), "not fizz")))   // <li><strong>Fizz</strong></li>
+```
+
+The whole `If*` / `IfMatch` family behaves this way. If you prefer a ternary, it is enough for one
+branch to be `Content` — and `int`, `long`, `double`, `decimal` and `DateTime` convert directly, so
+`Fizz(i) ? strong("Fizz") : i` is already correct.
 
 See [the migration guide](/docs/MIGRATION-v3.md) for the details.
 

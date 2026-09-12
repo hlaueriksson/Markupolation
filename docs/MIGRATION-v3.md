@@ -71,16 +71,27 @@ numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i.ToString()))
 // <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
 ```
 
-Drop the `ToString()`. `int`, `long`, `double`, `decimal` and `DateTime` now convert to `Content`
-directly, so the conditional has no natural type and is target-typed to `Content` — which keeps the
-element as markup:
+**Use `If` instead of a ternary.** It takes `Content` parameters, so each branch converts on its
+own and there is no common type to infer — the element stays markup and the text is encoded:
 
 ```cs
-numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i))
-// <li><strong>Fizz</strong></li>
+numbers.Each(i => li(Fizz(i).If(strong("Fizz"), "not fizz")))
+// <li>not fizz</li><li><strong>Fizz</strong></li>
 ```
 
-For any other type, cast the text branch: `(Content)value.ToString()`.
+The same holds for the whole `If*` / `IfMatch` family, which all take `Content` or
+`Func<T, Content>`. This is the recommended shape for any conditional that mixes elements and text.
+
+If you would rather keep the ternary, either branch being `Content` is enough. `int`, `long`,
+`double`, `decimal` and `DateTime` now convert to `Content` directly, so with a numeric branch
+dropping the `ToString()` is the whole fix:
+
+```cs
+numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i))       // <li><strong>Fizz</strong></li>
+numbers.Each(i => li(Fizz(i) ? strong("Fizz") : text))    // still collapses to string
+```
+
+For anything else, cast the text branch: `(Content)value`.
 
 ## netstandard2.1
 
