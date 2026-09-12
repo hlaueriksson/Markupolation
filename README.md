@@ -832,6 +832,23 @@ The whole `If*` / `IfMatch` family behaves this way. If you prefer a ternary, it
 branch to be `Content` — and `int`, `long`, `double`, `decimal` and `DateTime` convert directly, so
 `Fizz(i) ? strong("Fizz") : i` is already correct.
 
+Two things encoding deliberately does not do.
+
+`<script>` and `<style>` are *raw text* elements — the HTML parser does not decode character
+references inside them — so encoding their content breaks it. The library cannot tell from an
+argument which element it will land in, so wrap those bodies yourself:
+
+```cs
+e.style(Content.Raw("a > b { color: red }"))
+script(Content.Raw("if (a < b) x();"))
+```
+
+And there is no URL encoding. Encoding an attribute value makes it safe to *place* in the
+attribute; composing the URL is the caller's job, since only you know which parts are components
+(`Uri.EscapeDataString`). `&` becoming `&amp;` in an `href` is correct HTML — the browser decodes
+it back. Note that encoding does not make `href("javascript:...")` safe; nothing here validates
+URL schemes.
+
 See [the migration guide](/docs/MIGRATION-v3.md) for the details.
 
 ## String Interpolation

@@ -1,3 +1,4 @@
+using e = Markupolation.Elements;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -182,5 +183,43 @@ public class EncodingTests
         // The same holds for the rest of the If* family, which all take Content.
         li(3.IfMatch(x => x > 0, x => strong("Fizz"), x => (Content)"none")).ToString()
             .Should().Be("<li><strong>Fizz</strong></li>");
+    }
+
+    [Test]
+    public void Script_and_style_content_is_encoded_which_the_browser_will_not_decode()
+    {
+        // <script> and <style> are "raw text" elements: the HTML parser does not decode
+        // character references inside them. Encoding their content therefore breaks it, and the
+        // library cannot tell from the argument which element it is about to land in.
+        // Wrap script and style bodies in Content.Raw.
+        e.style("a > b { color: red }").ToString()
+            .Should().Be("<style>a &gt; b { color: red }</style>", "this is wrong CSS - see Content.Raw below");
+
+        e.style(Content.Raw("a > b { color: red }")).ToString()
+            .Should().Be("<style>a > b { color: red }</style>");
+
+        script(Content.Raw("if (a < b && c) x();")).ToString()
+            .Should().Be("<script>if (a < b && c) x();</script>");
+    }
+
+    [Test]
+    public void Title_and_textarea_content_is_encoded_correctly()
+    {
+        // These are "escapable raw text": character references ARE decoded, so encoding is right.
+        e.title("A > B").ToString().Should().Be("<title>A &gt; B</title>");
+        textarea("A > B").ToString().Should().Be("<textarea>A &gt; B</textarea>");
+    }
+
+    [Test]
+    public void Encoding_leaves_non_ascii_alone()
+    {
+        // WebUtility.HtmlEncode would turn these into numeric references (G&#246;teborg), which
+        // is bigger and unreadable in a UTF-8 document. Only & < > " are encoded.
+        div("Göteborg, naïve café, 日本語").ToString()
+            .Should().Be("<div>Göteborg, naïve café, 日本語</div>");
+
+        // Apostrophes are left alone too: attribute values are always double-quoted.
+        div("it's").ToString().Should().Be("<div>it's</div>");
+        a(href("/x?q=it's")).ToString().Should().Be("<a href=\"/x?q=it's\"></a>");
     }
 }
