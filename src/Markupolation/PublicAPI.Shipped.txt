@@ -42,15 +42,18 @@ static Markupolation.Attributes.action(string! value) -> Markupolation.Attribute
 static Markupolation.Attributes.allow(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.allow(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.allowfullscreen() -> Markupolation.Attribute!
+static Markupolation.Attributes.alpha() -> Markupolation.Attribute!
 static Markupolation.Attributes.alt(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.alt(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.async() -> Markupolation.Attribute!
 static Markupolation.Attributes.as_(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.as_(string! value) -> Markupolation.Attribute!
-static Markupolation.Attributes.async() -> Markupolation.Attribute!
 static Markupolation.Attributes.autocapitalize(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.autocapitalize(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.autocomplete(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.autocomplete(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autocorrect(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autocorrect(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.autofocus() -> Markupolation.Attribute!
 static Markupolation.Attributes.autoplay() -> Markupolation.Attribute!
 static Markupolation.Attributes.blocking(object! value) -> Markupolation.Attribute!
@@ -62,12 +65,20 @@ static Markupolation.Attributes.cite(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.cite(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.class_(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.class_(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.closedby(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.closedby(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.color(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.color(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.colorspace(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.colorspace(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.cols(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.cols(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.colspan(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.colspan(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.command(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.command(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.commandfor(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.commandfor(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.content(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.content(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.contenteditable(object! value) -> Markupolation.Attribute!
@@ -101,8 +112,6 @@ static Markupolation.Attributes.enterkeyhint(object! value) -> Markupolation.Att
 static Markupolation.Attributes.enterkeyhint(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.fetchpriority(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.fetchpriority(string! value) -> Markupolation.Attribute!
-static Markupolation.Attributes.for_(object! value) -> Markupolation.Attribute!
-static Markupolation.Attributes.for_(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.form(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.form(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.formaction(object! value) -> Markupolation.Attribute!
@@ -114,8 +123,13 @@ static Markupolation.Attributes.formmethod(string! value) -> Markupolation.Attri
 static Markupolation.Attributes.formnovalidate() -> Markupolation.Attribute!
 static Markupolation.Attributes.formtarget(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.formtarget(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.for_(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.for_(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.headers(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.headers(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headingoffset(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headingoffset(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headingreset() -> Markupolation.Attribute!
 static Markupolation.Attributes.height(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.height(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.hidden(object! value) -> Markupolation.Attribute!
@@ -139,9 +153,9 @@ static Markupolation.Attributes.inputmode(object! value) -> Markupolation.Attrib
 static Markupolation.Attributes.inputmode(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.integrity(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.integrity(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.ismap() -> Markupolation.Attribute!
 static Markupolation.Attributes.is_(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.is_(string! value) -> Markupolation.Attribute!
-static Markupolation.Attributes.ismap() -> Markupolation.Attribute!
 static Markupolation.Attributes.itemid(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.itemid(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.itemprop(object! value) -> Markupolation.Attribute!
@@ -221,10 +235,13 @@ static Markupolation.Attributes.scope(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.scope(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.selected() -> Markupolation.Attribute!
 static Markupolation.Attributes.shadowrootclonable() -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootcustomelementregistry() -> Markupolation.Attribute!
 static Markupolation.Attributes.shadowrootdelegatesfocus() -> Markupolation.Attribute!
 static Markupolation.Attributes.shadowrootmode(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.shadowrootmode(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.shadowrootserializable() -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootslotassignment(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootslotassignment(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.shape(object! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.shape(string! value) -> Markupolation.Attribute!
 static Markupolation.Attributes.size(object! value) -> Markupolation.Attribute!
@@ -278,7 +295,6 @@ static Markupolation.Content.operator ==(Markupolation.Content? left, Markupolat
 static Markupolation.Element.implicit operator string!(Markupolation.Element! value) -> string!
 static Markupolation.Element.operator !=(Markupolation.Element? left, Markupolation.Element? right) -> bool
 static Markupolation.Element.operator ==(Markupolation.Element? left, Markupolation.Element? right) -> bool
-static Markupolation.Elements.DOCTYPE() -> string!
 static Markupolation.Elements.a(object! content) -> Markupolation.Element!
 static Markupolation.Elements.a(params Markupolation.Content![]! content) -> Markupolation.Element!
 static Markupolation.Elements.abbr(object! content) -> Markupolation.Element!
@@ -335,6 +351,7 @@ static Markupolation.Elements.div(object! content) -> Markupolation.Element!
 static Markupolation.Elements.div(params Markupolation.Content![]! content) -> Markupolation.Element!
 static Markupolation.Elements.dl(object! content) -> Markupolation.Element!
 static Markupolation.Elements.dl(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.DOCTYPE() -> string!
 static Markupolation.Elements.dt(object! content) -> Markupolation.Element!
 static Markupolation.Elements.dt(params Markupolation.Content![]! content) -> Markupolation.Element!
 static Markupolation.Elements.em(object! content) -> Markupolation.Element!
@@ -441,6 +458,8 @@ static Markupolation.Elements.section(object! content) -> Markupolation.Element!
 static Markupolation.Elements.section(params Markupolation.Content![]! content) -> Markupolation.Element!
 static Markupolation.Elements.select(object! content) -> Markupolation.Element!
 static Markupolation.Elements.select(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.Elements.selectedcontent(object! content) -> Markupolation.Element!
+static Markupolation.Elements.selectedcontent(params Markupolation.Content![]! content) -> Markupolation.Element!
 static Markupolation.Elements.slot(object! content) -> Markupolation.Element!
 static Markupolation.Elements.slot(params Markupolation.Content![]! content) -> Markupolation.Element!
 static Markupolation.Elements.small(object! content) -> Markupolation.Element!
@@ -504,6 +523,7 @@ static Markupolation.EventHandlerContentAttributes.oncanplaythrough(string! valu
 static Markupolation.EventHandlerContentAttributes.onchange(string! value) -> Markupolation.Attribute!
 static Markupolation.EventHandlerContentAttributes.onclick(string! value) -> Markupolation.Attribute!
 static Markupolation.EventHandlerContentAttributes.onclose(string! value) -> Markupolation.Attribute!
+static Markupolation.EventHandlerContentAttributes.oncommand(string! value) -> Markupolation.Attribute!
 static Markupolation.EventHandlerContentAttributes.oncontextlost(string! value) -> Markupolation.Attribute!
 static Markupolation.EventHandlerContentAttributes.oncontextmenu(string! value) -> Markupolation.Attribute!
 static Markupolation.EventHandlerContentAttributes.oncontextrestored(string! value) -> Markupolation.Attribute!
