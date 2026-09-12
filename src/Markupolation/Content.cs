@@ -30,6 +30,7 @@ namespace Markupolation;
 public record Content
 {
     private readonly StringBuilder? _builder;
+    private string? _text;
 
     private string? _value;
 
@@ -55,10 +56,40 @@ public record Content
         _builder = new StringBuilder(literalLength + (formattedCount * 8));
     }
 
+    private Content()
+    {
+    }
+
     /// <summary>
     /// Gets content value.
     /// </summary>
-    public string? Value => _builder == null ? _value : (_value ??= _builder.ToString());
+    public string? Value
+    {
+        get
+        {
+            if (_value != null)
+            {
+                return _value;
+            }
+
+            if (_builder != null)
+            {
+                return _value = _builder.ToString();
+            }
+
+            return _text == null ? null : (_value = HtmlEncoder.Encode(_text));
+        }
+    }
+
+    /// <summary>
+    /// Gets the text this content was created from, before encoding, or <c>null</c> when the
+    /// content is already markup.
+    /// </summary>
+    /// <remarks>
+    /// Raw text elements (<c>script</c>, <c>style</c>) render this instead of <see cref="Value"/>,
+    /// because the HTML parser does not decode character references inside them.
+    /// </remarks>
+    internal string? Unencoded => _text;
 
     /// <summary>
     /// Converts <see cref="Content"/> to <see cref="string"/>.
@@ -75,7 +106,7 @@ public record Content
     /// <param name="value">The string.</param>
     public static implicit operator Content(string value)
     {
-        return new Content(HtmlEncoder.Encode(value));
+        return FromText(value);
     }
 
     /// <summary>
@@ -221,4 +252,12 @@ public record Content
 
     /// <inheritdoc/>
     public override string ToString() => Value ?? string.Empty;
+
+    /// <summary>
+    /// Creates content from text, encoding it lazily so that a raw text element can render the
+    /// original instead.
+    /// </summary>
+    /// <param name="text">Text.</param>
+    /// <returns><see cref="Content"/></returns>
+    private static Content FromText(string? text) => new() { _text = text };
 }

@@ -835,13 +835,17 @@ branch to be `Content` — and `int`, `long`, `double`, `decimal` and `DateTime`
 Two things encoding deliberately does not do.
 
 `<script>` and `<style>` are *raw text* elements — the HTML parser does not decode character
-references inside them — so encoding their content breaks it. The library cannot tell from an
-argument which element it will land in, so wrap those bodies yourself:
+references inside them — so their content is **not** encoded. That is handled for you; the two
+elements are marked as raw text in the generated metadata:
 
 ```cs
-e.style(Content.Raw("a > b { color: red }"))
-script(Content.Raw("if (a < b) x();"))
+e.style("a > b { color: red }")     // <style>a > b { color: red }</style>
+script("if (a < b) x();")           // <script>if (a < b) x();</script>
 ```
+
+Their *attribute* values are still encoded. `<title>` and `<textarea>` are escapable raw text —
+references there are decoded — so their content is encoded normally. Because script and style
+bodies are raw, never build one out of data from a user; serialise it to JSON instead.
 
 And there is no URL encoding. Encoding an attribute value makes it safe to *place* in the
 attribute; composing the URL is the caller's job, since only you know which parts are components

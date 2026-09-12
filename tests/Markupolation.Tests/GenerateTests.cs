@@ -43,6 +43,7 @@ public class GenerateTests
         await EventHandlerContentAttributes();
         ElementNames();
         AttributeNames();
+        ElementRawText();
     }
 
     [Test]
@@ -494,6 +495,30 @@ public class GenerateTests
 
         var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\AttributeNames.cs";
         File.WriteAllText(path, Names("AttributeNames", "AttributeType", names));
+    }
+
+
+    [Test]
+    public void ElementRawText()
+    {
+        // The "raw text elements" of the HTML parsing spec (13.2.5): the parser does not decode
+        // character references inside them, so their content must not be encoded. This is not in
+        // the element index the other generators scrape, and the set has never changed, so it is
+        // written out here. textarea and title are *escapable* raw text and do decode, so they
+        // are deliberately absent.
+        var names = new[] { "script", "style" };
+        var condition = string.Join(" or ", names.Select(x => $"ElementType.{x}"));
+
+        var result = new StringBuilder();
+        result.AppendLine("namespace Markupolation;");
+        result.AppendLine();
+        result.AppendLine("internal static class ElementRawText");
+        result.AppendLine("{");
+        result.AppendLine($"    internal static bool Get(ElementType type) => type is {condition};");
+        result.AppendLine("}");
+
+        var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\ElementRawText.cs";
+        File.WriteAllText(path, result.ToString());
     }
 
     private static string Names(string className, string enumName, IEnumerable<string> names)

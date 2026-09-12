@@ -186,22 +186,28 @@ public class EncodingTests
     }
 
     [Test]
-    public void Script_and_style_content_is_encoded_which_the_browser_will_not_decode()
+    public void Script_and_style_content_is_not_encoded()
     {
-        // <script> and <style> are "raw text" elements: the HTML parser does not decode
-        // character references inside them. Encoding their content therefore breaks it, and the
-        // library cannot tell from the argument which element it is about to land in.
-        // Wrap script and style bodies in Content.Raw.
+        // script and style are "raw text" elements: the HTML parser does not decode character
+        // references inside them, so encoding their content would break it. Content keeps the
+        // text it was created from, and these two elements render that instead.
         e.style("a > b { color: red }").ToString()
-            .Should().Be("<style>a &gt; b { color: red }</style>", "this is wrong CSS - see Content.Raw below");
-
-        e.style(Content.Raw("a > b { color: red }")).ToString()
             .Should().Be("<style>a > b { color: red }</style>");
 
-        script(Content.Raw("if (a < b && c) x();")).ToString()
+        script("if (a < b && c) x();").ToString()
             .Should().Be("<script>if (a < b && c) x();</script>");
-    }
 
+        // Also with attributes, where the body arrives through the params overload.
+        script(type("module"), "if (a < b) x();").ToString()
+            .Should().Be("<script type=\"module\">if (a < b) x();</script>");
+
+        // Attribute values on those elements are still encoded - only the body is raw.
+        script(src("/a.js?x=1&y=2")).ToString()
+            .Should().Be("<script src=\"/a.js?x=1&amp;y=2\"></script>");
+
+        // Content.Raw still works, and nested markup is unaffected.
+        e.style(Content.Raw("a > b {}")).ToString().Should().Be("<style>a > b {}</style>");
+    }
     [Test]
     public void Title_and_textarea_content_is_encoded_correctly()
     {
