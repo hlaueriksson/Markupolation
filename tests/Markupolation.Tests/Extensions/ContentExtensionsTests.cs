@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
@@ -17,7 +18,10 @@ public class ContentExtensionsTests
         result = Enumerable.Empty<int>().Each(x => div(x));
         result.ToString().Should().BeEmpty();
 
-        ((IEnumerable<int>)null).Each(x => div(x));
+        result = ((IEnumerable<int>)null).Each(x => div(x));
+        result.ToString().Should().BeEmpty();
+
+        result = items.Each((Func<int, Content>)null);
         result.ToString().Should().BeEmpty();
     }
 
@@ -31,7 +35,10 @@ public class ContentExtensionsTests
         result = Enumerable.Empty<string>().Each((x, i) => div(id(i), x));
         result.ToString().Should().BeEmpty();
 
-        ((IEnumerable<string>)null).Each((x, i) => div(id(i), x));
+        result = ((IEnumerable<string>)null).Each((x, i) => div(id(i), x));
+        result.ToString().Should().BeEmpty();
+
+        result = items.Each((Func<string, int, Content>)null);
         result.ToString().Should().BeEmpty();
     }
 

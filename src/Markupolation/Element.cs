@@ -1,8 +1,4 @@
-#if NET
 using System;
-#else
-using System.Text;
-#endif
 
 namespace Markupolation;
 
@@ -53,43 +49,12 @@ public sealed record Element : Content
 
     private static string ToString(string name, bool isVoidElement, Content[] content)
     {
-        var length = Length(name, isVoidElement, content);
-
-#if NET
-        return string.Create(length, (name, isVoidElement, content), static (destination, state) => Write(destination, state.name, state.isVoidElement, state.content));
-#else
-        var builder = new StringBuilder(length);
-
-        builder.Append('<').Append(name);
-
-        for (var i = 0; i < content.Length; i++)
-        {
-            if (content[i] is Attribute attribute && attribute.Value != null)
-            {
-                builder.Append(' ').Append(attribute.Value);
-            }
-        }
-
-        if (isVoidElement)
-        {
-            return builder.Append(" />").ToString();
-        }
-
-        builder.Append('>');
-
-        for (var i = 0; i < content.Length; i++)
-        {
-            if (content[i] is not Attribute)
-            {
-                builder.Append(content[i]?.Value);
-            }
-        }
-
-        return builder.Append("</").Append(name).Append('>').ToString();
-#endif
+        return string.Create(
+            Length(name, isVoidElement, content),
+            (name, isVoidElement, content),
+            static (destination, state) => Write(destination, state.name, state.isVoidElement, state.content));
     }
 
-#if NET
     private static void Write(Span<char> destination, string name, bool isVoidElement, Content[] content)
     {
         var position = 0;
@@ -131,10 +96,10 @@ public sealed record Element : Content
         position += name.Length;
         destination[position] = '>';
     }
-#endif
 
     /// <summary>
     /// Calculates the exact rendered length, so the buffer is allocated once and never grows.
+    /// <see cref="Write"/> must skip exactly what this skips.
     /// </summary>
     private static int Length(string name, bool isVoidElement, Content[] content)
     {

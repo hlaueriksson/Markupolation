@@ -28,7 +28,7 @@ Intel Core i7-6700 CPU 3.40GHz (Max: 3.41GHz) (Skylake), 1 CPU, 8 logical and 4 
 
 ```
 
-The `Markupolation` rows below were measured from source, ahead of the 2.2.0 release.
+The `Markupolation` rows below were measured from source, ahead of the 3.0.0 release.
 
 ## Markupolation.Benchmark.BasicUsage
 

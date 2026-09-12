@@ -19,7 +19,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content Each<T>(this IEnumerable<T> values, Func<T, Content> content)
     {
-        if (values == null)
+        if (values == null || content == null)
         {
             return string.Empty;
         }
@@ -36,7 +36,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content Each<T>(this IEnumerable<T> values, Func<T, int, Content> content)
     {
-        if (values == null)
+        if (values == null || content == null)
         {
             return string.Empty;
         }
