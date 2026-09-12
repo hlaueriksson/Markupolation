@@ -199,7 +199,7 @@ Code:
 | `area` | Hyperlink or dead area on an image map | `alt`, `coords`, `shape`, `href`, `target`, `download`, `rel`, `referrerpolicy` |
 | `article` | Self-contained syndicatable or reusable composition |  |
 | `aside` | Sidebar for tangentially related content |  |
-| `audio` | Audio player | `src`, `crossorigin`, `preload`, `autoplay`, `loop`, `muted`, `controls` |
+| `audio` | Audio player | `src`, `crossorigin`, `preload`, `autoplay`, `loading`, `loop`, `muted`, `controls` |
 | `b` | Keywords |  |
 | `base_` | Base URL and default target navigable for hyperlinks and forms | `href`, `target` |
 | `bdi` | Text directionality isolation |  |
@@ -207,7 +207,7 @@ Code:
 | `blockquote` | A section quoted from another source | `cite` |
 | `body` | Document body |  |
 | `br` | Line break, e.g. in poem or postal address |  |
-| `button` | Button control | `disabled`, `form`, `formaction`, `formenctype`, `formmethod`, `formnovalidate`, `formtarget`, `name`, `popovertarget`, `popovertargetaction`, `type`, `value` |
+| `button` | Button control | `command`, `commandfor`, `disabled`, `form`, `formaction`, `formenctype`, `formmethod`, `formnovalidate`, `formtarget`, `name`, `popovertarget`, `popovertargetaction`, `type`, `value` |
 | `canvas` | Scriptable bitmap canvas | `width`, `height` |
 | `caption` | Table caption |  |
 | `cite` | Title of a work |  |
@@ -244,8 +244,8 @@ Code:
 | `html` | Root element |  |
 | `i` | Alternate voice |  |
 | `iframe` | Child navigable | `src`, `srcdoc`, `name`, `sandbox`, `allow`, `allowfullscreen`, `width`, `height`, `referrerpolicy`, `loading` |
-| `img` | Image | `alt`, `src`, `srcset`, `sizes`, `crossorigin`, `usemap`, `ismap`, `width`, `height`, `referrerpolicy`, `decoding`, `loading`, `fetchpriority` |
-| `input` | Form control | `accept`, `alt`, `autocomplete`, `checked_`, `dirname`, `disabled`, `form`, `formaction`, `formenctype`, `formmethod`, `formnovalidate`, `formtarget`, `height`, `list`, `max`, `maxlength`, `min`, `minlength`, `multiple`, `name`, `pattern`, `placeholder`, `popovertarget`, `popovertargetaction`, `readonly_`, `required`, `size`, `src`, `step`, `type`, `value`, `width` |
+| `img` | Image | `alt`, `src`, `srcset`, `sizes`, `crossorigin`, `usemap`, `ismap`, `controls`, `width`, `height`, `referrerpolicy`, `decoding`, `loading`, `fetchpriority` |
+| `input` | Form control | `accept`, `alpha`, `alt`, `autocomplete`, `checked_`, `colorspace`, `dirname`, `disabled`, `form`, `formaction`, `formenctype`, `formmethod`, `formnovalidate`, `formtarget`, `height`, `list`, `max`, `maxlength`, `min`, `minlength`, `multiple`, `name`, `pattern`, `placeholder`, `popovertarget`, `popovertargetaction`, `readonly_`, `required`, `size`, `src`, `step`, `type`, `value`, `width` |
 | `ins` | An addition to the document | `cite`, `datetime` |
 | `kbd` | User input |  |
 | `label` | Caption for a form control | `for_` |
@@ -279,6 +279,7 @@ Code:
 | `search` | Container for search controls |  |
 | `section` | Generic document or application section |  |
 | `select` | List box control | `autocomplete`, `disabled`, `form`, `multiple`, `name`, `required`, `size` |
+| `selectedcontent` | Mirrors content from an option |  |
 | `slot` | Shadow tree slot | `name` |
 | `small` | Side comment |  |
 | `source` | Image source for img or media source for video or audio | `type`, `media`, `src`, `srcset`, `sizes`, `width`, `height` |
@@ -291,7 +292,7 @@ Code:
 | `table` | Table |  |
 | `tbody` | Group of rows in a table |  |
 | `td` | Table cell | `colspan`, `rowspan`, `headers` |
-| `template` | Template | `shadowrootmode`, `shadowrootdelegatesfocus`, `shadowrootclonable`, `shadowrootserializable` |
+| `template` | Template | `for_`, `shadowrootmode`, `shadowrootdelegatesfocus`, `shadowrootserializable`, `shadowrootslotassignment`, `shadowrootclonable`, `shadowrootcustomelementregistry` |
 | `textarea` | Multiline text controls | `autocomplete`, `cols`, `dirname`, `disabled`, `form`, `maxlength`, `minlength`, `name`, `placeholder`, `readonly_`, `required`, `rows`, `wrap` |
 | `tfoot` | Group of footer rows in a table |  |
 | `th` | Table header cell | `colspan`, `rowspan`, `headers`, `scope`, `abbr` |
@@ -303,7 +304,7 @@ Code:
 | `u` | Unarticulated annotation |  |
 | `ul` | List |  |
 | `var` | Variable |  |
-| `video` | Video player | `src`, `crossorigin`, `poster`, `preload`, `autoplay`, `playsinline`, `loop`, `muted`, `controls`, `width`, `height` |
+| `video` | Video player | `src`, `crossorigin`, `poster`, `preload`, `autoplay`, `playsinline`, `loading`, `loop`, `muted`, `controls`, `width`, `height` |
 | `wbr` | Line breaking opportunity |  |
 
 </details>
@@ -327,11 +328,13 @@ Code:
 | `action` | URL to use for form submission | `form` |
 | `allow` | Permissions policy to be applied to the iframe's contents | `iframe` |
 | `allowfullscreen` | Whether to allow the iframe's contents to use requestFullscreen() | `iframe` |
+| `alpha` | Allow the color's alpha component to be set | `input` |
 | `alt` | Replacement text for use when images are not available | `area`, `img`, `input` |
-| `as_` | Potential destination for a preload request (for rel="preload" and rel="modulepreload") | `link` |
+| `as_` | Destination for a preload request (for rel="preload" and rel="modulepreload") | `link` |
 | `async` | Execute script when available, without blocking while fetching | `script` |
 | `autocapitalize` | Recommended autocapitalization behavior (for supported input methods) |  |
 | `autocomplete` | Default setting for autofill feature for controls in the form<br/>Hint for form autofill feature | `form`, `input`, `select`, `textarea` |
+| `autocorrect` | Recommended autocorrection behavior (for supported input methods) |  |
 | `autofocus` | Automatically focus the element when the page is loaded |  |
 | `autoplay` | Hint that the media resource can be started automatically when the page is loaded | `audio`, `video` |
 | `blocking` | Whether the element is potentially render-blocking | `link`, `script`, `style` |
@@ -339,12 +342,16 @@ Code:
 | `checked_` | Whether the control is checked | `input` |
 | `cite` | Link to the source of the quotation or more information about the edit | `blockquote`, `del`, `ins`, `q` |
 | `class_` | Classes to which the element belongs |  |
+| `closedby` | Which user actions will close the dialog | `dialog` |
 | `color` | Color to use when customizing a site's icon (for rel="mask-icon") | `link` |
+| `colorspace` | The color space of the serialized color | `input` |
 | `cols` | Maximum number of characters per line | `textarea` |
 | `colspan` | Number of columns that the cell is to span | `td`, `th` |
+| `command` | Indicates to the targeted element which action to take | `button` |
+| `commandfor` | Targets another element to be invoked | `button` |
 | `content` | Value of the element | `meta` |
 | `contenteditable` | Whether the element is editable |  |
-| `controls` | Show user agent controls | `audio`, `video` |
+| `controls` | Show user agent controls | `audio`, `video`, `img` |
 | `coords` | Coordinates for the shape to be created in an image map | `area` |
 | `crossorigin` | How the element handles crossorigin requests | `audio`, `img`, `link`, `script`, `video` |
 | `data` | Address of the resource | `object_` |
@@ -360,7 +367,7 @@ Code:
 | `enctype` | Entry list encoding type to use for form submission | `form` |
 | `enterkeyhint` | Hint for selecting an enter key action |  |
 | `fetchpriority` | Sets the priority for fetches initiated by the element | `img`, `link`, `script` |
-| `for_` | Associate the label with form control<br/>Specifies controls from which the output was calculated | `label`, `output` |
+| `for_` | Associate the label with form control<br/>Specifies controls from which the output was calculated<br/>Updates existing content | `label`, `output`, `template` |
 | `form` | Associates the element with a form element | `button`, `fieldset`, `input`, `object_`, `output`, `select`, `textarea` |
 | `formaction` | URL to use for form submission | `button`, `input` |
 | `formenctype` | Entry list encoding type to use for form submission | `button`, `input` |
@@ -368,6 +375,8 @@ Code:
 | `formnovalidate` | Bypass form control validation for form submission | `button`, `input` |
 | `formtarget` | Navigable for form submission | `button`, `input` |
 | `headers` | The header cells for this cell | `td`, `th` |
+| `headingoffset` | Offsets heading levels for descendants |  |
+| `headingreset` | Prevents a heading offset computation from traversing beyond the element with the attribute |  |
 | `height` | Vertical dimension | `canvas`, `embed`, `iframe`, `img`, `input`, `object_`, `source`, `video` |
 | `hidden` | Whether the element is relevant |  |
 | `high` | Low limit of high range | `meter` |
@@ -391,7 +400,7 @@ Code:
 | `label` | User-visible label | `optgroup`, `option`, `track` |
 | `lang` | Language of the element |  |
 | `list` | List of autocomplete options | `input` |
-| `loading` | Used when determining loading deferral | `iframe`, `img` |
+| `loading` | Used when determining loading deferral | `iframe`, `img`, `audio`, `video` |
 | `loop` | Whether to loop the media resource | `audio`, `video` |
 | `low` | High limit of low range | `meter` |
 | `max` | Maximum value<br/>Upper bound of range | `input`, `meter`, `progress` |
@@ -428,9 +437,11 @@ Code:
 | `scope` | Specifies which cells the header cell applies to | `th` |
 | `selected` | Whether the option is selected by default | `option` |
 | `shadowrootclonable` | Sets clonable on a declarative shadow root | `template` |
+| `shadowrootcustomelementregistry` | Enables declarative shadow roots to indicate they will use a custom element registry | `template` |
 | `shadowrootdelegatesfocus` | Sets delegates focus on a declarative shadow root | `template` |
 | `shadowrootmode` | Enables streaming declarative shadow roots | `template` |
 | `shadowrootserializable` | Sets serializable on a declarative shadow root | `template` |
+| `shadowrootslotassignment` | Sets slot assignment on a declarative shadow root | `template` |
 | `shape` | The kind of shape to be created in an image map | `area` |
 | `size` | Size of the control | `input`, `select` |
 | `sizes` | Sizes of the icons (for rel="icon")<br/>Image sizes for different page layouts | `link`, `img`, `source` |
@@ -483,6 +494,7 @@ Code:
 | `onchange` | change event handler |  |
 | `onclick` | click event handler |  |
 | `onclose` | close event handler |  |
+| `oncommand` | command event handler |  |
 | `oncontextlost` | contextlost event handler |  |
 | `oncontextmenu` | contextmenu event handler |  |
 | `oncontextrestored` | contextrestored event handler |  |

@@ -18,7 +18,10 @@ namespace Markupolation.Tests;
 /// 1. Run <see cref="All_enums"/>
 /// 2. Compile
 /// 3. Run <see cref="All_classes"/>
-/// 4. Run <see cref="All_markdown"/>
+/// 4. Compile
+/// 5. dotnet format analyzers --diagnostics RS0016 --severity info
+/// 6. Run <see cref="All_markdown"/>
+/// 7. Update <see href="README.md" />
 /// </summary>
 [Explicit]
 public class GenerateTests

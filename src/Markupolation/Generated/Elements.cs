@@ -51,7 +51,7 @@ public static partial class Elements
     public static Element aside(object content) => new(ElementType.aside, false, content?.ToString()!);
 
     /// <summary>Audio player.</summary>
-    /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.preload(string)"/>, <see cref="Attributes.autoplay()"/>, <see cref="Attributes.loop()"/>, <see cref="Attributes.muted()"/>, <see cref="Attributes.controls()"/>.</remarks>
+    /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.preload(string)"/>, <see cref="Attributes.autoplay()"/>, <see cref="Attributes.loading(string)"/>, <see cref="Attributes.loop()"/>, <see cref="Attributes.muted()"/>, <see cref="Attributes.controls()"/>.</remarks>
     /// <param name="content">Attributes, elements and content.</param>
     /// <returns><c><![CDATA[<audio></audio>]]></c></returns>
     public static Element audio(params Content[] content) => new(ElementType.audio, false, content);
@@ -112,7 +112,7 @@ public static partial class Elements
     public static Element br(params Content[] content) => new(ElementType.br, true, content);
 
     /// <summary>Button control.</summary>
-    /// <remarks>Attributes: <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.popovertarget(string)"/>, <see cref="Attributes.popovertargetaction(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>.</remarks>
+    /// <remarks>Attributes: <see cref="Attributes.command(string)"/>, <see cref="Attributes.commandfor(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.popovertarget(string)"/>, <see cref="Attributes.popovertargetaction(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>.</remarks>
     /// <param name="content">Attributes, elements and content.</param>
     /// <returns><c><![CDATA[<button></button>]]></c></returns>
     public static Element button(params Content[] content) => new(ElementType.button, false, content);
@@ -411,13 +411,13 @@ public static partial class Elements
     public static Element iframe(object content) => new(ElementType.iframe, false, content?.ToString()!);
 
     /// <summary>Image.</summary>
-    /// <remarks>Attributes: <see cref="Attributes.alt(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.srcset(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.usemap(string)"/>, <see cref="Attributes.ismap()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.decoding(string)"/>, <see cref="Attributes.loading(string)"/>, <see cref="Attributes.fetchpriority(string)"/>.</remarks>
+    /// <remarks>Attributes: <see cref="Attributes.alt(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.srcset(string)"/>, <see cref="Attributes.sizes(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.usemap(string)"/>, <see cref="Attributes.ismap()"/>, <see cref="Attributes.controls()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.referrerpolicy(string)"/>, <see cref="Attributes.decoding(string)"/>, <see cref="Attributes.loading(string)"/>, <see cref="Attributes.fetchpriority(string)"/>.</remarks>
     /// <param name="content">Attributes.</param>
     /// <returns><c><![CDATA[<img />]]></c></returns>
     public static Element img(params Content[] content) => new(ElementType.img, true, content);
 
     /// <summary>Form control.</summary>
-    /// <remarks>Attributes: <see cref="Attributes.accept(string)"/>, <see cref="Attributes.alt(string)"/>, <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.checked_()"/>, <see cref="Attributes.dirname(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.list(string)"/>, <see cref="Attributes.max(string)"/>, <see cref="Attributes.maxlength(string)"/>, <see cref="Attributes.min(string)"/>, <see cref="Attributes.minlength(string)"/>, <see cref="Attributes.multiple()"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.pattern(string)"/>, <see cref="Attributes.placeholder(string)"/>, <see cref="Attributes.popovertarget(string)"/>, <see cref="Attributes.popovertargetaction(string)"/>, <see cref="Attributes.readonly_()"/>, <see cref="Attributes.required()"/>, <see cref="Attributes.size(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.step(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>, <see cref="Attributes.width(string)"/>.</remarks>
+    /// <remarks>Attributes: <see cref="Attributes.accept(string)"/>, <see cref="Attributes.alpha()"/>, <see cref="Attributes.alt(string)"/>, <see cref="Attributes.autocomplete(string)"/>, <see cref="Attributes.checked_()"/>, <see cref="Attributes.colorspace(string)"/>, <see cref="Attributes.dirname(string)"/>, <see cref="Attributes.disabled()"/>, <see cref="Attributes.form(string)"/>, <see cref="Attributes.formaction(string)"/>, <see cref="Attributes.formenctype(string)"/>, <see cref="Attributes.formmethod(string)"/>, <see cref="Attributes.formnovalidate()"/>, <see cref="Attributes.formtarget(string)"/>, <see cref="Attributes.height(string)"/>, <see cref="Attributes.list(string)"/>, <see cref="Attributes.max(string)"/>, <see cref="Attributes.maxlength(string)"/>, <see cref="Attributes.min(string)"/>, <see cref="Attributes.minlength(string)"/>, <see cref="Attributes.multiple()"/>, <see cref="Attributes.name(string)"/>, <see cref="Attributes.pattern(string)"/>, <see cref="Attributes.placeholder(string)"/>, <see cref="Attributes.popovertarget(string)"/>, <see cref="Attributes.popovertargetaction(string)"/>, <see cref="Attributes.readonly_()"/>, <see cref="Attributes.required()"/>, <see cref="Attributes.size(string)"/>, <see cref="Attributes.src(string)"/>, <see cref="Attributes.step(string)"/>, <see cref="Attributes.type(string)"/>, <see cref="Attributes.value(string)"/>, <see cref="Attributes.width(string)"/>.</remarks>
     /// <param name="content">Attributes.</param>
     /// <returns><c><![CDATA[<input />]]></c></returns>
     public static Element input(params Content[] content) => new(ElementType.input, true, content);
@@ -696,6 +696,14 @@ public static partial class Elements
     /// <inheritdoc cref="select(Content[])" />
     public static Element select(object content) => new(ElementType.select, false, content?.ToString()!);
 
+    /// <summary>Mirrors content from an option.</summary>
+    /// <param name="content">Attributes, elements and content.</param>
+    /// <returns><c><![CDATA[<selectedcontent></selectedcontent>]]></c></returns>
+    public static Element selectedcontent(params Content[] content) => new(ElementType.selectedcontent, false, content);
+
+    /// <inheritdoc cref="selectedcontent(Content[])" />
+    public static Element selectedcontent(object content) => new(ElementType.selectedcontent, false, content?.ToString()!);
+
     /// <summary>Shadow tree slot.</summary>
     /// <remarks>Attributes: <see cref="Attributes.name(string)"/>.</remarks>
     /// <param name="content">Attributes, elements and content.</param>
@@ -794,7 +802,7 @@ public static partial class Elements
     public static Element td(object content) => new(ElementType.td, false, content?.ToString()!);
 
     /// <summary>Template.</summary>
-    /// <remarks>Attributes: <see cref="Attributes.shadowrootmode(string)"/>, <see cref="Attributes.shadowrootdelegatesfocus()"/>, <see cref="Attributes.shadowrootclonable()"/>, <see cref="Attributes.shadowrootserializable()"/>.</remarks>
+    /// <remarks>Attributes: <see cref="Attributes.for_(string)"/>, <see cref="Attributes.shadowrootmode(string)"/>, <see cref="Attributes.shadowrootdelegatesfocus()"/>, <see cref="Attributes.shadowrootserializable()"/>, <see cref="Attributes.shadowrootslotassignment(string)"/>, <see cref="Attributes.shadowrootclonable()"/>, <see cref="Attributes.shadowrootcustomelementregistry()"/>.</remarks>
     /// <param name="content">Attributes, elements and content.</param>
     /// <returns><c><![CDATA[<template></template>]]></c></returns>
     public static Element template(params Content[] content) => new(ElementType.template, false, content);
@@ -892,7 +900,7 @@ public static partial class Elements
     public static Element var(object content) => new(ElementType.var, false, content?.ToString()!);
 
     /// <summary>Video player.</summary>
-    /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.poster(string)"/>, <see cref="Attributes.preload(string)"/>, <see cref="Attributes.autoplay()"/>, <see cref="Attributes.playsinline()"/>, <see cref="Attributes.loop()"/>, <see cref="Attributes.muted()"/>, <see cref="Attributes.controls()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
+    /// <remarks>Attributes: <see cref="Attributes.src(string)"/>, <see cref="Attributes.crossorigin(string)"/>, <see cref="Attributes.poster(string)"/>, <see cref="Attributes.preload(string)"/>, <see cref="Attributes.autoplay()"/>, <see cref="Attributes.playsinline()"/>, <see cref="Attributes.loading(string)"/>, <see cref="Attributes.loop()"/>, <see cref="Attributes.muted()"/>, <see cref="Attributes.controls()"/>, <see cref="Attributes.width(string)"/>, <see cref="Attributes.height(string)"/>.</remarks>
     /// <param name="content">Attributes, elements and content.</param>
     /// <returns><c><![CDATA[<video></video>]]></c></returns>
     public static Element video(params Content[] content) => new(ElementType.video, false, content);

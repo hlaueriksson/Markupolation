@@ -20,7 +20,7 @@ internal enum ElementType
     [Element("Sidebar for tangentially related content", false)]
     aside,
 
-    [Element("Audio player", false, AttributeType.src, AttributeType.crossorigin, AttributeType.preload, AttributeType.autoplay, AttributeType.loop, AttributeType.muted, AttributeType.controls)]
+    [Element("Audio player", false, AttributeType.src, AttributeType.crossorigin, AttributeType.preload, AttributeType.autoplay, AttributeType.loading, AttributeType.loop, AttributeType.muted, AttributeType.controls)]
     audio,
 
     [Element("Keywords", false)]
@@ -44,7 +44,7 @@ internal enum ElementType
     [Element("Line break, e.g. in poem or postal address", true)]
     br,
 
-    [Element("Button control", false, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.name, AttributeType.popovertarget, AttributeType.popovertargetaction, AttributeType.type, AttributeType.value)]
+    [Element("Button control", false, AttributeType.command, AttributeType.commandfor, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.name, AttributeType.popovertarget, AttributeType.popovertargetaction, AttributeType.type, AttributeType.value)]
     button,
 
     [Element("Scriptable bitmap canvas", false, AttributeType.width, AttributeType.height)]
@@ -155,10 +155,10 @@ internal enum ElementType
     [Element("Child navigable", false, AttributeType.src, AttributeType.srcdoc, AttributeType.name, AttributeType.sandbox, AttributeType.allow, AttributeType.allowfullscreen, AttributeType.width, AttributeType.height, AttributeType.referrerpolicy, AttributeType.loading)]
     iframe,
 
-    [Element("Image", true, AttributeType.alt, AttributeType.src, AttributeType.srcset, AttributeType.sizes, AttributeType.crossorigin, AttributeType.usemap, AttributeType.ismap, AttributeType.width, AttributeType.height, AttributeType.referrerpolicy, AttributeType.decoding, AttributeType.loading, AttributeType.fetchpriority)]
+    [Element("Image", true, AttributeType.alt, AttributeType.src, AttributeType.srcset, AttributeType.sizes, AttributeType.crossorigin, AttributeType.usemap, AttributeType.ismap, AttributeType.controls, AttributeType.width, AttributeType.height, AttributeType.referrerpolicy, AttributeType.decoding, AttributeType.loading, AttributeType.fetchpriority)]
     img,
 
-    [Element("Form control", true, AttributeType.accept, AttributeType.alt, AttributeType.autocomplete, AttributeType.checked_, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.height, AttributeType.list, AttributeType.max, AttributeType.maxlength, AttributeType.min, AttributeType.minlength, AttributeType.multiple, AttributeType.name, AttributeType.pattern, AttributeType.placeholder, AttributeType.popovertarget, AttributeType.popovertargetaction, AttributeType.readonly_, AttributeType.required, AttributeType.size, AttributeType.src, AttributeType.step, AttributeType.type, AttributeType.value, AttributeType.width)]
+    [Element("Form control", true, AttributeType.accept, AttributeType.alpha, AttributeType.alt, AttributeType.autocomplete, AttributeType.checked_, AttributeType.colorspace, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.formaction, AttributeType.formenctype, AttributeType.formmethod, AttributeType.formnovalidate, AttributeType.formtarget, AttributeType.height, AttributeType.list, AttributeType.max, AttributeType.maxlength, AttributeType.min, AttributeType.minlength, AttributeType.multiple, AttributeType.name, AttributeType.pattern, AttributeType.placeholder, AttributeType.popovertarget, AttributeType.popovertargetaction, AttributeType.readonly_, AttributeType.required, AttributeType.size, AttributeType.src, AttributeType.step, AttributeType.type, AttributeType.value, AttributeType.width)]
     input,
 
     [Element("An addition to the document", false, AttributeType.cite, AttributeType.datetime)]
@@ -260,6 +260,9 @@ internal enum ElementType
     [Element("List box control", false, AttributeType.autocomplete, AttributeType.disabled, AttributeType.form, AttributeType.multiple, AttributeType.name, AttributeType.required, AttributeType.size)]
     select,
 
+    [Element("Mirrors content from an option", false)]
+    selectedcontent,
+
     [Element("Shadow tree slot", false, AttributeType.name)]
     slot,
 
@@ -296,7 +299,7 @@ internal enum ElementType
     [Element("Table cell", false, AttributeType.colspan, AttributeType.rowspan, AttributeType.headers)]
     td,
 
-    [Element("Template", false, AttributeType.shadowrootmode, AttributeType.shadowrootdelegatesfocus, AttributeType.shadowrootclonable, AttributeType.shadowrootserializable)]
+    [Element("Template", false, AttributeType.for_, AttributeType.shadowrootmode, AttributeType.shadowrootdelegatesfocus, AttributeType.shadowrootserializable, AttributeType.shadowrootslotassignment, AttributeType.shadowrootclonable, AttributeType.shadowrootcustomelementregistry)]
     template,
 
     [Element("Multiline text controls", false, AttributeType.autocomplete, AttributeType.cols, AttributeType.dirname, AttributeType.disabled, AttributeType.form, AttributeType.maxlength, AttributeType.minlength, AttributeType.name, AttributeType.placeholder, AttributeType.readonly_, AttributeType.required, AttributeType.rows, AttributeType.wrap)]
@@ -332,7 +335,7 @@ internal enum ElementType
     [Element("Variable", false)]
     var,
 
-    [Element("Video player", false, AttributeType.src, AttributeType.crossorigin, AttributeType.poster, AttributeType.preload, AttributeType.autoplay, AttributeType.playsinline, AttributeType.loop, AttributeType.muted, AttributeType.controls, AttributeType.width, AttributeType.height)]
+    [Element("Video player", false, AttributeType.src, AttributeType.crossorigin, AttributeType.poster, AttributeType.preload, AttributeType.autoplay, AttributeType.playsinline, AttributeType.loading, AttributeType.loop, AttributeType.muted, AttributeType.controls, AttributeType.width, AttributeType.height)]
     video,
 
     [Element("Line breaking opportunity", true)]

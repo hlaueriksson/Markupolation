@@ -76,6 +76,11 @@ public static class EventHandlerContentAttributes
     /// <returns><c>onclose="{value}"</c></returns>
     public static Attribute onclose(string value) => new("onclose", value);
 
+    /// <summary>command event handler.</summary>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>oncommand="{value}"</c></returns>
+    public static Attribute oncommand(string value) => new("oncommand", value);
+
     /// <summary>contextlost event handler.</summary>
     /// <param name="value">Attribute value.</param>
     /// <returns><c>oncontextlost="{value}"</c></returns>
