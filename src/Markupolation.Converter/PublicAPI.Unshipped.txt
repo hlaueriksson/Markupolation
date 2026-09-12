@@ -1,0 +1,19 @@
+#nullable enable
+Markupolation.Converter.ConvertOptions
+Markupolation.Converter.ConvertOptions.<Clone>$() -> Markupolation.Converter.ConvertOptions!
+Markupolation.Converter.ConvertOptions.Aliases.get -> bool
+Markupolation.Converter.ConvertOptions.Aliases.init -> void
+Markupolation.Converter.ConvertOptions.ConvertOptions() -> void
+Markupolation.Converter.ConvertOptions.Equals(Markupolation.Converter.ConvertOptions? other) -> bool
+Markupolation.Converter.ConvertOptions.Fragment.get -> bool?
+Markupolation.Converter.ConvertOptions.Fragment.init -> void
+Markupolation.Converter.ConvertOptions.Indent.get -> int
+Markupolation.Converter.ConvertOptions.Indent.init -> void
+Markupolation.Converter.HtmlConverter
+override Markupolation.Converter.ConvertOptions.Equals(object? obj) -> bool
+override Markupolation.Converter.ConvertOptions.GetHashCode() -> int
+override Markupolation.Converter.ConvertOptions.ToString() -> string!
+static Markupolation.Converter.ConvertOptions.operator !=(Markupolation.Converter.ConvertOptions? left, Markupolation.Converter.ConvertOptions? right) -> bool
+static Markupolation.Converter.ConvertOptions.operator ==(Markupolation.Converter.ConvertOptions? left, Markupolation.Converter.ConvertOptions? right) -> bool
+static Markupolation.Converter.HtmlConverter.Convert(string! html) -> string!
+static Markupolation.Converter.HtmlConverter.Convert(string! html, Markupolation.Converter.ConvertOptions! options) -> string!

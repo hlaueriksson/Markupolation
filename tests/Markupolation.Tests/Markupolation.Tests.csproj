@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="AngleSharp" Version="1.8.0" />
     <PackageReference Include="AngleSharp.Diffing" Version="1.1.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="5.0.0" Condition="'$(TargetFramework)' == 'net10.0'" />
     <PackageReference Include="FluentAssertions" Version="[7.2.2]" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.9.0" />
     <PackageReference Include="Microsoft.Playwright" Version="1.62.0" />
@@ -18,12 +19,14 @@
   <!-- Markupolation.AspNetCore is net10.0 only; the net8.0 leg covers the netstandard2.1 build. -->
   <ItemGroup Condition="'$(TargetFramework)' != 'net10.0'">
     <Compile Remove="AspNetCore\**" />
+    <Compile Remove="Converter\**" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" />
     <ProjectReference Include="..\..\src\Markupolation.Htmx\Markupolation.Htmx.csproj" />
     <ProjectReference Include="..\..\src\Markupolation.AspNetCore\Markupolation.AspNetCore.csproj" Condition="'$(TargetFramework)' == 'net10.0'" />
+    <ProjectReference Include="..\..\src\Markupolation.Converter\Markupolation.Converter.csproj" Condition="'$(TargetFramework)' == 'net10.0'" />
     <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
     <Using Include="Markupolation.Elements" Static="True" />
     <Using Include="Markupolation.Attributes" Static="True" />

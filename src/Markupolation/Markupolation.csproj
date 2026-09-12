@@ -51,6 +51,7 @@ HTML templating in C# with a fluent API:
 
   <ItemGroup>
     <InternalsVisibleTo Include="Markupolation.Extensions" />
+    <InternalsVisibleTo Include="Markupolation.Converter" />
     <InternalsVisibleTo Include="Markupolation.Tests" />
   </ItemGroup>
 
