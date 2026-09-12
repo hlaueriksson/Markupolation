@@ -1,15 +1,14 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Markupolation.Tests
+namespace Markupolation.Tests;
+
+public class EventHandlerContentAttributesTests
 {
-    public class EventHandlerContentAttributesTests
+    [Test]
+    public void Attribute()
     {
-        [Test]
-        public void Attribute()
-        {
-            var result = onload("console.log('onload');");
-            result.ToString().Should().Be("onload=\"console.log('onload');\"");
-        }
+        var result = onload("console.log('onload');");
+        result.ToString().Should().Be("onload=\"console.log('onload');\"");
     }
 }

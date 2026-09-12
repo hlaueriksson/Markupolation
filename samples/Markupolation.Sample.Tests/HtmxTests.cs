@@ -2,40 +2,39 @@ using System.Net;
 using FluentAssertions;
 using VerifyTests.AngleSharp;
 
-namespace Markupolation.Sample.Tests
+namespace Markupolation.Sample.Tests;
+
+public class HtmxTests
 {
-    public class HtmxTests
+    private HttpClient _httpClient = null!;
+
+    [SetUp]
+    public void Setup()
     {
-        private HttpClient _httpClient = null!;
+        _httpClient = GlobalSetup.App.CreateHttpClient("htmx");
+    }
 
-        [SetUp]
-        public void Setup()
-        {
-            _httpClient = GlobalSetup.App.CreateHttpClient("htmx");
-        }
+    [Test]
+    public async Task Root_should_return_HTML()
+    {
+        var response = await _httpClient.GetAsync("/");
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        await Verify(await response.Content.ReadAsStringAsync(), "html").PrettyPrintHtml();
+    }
 
-        [Test]
-        public async Task Root_should_return_HTML()
-        {
-            var response = await _httpClient.GetAsync("/");
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            await Verify(await response.Content.ReadAsStringAsync(), "html").PrettyPrintHtml();
-        }
+    [Test]
+    public async Task Counter_should_return_HTML()
+    {
+        var response = await _httpClient.GetAsync("/counter.html");
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        await Verify(await response.Content.ReadAsStringAsync(), "html").PrettyPrintHtml();
+    }
 
-        [Test]
-        public async Task Counter_should_return_HTML()
-        {
-            var response = await _httpClient.GetAsync("/counter.html");
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            await Verify(await response.Content.ReadAsStringAsync(), "html").PrettyPrintHtml();
-        }
-
-        [Test]
-        public async Task Weather_should_return_HTML()
-        {
-            var response = await _httpClient.GetAsync("/weather.html");
-            response.StatusCode.Should().Be(HttpStatusCode.OK);
-            await Verify(await response.Content.ReadAsStringAsync(), "html").PrettyPrintHtml();
-        }
+    [Test]
+    public async Task Weather_should_return_HTML()
+    {
+        var response = await _httpClient.GetAsync("/weather.html");
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        await Verify(await response.Content.ReadAsStringAsync(), "html").PrettyPrintHtml();
     }
 }

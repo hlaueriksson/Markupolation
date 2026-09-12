@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/Markupolation.Sample.Api/Markupolation.Sample.Api.csproj" />
+    <Project Path="samples/Markupolation.Sample.ApiGateway/Markupolation.Sample.ApiGateway.csproj" />
+    <Project Path="samples/Markupolation.Sample.Aspire.AppHost/Markupolation.Sample.Aspire.AppHost.csproj" />
+    <Project Path="samples/Markupolation.Sample.Aspire.ServiceDefaults/Markupolation.Sample.Aspire.ServiceDefaults.csproj" />
+    <Project Path="samples/Markupolation.Sample.Blazor/Markupolation.Sample.Blazor.csproj" />
+    <Project Path="samples/Markupolation.Sample.Examples/Markupolation.Sample.Examples.csproj" />
+    <Project Path="samples/Markupolation.Sample.Functions/Markupolation.Sample.Functions.csproj" />
+    <Project Path="samples/Markupolation.Sample.Htmx/Markupolation.Sample.Htmx.csproj" />
+    <Project Path="samples/Markupolation.Sample.Tests/Markupolation.Sample.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Markupolation.Extensions/Markupolation.Extensions.csproj" />
+    <Project Path="src/Markupolation/Markupolation.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Markupolation.Benchmark/Markupolation.Benchmark.csproj" />
+    <Project Path="tests/Markupolation.Razor/Markupolation.Razor.csproj" />
+    <Project Path="tests/Markupolation.Tests/Markupolation.Tests.csproj" />
+  </Folder>
+</Solution>
