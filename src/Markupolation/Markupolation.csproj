@@ -42,6 +42,11 @@ HTML templating in C# with a fluent API:
     <AdditionalFiles Include="PublicAPI\$(TargetFramework)\PublicAPI.Unshipped.txt" />
   </ItemGroup>
 
+  <!-- Nest the Content partials under Content.cs in the Solution Explorer. -->
+  <ItemGroup>
+    <Compile Update="Content.*.cs" DependentUpon="Content.cs" />
+  </ItemGroup>
+
   <Import Project="../../Analyzers.props" />
 
   <ItemGroup>
