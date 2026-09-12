@@ -118,7 +118,7 @@ public record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(int value)
     {
-        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
+        return FromText(value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ public record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(long value)
     {
-        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
+        return FromText(value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
@@ -136,7 +136,7 @@ public record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(double value)
     {
-        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
+        return FromText(value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
@@ -145,7 +145,7 @@ public record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(decimal value)
     {
-        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
+        return FromText(value.ToString(CultureInfo.CurrentCulture));
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(DateTime value)
     {
-        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
+        return FromText(value.ToString(CultureInfo.CurrentCulture));
     }
 
     #endregion
@@ -172,7 +172,7 @@ public record Content
     /// <remarks>The same as converting a <see cref="string"/> to <see cref="Content"/>.</remarks>
     /// <param name="value">Text.</param>
     /// <returns><see cref="Content"/></returns>
-    public static Content Text(string? value) => new(HtmlEncoder.Encode(value));
+    public static Content Text(string? value) => FromText(value);
 
     #region InterpolatedStringHandler
 

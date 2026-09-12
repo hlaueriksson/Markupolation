@@ -228,4 +228,26 @@ public class EncodingTests
         div("it's").ToString().Should().Be("<div>it's</div>");
         a(href("/x?q=it's")).ToString().Should().Be("<a href=\"/x?q=it's\"></a>");
     }
+
+    [Test]
+    public void Text_behaves_exactly_like_converting_a_string()
+    {
+        // Content.Text documents itself as "the same as converting a string to Content", so the
+        // two must agree everywhere - including inside a raw text element, where Content keeps
+        // the original to render instead of the encoded form.
+        div("a > b").ToString().Should().Be(div(Content.Text("a > b")).ToString());
+        e.style("a > b").ToString().Should().Be(e.style(Content.Text("a > b")).ToString());
+
+        div(Content.Text("a > b")).ToString().Should().Be("<div>a &gt; b</div>");
+        e.style(Content.Text("a > b")).ToString().Should().Be("<style>a > b</style>");
+    }
+
+    [Test]
+    public void Raw_is_markup_everywhere()
+    {
+        // Raw sets the value directly - the string already is the markup - so there is no
+        // original text to fall back to and it renders the same in both places.
+        div(Content.Raw("a > b")).ToString().Should().Be("<div>a > b</div>");
+        e.style(Content.Raw("a > b")).ToString().Should().Be("<style>a > b</style>");
+    }
 }
