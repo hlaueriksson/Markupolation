@@ -38,8 +38,8 @@ app.MapGet("/counter/{count}", (HttpRequest request, int count) =>
         p(new A("role", "status"), $"Current count: {result}") +
         button(
             class_("btn btn-primary"),
-            new A("hx-get", $"/api/counter/{count + 1}"),
-            new A("hx-target", "#result"),
+            hx_get($"/api/counter/{count + 1}"),
+            hx_target("#result"),
             "Click me"
         ) :
         result
