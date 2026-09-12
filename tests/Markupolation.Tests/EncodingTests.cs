@@ -315,4 +315,26 @@ public class EncodingTests
         li(true ? strong("Fizz") : 'x').ToString().Should().Be("<li><strong>Fizz</strong></li>");
         li(false ? strong("Fizz") : 'x').ToString().Should().Be("<li>x</li>");
     }
+
+    [Test]
+    public void Nullable_value_types_convert()
+    {
+        // The conversion lookup uses the underlying type, so int? reaches operator Content(int).
+        // The compiler emits the HasValue check, so a null yields null content rather than throwing.
+        int? some = 5;
+        int? none = null;
+
+        Content fromSome = some;
+        Content fromNone = none!;
+
+        fromSome.ToString().Should().Be("5");
+        div(fromSome).ToString().Should().Be("<div>5</div>");
+        (fromNone is null).Should().BeTrue("a null nullable converts to null content, it does not throw");
+        div(none).ToString().Should().Be("<div></div>");
+
+        // And in a conditional, which is what the conversions exist for.
+        li(true ? strong("Fizz") : some).ToString().Should().Be("<li><strong>Fizz</strong></li>");
+        li(false ? strong("Fizz") : some).ToString().Should().Be("<li>5</li>");
+        li(false ? strong("Fizz") : none).ToString().Should().Be("<li></li>");
+    }
 }

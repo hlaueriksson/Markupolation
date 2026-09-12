@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -29,7 +28,7 @@ namespace Markupolation;
 /// </remarks>
 [DebuggerDisplay("{ToString()}")]
 [InterpolatedStringHandler]
-public record Content
+public partial record Content
 {
     private readonly StringBuilder? _builder;
     private string? _text;
@@ -91,195 +90,6 @@ public record Content
     /// because the HTML parser does not decode character references inside them.
     /// </remarks>
     internal string? Unencoded => _text;
-
-    #region Conversions
-
-    /// <summary>
-    /// Converts <see cref="Content"/> to <see cref="string"/>.
-    /// </summary>
-    /// <param name="value">The content.</param>
-    public static implicit operator string(Content value)
-    {
-        return value != null ? value.ToString() : string.Empty;
-    }
-
-    /// <summary>
-    /// Converts <see cref="string"/> to <see cref="Content"/>, encoding it as text.
-    /// </summary>
-    /// <param name="value">The string.</param>
-    public static implicit operator Content(string value)
-    {
-        return FromText(value);
-    }
-
-    /// <summary>
-    /// Converts <see cref="int"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(int value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="long"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(long value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="double"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(double value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="decimal"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(decimal value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="DateTime"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(DateTime value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="char"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <remarks>Without this a char would widen to <see cref="int"/> and render as its numeric code.</remarks>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(char value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="float"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <remarks>Without this a float would widen to <see cref="double"/> and render its binary artefacts.</remarks>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(float value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="ulong"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <remarks>Without this a ulong is ambiguous between the <see cref="double"/> and <see cref="decimal"/> conversions.</remarks>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(ulong value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="bool"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <remarks>Renders <c>True</c> or <c>False</c>. A conditional usually reads better as <c>flag.If(...)</c>.</remarks>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(bool value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="DateTimeOffset"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(DateTimeOffset value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="TimeSpan"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(TimeSpan value)
-    {
-        return FromText(value.ToString(null, CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="Guid"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(Guid value)
-    {
-        return FromText(value.ToString("D", CultureInfo.InvariantCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="Enum"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <remarks>One conversion covers every enum; the value is boxed.</remarks>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(Enum value)
-    {
-        return FromText(value?.ToString());
-    }
-
-    /// <summary>
-    /// Converts <see cref="sbyte"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(sbyte value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="byte"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(byte value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="short"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(short value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="ushort"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(ushort value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    /// <summary>
-    /// Converts <see cref="uint"/> to <see cref="Content"/>.
-    /// </summary>
-    /// <param name="value">The value.</param>
-    public static implicit operator Content(uint value)
-    {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
-    }
-
-    #endregion
 
     /// <summary>
     /// Wraps a string that is already markup, without encoding it.
