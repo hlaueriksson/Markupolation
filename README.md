@@ -773,6 +773,49 @@ items.IfEmpty(() => EmptyState(), x => table(x.Each(Row)))
 
 A null sequence, value or delegate yields empty content rather than throwing.
 
+## Encoding
+
+Text is encoded. A `string` that becomes `Content`, and every attribute value, has its `&`, `<`,
+`>` and `"` encoded, so a value coming from a user cannot break out of the markup around it:
+
+```cs
+var name = "<script>alert('xss')</script>";
+
+div(name)                       // <div>&lt;script&gt;alert('xss')&lt;/script&gt;</div>
+a(href("/x?a=1&b=2"))           // <a href="/x?a=1&amp;b=2"></a>
+```
+
+Elements and attributes are already markup and are never re-encoded, so composing them is
+unaffected, and so is `DOCTYPE() + html(...)`.
+
+Interpolation keeps working, because `Content` is an interpolated string handler: the literal parts
+of an interpolated string are written by you and stay raw, an element or attribute in a hole stays
+raw, and every other hole is encoded.
+
+```cs
+div($"<i>{name}</i>")           // <div><i>&lt;script&gt;</i></div>
+div($"see {b("bold")} here")    // <div>see <b>bold</b> here</div>
+```
+
+To opt out, say so:
+
+| | |
+|---|---|
+| `Content.Raw(s)` | the string is already markup — use as is |
+| `Content.Text(s)` | encode explicitly; the same as an implicit conversion |
+| `new Content(s)`, `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
+
+Two things to watch for. Markup assembled into a `string` before it reaches an element is encoded
+whole — the library can no longer tell which parts you wrote — and a conditional mixing elements
+and text collapses to `string`, because `Element` converts to `string` and not the other way:
+
+```cs
+Fizz(i) ? strong("Fizz") : i.ToString()             // encoded: the common type is string
+Fizz(i) ? strong("Fizz") : (Content)i.ToString()    // raw: the common type is Content
+```
+
+See [the migration guide](/docs/MIGRATION-v3.md) for the details.
+
 ## String Interpolation
 
 You can interpolate strings and string literals with the methods of `Markupolation`.

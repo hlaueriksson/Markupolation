@@ -1,1 +1,11 @@
 #nullable enable
+Markupolation.Content.AppendFormatted(Markupolation.Content! value) -> void
+Markupolation.Content.AppendFormatted(string! value) -> void
+Markupolation.Content.AppendFormatted<T>(T value) -> void
+Markupolation.Content.AppendFormatted<T>(T value, string? format) -> void
+Markupolation.Content.AppendLiteral(string! value) -> void
+Markupolation.Content.Content(int literalLength, int formattedCount) -> void
+Markupolation.Content.WriteTo(System.IO.TextWriter! writer) -> void
+Markupolation.Content.WriteTo(System.Text.StringBuilder! builder) -> void
+static Markupolation.Content.Raw(string? value) -> Markupolation.Content!
+static Markupolation.Content.Text(string? value) -> Markupolation.Content!

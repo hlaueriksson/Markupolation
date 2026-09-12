@@ -446,7 +446,7 @@ public static class ContentExtensions
         return match && then != null ? then(value) : !match && otherwise != null ? otherwise(value) : string.Empty;
     }
 
-    private static string Join<T>(IEnumerable<T> values, Func<T, Content> content)
+    private static Content Join<T>(IEnumerable<T> values, Func<T, Content> content)
     {
         var builder = new StringBuilder();
 
@@ -455,10 +455,10 @@ public static class ContentExtensions
             builder.Append(content(value)?.Value);
         }
 
-        return builder.ToString();
+        return Content.Raw(builder.ToString());
     }
 
-    private static string Join<T>(IEnumerable<T> values, Func<T, int, Content> content)
+    private static Content Join<T>(IEnumerable<T> values, Func<T, int, Content> content)
     {
         var builder = new StringBuilder();
         var index = 0;
@@ -468,6 +468,6 @@ public static class ContentExtensions
             builder.Append(content(value, index++)?.Value);
         }
 
-        return builder.ToString();
+        return Content.Raw(builder.ToString());
     }
 }
