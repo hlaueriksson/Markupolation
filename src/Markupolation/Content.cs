@@ -2,7 +2,6 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -199,24 +198,6 @@ public record Content
         var text = value is IFormattable formattable ? formattable.ToString(format, null) : value?.ToString();
 
         _builder.Append(HtmlEncoder.Encode(text));
-    }
-
-    /// <summary>
-    /// Writes the content to a <see cref="TextWriter"/>.
-    /// </summary>
-    /// <param name="writer">The writer. Ignored when <c>null</c>.</param>
-    public void WriteTo(TextWriter writer)
-    {
-        writer?.Write(Value);
-    }
-
-    /// <summary>
-    /// Writes the content to a <see cref="StringBuilder"/>.
-    /// </summary>
-    /// <param name="builder">The builder. Ignored when <c>null</c>.</param>
-    public void WriteTo(StringBuilder builder)
-    {
-        builder?.Append(Value);
     }
 
     /// <summary>

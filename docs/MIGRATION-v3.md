@@ -103,8 +103,6 @@ Consumers on .NET Core 3.0+, .NET 5+, Mono 6.4+, Xamarin and Unity 2021.2+ are u
 
 ## Also new
 
-- `Content.WriteTo(TextWriter)` and `Content.WriteTo(StringBuilder)` write content without going
-  through an intermediate string of your own.
 - `int`, `long`, `double`, `decimal` and `DateTime` convert to `Content` implicitly.
 - `Markupolation.Extensions` gained `If` on `bool`, and a lazy `Func<Content>` form of every
   conditional so an unused branch is not built. See the README.
