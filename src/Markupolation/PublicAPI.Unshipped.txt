@@ -1,1 +1,21 @@
 #nullable enable
+static Markupolation.Attributes.alpha() -> Markupolation.Attribute!
+static Markupolation.Attributes.autocorrect(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.autocorrect(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.closedby(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.closedby(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.colorspace(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.colorspace(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.command(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.command(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.commandfor(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.commandfor(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headingoffset(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headingoffset(string! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.headingreset() -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootcustomelementregistry() -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootslotassignment(object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.shadowrootslotassignment(string! value) -> Markupolation.Attribute!
+static Markupolation.Elements.selectedcontent(object! content) -> Markupolation.Element!
+static Markupolation.Elements.selectedcontent(params Markupolation.Content![]! content) -> Markupolation.Element!
+static Markupolation.EventHandlerContentAttributes.oncommand(string! value) -> Markupolation.Attribute!
