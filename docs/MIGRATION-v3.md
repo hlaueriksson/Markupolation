@@ -37,28 +37,7 @@ p($"Read the {b($"HTML {i("Living")}")} Standard")   // unchanged from 2.x
 items.Each(x => li($"<b>{x}</b>"))                   // literal <b> raw, x encoded
 ```
 
-### The case most likely to bite you
-
-A conditional that mixes elements and text collapses to `string`, because `Element` converts to
-`string` and not the other way around. The markup is rendered, then encoded as text — and nothing
-warns about it:
-
-```cs
-numbers.Each(i => li(
-    Fizz(i) ? strong("Fizz") : i.ToString()))   // <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
-```
-
-Make one branch `Content` so the common type is `Content`:
-
-```cs
-numbers.Each(i => li(
-    Fizz(i) ? strong("Fizz") : (Content)i.ToString()))   // <li><strong>Fizz</strong></li>
-```
-
-Check anywhere you have a conditional whose branches are not all elements. The FizzBuzz
-benchmark in this repo hit exactly this and needed the cast.
-
-### The other case that changes silently
+### The case that changes silently
 
 Build markup into a `string` first and the library can no longer tell which parts you wrote:
 
@@ -73,13 +52,35 @@ div(Content.Raw(markup))     // opt out
 | | |
 |---|---|
 | `Content.Raw(s)` | the string is already markup — use as is |
-| `Content.Text(s)` | encode explicitly; the same as an implicit conversion |
+| `Content.Text(s)` | encode explicitly; the same as converting a string to `Content` |
 | `new Content(s)` | raw, like `Raw` — this is how `Element` wraps markup verbatim |
 | `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
 
 A quick way to find what needs attention: search for string variables passed into element or
 attribute calls. Anything that is prose, a name, a URL or a number needs no change. Anything that
 is *markup you assembled yourself* needs `Content.Raw`.
+
+### The other case: a conditional mixing an element with text
+
+A conditional takes `string` as its natural type as soon as one branch is a string, because
+`Element` converts to `string` and not the reverse. The element is rendered and then encoded as
+text — and nothing warns about it:
+
+```cs
+numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i.ToString()))
+// <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
+```
+
+Drop the `ToString()`. `int`, `long`, `double`, `decimal` and `DateTime` now convert to `Content`
+directly, so the conditional has no natural type and is target-typed to `Content` — which keeps the
+element as markup:
+
+```cs
+numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i))
+// <li><strong>Fizz</strong></li>
+```
+
+For any other type, cast the text branch: `(Content)value.ToString()`.
 
 ## netstandard2.1
 
@@ -93,6 +94,7 @@ Consumers on .NET Core 3.0+, .NET 5+, Mono 6.4+, Xamarin and Unity 2021.2+ are u
 
 - `Content.WriteTo(TextWriter)` and `Content.WriteTo(StringBuilder)` write content without going
   through an intermediate string of your own.
+- `int`, `long`, `double`, `decimal` and `DateTime` convert to `Content` implicitly.
 - `Markupolation.Extensions` gained `If` on `bool`, and a lazy `Func<Content>` form of every
   conditional so an unused branch is not built. See the README.
 

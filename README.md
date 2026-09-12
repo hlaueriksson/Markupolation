@@ -805,14 +805,25 @@ To opt out, say so:
 | `Content.Text(s)` | encode explicitly; the same as an implicit conversion |
 | `new Content(s)`, `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
 
-Two things to watch for. Markup assembled into a `string` before it reaches an element is encoded
-whole — the library can no longer tell which parts you wrote — and a conditional mixing elements
-and text collapses to `string`, because `Element` converts to `string` and not the other way:
+One thing to watch for: markup assembled into a `string` before it reaches an element is encoded
+whole, because the library can no longer tell which parts you wrote.
 
 ```cs
-Fizz(i) ? strong("Fizz") : i.ToString()             // encoded: the common type is string
-Fizz(i) ? strong("Fizz") : (Content)i.ToString()    // raw: the common type is Content
+var markup = $"<i>{name}</i>";
+div(markup)                    // encodes the <i> too
+div(Content.Raw(markup))       // opt out
 ```
+
+The same applies to a conditional whose other branch is a string, since that makes `string` the
+conditional's natural type. `int`, `long`, `double`, `decimal` and `DateTime` convert to `Content`
+directly, so dropping the `ToString()` is usually the whole fix:
+
+```cs
+numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i.ToString()))   // <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
+numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i))              // <li><strong>Fizz</strong></li>
+```
+
+For any other type, cast the text branch with `(Content)`.
 
 See [the migration guide](/docs/MIGRATION-v3.md) for the details.
 

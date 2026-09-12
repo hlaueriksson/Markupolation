@@ -132,20 +132,39 @@ public class EncodingTests
     }
 
     [Test]
-    public void A_ternary_mixing_elements_and_text_collapses_to_string()
+    public void Value_types_convert_to_content_directly()
     {
-        // The most likely real-world break. The conditional's common type is string, because
-        // Element converts to string but not the other way, so the rendered markup becomes a
-        // string and is then encoded as text. Nothing warns about it.
-        var mixed = new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : i.ToString()));
+        div(42).ToString().Should().Be("<div>42</div>");
+        div(42L).ToString().Should().Be("<div>42</div>");
 
-        mixed.ToString()
+        Content fromInt = 7;
+        fromInt.ToString().Should().Be("7");
+    }
+
+    [Test]
+    public void A_ternary_mixing_elements_and_values_keeps_the_elements_raw()
+    {
+        // int converts to Content directly, so this conditional has no natural type and is
+        // target-typed to Content: the element branch stays markup. Without that conversion the
+        // conditional would fall back to object, the element would be rendered to a string and
+        // then encoded as text.
+        new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : i)).ToString()
+            .Should().Be("<li>1</li><li><strong>Fizz</strong></li>");
+    }
+
+    [Test]
+    public void A_ternary_mixing_elements_and_strings_collapses_to_string()
+    {
+        // The remaining sharp edge. When a branch is a string, the conditional takes string as
+        // its natural type - because Element converts to string and not the reverse - so the
+        // element is rendered and then encoded as text. Nothing warns about it.
+        new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : i.ToString())).ToString()
             .Should().Be("<li>1</li><li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>");
 
-        // Fix: make one branch Content so the common type is Content, not string.
-        var fixedUp = new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : (Content)i.ToString()));
-
-        fixedUp.ToString()
+        // Fix: drop the ToString(), or make the other branch Content.
+        new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : i)).ToString()
+            .Should().Be("<li>1</li><li><strong>Fizz</strong></li>");
+        new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : (Content)i.ToString())).ToString()
             .Should().Be("<li>1</li><li><strong>Fizz</strong></li>");
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -76,6 +77,51 @@ public record Content
     public static implicit operator Content(string value)
     {
         return new Content(HtmlEncoder.Encode(value));
+    }
+
+    /// <summary>
+    /// Converts <see cref="int"/> to <see cref="Content"/>.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    public static implicit operator Content(int value)
+    {
+        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
+    }
+
+    /// <summary>
+    /// Converts <see cref="long"/> to <see cref="Content"/>.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    public static implicit operator Content(long value)
+    {
+        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
+    }
+
+    /// <summary>
+    /// Converts <see cref="double"/> to <see cref="Content"/>.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    public static implicit operator Content(double value)
+    {
+        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
+    }
+
+    /// <summary>
+    /// Converts <see cref="decimal"/> to <see cref="Content"/>.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    public static implicit operator Content(decimal value)
+    {
+        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
+    }
+
+    /// <summary>
+    /// Converts <see cref="DateTime"/> to <see cref="Content"/>.
+    /// </summary>
+    /// <param name="value">The value.</param>
+    public static implicit operator Content(DateTime value)
+    {
+        return new Content(HtmlEncoder.Encode(value.ToString(CultureInfo.CurrentCulture)));
     }
 
     /// <summary>

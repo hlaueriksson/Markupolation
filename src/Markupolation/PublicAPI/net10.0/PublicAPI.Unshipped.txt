@@ -7,5 +7,10 @@ Markupolation.Content.AppendLiteral(string! value) -> void
 Markupolation.Content.Content(int literalLength, int formattedCount) -> void
 Markupolation.Content.WriteTo(System.IO.TextWriter! writer) -> void
 Markupolation.Content.WriteTo(System.Text.StringBuilder! builder) -> void
+static Markupolation.Content.implicit operator Markupolation.Content!(decimal value) -> Markupolation.Content!
+static Markupolation.Content.implicit operator Markupolation.Content!(double value) -> Markupolation.Content!
+static Markupolation.Content.implicit operator Markupolation.Content!(int value) -> Markupolation.Content!
+static Markupolation.Content.implicit operator Markupolation.Content!(long value) -> Markupolation.Content!
+static Markupolation.Content.implicit operator Markupolation.Content!(System.DateTime value) -> Markupolation.Content!
 static Markupolation.Content.Raw(string? value) -> Markupolation.Content!
 static Markupolation.Content.Text(string? value) -> Markupolation.Content!
