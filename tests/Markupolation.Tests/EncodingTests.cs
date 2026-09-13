@@ -120,8 +120,9 @@ public class EncodingTests
     [Test]
     public void Document_composition_stays_raw()
     {
-        // DOCTYPE() + element uses built-in string concatenation, which must not be encoded.
-        (DOCTYPE() + html(body(h1("Hello, World!"))))
+        // DOCTYPE() returns Content, not a string, so the doctype composes as markup instead of
+        // being encoded as text by Content's + operator.
+        (DOCTYPE() + html(body(h1("Hello, World!")))).ToString()
             .Should().Be("<!DOCTYPE html><html><body><h1>Hello, World!</h1></body></html>");
     }
 
@@ -156,25 +157,27 @@ public class EncodingTests
     }
 
     [Test]
-    public void A_ternary_mixing_elements_and_strings_collapses_to_string()
+    public void A_ternary_mixing_elements_and_strings_keeps_the_element_raw()
     {
-        // The remaining sharp edge. When a branch is a string, the conditional takes string as
-        // its natural type - because Element converts to string and not the reverse - so the
-        // element is rendered and then encoded as text. Nothing warns about it.
+        // This used to collapse to string: Element converted to string implicitly and not the
+        // reverse, so string was the conditional's natural type, and the rendered element was then
+        // encoded as text. The conversion to string is explicit now, so the branches have no common
+        // type, the conditional is target-typed to Content, and each branch converts on its own.
         new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : i.ToString())).ToString()
-            .Should().Be("<li>1</li><li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>");
+            .Should().Be("<li>1</li><li><strong>Fizz</strong></li>");
 
-        // A string branch is the same, and value types do not help here.
         new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : "not fizz")).ToString()
-            .Should().Be("<li>not fizz</li><li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>");
+            .Should().Be("<li>not fizz</li><li><strong>Fizz</strong></li>");
+
+        // The text branch is still text, and is still encoded.
+        li(false ? strong("Fizz") : "<script>").ToString().Should().Be("<li>&lt;script&gt;</li>");
     }
 
     [Test]
-    public void If_avoids_the_conditional_problem_entirely()
+    public void If_reads_better_than_a_ternary()
     {
-        // If takes Content parameters, so each argument converts on its own and there is no
-        // common type to infer: the element stays markup and the string is encoded as text.
-        // This is the recommended form for a conditional that mixes elements and text.
+        // If takes Content parameters, so each argument converts on its own - the same outcome a
+        // ternary now gives, in a shape that reads better inside a template.
         new[] { 1, 3 }.Each(i => li((i % 3 == 0).If(strong("Fizz"), "not fizz"))).ToString()
             .Should().Be("<li>not fizz</li><li><strong>Fizz</strong></li>");
 

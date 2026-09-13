@@ -48,7 +48,7 @@ public class PlaygroundTests
         using var client = new HttpClient();
         var expected = await client.GetStringAsync("https://raw.githubusercontent.com/h5bp/html5-boilerplate/main/src/index.html");
 
-        var diffs = DiffBuilder.Compare(expected).WithTest(actual).Build().ToList();
+        var diffs = DiffBuilder.Compare(expected).WithTest(actual.ToString()).Build().ToList();
         diffs.Should().BeEmpty();
     }
 }

@@ -10,24 +10,24 @@ namespace Markupolation.AspNetCore;
 public static class HtmlResults
 {
     /// <summary>
-    /// Returns rendered markup with <c>200 OK</c>.
+    /// Returns the document with <c>200 OK</c>.
     /// </summary>
-    /// <param name="html">Rendered markup.</param>
+    /// <param name="html">The document.</param>
     /// <returns><see cref="HtmlResult"/></returns>
-    public static HtmlResult Ok(string html) => new(html);
+    public static HtmlResult Ok(Content html) => new(html);
 
     /// <summary>
-    /// Returns rendered markup with <c>404 Not Found</c>.
+    /// Returns the document with <c>404 Not Found</c>.
     /// </summary>
-    /// <param name="html">Rendered markup.</param>
+    /// <param name="html">The document.</param>
     /// <returns><see cref="HtmlResult"/></returns>
-    public static HtmlResult NotFound(string html) => new(html, 404);
+    public static HtmlResult NotFound(Content html) => new(html, 404);
 
     /// <summary>
-    /// Returns rendered markup with the given status code.
+    /// Returns the document with the given status code.
     /// </summary>
     /// <param name="statusCode">Status code.</param>
-    /// <param name="html">Rendered markup.</param>
+    /// <param name="html">The document.</param>
     /// <returns><see cref="HtmlResult"/></returns>
-    public static HtmlResult StatusCode(int statusCode, string html) => new(html, statusCode);
+    public static HtmlResult StatusCode(int statusCode, Content html) => new(html, statusCode);
 }

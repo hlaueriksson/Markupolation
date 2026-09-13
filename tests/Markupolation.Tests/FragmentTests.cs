@@ -1,3 +1,4 @@
+using e = Markupolation.Elements;
 using FluentAssertions;
 using NUnit.Framework;
 using static Markupolation.Htmx;
@@ -9,15 +10,16 @@ namespace Markupolation.Tests;
 /// </summary>
 /// <remarks>
 /// <para>
-/// <c>element + element</c> is the obvious way to write this, and it is a trap: the <c>+</c> is
-/// <see cref="string"/> concatenation (via the implicit conversion on <see cref="Content"/>), so
-/// the result is a <see cref="string"/>, and the moment that string flows back into a
-/// <see cref="Content"/> position it is encoded as text. It only survives where it stays a string
-/// all the way out to the caller.
+/// <c>element + element</c> is the obvious way to write this, and it is what you should write.
+/// <see cref="Content"/> declares <c>operator +</c>, which concatenates each side's rendered value,
+/// so the result is <see cref="Content"/> and every operand keeps its own rule: an element is
+/// already markup and stays raw, a <see cref="string"/> is text and is encoded.
 /// </para>
 /// <para>
-/// These tests pin what happens today, broken cases included. <c>Content.Raw</c> is the workaround;
-/// a <c>Fragment(params Content[])</c> helper would be the ergonomic version of it.
+/// It used to be a trap. Without a user-defined <c>+</c> the expression fell through to predefined
+/// <c>string</c> concatenation, and the resulting string was encoded as text the moment it reached
+/// a <see cref="Content"/> position - so the fragment only survived where it stayed a string all
+/// the way out to the caller. These tests pin that it no longer does.
 /// </para>
 /// </remarks>
 public class FragmentTests
@@ -25,42 +27,39 @@ public class FragmentTests
     private static readonly Item[] Items = [new("T1", "B1"), new("T2", "B2")];
 
     // A component returning two siblings, written the way you reach for first.
-    private static Content Card(Item x) => (Content)(h3(x.Title) + p(x.Body));
-
-    // The same component, saying explicitly that the string is already markup.
-    private static Content CardRaw(Item x) => Content.Raw(h3(x.Title) + p(x.Body));
+    private static Content Card(Item x) => h3(x.Title) + p(x.Body);
 
     // ------------------------------------------------------------- where the + lands ----------
 
     [Test]
-    public void Broken_1_nested_in_an_element()
+    public void Nested_in_an_element()
     {
         div(h1("a") + p("b")).ToString()
-            .Should().Be("<div>&lt;h1&gt;a&lt;/h1&gt;&lt;p&gt;b&lt;/p&gt;</div>");
+            .Should().Be("<div><h1>a</h1><p>b</p></div>");
     }
 
     [Test]
-    public void Broken_2_a_component_used_through_Each()
+    public void A_component_used_through_Each()
     {
         Items.Each(Card).ToString()
-            .Should().Be("&lt;h3&gt;T1&lt;/h3&gt;&lt;p&gt;B1&lt;/p&gt;&lt;h3&gt;T2&lt;/h3&gt;&lt;p&gt;B2&lt;/p&gt;");
+            .Should().Be("<h3>T1</h3><p>B1</p><h3>T2</h3><p>B2</p>");
     }
 
     [Test]
-    public void Broken_3_passed_to_If()
+    public void Passed_to_If()
     {
         li(true.If(h1("a") + p("b"))).ToString()
-            .Should().Be("<li>&lt;h1&gt;a&lt;/h1&gt;&lt;p&gt;b&lt;/p&gt;</li>");
+            .Should().Be("<li><h1>a</h1><p>b</p></li>");
     }
 
     [Test]
-    public void Works_4_at_the_top_level_where_it_stays_a_string()
+    public void At_the_top_level()
     {
-        (h1("a") + p("b")).Should().Be("<h1>a</h1><p>b</p>");
+        (h1("a") + p("b")).ToString().Should().Be("<h1>a</h1><p>b</p>");
     }
 
     [Test]
-    public void Works_5_with_an_explicit_content_array()
+    public void With_an_explicit_content_array()
     {
         div(new Content[] { h1("a"), p("b") }).ToString()
             .Should().Be("<div><h1>a</h1><p>b</p></div>");
@@ -71,15 +70,7 @@ public class FragmentTests
     [Test]
     public void Cards_a_component_returning_two_siblings()
     {
-        // div(class_("cards"), items.Each(Card))
         div(class_("cards"), Items.Each(Card)).ToString()
-            .Should().Be("<div class=\"cards\">"
-                + "&lt;h3&gt;T1&lt;/h3&gt;&lt;p&gt;B1&lt;/p&gt;"
-                + "&lt;h3&gt;T2&lt;/h3&gt;&lt;p&gt;B2&lt;/p&gt;"
-                + "</div>");
-
-        // Content.Raw says the concatenation is already markup.
-        div(class_("cards"), Items.Each(CardRaw)).ToString()
             .Should().Be("<div class=\"cards\">"
                 + "<h3>T1</h3><p>B1</p>"
                 + "<h3>T2</h3><p>B2</p>"
@@ -91,32 +82,70 @@ public class FragmentTests
     {
         var loggedIn = true;
 
-        // loggedIn.If(a(href("/profile"), "Profile") + a(href("/logout"), "Log out"))
         loggedIn.If(a(href("/profile"), "Profile") + a(href("/logout"), "Log out")).ToString()
-            .Should().Be("&lt;a href=&quot;/profile&quot;&gt;Profile&lt;/a&gt;"
-                + "&lt;a href=&quot;/logout&quot;&gt;Log out&lt;/a&gt;");
-
-        loggedIn.If(Content.Raw(a(href("/profile"), "Profile") + a(href("/logout"), "Log out"))).ToString()
             .Should().Be("<a href=\"/profile\">Profile</a><a href=\"/logout\">Log out</a>");
 
-        false.If(Content.Raw(a(href("/profile"), "Profile"))).ToString().Should().BeEmpty();
+        false.If(a(href("/profile"), "Profile")).ToString().Should().BeEmpty();
     }
 
     [Test]
     public void An_htmx_out_of_band_response()
     {
-        // Results.Extensions.Html(...) takes a string, and this stays a string, so the
-        // top level case is the one that already works.
         var html = div(id("result"), "one")
             + div(id("count"), hx_swap_oob("true"), "two");
 
-        html.Should().Be("<div id=\"result\">one</div><div id=\"count\" hx-swap-oob=\"true\">two</div>");
+        html.ToString().Should().Be("<div id=\"result\">one</div><div id=\"count\" hx-swap-oob=\"true\">two</div>");
 
-        // ...until it is nested in anything.
+        // ...and it survives being nested in anything, which is the whole point.
         div(html).ToString().Should().Be("<div>"
-            + "&lt;div id=&quot;result&quot;&gt;one&lt;/div&gt;"
-            + "&lt;div id=&quot;count&quot; hx-swap-oob=&quot;true&quot;&gt;two&lt;/div&gt;"
+            + "<div id=\"result\">one</div>"
+            + "<div id=\"count\" hx-swap-oob=\"true\">two</div>"
             + "</div>");
+    }
+
+    // ------------------------------------------------------------------- what + means ---------
+
+    [Test]
+    public void A_string_operand_is_text()
+    {
+        // A string is text everywhere, + included. Content.Raw is the single opt-out.
+        ("<b>" + p("x")).ToString().Should().Be("&lt;b&gt;<p>x</p>");
+        (Content.Raw("<b>") + p("x")).ToString().Should().Be("<b><p>x</p>");
+    }
+
+    [Test]
+    public void Chaining_and_null_operands()
+    {
+        (h1("a") + p("b") + e.span("c")).ToString().Should().Be("<h1>a</h1><p>b</p><span>c</span>");
+
+        ((Content?)null + p("x")).ToString().Should().Be("<p>x</p>");
+        (p("x") + (Content?)null).ToString().Should().Be("<p>x</p>");
+        ((Content?)null + (Content?)null).ToString().Should().BeEmpty();
+    }
+
+    [Test]
+    public void Content_accumulates()
+    {
+        // += on a Content is what replaces accumulating markup in a string.
+        var list = Content.Raw(null);
+
+        foreach (var i in new[] { 1, 2 })
+        {
+            list += li(i);
+        }
+
+        ul(list).ToString().Should().Be("<ul><li>1</li><li>2</li></ul>");
+    }
+
+    [Test]
+    public void Concatenated_text_still_falls_back_in_a_raw_text_element()
+    {
+        // Both sides are still text, so script and style get the original to render.
+        script(Content.Text("if (a < b") + Content.Text(" && c) x();")).ToString()
+            .Should().Be("<script>if (a < b && c) x();</script>");
+
+        div(Content.Text("if (a < b") + Content.Text(" && c) x();")).ToString()
+            .Should().Be("<div>if (a &lt; b &amp;&amp; c) x();</div>");
     }
 
     private sealed record Item(string Title, string Body);

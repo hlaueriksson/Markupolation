@@ -23,15 +23,6 @@ public sealed record Attribute : Content
 
     internal AttributeType Type { get; }
 
-    /// <summary>
-    /// Converts <see cref="Attribute"/> to <see cref="string"/>.
-    /// </summary>
-    /// <param name="value">The attribute.</param>
-    public static implicit operator string(Attribute value)
-    {
-        return value != null ? value.ToString() : string.Empty;
-    }
-
     /// <inheritdoc/>
     public override string ToString() => base.ToString();
 

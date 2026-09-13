@@ -59,10 +59,10 @@ Response: `HxTrigger()`, `HxRetarget()`, `HxReswap()`, `HxReselect()`, `HxPushUr
 
 ### A note on encoding
 
-These methods take rendered markup. `Content`, `Element` and `Attribute` all convert to `string`
-implicitly, so a whole document fits — including `DOCTYPE() + html(...)`, which is already a
-`string`. The value is written as it is, because encoding happened inside the elements. Do not
-pass text that came from a user straight into a result.
+These methods take `Content`, so an element or `DOCTYPE() + html(...)` fits directly. Encoding has
+already happened inside the elements, and the result writes what they produced without a second
+pass. A `string` that already holds rendered markup goes in through `Content.Raw(s)` — anything
+else is text, and is encoded.
 
 ### Would you like to know more? 🤔
 

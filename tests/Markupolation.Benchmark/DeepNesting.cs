@@ -51,7 +51,7 @@ public class DeepNesting
             content = div(class_($"level{i}"), content);
         }
 
-        return html(body(content));
+        return html(body(content)).ToString();
     }
 
     public static bool IsValid()

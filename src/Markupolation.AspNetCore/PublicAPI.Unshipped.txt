@@ -4,16 +4,16 @@ Markupolation.AspNetCore.HtmlResult
 Markupolation.AspNetCore.HtmlResult.ContentType.get -> string?
 Markupolation.AspNetCore.HtmlResult.ExecuteAsync(Microsoft.AspNetCore.Http.HttpContext! httpContext) -> System.Threading.Tasks.Task!
 Markupolation.AspNetCore.HtmlResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext! context) -> System.Threading.Tasks.Task!
-Markupolation.AspNetCore.HtmlResult.HtmlResult(string! html) -> void
-Markupolation.AspNetCore.HtmlResult.HtmlResult(string! html, int statusCode) -> void
+Markupolation.AspNetCore.HtmlResult.HtmlResult(Markupolation.Content! html) -> void
+Markupolation.AspNetCore.HtmlResult.HtmlResult(Markupolation.Content! html, int statusCode) -> void
 Markupolation.AspNetCore.HtmlResult.StatusCode.get -> int?
 Markupolation.AspNetCore.HtmlResults
 Markupolation.AspNetCore.HtmxResponseExtensions
 Markupolation.AspNetCore.ResultExtensions
 static Markupolation.AspNetCore.HtmlContentExtensions.ToHtmlContent(this Markupolation.Content! content) -> Microsoft.AspNetCore.Html.IHtmlContent!
-static Markupolation.AspNetCore.HtmlResults.NotFound(string! html) -> Markupolation.AspNetCore.HtmlResult!
-static Markupolation.AspNetCore.HtmlResults.Ok(string! html) -> Markupolation.AspNetCore.HtmlResult!
-static Markupolation.AspNetCore.HtmlResults.StatusCode(int statusCode, string! html) -> Markupolation.AspNetCore.HtmlResult!
+static Markupolation.AspNetCore.HtmlResults.NotFound(Markupolation.Content! html) -> Markupolation.AspNetCore.HtmlResult!
+static Markupolation.AspNetCore.HtmlResults.Ok(Markupolation.Content! html) -> Markupolation.AspNetCore.HtmlResult!
+static Markupolation.AspNetCore.HtmlResults.StatusCode(int statusCode, Markupolation.Content! html) -> Markupolation.AspNetCore.HtmlResult!
 static Markupolation.AspNetCore.HtmxResponseExtensions.HtmxTarget(this Microsoft.AspNetCore.Http.HttpRequest! request) -> string?
 static Markupolation.AspNetCore.HtmxResponseExtensions.HtmxTrigger(this Microsoft.AspNetCore.Http.HttpRequest! request) -> string?
 static Markupolation.AspNetCore.HtmxResponseExtensions.HxPushUrl(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
@@ -26,5 +26,5 @@ static Markupolation.AspNetCore.HtmxResponseExtensions.HxRetarget(this Microsoft
 static Markupolation.AspNetCore.HtmxResponseExtensions.HxTrigger(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
 static Markupolation.AspNetCore.HtmxResponseExtensions.IsHtmx(this Microsoft.AspNetCore.Http.HttpRequest! request) -> bool
 static Markupolation.AspNetCore.HtmxResponseExtensions.IsHtmxHistoryRestore(this Microsoft.AspNetCore.Http.HttpRequest! request) -> bool
-static Markupolation.AspNetCore.ResultExtensions.Html(this Microsoft.AspNetCore.Http.IResultExtensions! resultExtensions, string! html) -> Microsoft.AspNetCore.Http.IResult!
-static Markupolation.AspNetCore.ResultExtensions.Html(this Microsoft.AspNetCore.Http.IResultExtensions! resultExtensions, string! html, int statusCode) -> Microsoft.AspNetCore.Http.IResult!
+static Markupolation.AspNetCore.ResultExtensions.Html(this Microsoft.AspNetCore.Http.IResultExtensions! resultExtensions, Markupolation.Content! html) -> Microsoft.AspNetCore.Http.IResult!
+static Markupolation.AspNetCore.ResultExtensions.Html(this Microsoft.AspNetCore.Http.IResultExtensions! resultExtensions, Markupolation.Content! html, int statusCode) -> Microsoft.AspNetCore.Http.IResult!

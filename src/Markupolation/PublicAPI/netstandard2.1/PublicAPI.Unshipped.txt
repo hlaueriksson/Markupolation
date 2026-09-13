@@ -1,10 +1,22 @@
 #nullable enable
+*REMOVED*static Markupolation.Attribute.implicit operator string!(Markupolation.Attribute! value) -> string!
+*REMOVED*static Markupolation.Content.implicit operator string!(Markupolation.Content! value) -> string!
+*REMOVED*static Markupolation.Element.implicit operator string!(Markupolation.Element! value) -> string!
+*REMOVED*static Markupolation.Elements.DOCTYPE() -> string!
 Markupolation.Content.AppendFormatted(Markupolation.Content! value) -> void
 Markupolation.Content.AppendFormatted(string! value) -> void
 Markupolation.Content.AppendFormatted<T>(T value) -> void
 Markupolation.Content.AppendFormatted<T>(T value, string? format) -> void
 Markupolation.Content.AppendLiteral(string! value) -> void
 Markupolation.Content.Content(int literalLength, int formattedCount) -> void
+static Markupolation.Content.Raw(string? value) -> Markupolation.Content!
+static Markupolation.Content.Text(string? value) -> Markupolation.Content!
+static Markupolation.Content.explicit operator string!(Markupolation.Content! value) -> string!
+static Markupolation.Content.implicit operator Markupolation.Content!(System.DateTime value) -> Markupolation.Content!
+static Markupolation.Content.implicit operator Markupolation.Content!(System.DateTimeOffset value) -> Markupolation.Content!
+static Markupolation.Content.implicit operator Markupolation.Content!(System.Enum! value) -> Markupolation.Content!
+static Markupolation.Content.implicit operator Markupolation.Content!(System.Guid value) -> Markupolation.Content!
+static Markupolation.Content.implicit operator Markupolation.Content!(System.TimeSpan value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(bool value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(byte value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(char value) -> Markupolation.Content!
@@ -15,13 +27,8 @@ static Markupolation.Content.implicit operator Markupolation.Content!(int value)
 static Markupolation.Content.implicit operator Markupolation.Content!(long value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(sbyte value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(short value) -> Markupolation.Content!
-static Markupolation.Content.implicit operator Markupolation.Content!(System.DateTime value) -> Markupolation.Content!
-static Markupolation.Content.implicit operator Markupolation.Content!(System.DateTimeOffset value) -> Markupolation.Content!
-static Markupolation.Content.implicit operator Markupolation.Content!(System.Enum! value) -> Markupolation.Content!
-static Markupolation.Content.implicit operator Markupolation.Content!(System.Guid value) -> Markupolation.Content!
-static Markupolation.Content.implicit operator Markupolation.Content!(System.TimeSpan value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(uint value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(ulong value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(ushort value) -> Markupolation.Content!
-static Markupolation.Content.Raw(string? value) -> Markupolation.Content!
-static Markupolation.Content.Text(string? value) -> Markupolation.Content!
+static Markupolation.Content.operator +(Markupolation.Content? left, Markupolation.Content? right) -> Markupolation.Content!
+static Markupolation.Elements.DOCTYPE() -> Markupolation.Content!

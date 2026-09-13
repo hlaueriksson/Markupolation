@@ -8,16 +8,17 @@ namespace Markupolation.AspNetCore;
 public static class ResultExtensions
 {
     /// <summary>
-    /// Returns rendered markup as an HTML response.
+    /// Returns the document as an HTML response.
     /// </summary>
     /// <remarks>
-    /// Elements convert to <see cref="string"/> implicitly, so pass the document directly. The
-    /// value is written as it is; encoding already happened inside the elements.
+    /// Pass the document directly - an element, or <c>DOCTYPE() + html(...)</c>, is already
+    /// <see cref="Content"/>. Encoding happened inside the elements. A <see cref="string"/> that is
+    /// already rendered markup goes through <see cref="Content.Raw(string?)"/>.
     /// </remarks>
     /// <param name="resultExtensions">The extension point.</param>
-    /// <param name="html">Rendered markup.</param>
+    /// <param name="html">The document.</param>
     /// <returns><see cref="IResult"/></returns>
-    public static IResult Html(this IResultExtensions resultExtensions, string html)
+    public static IResult Html(this IResultExtensions resultExtensions, Content html)
     {
         _ = resultExtensions;
 
@@ -25,14 +26,13 @@ public static class ResultExtensions
     }
 
     /// <summary>
-    /// Returns rendered markup as an HTML response, with a status code.
+    /// Returns the document as an HTML response, with a status code.
     /// </summary>
-    /// <remarks>The string is used as it is, not encoded.</remarks>
     /// <param name="resultExtensions">The extension point.</param>
-    /// <param name="html">Rendered markup.</param>
+    /// <param name="html">The document.</param>
     /// <param name="statusCode">Status code.</param>
     /// <returns><see cref="IResult"/></returns>
-    public static IResult Html(this IResultExtensions resultExtensions, string html, int statusCode)
+    public static IResult Html(this IResultExtensions resultExtensions, Content html, int statusCode)
     {
         _ = resultExtensions;
 

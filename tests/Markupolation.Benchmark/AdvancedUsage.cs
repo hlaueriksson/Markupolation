@@ -98,7 +98,7 @@ public class AdvancedUsage
     [Benchmark]
     public string Markupolation()
     {
-        return
+        return (
             DOCTYPE() +
             html(lang("en"),
                 head(
@@ -117,7 +117,7 @@ public class AdvancedUsage
                         ))
                     )
                 )
-            );
+            )).ToString();
     }
 
     [Benchmark]

@@ -1,7 +1,7 @@
 # Migrating to Markupolation 3.0
 
-Two breaking changes: text is encoded by default, and the packages target `netstandard2.1`
-instead of `netstandard2.0`.
+Three breaking changes: text is encoded by default, rendering markup to a `string` is now explicit,
+and the packages target `netstandard2.1` instead of `netstandard2.0`.
 
 ## Text is encoded
 
@@ -21,8 +21,8 @@ a(href("/search?q=\" onmouseover=\"alert(1)"))
 ```
 
 Elements and attributes are already markup and are never re-encoded, so composing them is
-unchanged. `DOCTYPE() + html(...)` is unchanged. Ordinary prose is unchanged — encoding only
-touches those four characters, and returns the original string when none are present.
+unchanged. Ordinary prose is unchanged — encoding only touches those four characters, and returns
+the original string when none are present.
 
 ### Interpolation still works
 
@@ -67,38 +67,82 @@ A quick way to find what needs attention: search for string variables passed int
 attribute calls. Anything that is prose, a name, a URL or a number needs no change. Anything that
 is *markup you assembled yourself* needs `Content.Raw`.
 
-### The other case: a conditional mixing an element with text
+## Markup to `string` is explicit
 
-A conditional takes `string` as its natural type as soon as one branch is a string, because
-`Element` converts to `string` and not the reverse. The element is rendered and then encoded as
-text — and nothing warns about it:
+`Content`, `Element` and `Attribute` no longer convert to `string` implicitly. The conversion is
+still there, it just has to be asked for — `(string)content`, or `content.ToString()`:
+
+```cs
+string s = div("x");            // 2.x  fine
+                                // 3.0  CS0266
+string s = div("x").ToString(); // 3.0
+```
+
+This is what makes the rest of the encoding model hold together. Markup that slips into a `string`
+is indistinguishable from text, and is encoded the next time it reaches an element. Removing the
+implicit conversion means that can no longer happen by accident — and it fixes two traps outright.
+
+### `element + element` composes siblings
+
+`Content` now declares `operator +`. Several siblings without a wrapper element is what you would
+write anyway, and it now means what it looks like:
+
+```cs
+Content Card(Item x) => h3(x.Title) + p(x.Body);
+
+div(class_("cards"), items.Each(Card))
+// 2.x  <div class="cards">&lt;h3&gt;T1&lt;/h3&gt;…      <-- the + produced a string, then encoded
+// 3.0  <div class="cards"><h3>T1</h3><p>B1</p>…
+```
+
+The result is `Content`, and each side keeps its own rule: an element stays markup, a `string` is
+text and is encoded. `Content.Raw` is the opt-out, as everywhere else.
+
+```cs
+"<b>" + p("x")              // &lt;b&gt;<p>x</p>
+Content.Raw("<b>") + p("x") // <b><p>x</p>
+```
+
+`DOCTYPE()` returns `Content` rather than `string` for this reason, so `DOCTYPE() + html(...)` still
+composes as markup. If you assigned it to a `string`, add `.ToString()`.
+
+**Accumulating in a `string` no longer compiles**, which is deliberate — it used to re-encode
+everything it had already collected on each pass. Accumulate in a `Content`:
+
+```cs
+var html = "";                      // 2.x
+foreach (var i in items) html += li(i);
+
+Content html = Content.Raw(null);   // 3.0
+foreach (var i in items) html += li(i);
+```
+
+### A ternary mixing an element with text now works
+
+A conditional used to take `string` as its natural type as soon as one branch was a string, because
+`Element` converted to `string` and not the reverse — the element was rendered and then encoded as
+text, silently. With no implicit conversion the branches have no common type, so the conditional is
+target-typed to `Content` and each branch converts on its own:
 
 ```cs
 numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i.ToString()))
-// <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
+// 2.x  <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
+// 3.0  <li><strong>Fizz</strong></li>
 ```
 
-**Use `If` instead of a ternary.** It takes `Content` parameters, so each branch converts on its
-own and there is no common type to infer — the element stays markup and the text is encoded:
+The `If*` / `IfMatch` family takes `Content` parameters and always behaved this way. It is still
+worth preferring inside a template, for how it reads rather than for correctness:
 
 ```cs
 numbers.Each(i => li(Fizz(i).If(strong("Fizz"), "not fizz")))
-// <li>not fizz</li><li><strong>Fizz</strong></li>
 ```
 
-The same holds for the whole `If*` / `IfMatch` family, which all take `Content` or
-`Func<T, Content>`. This is the recommended shape for any conditional that mixes elements and text.
+### Passing a document to something that wants a `string`
 
-If you would rather keep the ternary, either branch being `Content` is enough. `int`, `long`,
-`double`, `decimal` and `DateTime` now convert to `Content` directly, so with a numeric branch
-dropping the `ToString()` is the whole fix:
-
-```cs
-numbers.Each(i => li(Fizz(i) ? strong("Fizz") : i))       // <li><strong>Fizz</strong></li>
-numbers.Each(i => li(Fizz(i) ? strong("Fizz") : text))    // still collapses to string
-```
-
-For anything else, cast the text branch: `(Content)value`.
+`Markupolation.AspNetCore` takes `Content` now, so `Results.Extensions.Html(...)`, `HtmlResults` and
+`HtmlResult` all take the document directly. For any other API that wants a `string` — a
+`ContentResult`, Blazor's `MarkupString` — add `.ToString()`. Going the other way, a `string` that
+already holds rendered markup becomes `Content` through `Content.Raw(s)`.
 
 ## netstandard2.1
 
@@ -118,6 +162,7 @@ Consumers on .NET Core 3.0+, .NET 5+, Mono 6.4+, Xamarin and Unity 2021.2+ are u
   (usable as both `IResult` and `IActionResult`), `ToHtmlContent()` for Razor, and htmx request and
   response headers.
 - Value types convert to `Content` implicitly: every numeric type, `char`, `bool`, `DateTime`, `DateTimeOffset`, `TimeSpan`, `Guid` and any `enum`.
+- `Content` supports `+`, so siblings compose without a wrapper element, and `+=` accumulates.
 - `Markupolation.Extensions` gained `If` on `bool`, and a lazy `Func<Content>` form of every
   conditional so an unused branch is not built. See the README.
 

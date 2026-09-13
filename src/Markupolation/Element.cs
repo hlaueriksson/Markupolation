@@ -35,15 +35,6 @@ public sealed record Element : Content
 
     internal ElementType Type { get; }
 
-    /// <summary>
-    /// Converts <see cref="Element"/> to <see cref="string"/>.
-    /// </summary>
-    /// <param name="value">The element.</param>
-    public static implicit operator string(Element value)
-    {
-        return value != null ? value.ToString() : string.Empty;
-    }
-
     /// <inheritdoc/>
     public override string ToString() => base.ToString();
 
