@@ -104,7 +104,10 @@ Content.Raw("<b>") + p("x") // <b><p>x</p>
 ```
 
 `DOCTYPE()` returns `Content` rather than `string` for this reason, so `DOCTYPE() + html(...)` still
-composes as markup. If you assigned it to a `string`, add `.ToString()`.
+composes as markup. If you assigned it to a `string`, add `.ToString()`. It has also **moved from
+`Elements` to `Contents`** — it is a document type declaration, not an element. Unqualified
+`DOCTYPE()` is unaffected as long as you have the standard using directives; only
+`Elements.DOCTYPE()` or `e.DOCTYPE()` need changing.
 
 **Accumulating in a `string` no longer compiles**, which is deliberate — it used to re-encode
 everything it had already collected on each pass. Accumulate in a `Content`:
@@ -163,9 +166,10 @@ Consumers on .NET Core 3.0+, .NET 5+, Mono 6.4+, Xamarin and Unity 2021.2+ are u
   response headers.
 - Value types convert to `Content` implicitly: every numeric type, `char`, `bool`, `DateTime`, `DateTimeOffset`, `TimeSpan`, `Guid` and any `enum`.
 - `Content` supports `+`, so siblings compose without a wrapper element, and `+=` accumulates.
-- New `Contents` static class, imported like `Elements` and `Attributes`: `raw(s)` is the unqualified
-  spelling of `Content.Raw(s)`. Add `<Using Include="Markupolation.Contents" Static="True" />` if you
-  list the using directives yourself instead of enabling `ImplicitUsings`.
+- New `Contents` static class, imported like `Elements` and `Attributes`, holding the markup that is
+  neither an element nor an attribute: `DOCTYPE()` and `raw(s)`, the unqualified spelling of
+  `Content.Raw(s)`. Add `<Using Include="Markupolation.Contents" Static="True" />` if you list the
+  using directives yourself instead of enabling `ImplicitUsings`.
 - `Markupolation.Extensions` gained `If` on `bool`, and a lazy `Func<Content>` form of every
   conditional so an unused branch is not built. See the README.
 

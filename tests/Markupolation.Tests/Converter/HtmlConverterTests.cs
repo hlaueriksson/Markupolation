@@ -15,6 +15,7 @@ public class HtmlConverterTests
         using static Markupolation.Elements;
         using static Markupolation.Attributes;
         using static Markupolation.EventHandlerContentAttributes;
+        using static Markupolation.Contents;
         using e = Markupolation.Elements;
         using a = Markupolation.Attributes;
         using E = Markupolation.Element;
