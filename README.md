@@ -810,8 +810,18 @@ To opt out, say so:
 
 | | |
 |---|---|
-| `Content.Raw(s)` | the string is already markup — use as is |
+| `raw(s)` | the string is already markup — use as is |
+| `Content.Raw(s)` | the same thing, qualified — `raw` is just the unqualified spelling |
 | `new Content(s)`, `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
+
+`raw` is imported with a static using like the elements are, so it reads inline:
+
+```cs
+body(raw("<!-- content here -->"), p("Hello, World!"))
+```
+
+That comment is the case worth remembering — it looks like text, but it is markup, so without
+`raw` it shows up on the page as literal text.
 
 One thing to watch for: markup assembled into a `string` before it reaches an element is encoded
 whole, because the library can no longer tell which parts you wrote.
@@ -921,6 +931,7 @@ These using directives are applied automatically:
   <Using Include="Markupolation.Attributes" Alias="a" />
   <Using Include="Markupolation.Attribute" Alias="A" />
   <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
+  <Using Include="Markupolation.Contents" Static="True" />
 </ItemGroup>
 ```
 
@@ -937,6 +948,7 @@ global using static Markupolation.Attributes;
 global using a = Markupolation.Attributes;
 global using A = Markupolation.Attribute;
 global using static Markupolation.EventHandlerContentAttributes;
+global using static Markupolation.Contents;
 ```
 
 ## Performance

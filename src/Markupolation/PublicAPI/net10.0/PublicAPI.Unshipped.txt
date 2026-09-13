@@ -9,6 +9,7 @@ Markupolation.Content.AppendFormatted<T>(T value) -> void
 Markupolation.Content.AppendFormatted<T>(T value, string? format) -> void
 Markupolation.Content.AppendLiteral(string! value) -> void
 Markupolation.Content.Content(int literalLength, int formattedCount) -> void
+Markupolation.Contents
 static Markupolation.Content.Raw(string? value) -> Markupolation.Content!
 static Markupolation.Content.explicit operator string!(Markupolation.Content! value) -> string!
 static Markupolation.Content.implicit operator Markupolation.Content!(System.DateTime value) -> Markupolation.Content!
@@ -30,4 +31,5 @@ static Markupolation.Content.implicit operator Markupolation.Content!(uint value
 static Markupolation.Content.implicit operator Markupolation.Content!(ulong value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(ushort value) -> Markupolation.Content!
 static Markupolation.Content.operator +(Markupolation.Content? left, Markupolation.Content? right) -> Markupolation.Content!
+static Markupolation.Contents.raw(string? value) -> Markupolation.Content!
 static Markupolation.Elements.DOCTYPE() -> Markupolation.Content!

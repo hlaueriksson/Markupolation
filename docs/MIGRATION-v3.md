@@ -50,15 +50,16 @@ div(Content.Raw(markup))     // opt out
 An HTML **comment** is the same case, and an easy one to miss — it looks like text but is markup:
 
 ```cs
-body("<!-- content here -->")                 // shows up on the page as literal text
-body(Content.Raw("<!-- content here -->"))    // a comment
+body("<!-- content here -->")         // shows up on the page as literal text
+body(raw("<!-- content here -->"))    // a comment
 ```
 
 ### Opting out
 
 | | |
 |---|---|
-| `Content.Raw(s)` | the string is already markup — use as is |
+| `raw(s)` | the string is already markup — use as is |
+| `Content.Raw(s)` | the same thing, qualified — `raw` is just the unqualified spelling |
 | `new Content(s)` | raw, like `Raw` — this is how `Element` wraps markup verbatim |
 | `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
 
@@ -162,6 +163,9 @@ Consumers on .NET Core 3.0+, .NET 5+, Mono 6.4+, Xamarin and Unity 2021.2+ are u
   response headers.
 - Value types convert to `Content` implicitly: every numeric type, `char`, `bool`, `DateTime`, `DateTimeOffset`, `TimeSpan`, `Guid` and any `enum`.
 - `Content` supports `+`, so siblings compose without a wrapper element, and `+=` accumulates.
+- New `Contents` static class, imported like `Elements` and `Attributes`: `raw(s)` is the unqualified
+  spelling of `Content.Raw(s)`. Add `<Using Include="Markupolation.Contents" Static="True" />` if you
+  list the using directives yourself instead of enabling `ImplicitUsings`.
 - `Markupolation.Extensions` gained `If` on `bool`, and a lazy `Func<Content>` form of every
   conditional so an unused branch is not built. See the README.
 

@@ -9,5 +9,6 @@
     <Using Include="Markupolation.Attributes" Alias="a" />
     <Using Include="Markupolation.Attribute" Alias="A" />
     <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
+    <Using Include="Markupolation.Contents" Static="True" />
   </ItemGroup>
 </Project>

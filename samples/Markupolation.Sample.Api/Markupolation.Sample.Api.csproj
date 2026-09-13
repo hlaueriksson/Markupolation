@@ -27,6 +27,7 @@
     <Using Include="Markupolation.Attributes" Alias="a" />
     <Using Include="Markupolation.Attribute" Alias="A" />
     <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
+    <Using Include="Markupolation.Contents" Static="True" />
     <Using Include="Markupolation.AspNetCore" />
     <Using Include="Markupolation.Htmx" Static="True" />
     <Using Include="Markupolation.Htmx" Alias="hx" />

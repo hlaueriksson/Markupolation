@@ -31,6 +31,7 @@
     <Using Include="Markupolation.Elements" Static="True" />
     <Using Include="Markupolation.Attributes" Static="True" />
     <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
+    <Using Include="Markupolation.Contents" Static="True" />
     <Using Include="Markupolation.Htmx" Alias="hx" />
   </ItemGroup>
 

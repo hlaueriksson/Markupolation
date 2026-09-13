@@ -42,6 +42,14 @@ public class EncodingTests
         div(Content.Raw("<b>bold</b>")).ToString()
             .Should().Be("<div><b>bold</b></div>");
 
+        // raw is the unqualified spelling, imported with a static using like the elements are.
+        div(raw("<b>bold</b>")).ToString()
+            .Should().Be("<div><b>bold</b></div>");
+
+        // An HTML comment is the case that catches people out: it looks like text, but is markup.
+        body(raw("<!-- content here -->")).ToString()
+            .Should().Be("<body><!-- content here --></body>");
+
         // The string constructors are raw too - that is how Element wraps markup verbatim.
         div(new Content("<b>bold</b>")).ToString()
             .Should().Be("<div><b>bold</b></div>");
