@@ -31,5 +31,6 @@ static Markupolation.Content.implicit operator Markupolation.Content!(uint value
 static Markupolation.Content.implicit operator Markupolation.Content!(ulong value) -> Markupolation.Content!
 static Markupolation.Content.implicit operator Markupolation.Content!(ushort value) -> Markupolation.Content!
 static Markupolation.Content.operator +(Markupolation.Content? left, Markupolation.Content? right) -> Markupolation.Content!
-static Markupolation.Contents.raw(string? value) -> Markupolation.Content!
 static Markupolation.Contents.DOCTYPE() -> Markupolation.Content!
+static Markupolation.Contents.comment(string? value) -> Markupolation.Content!
+static Markupolation.Contents.raw(string? value) -> Markupolation.Content!

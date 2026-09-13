@@ -814,14 +814,24 @@ To opt out, say so:
 | `Content.Raw(s)` | the same thing, qualified — `raw` is just the unqualified spelling |
 | `new Content(s)`, `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
 
-`raw` is imported with a static using like the elements are, so it reads inline:
+`raw` is imported with a static using like the elements are, so it reads inline.
+
+A **comment** is the case worth remembering: it looks like text, but it is markup, so writing it as
+text puts it on the page. `comment` writes one, and unlike `raw` it is safe for text you did not
+write yourself:
 
 ```cs
-body(raw("<!-- content here -->"), p("Hello, World!"))
+body(comment("content here"), p("Hello, World!"))
+// <body><!--content here--><p>Hello, World!</p></body>
 ```
 
-That comment is the case worth remembering — it looks like text, but it is markup, so without
-`raw` it shows up on the page as literal text.
+Encoding cannot make comment text safe — the parser does not decode character references inside a
+comment, so an escaped `-->` would still end it early and let the rest into the document as markup.
+`comment` breaks up the sequences the specification forbids instead:
+
+```cs
+comment("a --> b")   // <!--a - -> b-->
+```
 
 One thing to watch for: markup assembled into a `string` before it reaches an element is encoded
 whole, because the library can no longer tell which parts you wrote.

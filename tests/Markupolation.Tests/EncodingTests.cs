@@ -1,5 +1,7 @@
 using System;
 using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 using e = Markupolation.Elements;
 using FluentAssertions;
 using NUnit.Framework;
@@ -8,6 +10,66 @@ namespace Markupolation.Tests;
 
 public class EncodingTests
 {
+    [Test]
+    public void Comment_writes_a_comment()
+    {
+        comment("Add your site or application content here").ToString()
+            .Should().Be("<!--Add your site or application content here-->");
+
+        body(comment("content here"), p("Hello")).ToString()
+            .Should().Be("<body><!--content here--><p>Hello</p></body>");
+
+        // Empty is an empty comment, the way div(null) is an empty div.
+        comment(null).ToString().Should().Be("<!---->");
+        comment("").ToString().Should().Be("<!---->");
+    }
+
+    [Test]
+    public void Comment_neutralises_what_would_end_it_early()
+    {
+        // Encoding cannot help here - the parser does not decode character references inside a
+        // comment - so the sequences the spec forbids are broken up with a space instead. This is
+        // what makes comment() safe for text that came from a user, where raw() is not.
+        comment("a --> b").ToString().Should().Be("<!--a - -> b-->");
+        comment("a <!-- b").ToString().Should().Be("<!--a <!- - b-->");
+        comment("a --!> b").ToString().Should().Be("<!--a - -!> b-->");
+        comment("---").ToString().Should().Be("<!--- - --->");
+
+        // Must not start with > or ->, and must not end with <!-.
+        comment(">x").ToString().Should().Be("<!-- >x-->");
+        comment("->x").ToString().Should().Be("<!-- ->x-->");
+        comment("a<!-").ToString().Should().Be("<!--a<!- -->");
+
+        // A lone trailing dash is fine as it is; the parser gives it back.
+        comment("x-").ToString().Should().Be("<!--x--->");
+    }
+
+    [TestCase("plain")]
+    [TestCase("a --> b")]
+    [TestCase("a <!-- b")]
+    [TestCase("a --!> b")]
+    [TestCase("---")]
+    [TestCase(">x")]
+    [TestCase("->x")]
+    [TestCase("a<!-")]
+    [TestCase("x-")]
+    [TestCase("</script><img src=x onerror=alert(1)>")]
+    public void Comment_stays_one_comment_through_a_real_parser(string text)
+    {
+        // The point of the neutralising: whatever the text, the document still has exactly one
+        // comment node and nothing has escaped into the markup around it.
+        var parser = new AngleSharp.Html.Parser.HtmlParser();
+        var document = parser.ParseDocument(body(comment(text), p("after")).ToString());
+
+        var comments = document.Body!.ChildNodes
+            .Where(x => x.NodeType == AngleSharp.Dom.NodeType.Comment).ToList();
+
+        comments.Should().ContainSingle();
+        document.Body.QuerySelectorAll("img").Should().BeEmpty();
+        document.Body.QuerySelectorAll("p").Should().ContainSingle();
+        document.Body.QuerySelector("p")!.TextContent.Should().Be("after");
+    }
+
     [Test]
     public void Text_is_encoded()
     {
@@ -47,6 +109,7 @@ public class EncodingTests
             .Should().Be("<div><b>bold</b></div>");
 
         // An HTML comment is the case that catches people out: it looks like text, but is markup.
+        // comment() is the way to write one; raw is the escape hatch under it.
         body(raw("<!-- content here -->")).ToString()
             .Should().Be("<body><!-- content here --></body>");
 

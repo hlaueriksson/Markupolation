@@ -39,7 +39,7 @@ public class PlaygroundTests
                 body(
 
                     // A comment is markup, not text, so it has to say so under escape-by-default.
-                    Content.Raw("<!-- Add your site or application content here -->"),
+                    comment(" Add your site or application content here "),
                     p("Hello world! This is HTML5 Boilerplate."),
                     script(src("js/app.js"))
                 )
