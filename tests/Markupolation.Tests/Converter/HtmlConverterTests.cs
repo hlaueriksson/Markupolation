@@ -26,15 +26,20 @@ public class HtmlConverterTests
     private static string Convert(string html, ConvertOptions? options = null) =>
         HtmlConverter.Convert(html, options ?? new ConvertOptions()).ReplaceLineEndings("\n");
 
+    // A multi-line raw string literal keeps the newlines of the source file itself, which is
+    // CRLF when the repository is checked out with core.autocrlf=true, so the expectations
+    // need the same normalisation as the actual value.
+    private static string Lf(string source) => source.ReplaceLineEndings("\n");
+
     [Test]
     public void Elements_attributes_and_text()
     {
         Convert("""<div class="card"><h1 title="t">Hello</h1></div>""")
-            .Should().Be("""
+            .Should().Be(Lf("""
                 div(class_("card"),
                     h1(a.title("t"), "Hello")
                 )
-                """);
+                """));
     }
 
     [Test]
@@ -42,12 +47,12 @@ public class HtmlConverterTests
     {
         // Void-ness and boolean-ness come from the generated metadata, not a list here.
         Convert("""<p><img src="/x.png" alt="X"><input type="checkbox" checked></p>""")
-            .Should().Be("""
+            .Should().Be(Lf("""
                 p(
                     img(src("/x.png"), alt("X")),
                     input(type("checkbox"), checked_())
                 )
-                """);
+                """));
     }
 
     [Test]
