@@ -51,13 +51,6 @@ public class EncodingTests
     }
 
     [Test]
-    public void Text_encodes_explicitly()
-    {
-        Content.Text("<b>").ToString().Should().Be("&lt;b&gt;");
-        Content.Text(null).ToString().Should().BeEmpty();
-    }
-
-    [Test]
     public void Encoding_leaves_ordinary_text_untouched()
     {
         // The common case must not allocate a new string; it also must not change.
@@ -235,16 +228,21 @@ public class EncodingTests
     }
 
     [Test]
-    public void Text_behaves_exactly_like_converting_a_string()
+    public void A_converted_string_keeps_its_original_for_a_raw_text_element()
     {
-        // Content.Text documents itself as "the same as converting a string to Content", so the
-        // two must agree everywhere - including inside a raw text element, where Content keeps
-        // the original to render instead of the encoded form.
-        div("a > b").ToString().Should().Be(div(Content.Text("a > b")).ToString());
-        e.style("a > b").ToString().Should().Be(e.style(Content.Text("a > b")).ToString());
+        // A string becomes Content as text, encoded lazily, and Content keeps the original - which
+        // is what a raw text element renders instead of the encoded form.
+        div((Content)"a > b").ToString().Should().Be("<div>a &gt; b</div>");
+        e.style((Content)"a > b").ToString().Should().Be("<style>a > b</style>");
 
-        div(Content.Text("a > b")).ToString().Should().Be("<div>a &gt; b</div>");
-        e.style(Content.Text("a > b")).ToString().Should().Be("<style>a > b</style>");
+        // Spelling the conversion out changes nothing; it is the same conversion either way.
+        div("a > b").ToString().Should().Be(div((Content)"a > b").ToString());
+        e.style("a > b").ToString().Should().Be(e.style((Content)"a > b").ToString());
+
+        // A null string is empty content, not a throw.
+        string? none = null;
+        div(none!).ToString().Should().Be("<div></div>");
+        ((Content)"<b>").ToString().Should().Be("&lt;b&gt;");
     }
 
     [Test]

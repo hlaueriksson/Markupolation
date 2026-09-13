@@ -141,10 +141,10 @@ public class FragmentTests
     public void Concatenated_text_still_falls_back_in_a_raw_text_element()
     {
         // Both sides are still text, so script and style get the original to render.
-        script(Content.Text("if (a < b") + Content.Text(" && c) x();")).ToString()
+        script((Content)"if (a < b" + (Content)" && c) x();").ToString()
             .Should().Be("<script>if (a < b && c) x();</script>");
 
-        div(Content.Text("if (a < b") + Content.Text(" && c) x();")).ToString()
+        div((Content)"if (a < b" + (Content)" && c) x();").ToString()
             .Should().Be("<div>if (a &lt; b &amp;&amp; c) x();</div>");
     }
 

@@ -82,14 +82,6 @@ public partial record Content
     public static Content Raw(string? value) => new(value);
 
     /// <summary>
-    /// Encodes a string as text.
-    /// </summary>
-    /// <remarks>The same as converting a <see cref="string"/> to <see cref="Content"/>.</remarks>
-    /// <param name="value">Text.</param>
-    /// <returns><see cref="Content"/></returns>
-    public static Content Text(string? value) => FromText(value);
-
-    /// <summary>
     /// Determines whether two pieces of content have the same value.
     /// </summary>
     /// <remarks>

@@ -59,7 +59,6 @@ body(Content.Raw("<!-- content here -->"))    // a comment
 | | |
 |---|---|
 | `Content.Raw(s)` | the string is already markup — use as is |
-| `Content.Text(s)` | encode explicitly; the same as converting a string to `Content` |
 | `new Content(s)` | raw, like `Raw` — this is how `Element` wraps markup verbatim |
 | `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
 

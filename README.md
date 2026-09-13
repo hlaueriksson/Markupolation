@@ -811,7 +811,6 @@ To opt out, say so:
 | | |
 |---|---|
 | `Content.Raw(s)` | the string is already markup — use as is |
-| `Content.Text(s)` | encode explicitly; the same as an implicit conversion |
 | `new Content(s)`, `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
 
 One thing to watch for: markup assembled into a `string` before it reaches an element is encoded
