@@ -877,7 +877,7 @@ Content.Raw("<b>") + p("x")   // <b><p>x</p>
 `+=` accumulates, which is what a `string` used to be used for:
 
 ```cs
-Content html = Content.Raw(null);
+Content html = Content.Empty;
 
 foreach (var i in items)
 {

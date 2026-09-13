@@ -127,7 +127,7 @@ public class FragmentTests
     public void Content_accumulates()
     {
         // += on a Content is what replaces accumulating markup in a string.
-        var list = Content.Raw(null);
+        var list = Content.Empty;
 
         foreach (var i in new[] { 1, 2 })
         {

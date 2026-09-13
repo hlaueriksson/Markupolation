@@ -58,6 +58,19 @@ body(comment("content here"))     // a comment
 character references are not decoded inside a comment, so an escaped `-->` would still end it early.
 `comment` breaks up the forbidden sequences instead, so it is safe for text you did not write.
 
+A **character reference** is the third of these, and the most common one in an existing template:
+`&` is encoded, so `&nbsp;` arrives on the page as the literal text `&nbsp;`.
+
+```cs
+div("&nbsp;")
+// 2.x  a non-breaking space
+// 3.0  &amp;nbsp;   <-- reads as "&nbsp;" on the page
+```
+
+Write the character instead. Encoding only touches `&`, `<`, `>` and `"`, so `—`, `©` and `×` pass
+through untouched, and a non-breaking space is `"\u00a0"`. `raw("&nbsp;")` also works, but keep it
+for text you wrote yourself.
+
 ### Opting out
 
 | | |
@@ -120,7 +133,7 @@ everything it had already collected on each pass. Accumulate in a `Content`:
 var html = "";                      // 2.x
 foreach (var i in items) html += li(i);
 
-Content html = Content.Raw(null);   // 3.0
+Content html = Content.Empty;    // 3.0
 foreach (var i in items) html += li(i);
 ```
 

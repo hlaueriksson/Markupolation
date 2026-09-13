@@ -44,6 +44,16 @@ public partial record Content
     }
 
     /// <summary>
+    /// Gets empty content.
+    /// </summary>
+    /// <remarks>
+    /// One shared instance. <see cref="Content"/> never changes after it is constructed, so every
+    /// branch that renders nothing can return this rather than allocate another - which is what the
+    /// whole <c>If*</c> family does for the branch it does not take.
+    /// </remarks>
+    public static Content Empty { get; } = new(string.Empty);
+
+    /// <summary>
     /// Gets content value.
     /// </summary>
     public string? Value
