@@ -213,6 +213,13 @@ public static class Htmx
     public static Attribute hx_vals(string value) => new("hx-vals", value);
 
     /// <summary>
+    /// Adds values dynamically to parameters. Deprecated in htmx in favor of <see cref="hx_vals"/>.
+    /// </summary>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>hx-vars="{value}"</c></returns>
+    public static Attribute hx_vars(string value) => new("hx-vars", value);
+
+    /// <summary>
     /// Forces elements to validate themselves before a request.
     /// </summary>
     /// <param name="value">Attribute value.</param>

@@ -52,10 +52,12 @@ app.MapGet("/counter/{count}", (HttpRequest request, int count) =>
         : html(body(mark(count)))));
 ```
 
-Request: `IsHtmx()`, `IsHtmxHistoryRestore()`, `HtmxTarget()`, `HtmxTrigger()`.
+Request: `IsHtmx()`, `IsHtmxBoosted()`, `IsHtmxHistoryRestore()`, `HtmxTarget()`, `HtmxTrigger()`,
+`HtmxTriggerName()`, `HtmxCurrentUrl()`, `HtmxPrompt()`.
 
-Response: `HxTrigger()`, `HxRetarget()`, `HxReswap()`, `HxReselect()`, `HxPushUrl()`,
-`HxReplaceUrl()`, `HxRedirect()`, `HxRefresh()`.
+Response: `HxTrigger()`, `HxTriggerAfterSettle()`, `HxTriggerAfterSwap()`, `HxRetarget()`,
+`HxReswap()`, `HxReselect()`, `HxPushUrl()`, `HxReplaceUrl()`, `HxRedirect()`, `HxLocation()`,
+`HxRefresh()`.
 
 ### A note on encoding
 

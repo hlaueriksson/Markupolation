@@ -119,12 +119,26 @@ public class HtmlResultTests
     {
         var context = Context();
         context.Request.Headers["HX-Request"] = "true";
+        context.Request.Headers["HX-Boosted"] = "true";
         context.Request.Headers["HX-Target"] = "#result";
+        context.Request.Headers["HX-Trigger-Name"] = "save";
+        context.Request.Headers["HX-Current-URL"] = "https://example.com/page";
+        context.Request.Headers["HX-Prompt"] = "yes";
+        context.Request.Headers["HX-History-Restore-Request"] = "true";
 
         context.Request.IsHtmx().Should().BeTrue();
+        context.Request.IsHtmxBoosted().Should().BeTrue();
+        context.Request.IsHtmxHistoryRestore().Should().BeTrue();
         context.Request.HtmxTarget().Should().Be("#result");
         context.Request.HtmxTrigger().Should().BeNull();
-        Context().Request.IsHtmx().Should().BeFalse();
+        context.Request.HtmxTriggerName().Should().Be("save");
+        context.Request.HtmxCurrentUrl().Should().Be("https://example.com/page");
+        context.Request.HtmxPrompt().Should().Be("yes");
+
+        var plain = Context();
+        plain.Request.IsHtmx().Should().BeFalse();
+        plain.Request.IsHtmxBoosted().Should().BeFalse();
+        plain.Request.IsHtmxHistoryRestore().Should().BeFalse();
     }
 
     [Test]
@@ -133,13 +147,28 @@ public class HtmlResultTests
         var context = Context();
 
         context.Response.HxTrigger("refresh");
+        context.Response.HxTrigger("{\"showMessage\":\"Here Is A Message\"}");
+        context.Response.HxTriggerAfterSettle("settled");
+        context.Response.HxTriggerAfterSwap("swapped");
         context.Response.HxRetarget("#result");
         context.Response.HxReswap("outerHTML");
+        context.Response.HxReselect("#content");
+        context.Response.HxPushUrl("/page/2");
+        context.Response.HxReplaceUrl("/page/3");
+        context.Response.HxRedirect("/login");
+        context.Response.HxLocation("/details/1");
         context.Response.HxRefresh();
 
-        context.Response.Headers["HX-Trigger"].ToString().Should().Be("refresh");
+        context.Response.Headers["HX-Trigger"].ToString().Should().Be("{\"showMessage\":\"Here Is A Message\"}");
+        context.Response.Headers["HX-Trigger-After-Settle"].ToString().Should().Be("settled");
+        context.Response.Headers["HX-Trigger-After-Swap"].ToString().Should().Be("swapped");
         context.Response.Headers["HX-Retarget"].ToString().Should().Be("#result");
         context.Response.Headers["HX-Reswap"].ToString().Should().Be("outerHTML");
+        context.Response.Headers["HX-Reselect"].ToString().Should().Be("#content");
+        context.Response.Headers["HX-Push-Url"].ToString().Should().Be("/page/2");
+        context.Response.Headers["HX-Replace-Url"].ToString().Should().Be("/page/3");
+        context.Response.Headers["HX-Redirect"].ToString().Should().Be("/login");
+        context.Response.Headers["HX-Location"].ToString().Should().Be("/details/1");
         context.Response.Headers["HX-Refresh"].ToString().Should().Be("true");
     }
 

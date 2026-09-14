@@ -36,7 +36,9 @@ Targeting and swapping: `hx_target`, `hx_swap`, `hx_swap_oob`, `hx_select`, `hx_
 Everything else: `hx_boost`, `hx_confirm`, `hx_disable`, `hx_disabled_elt`, `hx_disinherit`,
 `hx_encoding`, `hx_ext`, `hx_headers`, `hx_history`, `hx_history_elt`, `hx_include`,
 `hx_indicator`, `hx_inherit`, `hx_on`, `hx_params`, `hx_preserve`, `hx_prompt`, `hx_push_url`,
-`hx_replace_url`, `hx_request`, `hx_sync`, `hx_trigger`, `hx_vals`, `hx_validate`.
+`hx_replace_url`, `hx_request`, `hx_sync`, `hx_trigger`, `hx_vals`, `hx_vars`, `hx_validate`.
+
+`hx_vars` is deprecated in htmx in favor of `hx_vals`.
 
 `hx_disable()`, `hx_history_elt()` and `hx_preserve()` take no value and render bare.
 
