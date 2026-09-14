@@ -16,6 +16,7 @@ public class HtmxAttributeTests
         hx_swap_oob("true").ToString().Should().Be("hx-swap-oob=\"true\"");
         hx_push_url("/page/2").ToString().Should().Be("hx-push-url=\"/page/2\"");
         hx_disabled_elt("this").ToString().Should().Be("hx-disabled-elt=\"this\"");
+        hx_vars("{\"a\":1}").ToString().Should().Be("hx-vars=\"{&quot;a&quot;:1}\"");
     }
 
     [Test]

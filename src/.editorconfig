@@ -22,3 +22,11 @@ dotnet_diagnostic.CA2225.severity = none
 # Field should not begin with an underscore. _camelCase is the .NET convention and the style
 # already used elsewhere in this repo (for example the benchmark fixtures).
 dotnet_diagnostic.SA1309.severity = none
+
+# Change the return type of method '...Url()' from 'string' to 'System.Uri'. Every htmx header
+# and attribute value in this library is a plain string -- some hold URLs, some hold "false",
+# some hold JSON -- and the caller composes them; introducing Uri for the one member whose name
+# happens to contain "Url" (HtmxCurrentUrl, mirroring the HX-Current-URL header) would be
+# inconsistent with every other member here (HxPushUrl, HxReplaceUrl, hx_push_url, ... all take
+# or return plain string).
+dotnet_diagnostic.CA1055.severity = none
