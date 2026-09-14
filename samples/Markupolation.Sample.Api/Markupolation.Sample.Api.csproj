@@ -30,7 +30,6 @@
     <Using Include="Markupolation.Contents" Static="True" />
     <Using Include="Markupolation.AspNetCore" />
     <Using Include="Markupolation.Htmx" Static="True" />
-    <Using Include="Markupolation.Htmx" Alias="hx" />
   </ItemGroup>
 
   <ItemGroup>

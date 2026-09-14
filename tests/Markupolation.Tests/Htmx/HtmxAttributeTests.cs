@@ -52,9 +52,4 @@ public class HtmxAttributeTests
             .Should().Be("<button class=\"btn\" hx-get=\"/counter/2\" hx-target=\"#result\" hx-swap=\"outerHTML\">Click me</button>");
     }
 
-    [Test]
-    public void The_alias_reads_the_same_as_the_static_import()
-    {
-        hx.hx_get("/x").ToString().Should().Be(hx_get("/x").ToString());
-    }
 }
