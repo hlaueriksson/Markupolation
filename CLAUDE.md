@@ -17,6 +17,7 @@ Two NuGet packages ship from `src/`:
 dotnet build                                   # build the solution (Markupolation.slnx)
 dotnet test tests/Markupolation.Tests          # run the unit tests (test.bat does the same)
 dotnet test tests/Markupolation.Tests --filter "FullyQualifiedName~ElementsTests.VoidElement"   # a single test
+coverage.bat                                   # dotnet test with coverage collection -> HTML + text summary report
 pack.bat                                       # dotnet build -c Release /p:TF_BUILD=true -> NuGet packages
 nuget-local.bat                                # publish built packages into a local ./packages feed
 dotnet run --project tests/Markupolation.Benchmark -c Release   # BenchmarkDotNet comparison vs Razor Slices, HtmlTags, HyperTextExpression
