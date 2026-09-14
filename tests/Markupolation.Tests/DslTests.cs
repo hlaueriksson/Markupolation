@@ -14,7 +14,7 @@ public class DslTests
     [Test]
     public void Rendered_inline()
     {
-        var links = new[] { new Link("#", "Foo", true), new Link("#", "Bar", false) };
+        Link[] links = [new("#", "Foo", true), new("#", "Bar", false)];
 
         links.Each((x, index) => a(href(x.Url), id($"link{index}"), x.IfMatch(x => x.Active, x => class_("active")), x.Title)).ToString()
             .Should().Be("<a href=\"#\" id=\"link0\" class=\"active\">Foo</a><a href=\"#\" id=\"link1\">Bar</a>");
@@ -24,29 +24,31 @@ public class DslTests
     [Test]
     public void Rendered_with_a_Func()
     {
-        var links = new[] { new Link("#", "Foo", true), new Link("#", "Bar", false) };
+        Link[] links = [new("#", "Foo", true), new("#", "Bar", false)];
 
         Func<Link, Content> render = link => a(href(link.Url), link.Active.If(class_("active")), link.Title);
 
-        links.Each(render).ToString().Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
+        links.Each(render).ToString()
+            .Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
     }
 
     /// <summary>Render with a local function.</summary>
     [Test]
     public void Rendered_with_a_local_function()
     {
-        var links = new[] { new Link("#", "Foo", true), new Link("#", "Bar", false) };
+        Link[] links = [new("#", "Foo", true), new("#", "Bar", false)];
 
         static Content Render(Link link) => a(href(link.Url), link.Active.If(class_("active")), link.Title);
 
-        links.Each(Render).ToString().Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
+        links.Each(Render).ToString()
+            .Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
     }
 
     /// <summary>Render with a local function, using a switch expression for more than one condition.</summary>
     [Test]
     public void Rendered_with_a_local_function_and_switch_expression()
     {
-        var links = new[] { new Link("#", "Foo", true), new Link("#", "Bar", false) };
+        Link[] links = [new("#", "Foo", true), new("#", "Bar", false)];
 
         static Content Render(Link link) => link switch
         {
@@ -54,25 +56,28 @@ public class DslTests
             _ => a(href(link.Url), link.Title),
         };
 
-        links.Each(Render).ToString().Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
+        links.Each(Render).ToString()
+            .Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
     }
 
     /// <summary>Render via an implicit operator conversion from Link to Content.</summary>
     [Test]
     public void Rendered_with_an_implicit_operator()
     {
-        var links = new[] { new Link("#", "Foo", true), new Link("#", "Bar", false) };
+        Link[] links = [new("#", "Foo", true), new("#", "Bar", false)];
 
-        links.Each(link => link).ToString().Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
+        links.Each(link => link).ToString()
+            .Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
     }
 
     /// <summary>Render via an extension method on Link.</summary>
     [Test]
     public void Rendered_with_an_extension_method()
     {
-        var links = new[] { new Link("#", "Foo", true), new Link("#", "Bar", false) };
+        Link[] links = [new("#", "Foo", true), new("#", "Bar", false)];
 
-        links.Each(link => link.ToContent()).ToString().Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
+        links.Each(link => link.ToContent()).ToString()
+            .Should().Be("<a href=\"#\" class=\"active\">Foo</a><a href=\"#\">Bar</a>");
     }
 }
 
