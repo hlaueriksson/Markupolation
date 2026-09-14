@@ -39,7 +39,7 @@ public class PlaygroundTests
                 body(
 
                     // A comment is markup, not text, so it has to say so under escape-by-default.
-                    Content.Raw("<!-- Add your site or application content here -->"),
+                    comment(" Add your site or application content here "),
                     p("Hello world! This is HTML5 Boilerplate."),
                     script(src("js/app.js"))
                 )
@@ -48,7 +48,7 @@ public class PlaygroundTests
         using var client = new HttpClient();
         var expected = await client.GetStringAsync("https://raw.githubusercontent.com/h5bp/html5-boilerplate/main/src/index.html");
 
-        var diffs = DiffBuilder.Compare(expected).WithTest(actual).Build().ToList();
+        var diffs = DiffBuilder.Compare(expected).WithTest(actual.ToString()).Build().ToList();
         diffs.Should().BeEmpty();
     }
 }

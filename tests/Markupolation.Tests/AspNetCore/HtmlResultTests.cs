@@ -157,8 +157,8 @@ public class HtmlResultTests
     [Test]
     public async Task A_whole_document_is_not_encoded()
     {
-        // DOCTYPE() + html(...) is a string, so without the string overloads it would convert to
-        // Content and the entire document would come back encoded.
+        // DOCTYPE() returns Content and + keeps it markup, so the document arrives as markup
+        // rather than as a string that would be encoded on the way back in.
         var context = Context();
 
         await Results.Extensions.Html(DOCTYPE() + html(body(h1("Hi")))).ExecuteAsync(context);
@@ -167,9 +167,10 @@ public class HtmlResultTests
     }
 
     [Test]
-    public async Task A_document_passed_as_content_is_still_encoded()
+    public async Task Text_inside_a_document_is_still_encoded()
     {
-        // The string overload is the exception, not a hole: text arriving as Content still encodes.
+        // The API takes Content, so encoding has already happened inside the elements - and the
+        // response writes what they produced, without a second pass.
         var context = Context();
 
         await Results.Extensions.Html(div("<script>")).ExecuteAsync(context);

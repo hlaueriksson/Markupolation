@@ -21,7 +21,7 @@ public static class ContentExtensions
     {
         if (values == null || content == null)
         {
-            return string.Empty;
+            return Content.Empty;
         }
 
         return Join(values, content);
@@ -38,7 +38,7 @@ public static class ContentExtensions
     {
         if (values == null || content == null)
         {
-            return string.Empty;
+            return Content.Empty;
         }
 
         return Join(values, content);
@@ -52,7 +52,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content If(this bool condition, Content then)
     {
-        return condition ? then : string.Empty;
+        return condition ? then : Content.Empty;
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content If(this bool condition, Func<Content> then)
     {
-        return condition && then != null ? then() : string.Empty;
+        return condition ? Invoke(then) : Content.Empty;
     }
 
     /// <summary>
@@ -88,9 +88,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content If(this bool condition, Func<Content> then, Func<Content> otherwise)
     {
-        return condition
-            ? then != null ? then() : string.Empty
-            : otherwise != null ? otherwise() : string.Empty;
+        return condition ? Invoke(then) : Invoke(otherwise);
     }
 
     /// <summary>
@@ -102,7 +100,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNull<T>(this T value, Content then)
     {
-        return value == null ? then : string.Empty;
+        return value == null ? then : Content.Empty;
     }
 
     /// <summary>
@@ -114,7 +112,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNull<T>(this T value, Func<Content> then)
     {
-        return value == null && then != null ? then() : string.Empty;
+        return value == null ? Invoke(then) : Content.Empty;
     }
 
     /// <summary>
@@ -127,7 +125,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNull<T>(this T value, Content then, Func<T, Content> otherwise)
     {
-        return value == null ? then : otherwise != null ? otherwise(value) : string.Empty;
+        return value == null ? then : Invoke(otherwise, value);
     }
 
     /// <summary>
@@ -141,9 +139,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNull<T>(this T value, Func<Content> then, Func<T, Content> otherwise)
     {
-        return value == null
-            ? then != null ? then() : string.Empty
-            : otherwise != null ? otherwise(value) : string.Empty;
+        return value == null ? Invoke(then) : Invoke(otherwise, value);
     }
 
     /// <summary>
@@ -155,7 +151,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotNull<T>(this T value, Func<T, Content> then)
     {
-        return value != null && then != null ? then(value) : string.Empty;
+        return value != null ? Invoke(then, value) : Content.Empty;
     }
 
     /// <summary>
@@ -168,7 +164,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotNull<T>(this T value, Func<T, Content> then, Content otherwise)
     {
-        return value != null && then != null ? then(value) : value == null ? otherwise : string.Empty;
+        return value != null ? Invoke(then, value) : otherwise;
     }
 
     /// <summary>
@@ -182,7 +178,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotNull<T>(this T value, Func<T, Content> then, Func<Content> otherwise)
     {
-        return value != null && then != null ? then(value) : value == null && otherwise != null ? otherwise() : string.Empty;
+        return value != null ? Invoke(then, value) : Invoke(otherwise);
     }
 
     /// <summary>
@@ -193,7 +189,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNullOrEmpty(this string value, Content then)
     {
-        return string.IsNullOrEmpty(value) ? then : string.Empty;
+        return string.IsNullOrEmpty(value) ? then : Content.Empty;
     }
 
     /// <summary>
@@ -204,7 +200,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNullOrEmpty(this string value, Func<Content> then)
     {
-        return string.IsNullOrEmpty(value) && then != null ? then() : string.Empty;
+        return string.IsNullOrEmpty(value) ? Invoke(then) : Content.Empty;
     }
 
     /// <summary>
@@ -216,7 +212,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNullOrEmpty(this string value, Content then, Func<string, Content> otherwise)
     {
-        return string.IsNullOrEmpty(value) ? then : otherwise != null ? otherwise(value) : string.Empty;
+        return string.IsNullOrEmpty(value) ? then : Invoke(otherwise, value);
     }
 
     /// <summary>
@@ -229,9 +225,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNullOrEmpty(this string value, Func<Content> then, Func<string, Content> otherwise)
     {
-        return string.IsNullOrEmpty(value)
-            ? then != null ? then() : string.Empty
-            : otherwise != null ? otherwise(value) : string.Empty;
+        return string.IsNullOrEmpty(value) ? Invoke(then) : Invoke(otherwise, value);
     }
 
     /// <summary>
@@ -242,7 +236,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotNullOrEmpty(this string value, Func<string, Content> then)
     {
-        return !string.IsNullOrEmpty(value) && then != null ? then(value) : string.Empty;
+        return !string.IsNullOrEmpty(value) ? Invoke(then, value) : Content.Empty;
     }
 
     /// <summary>
@@ -254,9 +248,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotNullOrEmpty(this string value, Func<string, Content> then, Content otherwise)
     {
-        var any = !string.IsNullOrEmpty(value);
-
-        return any && then != null ? then(value) : !any ? otherwise : string.Empty;
+        return !string.IsNullOrEmpty(value) ? Invoke(then, value) : otherwise;
     }
 
     /// <summary>
@@ -269,9 +261,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotNullOrEmpty(this string value, Func<string, Content> then, Func<Content> otherwise)
     {
-        var any = !string.IsNullOrEmpty(value);
-
-        return any && then != null ? then(value) : !any && otherwise != null ? otherwise() : string.Empty;
+        return !string.IsNullOrEmpty(value) ? Invoke(then, value) : Invoke(otherwise);
     }
 
     /// <summary>
@@ -283,7 +273,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfEmpty<T>(this IEnumerable<T> values, Content then)
     {
-        return values?.Any() != true ? then : string.Empty;
+        return values?.Any() != true ? then : Content.Empty;
     }
 
     /// <summary>
@@ -295,7 +285,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfEmpty<T>(this IEnumerable<T> values, Func<Content> then)
     {
-        return values?.Any() != true && then != null ? then() : string.Empty;
+        return values?.Any() != true ? Invoke(then) : Content.Empty;
     }
 
     /// <summary>
@@ -308,7 +298,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfEmpty<T>(this IEnumerable<T> values, Content then, Func<IEnumerable<T>, Content> otherwise)
     {
-        return values?.Any() != true ? then : otherwise != null ? otherwise(values) : string.Empty;
+        return values?.Any() != true ? then : Invoke(otherwise, values);
     }
 
     /// <summary>
@@ -322,9 +312,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfEmpty<T>(this IEnumerable<T> values, Func<Content> then, Func<IEnumerable<T>, Content> otherwise)
     {
-        return values?.Any() != true
-            ? then != null ? then() : string.Empty
-            : otherwise != null ? otherwise(values) : string.Empty;
+        return values?.Any() != true ? Invoke(then) : Invoke(otherwise, values);
     }
 
     /// <summary>
@@ -336,7 +324,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotEmpty<T>(this IEnumerable<T> values, Func<IEnumerable<T>, Content> then)
     {
-        return values?.Any() == true && then != null ? then(values) : string.Empty;
+        return values?.Any() == true ? Invoke(then, values) : Content.Empty;
     }
 
     /// <summary>
@@ -349,9 +337,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotEmpty<T>(this IEnumerable<T> values, Func<IEnumerable<T>, Content> then, Content otherwise)
     {
-        var any = values?.Any() == true;
-
-        return any && then != null ? then(values!) : !any ? otherwise : string.Empty;
+        return values?.Any() == true ? Invoke(then, values) : otherwise;
     }
 
     /// <summary>
@@ -365,9 +351,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfNotEmpty<T>(this IEnumerable<T> values, Func<IEnumerable<T>, Content> then, Func<Content> otherwise)
     {
-        var any = values?.Any() == true;
-
-        return any && then != null ? then(values!) : !any && otherwise != null ? otherwise() : string.Empty;
+        return values?.Any() == true ? Invoke(then, values) : Invoke(otherwise);
     }
 
     /// <summary>
@@ -380,7 +364,7 @@ public static class ContentExtensions
     public static Content IfHasValue<T>(this T? value, Func<T, Content> then)
         where T : struct
     {
-        return value.HasValue && then != null ? then(value.Value) : string.Empty;
+        return value.HasValue ? Invoke(then, value.Value) : Content.Empty;
     }
 
     /// <summary>
@@ -394,7 +378,7 @@ public static class ContentExtensions
     public static Content IfHasValue<T>(this T? value, Func<T, Content> then, Content otherwise)
         where T : struct
     {
-        return value.HasValue && then != null ? then(value.Value) : !value.HasValue ? otherwise : string.Empty;
+        return value.HasValue ? Invoke(then, value.Value) : otherwise;
     }
 
     /// <summary>
@@ -409,7 +393,7 @@ public static class ContentExtensions
     public static Content IfHasValue<T>(this T? value, Func<T, Content> then, Func<Content> otherwise)
         where T : struct
     {
-        return value.HasValue && then != null ? then(value.Value) : !value.HasValue && otherwise != null ? otherwise() : string.Empty;
+        return value.HasValue ? Invoke(then, value.Value) : Invoke(otherwise);
     }
 
     /// <summary>
@@ -422,7 +406,7 @@ public static class ContentExtensions
     /// <returns><see cref="Content"/></returns>
     public static Content IfMatch<T>(this T value, Func<T, bool> predicate, Func<T, Content> then)
     {
-        return predicate != null && predicate(value) && then != null ? then(value) : string.Empty;
+        return predicate != null && predicate(value) ? Invoke(then, value) : Content.Empty;
     }
 
     /// <summary>
@@ -438,13 +422,21 @@ public static class ContentExtensions
     {
         if (predicate == null)
         {
-            return string.Empty;
+            return Content.Empty;
         }
 
-        var match = predicate(value);
-
-        return match && then != null ? then(value) : !match && otherwise != null ? otherwise(value) : string.Empty;
+        return predicate(value) ? Invoke(then, value) : Invoke(otherwise, value);
     }
+
+    /// <summary>
+    /// Calls a branch delegate, or renders nothing when there is none. Every <c>If*</c> overload is
+    /// null tolerant, and this is where that tolerance lives, so each body is left saying only which
+    /// branch it takes.
+    /// </summary>
+    private static Content Invoke(Func<Content>? content) => content != null ? content() : Content.Empty;
+
+    /// <inheritdoc cref="Invoke(Func{Content})"/>
+    private static Content Invoke<T>(Func<T, Content>? content, T value) => content != null ? content(value) : Content.Empty;
 
     private static Content Join<T>(IEnumerable<T> values, Func<T, Content> content)
     {

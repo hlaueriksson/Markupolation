@@ -37,6 +37,8 @@
     <Using Include="Markupolation.Elements" Alias="e" />
     <Using Include="Markupolation.Attributes" Static="True" />
     <Using Include="Markupolation.Attributes" Alias="a" />
+    <!-- Contents (and DOCTYPE with it) is 3.0; the published 2.1.0 package has DOCTYPE on Elements. -->
+    <Using Include="Markupolation.Contents" Static="True" Condition="'$(MarkupolationLocal)' == 'true'" />
   </ItemGroup>
 
   <ItemGroup>

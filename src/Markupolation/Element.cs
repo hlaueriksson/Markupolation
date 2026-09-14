@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace Markupolation;
 
@@ -35,36 +36,27 @@ public sealed record Element : Content
 
     internal ElementType Type { get; }
 
-    /// <summary>
-    /// Converts <see cref="Element"/> to <see cref="string"/>.
-    /// </summary>
-    /// <param name="value">The element.</param>
-    public static implicit operator string(Element value)
-    {
-        return value != null ? value.ToString() : string.Empty;
-    }
-
     /// <inheritdoc/>
     public override string ToString() => base.ToString();
 
-    private static string ToString(string name, bool isVoidElement, bool isRawText, Content[] content)
+    private static string ToString(string name, bool isVoidElement, bool isRawTextElement, Content[] content)
     {
         return string.Create(
-            Length(name, isVoidElement, isRawText, content),
-            (name, isVoidElement, isRawText, content),
-            static (destination, state) => Write(destination, state.name, state.isVoidElement, state.isRawText, state.content));
+            Length(name, isVoidElement, isRawTextElement, content),
+            (name, isVoidElement, isRawTextElement, content),
+            static (destination, state) => Write(destination, state.name, state.isVoidElement, state.isRawTextElement, state.content));
     }
 
     /// <summary>
     /// The text a child renders as. Inside a raw text element (<c>script</c>, <c>style</c>) that is
     /// the unencoded original, because the HTML parser does not decode character references there.
     /// </summary>
-    private static string? ChildValue(Content? child, bool isRawText)
+    private static string? ChildValue(Content? child, bool isRawTextElement)
     {
-        return isRawText ? child?.Unencoded ?? child?.Value : child?.Value;
+        return isRawTextElement ? child?.Unencoded ?? child?.Value : child?.Value;
     }
 
-    private static void Write(Span<char> destination, string name, bool isVoidElement, bool isRawText, Content[] content)
+    private static void Write(Span<char> destination, string name, bool isVoidElement, bool isRawTextElement, Content[] content)
     {
         var position = 0;
 
@@ -85,6 +77,7 @@ public sealed record Element : Content
         if (isVoidElement)
         {
             " />".AsSpan().CopyTo(destination.Slice(position));
+            Debug.Assert(position + 3 == destination.Length, "Length must match what Write emits.");
             return;
         }
 
@@ -92,7 +85,7 @@ public sealed record Element : Content
 
         for (var i = 0; i < content.Length; i++)
         {
-            if (content[i] is not Attribute && ChildValue(content[i], isRawText) is { } childValue)
+            if (content[i] is not Attribute && ChildValue(content[i], isRawTextElement) is { } childValue)
             {
                 childValue.AsSpan().CopyTo(destination.Slice(position));
                 position += childValue.Length;
@@ -104,20 +97,21 @@ public sealed record Element : Content
         name.AsSpan().CopyTo(destination.Slice(position));
         position += name.Length;
         destination[position] = '>';
+        Debug.Assert(position == destination.Length - 1, "Length must match what Write emits.");
     }
 
     /// <summary>
     /// Calculates the exact rendered length, so the buffer is allocated once and never grows.
     /// <see cref="Write"/> must skip exactly what this skips.
     /// </summary>
-    private static int Length(string name, bool isVoidElement, bool isRawText, Content[] content)
+    private static int Length(string name, bool isVoidElement, bool isRawTextElement, Content[] content)
     {
         // <name /> or <name></name>
         var length = isVoidElement ? name.Length + 4 : (name.Length * 2) + 5;
 
         for (var i = 0; i < content.Length; i++)
         {
-            var value = content[i] is Attribute ? content[i].Value : ChildValue(content[i], isRawText);
+            var value = content[i] is Attribute ? content[i].Value : ChildValue(content[i], isRawTextElement);
 
             if (value == null)
             {

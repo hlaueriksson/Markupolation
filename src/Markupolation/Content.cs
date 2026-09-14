@@ -25,8 +25,15 @@ namespace Markupolation;
 [DebuggerDisplay("{ToString()}")]
 public partial record Content
 {
+    // A Content is in exactly one of three states, and never changes after it is constructed:
+    //
+    //   markup        _value      set up front - new Content(string?), Raw, Element, Attribute
+    //   text          _unencoded  set by FromText - every implicit conversion
+    //   interpolated  _builder    filled by the interpolated string handler
+    //
+    // The last two render lazily into _value, which is the memo rather than a fourth state.
     private readonly StringBuilder? _builder;
-    private string? _text;
+    private string? _unencoded;
     private string? _value;
 
     /// <summary>
@@ -39,40 +46,42 @@ public partial record Content
         _value = value;
     }
 
+    // The text and interpolated states fill a field after construction, rather than passing a
+    // rendered value in the way the raw constructor above does.
     private Content()
     {
     }
 
     /// <summary>
+    /// Gets empty content.
+    /// </summary>
+    /// <remarks>
+    /// One shared instance. <see cref="Content"/> never changes after it is constructed, so every
+    /// branch that renders nothing can return this rather than allocate another - which is what the
+    /// whole <c>If*</c> family does for the branch it does not take.
+    /// </remarks>
+    public static Content Empty { get; } = new(string.Empty);
+
+    /// <summary>
     /// Gets content value.
     /// </summary>
-    public string? Value
-    {
-        get
-        {
-            if (_value != null)
-            {
-                return _value;
-            }
-
-            if (_builder != null)
-            {
-                return _value = _builder.ToString();
-            }
-
-            return _text == null ? null : (_value = HtmlEncoder.Encode(_text));
-        }
-    }
+    /// <remarks>
+    /// Rendered once and remembered: an interpolated builder is flushed, text is encoded, and markup
+    /// is already here. Null content stays null - re-encoding null costs nothing.
+    /// </remarks>
+    public string? Value => _value ??= _builder?.ToString() ?? HtmlEncoder.Encode(_unencoded);
 
     /// <summary>
     /// Gets the text this content was created from, before encoding, or <c>null</c> when the
     /// content is already markup.
     /// </summary>
     /// <remarks>
-    /// Raw text elements (<c>script</c>, <c>style</c>) render this instead of <see cref="Value"/>,
-    /// because the HTML parser does not decode character references inside them.
+    /// Two readers, and no others. Raw text elements (<c>script</c>, <c>style</c>) render this instead
+    /// of <see cref="Value"/>, because the HTML parser does not decode character references inside
+    /// them; and <c>+</c> keeps it when both operands are still text, so that the fallback survives
+    /// concatenation. Everywhere else the answer is <see cref="Value"/>.
     /// </remarks>
-    internal string? Unencoded => _text;
+    internal string? Unencoded => _unencoded;
 
     /// <summary>
     /// Wraps a string that is already markup, without encoding it.
@@ -80,14 +89,6 @@ public partial record Content
     /// <param name="value">Markup.</param>
     /// <returns><see cref="Content"/></returns>
     public static Content Raw(string? value) => new(value);
-
-    /// <summary>
-    /// Encodes a string as text.
-    /// </summary>
-    /// <remarks>The same as converting a <see cref="string"/> to <see cref="Content"/>.</remarks>
-    /// <param name="value">Text.</param>
-    /// <returns><see cref="Content"/></returns>
-    public static Content Text(string? value) => FromText(value);
 
     /// <summary>
     /// Determines whether two pieces of content have the same value.
@@ -115,7 +116,13 @@ public partial record Content
     /// Creates content from text, encoding it lazily so that a raw text element can render the
     /// original instead.
     /// </summary>
+    /// <remarks>
+    /// Why it exists: encoding up front and handing the result to the raw constructor would leave
+    /// <see cref="Unencoded"/> null, and <c>script</c>/<c>style</c> would then render the encoded
+    /// form. Why it is private: the raw constructor is already the public way in, and a public
+    /// <c>Text</c> helper was removed once for naming the default - it is exactly <c>(Content)s</c>.
+    /// </remarks>
     /// <param name="text">Text.</param>
     /// <returns><see cref="Content"/></returns>
-    private static Content FromText(string? text) => new() { _text = text };
+    private static Content FromText(string? text) => new() { _unencoded = text };
 }

@@ -249,11 +249,12 @@ public static class HtmlConverter
         var multiline = value.IndexOfAny(NewLines) >= 0;
 
         // A raw string literal reads better when there is a lot to escape, but its content may not
-        // start or end with a quote, and a single-line one may not contain a newline.
-        if ((quotes > 0 || multiline)
+        // start or end with a quote, and a single-line one may not contain a newline - so a multiline
+        // value always falls through to the escaped literal below.
+        if (quotes > 0
+            && !multiline
             && !value.StartsWith('"')
-            && !value.EndsWith('"')
-            && !multiline)
+            && !value.EndsWith('"'))
         {
             var fence = new string('"', Math.Max(3, quotes + 1));
 

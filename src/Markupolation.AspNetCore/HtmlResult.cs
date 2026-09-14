@@ -19,20 +19,20 @@ namespace Markupolation.AspNetCore;
 /// </remarks>
 public sealed class HtmlResult : IResult, IActionResult, IStatusCodeHttpResult, IContentTypeHttpResult
 {
-    private readonly string _html;
+    private readonly Content _html;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="HtmlResult"/> class.
     /// </summary>
     /// <remarks>
-    /// Takes the rendered markup. <see cref="Content"/>, <see cref="Element"/> and
-    /// <see cref="Attribute"/> all convert to <see cref="string"/> implicitly, and so does
-    /// <c>DOCTYPE() + html(...)</c>, so every shape of a finished document fits. The value is
-    /// written as it is — encoding already happened inside the elements — so do not pass text
-    /// that came from a user straight into this.
+    /// Takes the document as <see cref="Content"/>. <see cref="Element"/>, <see cref="Attribute"/>
+    /// and <c>DOCTYPE() + html(...)</c> are all <see cref="Content"/>, so every shape of a finished
+    /// document fits, and encoding has already happened inside the elements. A <see cref="string"/>
+    /// that is already rendered markup goes through <see cref="Content.Raw(string?)"/>; anything
+    /// else is text, and is encoded.
     /// </remarks>
-    /// <param name="html">Rendered markup.</param>
-    public HtmlResult(string html)
+    /// <param name="html">The document.</param>
+    public HtmlResult(Content html)
         : this(html, null)
     {
     }
@@ -40,15 +40,15 @@ public sealed class HtmlResult : IResult, IActionResult, IStatusCodeHttpResult, 
     /// <summary>
     /// Initializes a new instance of the <see cref="HtmlResult"/> class with a status code.
     /// </summary>
-    /// <remarks>The value is written as it is; see the other constructor.</remarks>
-    /// <param name="html">Rendered markup.</param>
+    /// <remarks>See the other constructor.</remarks>
+    /// <param name="html">The document.</param>
     /// <param name="statusCode">Status code.</param>
-    public HtmlResult(string html, int statusCode)
+    public HtmlResult(Content html, int statusCode)
         : this(html, (int?)statusCode)
     {
     }
 
-    private HtmlResult(string html, int? statusCode)
+    private HtmlResult(Content html, int? statusCode)
     {
         _html = html;
         StatusCode = statusCode;
@@ -74,7 +74,7 @@ public sealed class HtmlResult : IResult, IActionResult, IStatusCodeHttpResult, 
 
     private Task WriteAsync(HttpResponse response)
     {
-        var value = _html ?? string.Empty;
+        var value = _html?.Value ?? string.Empty;
 
         response.Headers[HeaderNames.ContentType] = ContentType;
 

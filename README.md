@@ -786,7 +786,16 @@ a(href("/x?a=1&b=2"))           // <a href="/x?a=1&amp;b=2"></a>
 ```
 
 Elements and attributes are already markup and are never re-encoded, so composing them is
-unaffected, and so is `DOCTYPE() + html(...)`.
+unaffected.
+
+Markup only ever becomes a `string` because you asked for it — `content.ToString()`, or
+`(string)content`. There is no implicit conversion out of `Content`, because a `string` that comes
+back is text, and would be encoded:
+
+```cs
+string s = div("x");              // does not compile
+string s = div("x").ToString();   // this
+```
 
 Interpolation keeps working, because `Content` is an interpolated string handler: the literal parts
 of an interpolated string are written by you and stay raw, an element or attribute in a hole stays
@@ -801,9 +810,28 @@ To opt out, say so:
 
 | | |
 |---|---|
-| `Content.Raw(s)` | the string is already markup — use as is |
-| `Content.Text(s)` | encode explicitly; the same as an implicit conversion |
+| `raw(s)` | the string is already markup — use as is |
+| `Content.Raw(s)` | the same thing, qualified — `raw` is just the unqualified spelling |
 | `new Content(s)`, `new Element(s)`, `new Attribute(n, v)` | the escape hatches stay raw |
+
+`raw` is imported with a static using like the elements are, so it reads inline.
+
+A **comment** is the case worth remembering: it looks like text, but it is markup, so writing it as
+text puts it on the page. `comment` writes one, and unlike `raw` it is safe for text you did not
+write yourself:
+
+```cs
+body(comment("content here"), p("Hello, World!"))
+// <body><!--content here--><p>Hello, World!</p></body>
+```
+
+Encoding cannot make comment text safe — the parser does not decode character references inside a
+comment, so an escaped `-->` would still end it early and let the rest into the document as markup.
+`comment` breaks up the sequences the specification forbids instead:
+
+```cs
+comment("a --> b")   // <!--a - -> b-->
+```
 
 One thing to watch for: markup assembled into a `string` before it reaches an element is encoded
 whole, because the library can no longer tell which parts you wrote.
@@ -814,24 +842,48 @@ div(markup)                    // encodes the <i> too
 div(Content.Raw(markup))       // opt out
 ```
 
-The same applies to a ternary whose other branch is a string, since that makes `string` the
-conditional's natural type — the element is rendered and then encoded as text:
+A ternary mixing an element with text needs no special care — the branches have no common type, so
+the conditional is target-typed to `Content` and each branch converts on its own:
 
 ```cs
-numbers.Each(i => li(Fizz(i) ? strong("Fizz") : "not fizz"))   // <li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>
+numbers.Each(i => li(Fizz(i) ? strong("Fizz") : "not fizz"))   // <li><strong>Fizz</strong></li>
 ```
 
-Use `If` instead. It takes `Content` parameters, so each branch converts on its own and there is no
-common type to infer:
+The `If*` / `IfMatch` family takes `Content` parameters and reads better inside a template:
 
 ```cs
 numbers.Each(i => li(Fizz(i).If(strong("Fizz"), "not fizz")))   // <li><strong>Fizz</strong></li>
 ```
 
-The whole `If*` / `IfMatch` family behaves this way. If you prefer a ternary, it is enough for one
-branch to be `Content` — and every numeric type, `char`, `bool`, `DateTime`, `DateTimeOffset`,
-`TimeSpan`, `Guid` and any `enum` convert directly, so `Fizz(i) ? strong("Fizz") : i` is already
-correct.
+### Several siblings without a wrapper<!-- omit in toc -->
+
+`Content` declares `+`, so a fragment is written the way it looks:
+
+```cs
+Content Card(Item x) => h3(x.Title) + p(x.Body);
+
+div(class_("cards"), items.Each(Card))
+// <div class="cards"><h3>T1</h3><p>B1</p><h3>T2</h3><p>B2</p></div>
+```
+
+The result is `Content`, and each side is rendered by its own rule — so a `string` operand is text,
+and is encoded:
+
+```cs
+"<b>" + p("x")                // &lt;b&gt;<p>x</p>
+Content.Raw("<b>") + p("x")   // <b><p>x</p>
+```
+
+`+=` accumulates, which is what a `string` used to be used for:
+
+```cs
+Content html = Content.Empty;
+
+foreach (var i in items)
+{
+    html += li(i);
+}
+```
 
 Two things encoding deliberately does not do.
 
@@ -889,6 +941,7 @@ These using directives are applied automatically:
   <Using Include="Markupolation.Attributes" Alias="a" />
   <Using Include="Markupolation.Attribute" Alias="A" />
   <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
+  <Using Include="Markupolation.Contents" Static="True" />
 </ItemGroup>
 ```
 
@@ -905,6 +958,7 @@ global using static Markupolation.Attributes;
 global using a = Markupolation.Attributes;
 global using A = Markupolation.Attribute;
 global using static Markupolation.EventHandlerContentAttributes;
+global using static Markupolation.Contents;
 ```
 
 ## Performance

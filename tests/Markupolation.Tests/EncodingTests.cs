@@ -1,5 +1,7 @@
 using System;
 using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
 using e = Markupolation.Elements;
 using FluentAssertions;
 using NUnit.Framework;
@@ -8,6 +10,66 @@ namespace Markupolation.Tests;
 
 public class EncodingTests
 {
+    [Test]
+    public void Comment_writes_a_comment()
+    {
+        comment("Add your site or application content here").ToString()
+            .Should().Be("<!--Add your site or application content here-->");
+
+        body(comment("content here"), p("Hello")).ToString()
+            .Should().Be("<body><!--content here--><p>Hello</p></body>");
+
+        // Empty is an empty comment, the way div(null) is an empty div.
+        comment(null).ToString().Should().Be("<!---->");
+        comment("").ToString().Should().Be("<!---->");
+    }
+
+    [Test]
+    public void Comment_neutralises_what_would_end_it_early()
+    {
+        // Encoding cannot help here - the parser does not decode character references inside a
+        // comment - so the sequences the spec forbids are broken up with a space instead. This is
+        // what makes comment() safe for text that came from a user, where raw() is not.
+        comment("a --> b").ToString().Should().Be("<!--a - -> b-->");
+        comment("a <!-- b").ToString().Should().Be("<!--a <!- - b-->");
+        comment("a --!> b").ToString().Should().Be("<!--a - -!> b-->");
+        comment("---").ToString().Should().Be("<!--- - --->");
+
+        // Must not start with > or ->, and must not end with <!-.
+        comment(">x").ToString().Should().Be("<!-- >x-->");
+        comment("->x").ToString().Should().Be("<!-- ->x-->");
+        comment("a<!-").ToString().Should().Be("<!--a<!- -->");
+
+        // A lone trailing dash is fine as it is; the parser gives it back.
+        comment("x-").ToString().Should().Be("<!--x--->");
+    }
+
+    [TestCase("plain")]
+    [TestCase("a --> b")]
+    [TestCase("a <!-- b")]
+    [TestCase("a --!> b")]
+    [TestCase("---")]
+    [TestCase(">x")]
+    [TestCase("->x")]
+    [TestCase("a<!-")]
+    [TestCase("x-")]
+    [TestCase("</script><img src=x onerror=alert(1)>")]
+    public void Comment_stays_one_comment_through_a_real_parser(string text)
+    {
+        // The point of the neutralising: whatever the text, the document still has exactly one
+        // comment node and nothing has escaped into the markup around it.
+        var parser = new AngleSharp.Html.Parser.HtmlParser();
+        var document = parser.ParseDocument(body(comment(text), p("after")).ToString());
+
+        var comments = document.Body!.ChildNodes
+            .Where(x => x.NodeType == AngleSharp.Dom.NodeType.Comment).ToList();
+
+        comments.Should().ContainSingle();
+        document.Body.QuerySelectorAll("img").Should().BeEmpty();
+        document.Body.QuerySelectorAll("p").Should().ContainSingle();
+        document.Body.QuerySelector("p")!.TextContent.Should().Be("after");
+    }
+
     [Test]
     public void Text_is_encoded()
     {
@@ -42,19 +104,21 @@ public class EncodingTests
         div(Content.Raw("<b>bold</b>")).ToString()
             .Should().Be("<div><b>bold</b></div>");
 
+        // raw is the unqualified spelling, imported with a static using like the elements are.
+        div(raw("<b>bold</b>")).ToString()
+            .Should().Be("<div><b>bold</b></div>");
+
+        // An HTML comment is the case that catches people out: it looks like text, but is markup.
+        // comment() is the way to write one; raw is the escape hatch under it.
+        body(raw("<!-- content here -->")).ToString()
+            .Should().Be("<body><!-- content here --></body>");
+
         // The string constructors are raw too - that is how Element wraps markup verbatim.
         div(new Content("<b>bold</b>")).ToString()
             .Should().Be("<div><b>bold</b></div>");
 
         new Element("<svg viewBox=\"0 0 1 1\"></svg>").ToString()
             .Should().Be("<svg viewBox=\"0 0 1 1\"></svg>");
-    }
-
-    [Test]
-    public void Text_encodes_explicitly()
-    {
-        Content.Text("<b>").ToString().Should().Be("&lt;b&gt;");
-        Content.Text(null).ToString().Should().BeEmpty();
     }
 
     [Test]
@@ -120,8 +184,9 @@ public class EncodingTests
     [Test]
     public void Document_composition_stays_raw()
     {
-        // DOCTYPE() + element uses built-in string concatenation, which must not be encoded.
-        (DOCTYPE() + html(body(h1("Hello, World!"))))
+        // DOCTYPE() returns Content, not a string, so the doctype composes as markup instead of
+        // being encoded as text by Content's + operator.
+        (DOCTYPE() + html(body(h1("Hello, World!")))).ToString()
             .Should().Be("<!DOCTYPE html><html><body><h1>Hello, World!</h1></body></html>");
     }
 
@@ -156,25 +221,27 @@ public class EncodingTests
     }
 
     [Test]
-    public void A_ternary_mixing_elements_and_strings_collapses_to_string()
+    public void A_ternary_mixing_elements_and_strings_keeps_the_element_raw()
     {
-        // The remaining sharp edge. When a branch is a string, the conditional takes string as
-        // its natural type - because Element converts to string and not the reverse - so the
-        // element is rendered and then encoded as text. Nothing warns about it.
+        // This used to collapse to string: Element converted to string implicitly and not the
+        // reverse, so string was the conditional's natural type, and the rendered element was then
+        // encoded as text. The conversion to string is explicit now, so the branches have no common
+        // type, the conditional is target-typed to Content, and each branch converts on its own.
         new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : i.ToString())).ToString()
-            .Should().Be("<li>1</li><li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>");
+            .Should().Be("<li>1</li><li><strong>Fizz</strong></li>");
 
-        // A string branch is the same, and value types do not help here.
         new[] { 1, 3 }.Each(i => li(i % 3 == 0 ? strong("Fizz") : "not fizz")).ToString()
-            .Should().Be("<li>not fizz</li><li>&lt;strong&gt;Fizz&lt;/strong&gt;</li>");
+            .Should().Be("<li>not fizz</li><li><strong>Fizz</strong></li>");
+
+        // The text branch is still text, and is still encoded.
+        li(false ? strong("Fizz") : "<script>").ToString().Should().Be("<li>&lt;script&gt;</li>");
     }
 
     [Test]
-    public void If_avoids_the_conditional_problem_entirely()
+    public void If_reads_better_than_a_ternary()
     {
-        // If takes Content parameters, so each argument converts on its own and there is no
-        // common type to infer: the element stays markup and the string is encoded as text.
-        // This is the recommended form for a conditional that mixes elements and text.
+        // If takes Content parameters, so each argument converts on its own - the same outcome a
+        // ternary now gives, in a shape that reads better inside a template.
         new[] { 1, 3 }.Each(i => li((i % 3 == 0).If(strong("Fizz"), "not fizz"))).ToString()
             .Should().Be("<li>not fizz</li><li><strong>Fizz</strong></li>");
 
@@ -232,16 +299,21 @@ public class EncodingTests
     }
 
     [Test]
-    public void Text_behaves_exactly_like_converting_a_string()
+    public void A_converted_string_keeps_its_original_for_a_raw_text_element()
     {
-        // Content.Text documents itself as "the same as converting a string to Content", so the
-        // two must agree everywhere - including inside a raw text element, where Content keeps
-        // the original to render instead of the encoded form.
-        div("a > b").ToString().Should().Be(div(Content.Text("a > b")).ToString());
-        e.style("a > b").ToString().Should().Be(e.style(Content.Text("a > b")).ToString());
+        // A string becomes Content as text, encoded lazily, and Content keeps the original - which
+        // is what a raw text element renders instead of the encoded form.
+        div((Content)"a > b").ToString().Should().Be("<div>a &gt; b</div>");
+        e.style((Content)"a > b").ToString().Should().Be("<style>a > b</style>");
 
-        div(Content.Text("a > b")).ToString().Should().Be("<div>a &gt; b</div>");
-        e.style(Content.Text("a > b")).ToString().Should().Be("<style>a > b</style>");
+        // Spelling the conversion out changes nothing; it is the same conversion either way.
+        div("a > b").ToString().Should().Be(div((Content)"a > b").ToString());
+        e.style("a > b").ToString().Should().Be(e.style((Content)"a > b").ToString());
+
+        // A null string is empty content, not a throw.
+        string? none = null;
+        div(none!).ToString().Should().Be("<div></div>");
+        ((Content)"<b>").ToString().Should().Be("&lt;b&gt;");
     }
 
     [Test]

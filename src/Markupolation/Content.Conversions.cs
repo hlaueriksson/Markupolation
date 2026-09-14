@@ -24,8 +24,13 @@ public partial record Content
     /// <summary>
     /// Converts <see cref="Content"/> to <see cref="string"/>.
     /// </summary>
+    /// <remarks>
+    /// Explicit on purpose. Markup that leaves <see cref="Content"/> for a <see cref="string"/> has
+    /// lost what the library knows about it, and is encoded as text the next time it reaches an
+    /// element - so saying so is part of the API. <see cref="object.ToString()"/> does the same.
+    /// </remarks>
     /// <param name="value">The content.</param>
-    public static implicit operator string(Content value)
+    public static explicit operator string(Content value)
     {
         return value != null ? value.ToString() : string.Empty;
     }
