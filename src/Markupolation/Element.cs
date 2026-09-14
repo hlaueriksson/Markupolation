@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace Markupolation;
 
@@ -76,6 +77,7 @@ public sealed record Element : Content
         if (isVoidElement)
         {
             " />".AsSpan().CopyTo(destination.Slice(position));
+            Debug.Assert(position + 3 == destination.Length, "Length must match what Write emits.");
             return;
         }
 
@@ -95,6 +97,7 @@ public sealed record Element : Content
         name.AsSpan().CopyTo(destination.Slice(position));
         position += name.Length;
         destination[position] = '>';
+        Debug.Assert(position == destination.Length - 1, "Length must match what Write emits.");
     }
 
     /// <summary>
