@@ -62,7 +62,7 @@ string GetHtml(Example example) => example switch
     _ => string.Empty,
 };
 
-string Simple() => DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")));
+string Simple() => (DOCTYPE() + html(head(e.title("Markupolation")), body(h1("Hello, World!")))).ToString();
 
 string Elaborate() =>
     $"""

@@ -12,14 +12,31 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Humanizer" Version="3.0.10" />
-    <PackageReference Include="Markupolation" Version="2.1.0" />
-    <PackageReference Include="Markupolation.Extensions" Version="2.1.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="2.52.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.OpenTelemetry" Version="1.2.0" />
     <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.18.0" />
     <PackageReference Include="Azure.Monitor.OpenTelemetry.Exporter" Version="1.9.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="2.1.0" />
+    <!-- This sample tracks the working tree so it can use Markupolation.AspNetCore, which
+         is not published yet. The other samples still reference the published packages. -->
+    <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
+    <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" />
+    <ProjectReference Include="..\..\src\Markupolation.Htmx\Markupolation.Htmx.csproj" />
+  </ItemGroup>
+
+  <!-- A package reference would inject these through buildTransitive; a project reference does not. -->
+  <ItemGroup>
+    <Using Include="Markupolation" />
+    <Using Include="Markupolation.Elements" Static="True" />
+    <Using Include="Markupolation.Elements" Alias="e" />
+    <Using Include="Markupolation.Element" Alias="E" />
+    <Using Include="Markupolation.Attributes" Static="True" />
+    <Using Include="Markupolation.Attributes" Alias="a" />
+    <Using Include="Markupolation.Attribute" Alias="A" />
+    <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
+    <Using Include="Markupolation.Contents" Static="True" />
+    <Using Include="Markupolation.Htmx" Static="True" />
   </ItemGroup>
 
   <ItemGroup>
