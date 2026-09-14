@@ -1,7 +1,7 @@
-using e = Markupolation.Elements;
 using FluentAssertions;
 using NUnit.Framework;
 using static Markupolation.Htmx;
+using e = Markupolation.Elements;
 
 namespace Markupolation.Tests;
 

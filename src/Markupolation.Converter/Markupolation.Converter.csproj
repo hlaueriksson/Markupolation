@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/hlaueriksson/Markupolation</PackageProjectUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <IsPackable>false</IsPackable>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <Import Project="../../Analyzers.props" />

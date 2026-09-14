@@ -1,10 +1,9 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
-using e = Markupolation.Elements;
 using FluentAssertions;
 using NUnit.Framework;
+using e = Markupolation.Elements;
 
 namespace Markupolation.Tests;
 

@@ -11,7 +11,7 @@ public class Functions
     {
         ContentType = "text/html; charset=utf-8",
         Content =
-            DOCTYPE() +
+            (DOCTYPE() +
             html(lang("en"),
                 head(
                     meta(charset("utf-8")),
@@ -23,14 +23,14 @@ public class Functions
                     h1("Hello, World!"),
                     p("This is ", mark(a.title("Markup with string interpolation"), "Markupolation"), " in action.")
                 )
-            ),
+            )).ToString(),
     };
 
     [Function(nameof(Hello))]
     public IActionResult Hello([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req) => new ContentResult
     {
         ContentType = "text/html; charset=utf-8",
-        Content = h1("Hello, World!") + p("This is ", mark(title("Markup with string interpolation"), "Markupolation"), " in action."),
+        Content = (h1("Hello, World!") + p("This is ", mark(title("Markup with string interpolation"), "Markupolation"), " in action.")).ToString(),
     };
 
     [Function(nameof(Counter))]
@@ -42,15 +42,15 @@ public class Functions
         {
             ContentType = "text/html; charset=utf-8",
             Content = req.Headers["HX-Request"].Count > 0 ?
-                h1("Counter") +
+                (h1("Counter") +
                 p(new A("role", "status"), $"Current count: {result}") +
                 button(
                     class_("btn btn-primary"),
-                    new A("hx-get", $"/api/counter/{count + 1}"),
-                    new A("hx-target", "#result"),
+                    hx_get($"/api/counter/{count + 1}"),
+                    hx_target("#result"),
                     "Click me"
-                ) :
-                result,
+                )).ToString() :
+                result.ToString(),
         };
     }
 
@@ -60,15 +60,14 @@ public class Functions
     ];
 
     static readonly Func<WeatherForecast[]> forecasts = () =>
-        Enumerable.Range(1, 5).Select(index =>
+        [.. Enumerable.Range(1, 5).Select(index =>
             new WeatherForecast
             (
                 DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 Random.Shared.Next(-20, 55),
                 summaries[Random.Shared.Next(summaries.Length)]
             )
-        )
-        .ToArray();
+        )];
 
     [Function(nameof(Weather))]
     public IActionResult Weather([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req) => new ContentResult
