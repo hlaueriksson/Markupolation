@@ -25,7 +25,7 @@ Blazor Web App + Azure Functions + .NET Aspire:
 - `Markupolation.Sample.Aspire.AppHost`
 - `Markupolation.Sample.Aspire.ServiceDefaults`
 
-Prerequisite:
+Prerequisites:
 
 1. [Install .NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
 2. [Install the Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local)
@@ -65,7 +65,7 @@ HTMX + Minimal API + YARP + .NET Aspire:
 - `Markupolation.Sample.Aspire.AppHost`
 - `Markupolation.Sample.Aspire.ServiceDefaults`
 
-Prerequisite:
+Prerequisites:
 
 1. [Install .NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
 2. [Install .NET Aspire workload](https://learn.microsoft.com/en-us/dotnet/aspire/setup-tooling)
@@ -96,7 +96,7 @@ Spectre.Console + Playwright for .NET:
 
 - `Markupolation.Sample.Examples`
 
-Prerequisite:
+Prerequisites:
 
 1. [Install .NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
 2. Build:

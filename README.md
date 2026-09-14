@@ -13,7 +13,7 @@ A library for generating `HTML` in `C#`
 - It uses chainable methods to represent HTML elements and attributes
 - The methods are generated from the HTML specification
   - <https://html.spec.whatwg.org>
-- Perfect for your APIs that sends HTML Over The Wire
+- Perfect for your APIs that send HTML Over The Wire
 
 ## Content<!-- omit in toc -->
 
@@ -51,7 +51,7 @@ PM> Install-Package Markupolation.Extensions
 
 ## Introduction
 
-This project consist of two packages:
+This project consists of two packages:
 
 - 📦 [Markupolation](https://www.nuget.org/packages/Markupolation)
 - 📦 [Markupolation.Extensions](https://www.nuget.org/packages/Markupolation.Extensions)
@@ -130,7 +130,7 @@ In cases like these, `Markupolation` could be a good fit to generate HTML for yo
 This is a library for generating `HTML` in `C#`.
 It uses chainable methods to represent HTML elements and attributes.
 
-The methods are generated from the HTML Specification:
+The methods are generated from the HTML specification:
 
 - <https://html.spec.whatwg.org>
 
@@ -574,7 +574,7 @@ Code:
 
 ### Naming Convention<!-- omit in toc -->
 
-- ℹ️ The names of element and attribute methods are in *lowercase* to reflect the `HTML` Specification:
+- ℹ️ The names of element and attribute methods are in *lowercase* to reflect the `HTML` specification:
   - <https://html.spec.whatwg.org>
 - ℹ️ Names that conflict with the [`C#` keywords](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/) are suffixed with an underscore (`_`)
 - ℹ️ Attributes that contain hyphen (`-`) are converted to [snake_case](https://en.wikipedia.org/wiki/Snake_case)
@@ -619,7 +619,7 @@ Use the predefined `e` and `a` aliases as shorthands for these ambiguous methods
 
 ### Custom Elements and Attributes<!-- omit in toc -->
 
-Custom elements and attributes that are not available in the API (not part of the HTML Specification) can be instantiated from the `Element` and `Attribute` classes.
+Custom elements and attributes that are not available in the API (not part of the HTML specification) can be instantiated from the `Element` and `Attribute` classes.
 Use the predefined `E` and `A` aliases as shorthands for these classes.
 
 Scalable Vector Graphics element:
