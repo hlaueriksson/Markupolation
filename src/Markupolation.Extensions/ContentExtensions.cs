@@ -265,7 +265,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if values is empty.
+    /// Returns <see cref="Content"/> if values are empty.
     /// </summary>
     /// <typeparam name="T">Type of elements.</typeparam>
     /// <param name="values">Elements.</param>
@@ -277,7 +277,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if values is empty. The delegate is only invoked when it is.
+    /// Returns <see cref="Content"/> if values are empty. The delegate is only invoked when it is.
     /// </summary>
     /// <typeparam name="T">Type of elements.</typeparam>
     /// <param name="values">Elements.</param>
@@ -289,7 +289,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if values is empty; otherwise the fallback <see cref="Content"/>.
+    /// Returns <see cref="Content"/> if values are empty; otherwise the fallback <see cref="Content"/>.
     /// </summary>
     /// <typeparam name="T">Type of elements.</typeparam>
     /// <param name="values">Elements.</param>
@@ -302,7 +302,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if values is empty; otherwise the fallback <see cref="Content"/>.
+    /// Returns <see cref="Content"/> if values are empty; otherwise the fallback <see cref="Content"/>.
     /// Only the delegate for the branch that is taken is invoked.
     /// </summary>
     /// <typeparam name="T">Type of elements.</typeparam>
@@ -316,7 +316,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if values is not empty.
+    /// Returns <see cref="Content"/> if values are not empty.
     /// </summary>
     /// <typeparam name="T">Type of elements.</typeparam>
     /// <param name="values">Elements.</param>
@@ -328,7 +328,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if values is not empty; otherwise the fallback <see cref="Content"/>.
+    /// Returns <see cref="Content"/> if values are not empty; otherwise the fallback <see cref="Content"/>.
     /// </summary>
     /// <typeparam name="T">Type of elements.</typeparam>
     /// <param name="values">Elements.</param>
@@ -341,7 +341,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if values is not empty; otherwise the fallback <see cref="Content"/>.
+    /// Returns <see cref="Content"/> if values are not empty; otherwise the fallback <see cref="Content"/>.
     /// Only the delegate for the branch that is taken is invoked.
     /// </summary>
     /// <typeparam name="T">Type of elements.</typeparam>
@@ -355,7 +355,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if value has value.
+    /// Returns <see cref="Content"/> if value has a value.
     /// </summary>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
@@ -368,7 +368,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if value has value; otherwise the fallback <see cref="Content"/>.
+    /// Returns <see cref="Content"/> if value has a value; otherwise the fallback <see cref="Content"/>.
     /// </summary>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
@@ -382,7 +382,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if value has value; otherwise the fallback <see cref="Content"/>.
+    /// Returns <see cref="Content"/> if value has a value; otherwise the fallback <see cref="Content"/>.
     /// Only the delegate for the branch that is taken is invoked.
     /// </summary>
     /// <typeparam name="T">Type of value.</typeparam>
@@ -397,7 +397,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if value match the condition.
+    /// Returns <see cref="Content"/> if value matches the condition.
     /// </summary>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
@@ -410,7 +410,7 @@ public static class ContentExtensions
     }
 
     /// <summary>
-    /// Returns <see cref="Content"/> if value match the condition; otherwise the fallback <see cref="Content"/>.
+    /// Returns <see cref="Content"/> if value matches the condition; otherwise the fallback <see cref="Content"/>.
     /// </summary>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
