@@ -74,6 +74,15 @@ public class AttributesTests
         data(null!, "value").ToString().Should().BeEmpty();
         div(data(null!, "value"), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
 
+        // An empty name is the same "no name" case. data-="value" is not a custom data attribute
+        // (the specification wants at least one character after the dash) and dataset would not
+        // expose it, so it does not render either.
+        div(data("", "value"), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
+
+        // And it does not fall back to the data attribute, which is a different thing entirely -
+        // object's resource URL. That one is spelled data("value").
+        data("value").ToString().Should().Be("data=\"value\"");
+
         // Same for the raw constructor, which used to concatenate a null name into ="value".
         div(new Attribute(null!, "value"), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
     }

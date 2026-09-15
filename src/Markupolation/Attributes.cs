@@ -31,15 +31,20 @@ public static partial class Attributes
     /// Custom data attribute.
     /// </summary>
     /// <remarks>
-    /// Null tolerant, like the rest of the library: a null name has no attribute to build, so it
-    /// renders nothing rather than throwing or emitting a nameless <c>data-</c>.
+    /// Null tolerant, like the rest of the library: without a name there is no attribute to build,
+    /// so a null or empty one renders nothing. Not a nameless <c>data-="{value}"</c>, which the
+    /// specification does not allow (a custom data attribute needs at least one character after
+    /// the dash) and <c>element.dataset</c> does not expose. And deliberately not <c>data</c> on
+    /// its own: that is a different attribute - <see cref="Elements.object_(Content[])"/>'s
+    /// resource URL, which the browser fetches - so falling back to it would quietly turn missing
+    /// metadata into a resource load. <c><see cref="data(string)"/></c> is how that one is spelled.
     /// </remarks>
     /// <param name="name">Attribute name suffix.</param>
     /// <param name="value">Attribute value.</param>
     /// <returns><c>data-{name}="{value}"</c></returns>
     public static Attribute data(string name, string value)
     {
-        return name == null ? None : new($"data-{Nameable(name)}", value);
+        return string.IsNullOrEmpty(name) ? None : new($"data-{Nameable(name)}", value);
     }
 
     /// <inheritdoc cref="data(string, string)" />
@@ -51,7 +56,7 @@ public static partial class Attributes
     /// </remarks>
     public static Attribute data(string name, object value)
     {
-        return name == null ? None : new($"data-{Nameable(name)}", ValueFormatter.Format(value));
+        return string.IsNullOrEmpty(name) ? None : new($"data-{Nameable(name)}", ValueFormatter.Format(value));
     }
 
     /// <summary>
