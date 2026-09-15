@@ -1,3 +1,9 @@
+using System;
+#if NET
+using System.Buffers;
+#endif
+using System.Text;
+
 namespace Markupolation;
 
 /// <summary>
@@ -5,11 +11,74 @@ namespace Markupolation;
 /// </summary>
 public static partial class Attributes
 {
+    // Tab, LF, FF, CR, space, /, > and = all end an attribute name in the HTML tokenizer's
+    // "attribute name" state, so any of them in a dynamic name would end data-{name} early and
+    // start a new attribute (or close the tag) instead of becoming part of the name. Unlike a
+    // value, a name is never quoted, so encoding does not help here - the character has to not
+    // be there at all.
+#if NET
+    private static readonly SearchValues<char> UnsafeNameCharacters = SearchValues.Create("\t\n\f\r /=>");
+#else
+    private static readonly char[] UnsafeNameCharacters = ['\t', '\n', '\f', '\r', ' ', '/', '=', '>'];
+#endif
+
     /// <summary>
     /// Custom data attribute.
     /// </summary>
     /// <param name="name">Attribute name suffix.</param>
     /// <param name="value">Attribute value.</param>
     /// <returns><c>data-{name}="{value}"</c></returns>
-    public static Attribute data(string name, string value) => new($"data-{name}", value);
+    public static Attribute data(string name, string value)
+    {
+#if NET
+        ArgumentNullException.ThrowIfNull(name);
+#else
+        if (name == null)
+        {
+            throw new ArgumentNullException(nameof(name));
+        }
+#endif
+
+        return new($"data-{Nameable(name)}", value);
+    }
+
+    /// <summary>
+    /// Makes a string safe to use as (part of) an attribute name, by replacing any character that
+    /// would end the name early with <c>_</c>.
+    /// </summary>
+    private static string Nameable(string name)
+    {
+        // The common case needs nothing done to it, and is returned untouched - as HtmlEncoder does.
+        if (IndexOfUnsafeCharacter(name) < 0)
+        {
+            return name;
+        }
+
+        var builder = new StringBuilder(name.Length);
+
+        foreach (var c in name)
+        {
+            builder.Append(IsUnsafeCharacter(c) ? '_' : c);
+        }
+
+        return builder.ToString();
+    }
+
+    private static bool IsUnsafeCharacter(char c)
+    {
+#if NET
+        return UnsafeNameCharacters.Contains(c);
+#else
+        return Array.IndexOf(UnsafeNameCharacters, c) >= 0;
+#endif
+    }
+
+    private static int IndexOfUnsafeCharacter(string name)
+    {
+#if NET
+        return name.AsSpan().IndexOfAny(UnsafeNameCharacters);
+#else
+        return name.IndexOfAny(UnsafeNameCharacters);
+#endif
+    }
 }

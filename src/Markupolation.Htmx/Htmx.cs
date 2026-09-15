@@ -52,6 +52,18 @@ public static class Htmx
     public static Attribute hx_boost(string value) => new("hx-boost", value);
 
     /// <summary>
+    /// Adds or removes progressive enhancement for links and forms.
+    /// </summary>
+    /// <remarks>
+    /// Renders the literal lowercase <c>true</c>/<c>false</c> that htmx's protocol expects - a
+    /// bare <see cref="bool.ToString()"/> would send <c>True</c>/<c>False</c>, which htmx does not
+    /// recognise as falsy, so the boost would silently stay on.
+    /// </remarks>
+    /// <param name="value">Attribute value.</param>
+    /// <returns><c>hx-boost="{value}"</c></returns>
+    public static Attribute hx_boost(bool value) => new("hx-boost", value ? "true" : "false");
+
+    /// <summary>
     /// Shows a confirm dialog before issuing a request.
     /// </summary>
     /// <param name="value">Attribute value.</param>
@@ -100,6 +112,14 @@ public static class Htmx
     /// <returns><c>hx-history="{value}"</c></returns>
     public static Attribute hx_history(string value) => new("hx-history", value);
 
+    /// <inheritdoc cref="hx_history(string)" />
+    /// <remarks>
+    /// Renders the literal lowercase <c>true</c>/<c>false</c> that htmx's protocol expects - a
+    /// bare <see cref="bool.ToString()"/> would send <c>True</c>/<c>False</c>, which htmx does not
+    /// recognise as falsy.
+    /// </remarks>
+    public static Attribute hx_history(bool value) => new("hx-history", value ? "true" : "false");
+
     /// <summary>
     /// Includes additional data in requests.
     /// </summary>
@@ -141,6 +161,14 @@ public static class Htmx
     /// <param name="value">Attribute value.</param>
     /// <returns><c>hx-push-url="{value}"</c></returns>
     public static Attribute hx_push_url(string value) => new("hx-push-url", value);
+
+    /// <inheritdoc cref="hx_push_url(string)" />
+    /// <remarks>
+    /// Renders the literal lowercase <c>true</c>/<c>false</c> that htmx's protocol expects - a
+    /// bare <see cref="bool.ToString()"/> would send <c>True</c>/<c>False</c>, which htmx does not
+    /// recognise as falsy, so the push would happen anyway.
+    /// </remarks>
+    public static Attribute hx_push_url(bool value) => new("hx-push-url", value ? "true" : "false");
 
     /// <summary>
     /// Replaces the URL in the browser location bar.
@@ -225,6 +253,14 @@ public static class Htmx
     /// <param name="value">Attribute value.</param>
     /// <returns><c>hx-validate="{value}"</c></returns>
     public static Attribute hx_validate(string value) => new("hx-validate", value);
+
+    /// <inheritdoc cref="hx_validate(string)" />
+    /// <remarks>
+    /// Renders the literal lowercase <c>true</c>/<c>false</c> that htmx's protocol expects - a
+    /// bare <see cref="bool.ToString()"/> would send <c>True</c>/<c>False</c>, which htmx does not
+    /// recognise as falsy.
+    /// </remarks>
+    public static Attribute hx_validate(bool value) => new("hx-validate", value ? "true" : "false");
 
     /// <summary>
     /// Disables htmx processing for this node and its children.

@@ -50,7 +50,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(int value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(long value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -68,7 +68,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(double value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(decimal value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -86,7 +86,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(DateTime value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -96,7 +96,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(char value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(float value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -116,7 +116,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(ulong value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -126,7 +126,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(bool value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -135,7 +135,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(DateTimeOffset value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -144,7 +144,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(TimeSpan value)
     {
-        return FromText(value.ToString(null, CultureInfo.CurrentCulture));
+        return FromText(value.ToString(null, CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -172,7 +172,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(sbyte value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -181,7 +181,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(byte value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -190,7 +190,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(short value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -199,7 +199,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(ushort value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -208,6 +208,6 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(uint value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 }

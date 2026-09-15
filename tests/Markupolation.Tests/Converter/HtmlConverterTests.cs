@@ -57,6 +57,15 @@ public class HtmlConverterTests
     }
 
     [Test]
+    public void Boolean_attribute_with_an_explicit_value_text_still_converts_to_the_no_arg_call()
+    {
+        // disabled="disabled" (rather than disabled="") used to convert to disabled("disabled"),
+        // which does not compile - the generated method takes no arguments.
+        Convert("""<input type="checkbox" disabled="disabled">""")
+            .Should().Be(Lf("""input(type("checkbox"), disabled())"""));
+    }
+
+    [Test]
     public void Ambiguous_names_are_qualified()
     {
         // title is both an element and an attribute; unqualified it resolves to the attribute,
@@ -122,6 +131,7 @@ public class HtmlConverterTests
     [TestCase("""<div class="card"><h1 title="t">Hello</h1><p>Text &amp; more</p></div>""")]
     [TestCase("""<ul><li>1</li><li>2</li><li>3</li></ul>""")]
     [TestCase("""<form method="post" action="/save"><input type="checkbox" checked disabled><button type="submit">Go</button></form>""")]
+    [TestCase("""<input type="checkbox" disabled="disabled">""")]
     [TestCase("""<p><img src="/x.png" alt="A &quot;quoted&quot; alt"><br></p>""")]
     [TestCase("""<div data-foo="bar" hx-get="/x"><span>y</span></div>""")]
     [TestCase("""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>T</title></head><body><h1>Hi</h1></body></html>""")]

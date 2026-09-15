@@ -44,6 +44,7 @@ public class GenerateTests
         ElementNames();
         AttributeNames();
         ElementRawText();
+        AttributeBooleanness();
     }
 
     [Test]
@@ -519,6 +520,39 @@ public class GenerateTests
 
         var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\ElementRawText.cs";
         File.WriteAllText(path, result.ToString());
+    }
+
+    [Test]
+    public void AttributeBooleanness()
+    {
+        // Whether an attribute is boolean is a property of the name, not of the element it is on,
+        // so IsBooleanAttribute agrees across every [Attribute] the scraper recorded for a value -
+        // Any() only guards against relying on which of several duplicates happens to be first.
+        // Attribute (the type, not this test) needs this precomputed to tell "boolean attribute,
+        // null is the default" apart from "value attribute, null was passed in" without reflecting
+        // at render time.
+        var names = Enum.GetValues(typeof(AttributeType))
+            .Cast<object>()
+            .Where(value => GetAttributeAttributes(value).Any(x => x.IsBooleanAttribute))
+            .Select(value => value.ToString());
+        var condition = string.Join(" or ", names.Select(x => $"AttributeType.{x}"));
+
+        var result = new StringBuilder();
+        result.AppendLine("namespace Markupolation;");
+        result.AppendLine();
+        result.AppendLine("internal static class AttributeBooleanness");
+        result.AppendLine("{");
+        result.AppendLine($"    internal static bool Get(AttributeType type) => type is {condition};");
+        result.AppendLine("}");
+
+        var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\AttributeBooleanness.cs";
+        File.WriteAllText(path, result.ToString());
+
+        static AttributeAttribute[] GetAttributeAttributes(object value)
+        {
+            var member = typeof(AttributeType).GetMember(value.ToString()!).First();
+            return member.GetCustomAttributes(false).OfType<AttributeAttribute>().ToArray();
+        }
     }
 
     private static string Names(string className, string enumName, IEnumerable<string> names)

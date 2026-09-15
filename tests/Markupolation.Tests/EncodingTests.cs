@@ -325,12 +325,39 @@ public class EncodingTests
     }
 
     [Test]
+    public void Concatenating_with_an_empty_seed_keeps_the_raw_text_fallback()
+    {
+        // Content.Raw(null) and Content.Empty are real Content instances, not a C# null, and are
+        // in the "markup" state (Unencoded is null). Accumulating text onto one of them with +
+        // used to fall through to the general concatenation branch - which discards Unencoded -
+        // instead of being recognised as a no-op that should return the text side untouched.
+        var accumulated = Content.Raw(null) + "a < b";
+        e.style(accumulated).ToString().Should().Be("<style>a < b</style>");
+
+        accumulated = Content.Empty + "a < b";
+        e.style(accumulated).ToString().Should().Be("<style>a < b</style>");
+
+        // The same has to hold building up incrementally with +=, and regardless of which side is
+        // empty.
+        Content acc = Content.Raw(null);
+        acc += "a < b";
+        e.style(acc).ToString().Should().Be("<style>a < b</style>");
+
+        accumulated = "a < b" + Content.Raw(null);
+        e.style(accumulated).ToString().Should().Be("<style>a < b</style>");
+
+        // Outside a raw text element this was never observable - Value was already correct either
+        // way - so pin that too.
+        div(Content.Raw(null) + "a < b").ToString().Should().Be("<div>a &lt; b</div>");
+    }
+
+    [Test]
     public void Value_types_that_would_otherwise_widen_to_the_wrong_conversion()
     {
         // Each of these three has to be declared explicitly. Without it the value widens to
         // another conversion and renders wrong - or does not compile at all.
         div('a').ToString().Should().Be("<div>a</div>", "a char would widen to int and render 97");
-        div(0.1f).ToString().Should().Be("<div>" + 0.1f.ToString(CultureInfo.CurrentCulture) + "</div>",
+        div(0.1f).ToString().Should().Be("<div>" + 0.1f.ToString(CultureInfo.InvariantCulture) + "</div>",
             "a float would widen to double and render its binary artefacts");
         div(ulong.MaxValue).ToString().Should().Be("<div>18446744073709551615</div>",
             "a ulong would be ambiguous between the double and decimal conversions");
@@ -339,7 +366,7 @@ public class EncodingTests
         Content fromFloat = 0.1f;
         Content fromULong = ulong.MaxValue;
         fromChar.ToString().Should().Be("a");
-        fromFloat.ToString().Should().Be(0.1f.ToString(CultureInfo.CurrentCulture));
+        fromFloat.ToString().Should().Be(0.1f.ToString(CultureInfo.InvariantCulture));
         fromULong.ToString().Should().Be("18446744073709551615");
     }
 
@@ -371,6 +398,36 @@ public class EncodingTests
         fromTimeSpan.ToString().Should().Be("01:30:00");
         fromEnum.ToString().Should().Be("Ordinal");
         fromOffset.ToString().Should().NotBeEmpty();
+    }
+
+    [Test]
+    public void Conversions_are_culture_invariant()
+    {
+        // A server running under a comma-decimal culture must not change what gets rendered -
+        // otherwise a numeric HTML attribute or embedded JSON silently breaks depending on where
+        // the process happens to be deployed.
+        var original = CultureInfo.CurrentCulture;
+
+        try
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("de-DE");
+
+            Content fromDouble = 3.14;
+            Content fromDecimal = 3.14m;
+            Content fromFloat = 3.14f;
+            Content fromDate = new DateTime(2026, 9, 15);
+            Content interpolated = $"{3.14}";
+
+            fromDouble.ToString().Should().Be("3.14");
+            fromDecimal.ToString().Should().Be("3.14");
+            fromFloat.ToString().Should().Be("3.14");
+            fromDate.ToString().Should().NotContain(",");
+            interpolated.ToString().Should().Be("3.14");
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = original;
+        }
     }
 
     [Test]

@@ -28,6 +28,18 @@ public class HtmxAttributeTests
     }
 
     [Test]
+    public void Boolean_valued_overloads_render_lowercase_true_or_false()
+    {
+        // htmx's protocol only recognises lowercase "false" - bool.ToString() would send "False",
+        // which htmx treats as truthy, so the push/boost/etc. would silently happen anyway.
+        hx_push_url(false).ToString().Should().Be("hx-push-url=\"false\"");
+        hx_push_url(true).ToString().Should().Be("hx-push-url=\"true\"");
+        hx_history(false).ToString().Should().Be("hx-history=\"false\"");
+        hx_boost(false).ToString().Should().Be("hx-boost=\"false\"");
+        hx_validate(false).ToString().Should().Be("hx-validate=\"false\"");
+    }
+
+    [Test]
     public void Hx_on_names_the_event()
     {
         hx_on("click", "alert(1)").ToString().Should().Be("hx-on:click=\"alert(1)\"");

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -85,7 +86,7 @@ public partial record Content
             return;
         }
 
-        var text = value is IFormattable formattable ? formattable.ToString(format, null) : value?.ToString();
+        var text = value is IFormattable formattable ? formattable.ToString(format, CultureInfo.InvariantCulture) : value?.ToString();
 
         _builder.Append(HtmlEncoder.Encode(text));
     }

@@ -56,6 +56,29 @@ public sealed record Element : Content
         return isRawTextElement ? child?.Unencoded ?? child?.Value : child?.Value;
     }
 
+    /// <summary>
+    /// Whether the attribute at <paramref name="index"/> already appeared earlier in
+    /// <paramref name="content"/> - the browser resolves a duplicate attribute to the first
+    /// occurrence during parsing, so a later one renders nothing.
+    /// </summary>
+    private static bool IsDuplicateAttribute(Content[] content, int index)
+    {
+        if (content[index] is not Attribute attribute)
+        {
+            return false;
+        }
+
+        for (var i = 0; i < index; i++)
+        {
+            if (content[i] is Attribute earlier && string.Equals(earlier.Name, attribute.Name, StringComparison.Ordinal))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     private static void Write(Span<char> destination, string name, bool isVoidElement, bool isRawTextElement, Content[] content)
     {
         var position = 0;
@@ -66,7 +89,7 @@ public sealed record Element : Content
 
         for (var i = 0; i < content.Length; i++)
         {
-            if (content[i] is Attribute attribute && attribute.Value is { } attributeValue)
+            if (content[i] is Attribute attribute && attribute.Value is { } attributeValue && !IsDuplicateAttribute(content, i))
             {
                 destination[position++] = ' ';
                 attributeValue.AsSpan().CopyTo(destination.Slice(position));
@@ -111,6 +134,11 @@ public sealed record Element : Content
 
         for (var i = 0; i < content.Length; i++)
         {
+            if (content[i] is Attribute && IsDuplicateAttribute(content, i))
+            {
+                continue;
+            }
+
             var value = content[i] is Attribute ? content[i].Value : ChildValue(content[i], isRawTextElement);
 
             if (value == null)
