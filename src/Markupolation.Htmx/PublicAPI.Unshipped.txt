@@ -1,7 +1,6 @@
 #nullable enable
 Markupolation.Htmx
 static Markupolation.Htmx.hx_boost(bool value) -> Markupolation.Attribute!
-static Markupolation.Htmx.hx_boost(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_confirm(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_delete(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_disable() -> Markupolation.Attribute!
@@ -12,7 +11,6 @@ static Markupolation.Htmx.hx_ext(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_get(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_headers(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_history(bool value) -> Markupolation.Attribute!
-static Markupolation.Htmx.hx_history(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_history_elt() -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_include(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_indicator(string! value) -> Markupolation.Attribute!
@@ -26,6 +24,7 @@ static Markupolation.Htmx.hx_prompt(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_push_url(bool value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_push_url(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_put(string! value) -> Markupolation.Attribute!
+static Markupolation.Htmx.hx_replace_url(bool value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_replace_url(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_request(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_select(string! value) -> Markupolation.Attribute!
@@ -36,6 +35,5 @@ static Markupolation.Htmx.hx_sync(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_target(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_trigger(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_validate(bool value) -> Markupolation.Attribute!
-static Markupolation.Htmx.hx_validate(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_vals(string! value) -> Markupolation.Attribute!
 static Markupolation.Htmx.hx_vars(string! value) -> Markupolation.Attribute!

@@ -42,6 +42,19 @@ Everything else: `hx_boost`, `hx_confirm`, `hx_disable`, `hx_disabled_elt`, `hx_
 
 `hx_disable()`, `hx_history_elt()` and `hx_preserve()` take no value and render bare.
 
+`hx_boost`, `hx_history` and `hx_validate` take a `bool` and nothing else, because a bool is all
+htmx reads from them. `hx_push_url` and `hx_replace_url` take either, since htmx reads a URL or
+`true`/`false` from those:
+
+```cs
+hx_boost(false)              // hx-boost="false"
+hx_push_url("/page/2")       // hx-push-url="/page/2"
+hx_push_url(false)           // hx-push-url="false"
+```
+
+The rendered value is always lowercase `true`/`false` — htmx does not recognise the `True`/`False`
+that `bool.ToString()` produces, and would have treated it as truthy.
+
 `hx_on` names the event. A DOM event is named directly; an htmx event takes a leading colon:
 
 ```cs
