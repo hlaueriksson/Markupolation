@@ -33,6 +33,20 @@ public class AttributesTests
     }
 
     [Test]
+    public void An_empty_value_is_how_a_non_boolean_attribute_is_written_bare()
+    {
+        // The spec's boolean set is narrower than "attributes where bare is idiomatic": hidden is
+        // enumerated and download is text, so neither gets a no-argument method, and passing null
+        // now omits them. "" is the spelling to use - bare and ="" parse to the same DOM, so
+        // <div hidden> and <div hidden=""> are the same element to a browser.
+        div(hidden(""), id("x")).ToString().Should().Be("<div hidden=\"\" id=\"x\"></div>");
+        a(href("/f"), download("")).ToString().Should().Be("<a href=\"/f\" download=\"\"></a>");
+
+        // The point of the contrast: null is the "I have nothing to say" case and drops out.
+        div(hidden(null!), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
+    }
+
+    [Test]
     public void Data()
     {
         data("value").ToString().Should().Be("data=\"value\"");

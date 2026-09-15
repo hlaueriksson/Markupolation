@@ -254,7 +254,7 @@ public class GenerateTests
             if (!a.IsVoidElement)
             {
                 result.AppendLine($"    /// <inheritdoc cref=\"{value}(Content[])\" />");
-                result.AppendLine($"    public static Element {value}(object content) => new(ElementType.{value}, false, content?.ToString()!);");
+                result.AppendLine($"    public static Element {value}(object content) => new(ElementType.{value}, false, ValueFormatter.Format(content)!);");
                 result.AppendLine();
             }
         }
@@ -323,7 +323,7 @@ public class GenerateTests
             if (!a.Any(x => x.IsBooleanAttribute))
             {
                 result.AppendLine($"    /// <inheritdoc cref=\"{value}(string)\" />");
-                result.AppendLine($"    public static Attribute {value}(object value) => new(AttributeType.{value}, value?.ToString());");
+                result.AppendLine($"    public static Attribute {value}(object value) => new(AttributeType.{value}, ValueFormatter.Format(value));");
                 result.AppendLine();
             }
         }

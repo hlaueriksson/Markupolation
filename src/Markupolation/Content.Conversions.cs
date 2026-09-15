@@ -83,10 +83,15 @@ public partial record Content
     /// <summary>
     /// Converts <see cref="DateTime"/> to <see cref="Content"/>.
     /// </summary>
+    /// <remarks>
+    /// ISO 8601 (<c>2026-09-15T13:45:00</c>), because that is what HTML's date and time attributes
+    /// are defined in terms of - an invariant <see cref="DateTime.ToString()"/> would render
+    /// <c>09/15/2026 13:45:00</c>, which <c>&lt;time datetime&gt;</c> does not accept.
+    /// </remarks>
     /// <param name="value">The value.</param>
     public static implicit operator Content(DateTime value)
     {
-        return FromText(value.ToString(CultureInfo.InvariantCulture));
+        return FromText(ValueFormatter.Format(value));
     }
 
     /// <summary>
@@ -122,20 +127,28 @@ public partial record Content
     /// <summary>
     /// Converts <see cref="bool"/> to <see cref="Content"/>.
     /// </summary>
-    /// <remarks>Renders <c>True</c> or <c>False</c>. A conditional usually reads better as <c>flag.If(...)</c>.</remarks>
+    /// <remarks>
+    /// Renders lowercase <c>true</c> or <c>false</c>, not the <c>True</c>/<c>False</c> of
+    /// <see cref="bool.ToString()"/> - see <see cref="ValueFormatter.Format(bool)"/> for why. A
+    /// conditional usually reads better as <c>flag.If(...)</c> than as a rendered bool.
+    /// </remarks>
     /// <param name="value">The value.</param>
     public static implicit operator Content(bool value)
     {
-        return FromText(value.ToString(CultureInfo.InvariantCulture));
+        return FromText(ValueFormatter.Format(value));
     }
 
     /// <summary>
     /// Converts <see cref="DateTimeOffset"/> to <see cref="Content"/>.
     /// </summary>
+    /// <remarks>
+    /// ISO 8601 with the offset spelled out (<c>2026-09-15T13:45:00+02:00</c>), which is HTML's
+    /// global date and time string.
+    /// </remarks>
     /// <param name="value">The value.</param>
     public static implicit operator Content(DateTimeOffset value)
     {
-        return FromText(value.ToString(CultureInfo.InvariantCulture));
+        return FromText(ValueFormatter.Format(value));
     }
 
     /// <summary>

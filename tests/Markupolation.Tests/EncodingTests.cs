@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
+using a = Markupolation.Attributes;
 using e = Markupolation.Elements;
 
 namespace Markupolation.Tests;
@@ -393,11 +394,46 @@ public class EncodingTests
         Content fromEnum = StringComparison.Ordinal;
         Content fromOffset = new DateTimeOffset(2026, 9, 12, 0, 0, 0, TimeSpan.Zero);
 
-        fromBool.ToString().Should().Be("True");
+        // Lowercase, because anything that reads the value back as a string compares against
+        // "true" - dataset.x === "true", htmx, Alpine. bool.ToString() would say "True".
+        fromBool.ToString().Should().Be("true");
         fromGuid.ToString().Should().Be("00000000-0000-0000-0000-000000000000");
         fromTimeSpan.ToString().Should().Be("01:30:00");
         fromEnum.ToString().Should().Be("Ordinal");
-        fromOffset.ToString().Should().NotBeEmpty();
+        fromOffset.ToString().Should().Be("2026-09-12T00:00:00+00:00");
+    }
+
+    [Test]
+    public void Dates_render_as_ISO_8601()
+    {
+        // HTML's date and time attributes are defined in terms of ISO 8601, so that is what a
+        // DateTime renders as - an invariant ToString() would give 09/15/2026 13:45:00, which
+        // <time datetime> does not accept. Nor the round-trip "O" format: its seven fractional
+        // digits exceed the three HTML allows.
+        Content date = new DateTime(2026, 9, 15, 13, 45, 0);
+        date.ToString().Should().Be("2026-09-15T13:45:00");
+
+        Content offset = new DateTimeOffset(2026, 9, 15, 13, 45, 0, TimeSpan.FromHours(2));
+        offset.ToString().Should().Be("2026-09-15T13:45:00+02:00");
+
+        e.time(datetime(new DateTime(2026, 9, 15)), "Sep 15").ToString()
+            .Should().Be("<time datetime=\"2026-09-15T00:00:00\">Sep 15</time>");
+    }
+
+    [Test]
+    public void A_bool_renders_the_same_through_every_path()
+    {
+        // The implicit conversion, the generated object overload and an interpolation hole are the
+        // same thing to whoever writes them, so they have to agree.
+        Content converted = true;
+        converted.ToString().Should().Be("true");
+        div(contenteditable(true)).ToString().Should().Be("<div contenteditable=\"true\"></div>");
+        div($"{true}").ToString().Should().Be("<div>true</div>");
+
+        // data is one of the nine names that are both an element and an attribute, so a non-string
+        // value needs the a. alias - unqualified it is now CS0121 rather than silently binding to
+        // Elements.data(params Content[]) and rendering <data>onTrue</data>.
+        a.data("on", true).ToString().Should().Be("data-on=\"true\"");
     }
 
     [Test]

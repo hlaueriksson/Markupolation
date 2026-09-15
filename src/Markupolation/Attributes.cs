@@ -42,6 +42,27 @@ public static partial class Attributes
         return new($"data-{Nameable(name)}", value);
     }
 
+    /// <inheritdoc cref="data(string, string)" />
+    /// <remarks>
+    /// The <c>object</c> overload every generated attribute has, so a data attribute renders a
+    /// value the same way the rest of the library does - lowercase <c>true</c>, an invariant
+    /// number, an ISO 8601 date. Without it the caller has to write <c>value.ToString()</c>, and a
+    /// bool would reach the markup as <c>True</c>, which <c>dataset.x === "true"</c> does not match.
+    /// </remarks>
+    public static Attribute data(string name, object value)
+    {
+#if NET
+        ArgumentNullException.ThrowIfNull(name);
+#else
+        if (name == null)
+        {
+            throw new ArgumentNullException(nameof(name));
+        }
+#endif
+
+        return new($"data-{Nameable(name)}", ValueFormatter.Format(value));
+    }
+
     /// <summary>
     /// Makes a string safe to use as (part of) an attribute name, by replacing any character that
     /// would end the name early with <c>_</c>.

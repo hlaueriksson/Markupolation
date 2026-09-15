@@ -43,6 +43,15 @@ public partial record Content
             return left;
         }
 
+        // Both sides are still text, so keep the original for a raw text element to fall back to.
+        // This comes first because it is the only branch that needs neither side's Value: reading
+        // Value encodes, and the combined text is encoded again below, so testing it here would
+        // encode three times where one will do.
+        if (left.Unencoded is { } leftText && right.Unencoded is { } rightText)
+        {
+            return FromText(leftText + rightText);
+        }
+
         // "" is the additive identity for +, so concatenating with it must be a genuine no-op -
         // returning the other side untouched, not a new Content that has lost whichever side still
         // carried Unencoded. Content.Raw(null) and Content.Empty both render as "" here, but are
@@ -55,12 +64,6 @@ public partial record Content
         if (string.IsNullOrEmpty(right.Value))
         {
             return left;
-        }
-
-        // Both sides are still text, so keep the original for a raw text element to fall back to.
-        if (left.Unencoded is { } leftText && right.Unencoded is { } rightText)
-        {
-            return FromText(leftText + rightText);
         }
 
         return new Content(string.Concat(left.Value, right.Value));

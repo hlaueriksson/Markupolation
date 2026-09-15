@@ -67,10 +67,10 @@ public class ContentExtensionsTests
         item.IfNull(div("null")).ToString()
             .Should().BeEmpty();
 
-        // A bare non-nullable value type is now a compile error (CS0453) rather than a permanent
-        // no-op: IfNull<T> is split into a `where T : class` and a `where T : struct` (Nullable<T>)
-        // overload, so `5.IfNull(...)` no longer compiles at all. Uncommenting the next line
-        // demonstrates that:
+        // A bare non-nullable value type is now a compile error (CS0452, "must be a reference
+        // type") rather than a permanent no-op: IfNull<T> is split into a `where T : class?` and a
+        // `where T : struct` (Nullable<T>) overload, so `5.IfNull(...)` no longer compiles at all.
+        // Uncommenting the next line demonstrates that:
         // 5.IfNull(div("null"));
     }
 

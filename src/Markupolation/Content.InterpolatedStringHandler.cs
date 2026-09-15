@@ -86,7 +86,12 @@ public partial record Content
             return;
         }
 
-        var text = value is IFormattable formattable ? formattable.ToString(format, CultureInfo.InvariantCulture) : value?.ToString();
+        // An explicit format in the hole ($"{price:N2}") is the author asking for exactly that, and
+        // wins. Without one, the value renders the way it would anywhere else in the library, so
+        // that $"{flag}" and div(flag) agree.
+        var text = format != null && value is IFormattable formattable
+            ? formattable.ToString(format, CultureInfo.InvariantCulture)
+            : ValueFormatter.Format(value);
 
         _builder.Append(HtmlEncoder.Encode(text));
     }
