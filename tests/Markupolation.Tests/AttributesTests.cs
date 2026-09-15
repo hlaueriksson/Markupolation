@@ -67,6 +67,18 @@ public class AttributesTests
     }
 
     [Test]
+    public void Data_is_null_tolerant_about_its_name()
+    {
+        // Null tolerant rather than throwing, like the rest of the library: there is no attribute
+        // to build without a name, so nothing renders - not a nameless data- in the tag.
+        data(null!, "value").ToString().Should().BeEmpty();
+        div(data(null!, "value"), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
+
+        // Same for the raw constructor, which used to concatenate a null name into ="value".
+        div(new Attribute(null!, "value"), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
+    }
+
+    [Test]
     public void Attribute_()
     {
         as_("value").ToString().Should().Be("as=\"value\"");
