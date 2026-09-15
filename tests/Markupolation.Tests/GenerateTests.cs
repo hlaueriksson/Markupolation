@@ -147,7 +147,17 @@ public class GenerateTests
             var elements = await GetElementsAsync(attribute);
             var elementTypes = elements.Length != 0 ? ", " + string.Join(", ", elements.Select(x => $"ElementType.{x.CleanName()}")) : string.Empty;
 
-            result.AppendLine($"    [Attribute(\"{description}\", {isGlobalAttribute}, {isBooleanAttribute}{elementTypes})]");
+            // The value column, which is where "the empty string" shows up - plain text, unlike the
+            // boolean attribute link above. It means the attribute may be written bare, because the
+            // two are the same thing once parsed. lang is excluded deliberately: it is the one
+            // attribute where the empty string is not the "on" keyword but a statement that the
+            // language is unknown, so a no-argument lang() would read as nonsense.
+            var value = await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(3)", "e => e.innerText");
+            var isEmptyStringValid = value.Contains("the empty string") && name != "lang"
+                ? ", IsEmptyStringValid = true"
+                : string.Empty;
+
+            result.AppendLine($"    [Attribute(\"{description}\", {isGlobalAttribute}, {isBooleanAttribute}{elementTypes}{isEmptyStringValid})]");
             if (name != nextName)
             {
                 result.AppendLine($"    {name},");
@@ -253,7 +263,7 @@ public class GenerateTests
             if (!a.IsVoidElement)
             {
                 result.AppendLine($"    /// <inheritdoc cref=\"{value}(Content[])\" />");
-                result.AppendLine($"    public static Element {value}(object content) => new(ElementType.{value}, false, content?.ToString()!);");
+                result.AppendLine($"    public static Element {value}(object content) => new(ElementType.{value}, false, ValueFormatter.Format(content)!);");
                 result.AppendLine();
             }
         }
@@ -322,8 +332,26 @@ public class GenerateTests
             if (!a.Any(x => x.IsBooleanAttribute))
             {
                 result.AppendLine($"    /// <inheritdoc cref=\"{value}(string)\" />");
-                result.AppendLine($"    public static Attribute {value}(object value) => new(AttributeType.{value}, value?.ToString());");
+                result.AppendLine($"    public static Attribute {value}(object value) => new(AttributeType.{value}, ValueFormatter.Format(value));");
                 result.AppendLine();
+
+                // The specification lists the empty string among this attribute's values, and bare
+                // is the same thing once parsed, so it gets a no-argument spelling as well - what
+                // makes <p hidden> writable. Not instead of the overloads above: these are
+                // enumerated attributes, so hidden("until-found") is still a real value.
+                if (a.Any(x => x.IsEmptyStringValid))
+                {
+                    result.AppendLine($"    /// <summary>");
+                    foreach (var x in a)
+                    {
+                        result.AppendLine($"    /// {x.Description}.");
+                    }
+                    result.AppendLine($"    /// </summary>");
+                    result.AppendLine($"    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>");
+                    result.AppendLine($"    /// <returns><c>{value}</c></returns>");
+                    result.AppendLine($"    public static Attribute {value}() => new(AttributeType.{value});");
+                    result.AppendLine();
+                }
             }
         }
         result.Remove(result.Length - Environment.NewLine.Length, Environment.NewLine.Length); // last new line
@@ -520,6 +548,7 @@ public class GenerateTests
         var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\ElementRawText.cs";
         File.WriteAllText(path, result.ToString());
     }
+
 
     private static string Names(string className, string enumName, IEnumerable<string> names)
     {

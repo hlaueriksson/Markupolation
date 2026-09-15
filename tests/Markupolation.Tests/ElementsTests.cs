@@ -18,11 +18,16 @@ public class ElementsTests
     [Test]
     public void VoidElement()
     {
+        // crossorigin is not a boolean attribute, so a null value omits it entirely rather than
+        // rendering it bare - required() below is the boolean case, unaffected by that.
         var result = img(id("main-logo"), crossorigin(null!), src("https://resources.whatwg.org/logo.svg"));
-        result.ToString().Should().Be("<img id=\"main-logo\" crossorigin src=\"https://resources.whatwg.org/logo.svg\" />");
+        result.ToString().Should().Be("<img id=\"main-logo\" src=\"https://resources.whatwg.org/logo.svg\" />");
 
         result = img(id("main-logo"), crossorigin(null!), src("https://resources.whatwg.org/logo.svg"), "Child");
-        result.ToString().Should().Be("<img id=\"main-logo\" crossorigin src=\"https://resources.whatwg.org/logo.svg\" />");
+        result.ToString().Should().Be("<img id=\"main-logo\" src=\"https://resources.whatwg.org/logo.svg\" />");
+
+        result = img(id("main-logo"), ismap(), src("https://resources.whatwg.org/logo.svg"));
+        result.ToString().Should().Be("<img id=\"main-logo\" ismap src=\"https://resources.whatwg.org/logo.svg\" />");
     }
 
     [Test]

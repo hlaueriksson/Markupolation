@@ -94,11 +94,25 @@ public static class ContentExtensions
     /// <summary>
     /// Returns <see cref="Content"/> if value is null.
     /// </summary>
+    /// <remarks>
+    /// Constrained to reference types. For a non-nullable value type, <c>value == null</c> boxes
+    /// and is always false - <c>then</c> could never run, silently. <see cref="Nullable{T}"/> has
+    /// its own overload below, so <c>int?</c> still works; a bare <c>int</c> is now a compile error
+    /// instead of a permanent no-op.
+    /// </remarks>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
     /// <param name="then">Attribute, element or content.</param>
     /// <returns><see cref="Content"/></returns>
     public static Content IfNull<T>(this T value, Content then)
+        where T : class?
+    {
+        return value == null ? then : Content.Empty;
+    }
+
+    /// <inheritdoc cref="IfNull{T}(T, Content)" />
+    public static Content IfNull<T>(this T? value, Content then)
+        where T : struct
     {
         return value == null ? then : Content.Empty;
     }
@@ -106,11 +120,25 @@ public static class ContentExtensions
     /// <summary>
     /// Returns <see cref="Content"/> if value is null. The delegate is only invoked when it is.
     /// </summary>
+    /// <remarks>
+    /// Constrained to reference types. For a non-nullable value type, <c>value == null</c> boxes
+    /// and is always false - <c>then</c> could never run, silently. <see cref="Nullable{T}"/> has
+    /// its own overload below, so <c>int?</c> still works; a bare <c>int</c> is now a compile error
+    /// instead of a permanent no-op.
+    /// </remarks>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
     /// <param name="then">Attribute, element or content delegate.</param>
     /// <returns><see cref="Content"/></returns>
     public static Content IfNull<T>(this T value, Func<Content> then)
+        where T : class?
+    {
+        return value == null ? Invoke(then) : Content.Empty;
+    }
+
+    /// <inheritdoc cref="IfNull{T}(T, Func{Content})" />
+    public static Content IfNull<T>(this T? value, Func<Content> then)
+        where T : struct
     {
         return value == null ? Invoke(then) : Content.Empty;
     }
@@ -118,28 +146,56 @@ public static class ContentExtensions
     /// <summary>
     /// Returns <see cref="Content"/> if value is null; otherwise the fallback <see cref="Content"/>.
     /// </summary>
+    /// <remarks>
+    /// Constrained to reference types. For a non-nullable value type, <c>value == null</c> boxes
+    /// and is always false - <c>then</c> could never run, silently. <see cref="Nullable{T}"/> has
+    /// its own overload below, so <c>int?</c> still works; a bare <c>int</c> is now a compile error
+    /// instead of a permanent no-op.
+    /// </remarks>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
     /// <param name="then">Attribute, element or content.</param>
     /// <param name="otherwise">Fallback attribute, element or content delegate.</param>
     /// <returns><see cref="Content"/></returns>
     public static Content IfNull<T>(this T value, Content then, Func<T, Content> otherwise)
+        where T : class?
     {
         return value == null ? then : Invoke(otherwise, value);
+    }
+
+    /// <inheritdoc cref="IfNull{T}(T, Content, Func{T, Content})" />
+    public static Content IfNull<T>(this T? value, Content then, Func<T, Content> otherwise)
+        where T : struct
+    {
+        return value.HasValue ? Invoke(otherwise, value.Value) : then;
     }
 
     /// <summary>
     /// Returns <see cref="Content"/> if value is null; otherwise the fallback <see cref="Content"/>.
     /// Only the delegate for the branch that is taken is invoked.
     /// </summary>
+    /// <remarks>
+    /// Constrained to reference types. For a non-nullable value type, <c>value == null</c> boxes
+    /// and is always false - <c>then</c> could never run, silently. <see cref="Nullable{T}"/> has
+    /// its own overload below, so <c>int?</c> still works; a bare <c>int</c> is now a compile error
+    /// instead of a permanent no-op.
+    /// </remarks>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
     /// <param name="then">Attribute, element or content delegate.</param>
     /// <param name="otherwise">Fallback attribute, element or content delegate.</param>
     /// <returns><see cref="Content"/></returns>
     public static Content IfNull<T>(this T value, Func<Content> then, Func<T, Content> otherwise)
+        where T : class?
     {
         return value == null ? Invoke(then) : Invoke(otherwise, value);
+    }
+
+    /// <inheritdoc cref="IfNull{T}(T, Func{Content}, Func{T, Content})" />
+    public static Content IfNull<T>(this T? value, Func<Content> then, Func<T, Content> otherwise)
+        where T : struct
+    {
+        return value.HasValue ? Invoke(otherwise, value.Value) : Invoke(then);
     }
 
     /// <summary>

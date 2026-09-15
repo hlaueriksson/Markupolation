@@ -209,8 +209,9 @@ public static class HtmlConverter
 
         var method = options.Aliases && Ambiguous.Contains(clean) ? "a." + clean : clean;
 
-        // A boolean attribute carries no value; htmx and the spec both write it bare.
-        return IsBooleanAttribute(clean) && string.IsNullOrEmpty(value)
+        // A boolean attribute carries no value; the generated method takes none, regardless of what
+        // the source HTML wrote as the value text (e.g. disabled="disabled").
+        return IsBooleanAttribute(clean)
             ? $"{method}()"
             : $"{method}({Literal(value)})";
     }

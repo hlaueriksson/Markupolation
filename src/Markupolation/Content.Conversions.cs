@@ -50,7 +50,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(int value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(long value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -68,7 +68,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(double value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -77,16 +77,21 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(decimal value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
     /// Converts <see cref="DateTime"/> to <see cref="Content"/>.
     /// </summary>
+    /// <remarks>
+    /// ISO 8601 (<c>2026-09-15T13:45:00</c>), because that is what HTML's date and time attributes
+    /// are defined in terms of - an invariant <see cref="DateTime.ToString()"/> would render
+    /// <c>09/15/2026 13:45:00</c>, which <c>&lt;time datetime&gt;</c> does not accept.
+    /// </remarks>
     /// <param name="value">The value.</param>
     public static implicit operator Content(DateTime value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(ValueFormatter.Format(value));
     }
 
     /// <summary>
@@ -96,7 +101,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(char value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -106,7 +111,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(float value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -116,26 +121,34 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(ulong value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
     /// Converts <see cref="bool"/> to <see cref="Content"/>.
     /// </summary>
-    /// <remarks>Renders <c>True</c> or <c>False</c>. A conditional usually reads better as <c>flag.If(...)</c>.</remarks>
+    /// <remarks>
+    /// Renders lowercase <c>true</c> or <c>false</c>, not the <c>True</c>/<c>False</c> of
+    /// <see cref="bool.ToString()"/> - see <see cref="ValueFormatter.Format(bool)"/> for why. A
+    /// conditional usually reads better as <c>flag.If(...)</c> than as a rendered bool.
+    /// </remarks>
     /// <param name="value">The value.</param>
     public static implicit operator Content(bool value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(ValueFormatter.Format(value));
     }
 
     /// <summary>
     /// Converts <see cref="DateTimeOffset"/> to <see cref="Content"/>.
     /// </summary>
+    /// <remarks>
+    /// ISO 8601 with the offset spelled out (<c>2026-09-15T13:45:00+02:00</c>), which is HTML's
+    /// global date and time string.
+    /// </remarks>
     /// <param name="value">The value.</param>
     public static implicit operator Content(DateTimeOffset value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(ValueFormatter.Format(value));
     }
 
     /// <summary>
@@ -144,7 +157,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(TimeSpan value)
     {
-        return FromText(value.ToString(null, CultureInfo.CurrentCulture));
+        return FromText(value.ToString(null, CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -172,7 +185,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(sbyte value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -181,7 +194,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(byte value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -190,7 +203,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(short value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -199,7 +212,7 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(ushort value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 
     /// <summary>
@@ -208,6 +221,6 @@ public partial record Content
     /// <param name="value">The value.</param>
     public static implicit operator Content(uint value)
     {
-        return FromText(value.ToString(CultureInfo.CurrentCulture));
+        return FromText(value.ToString(CultureInfo.InvariantCulture));
     }
 }

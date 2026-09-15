@@ -30,13 +30,13 @@ public class HtmlConverterTests
     // A multi-line raw string literal keeps the newlines of the source file itself, which is
     // CRLF when the repository is checked out with core.autocrlf=true, so the expectations
     // need the same normalisation as the actual value.
-    private static string Lf(string source) => source.ReplaceLineEndings("\n");
+    private static string Normalize(string source) => source.ReplaceLineEndings("\n");
 
     [Test]
     public void Elements_attributes_and_text()
     {
         Convert("""<div class="card"><h1 title="t">Hello</h1></div>""")
-            .Should().Be(Lf("""
+            .Should().Be(Normalize("""
                 div(class_("card"),
                     h1(a.title("t"), "Hello")
                 )
@@ -48,12 +48,21 @@ public class HtmlConverterTests
     {
         // Void-ness and boolean-ness come from the generated metadata, not a list here.
         Convert("""<p><img src="/x.png" alt="X"><input type="checkbox" checked></p>""")
-            .Should().Be(Lf("""
+            .Should().Be(Normalize("""
                 p(
                     img(src("/x.png"), alt("X")),
                     input(type("checkbox"), checked_())
                 )
                 """));
+    }
+
+    [Test]
+    public void Boolean_attribute_with_an_explicit_value_text_still_converts_to_the_no_arg_call()
+    {
+        // disabled="disabled" (rather than disabled="") used to convert to disabled("disabled"),
+        // which does not compile - the generated method takes no arguments.
+        Convert("""<input type="checkbox" disabled="disabled">""")
+            .Should().Be(Normalize("""input(type("checkbox"), disabled())"""));
     }
 
     [Test]
@@ -122,6 +131,7 @@ public class HtmlConverterTests
     [TestCase("""<div class="card"><h1 title="t">Hello</h1><p>Text &amp; more</p></div>""")]
     [TestCase("""<ul><li>1</li><li>2</li><li>3</li></ul>""")]
     [TestCase("""<form method="post" action="/save"><input type="checkbox" checked disabled><button type="submit">Go</button></form>""")]
+    [TestCase("""<input type="checkbox" disabled="disabled">""")]
     [TestCase("""<p><img src="/x.png" alt="A &quot;quoted&quot; alt"><br></p>""")]
     [TestCase("""<div data-foo="bar" hx-get="/x"><span>y</span></div>""")]
     [TestCase("""<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>T</title></head><body><h1>Hi</h1></body></html>""")]

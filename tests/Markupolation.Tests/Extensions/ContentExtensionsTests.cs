@@ -55,6 +55,26 @@ public class ContentExtensionsTests
     }
 
     [Test]
+    public void IfNull_reference_type()
+    {
+        // The reference-type overload, exercised separately from the Nullable<T> one above -
+        // string.IfNull is what a nullable website/email/etc. actually calls in practice.
+        string item = null;
+        item.IfNull(div("null")).ToString()
+            .Should().Be("<div>null</div>");
+
+        item = "value";
+        item.IfNull(div("null")).ToString()
+            .Should().BeEmpty();
+
+        // A bare non-nullable value type is now a compile error (CS0452, "must be a reference
+        // type") rather than a permanent no-op: IfNull<T> is split into a `where T : class?` and a
+        // `where T : struct` (Nullable<T>) overload, so `5.IfNull(...)` no longer compiles at all.
+        // Uncommenting the next line demonstrates that:
+        // 5.IfNull(div("null"));
+    }
+
+    [Test]
     public void IfNull_otherwise()
     {
         int? item = null;
@@ -66,6 +86,18 @@ public class ContentExtensionsTests
             .Should().Be("<div>1</div>");
         item.IfNull(then: div("null"), otherwise: null).ToString()
             .Should().BeEmpty();
+    }
+
+    [Test]
+    public void IfNull_reference_type_otherwise()
+    {
+        string item = null;
+        item.IfNull(then: div("null"), otherwise: x => div(x)).ToString()
+            .Should().Be("<div>null</div>");
+
+        item = "value";
+        item.IfNull(then: div("null"), otherwise: x => div(x)).ToString()
+            .Should().Be("<div>value</div>");
     }
 
     [Test]

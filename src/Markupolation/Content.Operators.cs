@@ -22,7 +22,11 @@ public partial record Content
     /// element.
     /// </summary>
     /// <remarks>
-    /// Each side is rendered by its own rule. A <c>null</c> operand contributes nothing.
+    /// Each side is rendered by its own rule. A <c>null</c> operand, and one whose
+    /// <see cref="Value"/> is empty (such as <see cref="Empty"/> or <c>Raw(null)</c>), contributes
+    /// nothing and is returned as the other side, untouched - so whichever side still carries
+    /// <see cref="Unencoded"/> keeps it, including when accumulating with <c>+=</c> from an empty
+    /// seed.
     /// </remarks>
     /// <param name="left">Left content.</param>
     /// <param name="right">Right content.</param>
@@ -40,9 +44,26 @@ public partial record Content
         }
 
         // Both sides are still text, so keep the original for a raw text element to fall back to.
+        // This comes first because it is the only branch that needs neither side's Value: reading
+        // Value encodes, and the combined text is encoded again below, so testing it here would
+        // encode three times where one will do.
         if (left.Unencoded is { } leftText && right.Unencoded is { } rightText)
         {
             return FromText(leftText + rightText);
+        }
+
+        // "" is the additive identity for +, so concatenating with it must be a genuine no-op -
+        // returning the other side untouched, not a new Content that has lost whichever side still
+        // carried Unencoded. Content.Raw(null) and Content.Empty both render as "" here, but are
+        // real Content instances rather than a C# null, so the null checks above do not catch them.
+        if (string.IsNullOrEmpty(left.Value))
+        {
+            return right;
+        }
+
+        if (string.IsNullOrEmpty(right.Value))
+        {
+            return left;
         }
 
         return new Content(string.Concat(left.Value, right.Value));

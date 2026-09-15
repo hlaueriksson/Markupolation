@@ -42,7 +42,7 @@ internal enum AttributeType
     [Attribute("Hint for form autofill feature", false, false, ElementType.input, ElementType.select, ElementType.textarea)]
     autocomplete,
 
-    [Attribute("Recommended autocorrection behavior (for supported input methods)", true, false)]
+    [Attribute("Recommended autocorrection behavior (for supported input methods)", true, false, IsEmptyStringValid = true)]
     autocorrect,
 
     [Attribute("Automatically focus the element when the page is loaded", true, true)]
@@ -90,7 +90,7 @@ internal enum AttributeType
     [Attribute("Value of the element", false, false, ElementType.meta)]
     content,
 
-    [Attribute("Whether the element is editable", true, false)]
+    [Attribute("Whether the element is editable", true, false, IsEmptyStringValid = true)]
     contenteditable,
 
     [Attribute("Show user agent controls", false, true, ElementType.audio, ElementType.video, ElementType.img)]
@@ -99,7 +99,7 @@ internal enum AttributeType
     [Attribute("Coordinates for the shape to be created in an image map", false, false, ElementType.area)]
     coords,
 
-    [Attribute("How the element handles crossorigin requests", false, false, ElementType.audio, ElementType.img, ElementType.link, ElementType.script, ElementType.video)]
+    [Attribute("How the element handles crossorigin requests", false, false, ElementType.audio, ElementType.img, ElementType.link, ElementType.script, ElementType.video, IsEmptyStringValid = true)]
     crossorigin,
 
     [Attribute("Address of the resource", false, false, ElementType.object_)]
@@ -180,7 +180,7 @@ internal enum AttributeType
     [Attribute("Vertical dimension", false, false, ElementType.canvas, ElementType.embed, ElementType.iframe, ElementType.img, ElementType.input, ElementType.object_, ElementType.source, ElementType.video)]
     height,
 
-    [Attribute("Whether the element is relevant", true, false)]
+    [Attribute("Whether the element is relevant", true, false, IsEmptyStringValid = true)]
     hidden,
 
     [Attribute("Low limit of high range", false, false, ElementType.meter)]
@@ -320,7 +320,7 @@ internal enum AttributeType
     [Attribute("Encourage the user agent to display video content within the element's playback area", false, true, ElementType.video)]
     playsinline,
 
-    [Attribute("Makes the element a popover element", true, false)]
+    [Attribute("Makes the element a popover element", true, false, IsEmptyStringValid = true)]
     popover,
 
     [Attribute("Targets a popover element to toggle, show, or hide", false, false, ElementType.button, ElementType.input)]
@@ -332,7 +332,7 @@ internal enum AttributeType
     [Attribute("Poster frame to show prior to video playback", false, false, ElementType.video)]
     poster,
 
-    [Attribute("Hints how much buffering the media resource will likely need", false, false, ElementType.audio, ElementType.video)]
+    [Attribute("Hints how much buffering the media resource will likely need", false, false, ElementType.audio, ElementType.video, IsEmptyStringValid = true)]
     preload,
 
     [Attribute("Whether to allow the value to be edited by the user", false, true, ElementType.input, ElementType.textarea)]
@@ -401,7 +401,7 @@ internal enum AttributeType
     [Attribute("Number of columns spanned by the element", false, false, ElementType.col, ElementType.colgroup)]
     span,
 
-    [Attribute("Whether the element is to have its spelling and grammar checked", true, false)]
+    [Attribute("Whether the element is to have its spelling and grammar checked", true, false, IsEmptyStringValid = true)]
     spellcheck,
 
     [Attribute("Address of the resource", false, false, ElementType.audio, ElementType.embed, ElementType.iframe, ElementType.img, ElementType.input, ElementType.script, ElementType.source, ElementType.track, ElementType.video)]
@@ -440,7 +440,7 @@ internal enum AttributeType
     [Attribute("CSS style sheet set name", true, false, ElementType.link, ElementType.style)]
     title,
 
-    [Attribute("Whether the element is to be translated when the page is localized", true, false)]
+    [Attribute("Whether the element is to be translated when the page is localized", true, false, IsEmptyStringValid = true)]
     translate,
 
     [Attribute("Hint for the type of the referenced resource", false, false, ElementType.a, ElementType.link)]
@@ -467,6 +467,6 @@ internal enum AttributeType
     [Attribute("How the value of the form control is to be wrapped for form submission", false, false, ElementType.textarea)]
     wrap,
 
-    [Attribute("Whether the element can offer writing suggestions or not", true, false)]
+    [Attribute("Whether the element can offer writing suggestions or not", true, false, IsEmptyStringValid = true)]
     writingsuggestions,
 }

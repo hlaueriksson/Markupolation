@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
+using a = Markupolation.Attributes;
 using e = Markupolation.Elements;
 
 namespace Markupolation.Tests;
@@ -325,12 +326,39 @@ public class EncodingTests
     }
 
     [Test]
+    public void Concatenating_with_an_empty_seed_keeps_the_raw_text_fallback()
+    {
+        // Content.Raw(null) and Content.Empty are real Content instances, not a C# null, and are
+        // in the "markup" state (Unencoded is null). Accumulating text onto one of them with +
+        // used to fall through to the general concatenation branch - which discards Unencoded -
+        // instead of being recognised as a no-op that should return the text side untouched.
+        var accumulated = Content.Raw(null) + "a < b";
+        e.style(accumulated).ToString().Should().Be("<style>a < b</style>");
+
+        accumulated = Content.Empty + "a < b";
+        e.style(accumulated).ToString().Should().Be("<style>a < b</style>");
+
+        // The same has to hold building up incrementally with +=, and regardless of which side is
+        // empty.
+        Content acc = Content.Raw(null);
+        acc += "a < b";
+        e.style(acc).ToString().Should().Be("<style>a < b</style>");
+
+        accumulated = "a < b" + Content.Raw(null);
+        e.style(accumulated).ToString().Should().Be("<style>a < b</style>");
+
+        // Outside a raw text element this was never observable - Value was already correct either
+        // way - so pin that too.
+        div(Content.Raw(null) + "a < b").ToString().Should().Be("<div>a &lt; b</div>");
+    }
+
+    [Test]
     public void Value_types_that_would_otherwise_widen_to_the_wrong_conversion()
     {
         // Each of these three has to be declared explicitly. Without it the value widens to
         // another conversion and renders wrong - or does not compile at all.
         div('a').ToString().Should().Be("<div>a</div>", "a char would widen to int and render 97");
-        div(0.1f).ToString().Should().Be("<div>" + 0.1f.ToString(CultureInfo.CurrentCulture) + "</div>",
+        div(0.1f).ToString().Should().Be("<div>" + 0.1f.ToString(CultureInfo.InvariantCulture) + "</div>",
             "a float would widen to double and render its binary artefacts");
         div(ulong.MaxValue).ToString().Should().Be("<div>18446744073709551615</div>",
             "a ulong would be ambiguous between the double and decimal conversions");
@@ -339,7 +367,7 @@ public class EncodingTests
         Content fromFloat = 0.1f;
         Content fromULong = ulong.MaxValue;
         fromChar.ToString().Should().Be("a");
-        fromFloat.ToString().Should().Be(0.1f.ToString(CultureInfo.CurrentCulture));
+        fromFloat.ToString().Should().Be(0.1f.ToString(CultureInfo.InvariantCulture));
         fromULong.ToString().Should().Be("18446744073709551615");
     }
 
@@ -366,11 +394,76 @@ public class EncodingTests
         Content fromEnum = StringComparison.Ordinal;
         Content fromOffset = new DateTimeOffset(2026, 9, 12, 0, 0, 0, TimeSpan.Zero);
 
-        fromBool.ToString().Should().Be("True");
+        // Lowercase, because anything that reads the value back as a string compares against
+        // "true" - dataset.x === "true", htmx, Alpine. bool.ToString() would say "True".
+        fromBool.ToString().Should().Be("true");
         fromGuid.ToString().Should().Be("00000000-0000-0000-0000-000000000000");
         fromTimeSpan.ToString().Should().Be("01:30:00");
         fromEnum.ToString().Should().Be("Ordinal");
-        fromOffset.ToString().Should().NotBeEmpty();
+        fromOffset.ToString().Should().Be("2026-09-12T00:00:00+00:00");
+    }
+
+    [Test]
+    public void Dates_render_as_ISO_8601()
+    {
+        // HTML's date and time attributes are defined in terms of ISO 8601, so that is what a
+        // DateTime renders as - an invariant ToString() would give 09/15/2026 13:45:00, which
+        // <time datetime> does not accept. Nor the round-trip "O" format: its seven fractional
+        // digits exceed the three HTML allows.
+        Content date = new DateTime(2026, 9, 15, 13, 45, 0);
+        date.ToString().Should().Be("2026-09-15T13:45:00");
+
+        Content offset = new DateTimeOffset(2026, 9, 15, 13, 45, 0, TimeSpan.FromHours(2));
+        offset.ToString().Should().Be("2026-09-15T13:45:00+02:00");
+
+        e.time(datetime(new DateTime(2026, 9, 15)), "Sep 15").ToString()
+            .Should().Be("<time datetime=\"2026-09-15T00:00:00\">Sep 15</time>");
+    }
+
+    [Test]
+    public void A_bool_renders_the_same_through_every_path()
+    {
+        // The implicit conversion, the generated object overload and an interpolation hole are the
+        // same thing to whoever writes them, so they have to agree.
+        Content converted = true;
+        converted.ToString().Should().Be("true");
+        div(contenteditable(true)).ToString().Should().Be("<div contenteditable=\"true\"></div>");
+        div($"{true}").ToString().Should().Be("<div>true</div>");
+
+        // data is one of the nine names that are both an element and an attribute, so a non-string
+        // value needs the a. alias - unqualified it is now CS0121 rather than silently binding to
+        // Elements.data(params Content[]) and rendering <data>onTrue</data>.
+        a.data("on", true).ToString().Should().Be("data-on=\"true\"");
+    }
+
+    [Test]
+    public void Conversions_are_culture_invariant()
+    {
+        // A server running under a comma-decimal culture must not change what gets rendered -
+        // otherwise a numeric HTML attribute or embedded JSON silently breaks depending on where
+        // the process happens to be deployed.
+        var original = CultureInfo.CurrentCulture;
+
+        try
+        {
+            CultureInfo.CurrentCulture = new CultureInfo("de-DE");
+
+            Content fromDouble = 3.14;
+            Content fromDecimal = 3.14m;
+            Content fromFloat = 3.14f;
+            Content fromDate = new DateTime(2026, 9, 15);
+            Content interpolated = $"{3.14}";
+
+            fromDouble.ToString().Should().Be("3.14");
+            fromDecimal.ToString().Should().Be("3.14");
+            fromFloat.ToString().Should().Be("3.14");
+            fromDate.ToString().Should().NotContain(",");
+            interpolated.ToString().Should().Be("3.14");
+        }
+        finally
+        {
+            CultureInfo.CurrentCulture = original;
+        }
     }
 
     [Test]

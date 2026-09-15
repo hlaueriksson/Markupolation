@@ -10,6 +10,16 @@ Markupolation.Content.AppendFormatted<T>(T value, string? format) -> void
 Markupolation.Content.AppendLiteral(string! value) -> void
 Markupolation.Content.Content(int literalLength, int formattedCount) -> void
 Markupolation.Contents
+static Markupolation.Attributes.autocorrect() -> Markupolation.Attribute!
+static Markupolation.Attributes.contenteditable() -> Markupolation.Attribute!
+static Markupolation.Attributes.crossorigin() -> Markupolation.Attribute!
+static Markupolation.Attributes.data(string! name, object! value) -> Markupolation.Attribute!
+static Markupolation.Attributes.hidden() -> Markupolation.Attribute!
+static Markupolation.Attributes.popover() -> Markupolation.Attribute!
+static Markupolation.Attributes.preload() -> Markupolation.Attribute!
+static Markupolation.Attributes.spellcheck() -> Markupolation.Attribute!
+static Markupolation.Attributes.translate() -> Markupolation.Attribute!
+static Markupolation.Attributes.writingsuggestions() -> Markupolation.Attribute!
 static Markupolation.Content.Empty.get -> Markupolation.Content!
 static Markupolation.Content.Raw(string? value) -> Markupolation.Content!
 static Markupolation.Content.explicit operator string!(Markupolation.Content! value) -> string!

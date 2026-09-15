@@ -28,6 +28,29 @@ public class HtmxAttributeTests
     }
 
     [Test]
+    public void Boolean_valued_attributes_render_lowercase_true_or_false()
+    {
+        // htmx's protocol only recognises lowercase "false" - bool.ToString() would send "False",
+        // which htmx treats as truthy, so the boost/validation/etc. would silently stay on. These
+        // four take no string at all, because a bool is the only thing htmx reads from them.
+        hx_boost(false).ToString().Should().Be("hx-boost=\"false\"");
+        hx_boost(true).ToString().Should().Be("hx-boost=\"true\"");
+        hx_history(false).ToString().Should().Be("hx-history=\"false\"");
+        hx_validate(true).ToString().Should().Be("hx-validate=\"true\"");
+    }
+
+    [Test]
+    public void Url_attributes_take_either_a_url_or_a_bool()
+    {
+        // hx-push-url and hx-replace-url are the two that keep a string overload as well: htmx
+        // reads either a URL or true/false from them.
+        hx_push_url("/page/2").ToString().Should().Be("hx-push-url=\"/page/2\"");
+        hx_push_url(false).ToString().Should().Be("hx-push-url=\"false\"");
+        hx_replace_url("/page/2").ToString().Should().Be("hx-replace-url=\"/page/2\"");
+        hx_replace_url(false).ToString().Should().Be("hx-replace-url=\"false\"");
+    }
+
+    [Test]
     public void Hx_on_names_the_event()
     {
         hx_on("click", "alert(1)").ToString().Should().Be("hx-on:click=\"alert(1)\"");

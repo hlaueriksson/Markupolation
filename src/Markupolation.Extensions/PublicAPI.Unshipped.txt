@@ -11,5 +11,9 @@ static Markupolation.ContentExtensions.IfNotNull<T>(this T value, System.Func<T,
 static Markupolation.ContentExtensions.IfNotNullOrEmpty(this string! value, System.Func<string!, Markupolation.Content!>! then, System.Func<Markupolation.Content!>! otherwise) -> Markupolation.Content!
 static Markupolation.ContentExtensions.IfNull<T>(this T value, System.Func<Markupolation.Content!>! then) -> Markupolation.Content!
 static Markupolation.ContentExtensions.IfNull<T>(this T value, System.Func<Markupolation.Content!>! then, System.Func<T, Markupolation.Content!>! otherwise) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNull<T>(this T? value, Markupolation.Content! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNull<T>(this T? value, Markupolation.Content! then, System.Func<T, Markupolation.Content!>! otherwise) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNull<T>(this T? value, System.Func<Markupolation.Content!>! then) -> Markupolation.Content!
+static Markupolation.ContentExtensions.IfNull<T>(this T? value, System.Func<Markupolation.Content!>! then, System.Func<T, Markupolation.Content!>! otherwise) -> Markupolation.Content!
 static Markupolation.ContentExtensions.IfNullOrEmpty(this string! value, System.Func<Markupolation.Content!>! then) -> Markupolation.Content!
 static Markupolation.ContentExtensions.IfNullOrEmpty(this string! value, System.Func<Markupolation.Content!>! then, System.Func<string!, Markupolation.Content!>! otherwise) -> Markupolation.Content!
