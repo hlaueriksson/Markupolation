@@ -15,7 +15,25 @@ public sealed record Attribute : Content
     {
     }
 
-    internal Attribute(AttributeType type, string? value = null)
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Attribute"/> class, written bare with no value
+    /// at all.
+    /// </summary>
+    /// <remarks>
+    /// What separates <c>required()</c> and <c>hidden()</c> from <c>hidden(someNullableString)</c>:
+    /// the arity says "there is no value here" outright, so a null arriving at the constructor
+    /// below can keep meaning "the caller had nothing to say" and omit the attribute. Both a
+    /// boolean attribute and one whose specification lists the empty string among its values are
+    /// written this way - bare and <c>=""</c> are the same thing once parsed.
+    /// </remarks>
+    /// <param name="type">Attribute type.</param>
+    internal Attribute(AttributeType type)
+        : base(AttributeNames.Get(type))
+    {
+        Type = type;
+    }
+
+    internal Attribute(AttributeType type, string? value)
         : base(ToString(type, value))
     {
         Type = type;
@@ -26,19 +44,13 @@ public sealed record Attribute : Content
     /// <inheritdoc/>
     public override string ToString() => base.ToString();
 
-    private static string? ToString(AttributeType type, string? value = null)
+    private static string? ToString(AttributeType type, string? value)
     {
-        // A boolean attribute's own generated method never passes a value, so null here is the
-        // intentional default and still renders bare. For every other attribute, null means the
-        // caller passed one in (typically a nullable property) - that omits the attribute entirely
+        // Reaching here at all means a value was passed, so a null one came from the caller -
+        // typically a nullable property with nothing in it. That omits the attribute entirely
         // rather than rendering a bare one, which Element already does for any Attribute whose
-        // Value is null.
-        if (value == null && !AttributeBooleanness.Get(type))
-        {
-            return null;
-        }
-
-        return ToString(AttributeNames.Get(type), value);
+        // Value is null. Anything meant to be bare uses the constructor above instead.
+        return value == null ? null : ToString(AttributeNames.Get(type), value);
     }
 
     private static string? ToString(string name, string? value = null)

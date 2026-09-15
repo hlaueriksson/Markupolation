@@ -144,6 +144,13 @@ public static partial class Attributes
     public static Attribute autocorrect(object value) => new(AttributeType.autocorrect, ValueFormatter.Format(value));
 
     /// <summary>
+    /// Recommended autocorrection behavior (for supported input methods).
+    /// </summary>
+    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>
+    /// <returns><c>autocorrect</c></returns>
+    public static Attribute autocorrect() => new(AttributeType.autocorrect);
+
+    /// <summary>
     /// Automatically focus the element when the page is loaded.
     /// </summary>
     /// <returns><c>autofocus</c></returns>
@@ -305,6 +312,13 @@ public static partial class Attributes
     public static Attribute contenteditable(object value) => new(AttributeType.contenteditable, ValueFormatter.Format(value));
 
     /// <summary>
+    /// Whether the element is editable.
+    /// </summary>
+    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>
+    /// <returns><c>contenteditable</c></returns>
+    public static Attribute contenteditable() => new(AttributeType.contenteditable);
+
+    /// <summary>
     /// Show user agent controls.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.video(Content[])"/>, <see cref="Elements.img(Content[])"/>.</remarks>
@@ -332,6 +346,13 @@ public static partial class Attributes
 
     /// <inheritdoc cref="crossorigin(string)" />
     public static Attribute crossorigin(object value) => new(AttributeType.crossorigin, ValueFormatter.Format(value));
+
+    /// <summary>
+    /// How the element handles crossorigin requests.
+    /// </summary>
+    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>
+    /// <returns><c>crossorigin</c></returns>
+    public static Attribute crossorigin() => new(AttributeType.crossorigin);
 
     /// <summary>
     /// Address of the resource.
@@ -587,6 +608,13 @@ public static partial class Attributes
 
     /// <inheritdoc cref="hidden(string)" />
     public static Attribute hidden(object value) => new(AttributeType.hidden, ValueFormatter.Format(value));
+
+    /// <summary>
+    /// Whether the element is relevant.
+    /// </summary>
+    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>
+    /// <returns><c>hidden</c></returns>
+    public static Attribute hidden() => new(AttributeType.hidden);
 
     /// <summary>
     /// Low limit of high range.
@@ -1020,6 +1048,13 @@ public static partial class Attributes
     public static Attribute popover(object value) => new(AttributeType.popover, ValueFormatter.Format(value));
 
     /// <summary>
+    /// Makes the element a popover element.
+    /// </summary>
+    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>
+    /// <returns><c>popover</c></returns>
+    public static Attribute popover() => new(AttributeType.popover);
+
+    /// <summary>
     /// Targets a popover element to toggle, show, or hide.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.button(Content[])"/>, <see cref="Elements.input(Content[])"/>.</remarks>
@@ -1062,6 +1097,13 @@ public static partial class Attributes
 
     /// <inheritdoc cref="preload(string)" />
     public static Attribute preload(object value) => new(AttributeType.preload, ValueFormatter.Format(value));
+
+    /// <summary>
+    /// Hints how much buffering the media resource will likely need.
+    /// </summary>
+    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>
+    /// <returns><c>preload</c></returns>
+    public static Attribute preload() => new(AttributeType.preload);
 
     /// <summary>
     /// Whether to allow the value to be edited by the user.
@@ -1275,6 +1317,13 @@ public static partial class Attributes
     public static Attribute spellcheck(object value) => new(AttributeType.spellcheck, ValueFormatter.Format(value));
 
     /// <summary>
+    /// Whether the element is to have its spelling and grammar checked.
+    /// </summary>
+    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>
+    /// <returns><c>spellcheck</c></returns>
+    public static Attribute spellcheck() => new(AttributeType.spellcheck);
+
+    /// <summary>
     /// Address of the resource.
     /// </summary>
     /// <remarks>Elements: <see cref="Elements.audio(Content[])"/>, <see cref="Elements.embed(Content[])"/>, <see cref="Elements.iframe(Content[])"/>, <see cref="Elements.img(Content[])"/>, <see cref="Elements.input(Content[])"/>, <see cref="Elements.script(Content[])"/>, <see cref="Elements.source(Content[])"/>, <see cref="Elements.track(Content[])"/>, <see cref="Elements.video(Content[])"/>.</remarks>
@@ -1399,6 +1448,13 @@ public static partial class Attributes
     public static Attribute translate(object value) => new(AttributeType.translate, ValueFormatter.Format(value));
 
     /// <summary>
+    /// Whether the element is to be translated when the page is localized.
+    /// </summary>
+    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>
+    /// <returns><c>translate</c></returns>
+    public static Attribute translate() => new(AttributeType.translate);
+
+    /// <summary>
     /// Hint for the type of the referenced resource.
     /// Type of button.
     /// Type of embedded resource.
@@ -1471,4 +1527,11 @@ public static partial class Attributes
 
     /// <inheritdoc cref="writingsuggestions(string)" />
     public static Attribute writingsuggestions(object value) => new(AttributeType.writingsuggestions, ValueFormatter.Format(value));
+
+    /// <summary>
+    /// Whether the element can offer writing suggestions or not.
+    /// </summary>
+    /// <remarks>Written bare, which the specification allows by listing the empty string among the values. Pass a value for the other states.</remarks>
+    /// <returns><c>writingsuggestions</c></returns>
+    public static Attribute writingsuggestions() => new(AttributeType.writingsuggestions);
 }

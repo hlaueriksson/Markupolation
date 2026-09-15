@@ -33,16 +33,31 @@ public class AttributesTests
     }
 
     [Test]
-    public void An_empty_value_is_how_a_non_boolean_attribute_is_written_bare()
+    public void Attributes_whose_specification_allows_the_empty_string_are_written_bare()
     {
-        // The spec's boolean set is narrower than "attributes where bare is idiomatic": hidden is
-        // enumerated and download is text, so neither gets a no-argument method, and passing null
-        // now omits them. "" is the spelling to use - bare and ="" parse to the same DOM, so
-        // <div hidden> and <div hidden=""> are the same element to a browser.
-        div(hidden(""), id("x")).ToString().Should().Be("<div hidden=\"\" id=\"x\"></div>");
-        a(href("/f"), download("")).ToString().Should().Be("<a href=\"/f\" download=\"\"></a>");
+        // These are not boolean attributes - they are enumerated, and the specification lists the
+        // empty string among their values, which is the same as writing them bare once parsed.
+        p(hidden(), "This paragraph should be hidden.").ToString()
+            .Should().Be("<p hidden>This paragraph should be hidden.</p>");
 
-        // The point of the contrast: null is the "I have nothing to say" case and drops out.
+        div(contenteditable()).ToString().Should().Be("<div contenteditable></div>");
+        div(spellcheck()).ToString().Should().Be("<div spellcheck></div>");
+        div(translate()).ToString().Should().Be("<div translate></div>");
+        div(popover()).ToString().Should().Be("<div popover></div>");
+        img(crossorigin(), src("/x.png")).ToString().Should().Be("<img crossorigin src=\"/x.png\" />");
+    }
+
+    [Test]
+    public void The_bare_spelling_does_not_replace_the_other_states()
+    {
+        // The whole reason these are not marked as boolean attributes: a boolean attribute is true
+        // whatever its value, while these have real values that mean something else.
+        div(hidden("until-found")).ToString().Should().Be("<div hidden=\"until-found\"></div>");
+        div(contenteditable("false")).ToString().Should().Be("<div contenteditable=\"false\"></div>");
+        div(contenteditable(false)).ToString().Should().Be("<div contenteditable=\"false\"></div>");
+
+        // And null still means "I have nothing to say", so it omits rather than turning into the
+        // bare form - otherwise a nullable property could hide content by accident.
         div(hidden(null!), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
     }
 
