@@ -17,12 +17,11 @@ namespace Markupolation.Tests;
 ///
 /// Generate:
 /// 1. Run <see cref="All_enums"/>
-/// 2. Compile
+/// 2. dotnet build
 /// 3. Run <see cref="All_classes"/>
-/// 4. Compile
-/// 5. dotnet format analyzers --diagnostics RS0016 --severity info
-/// 6. Run <see cref="All_markdown"/>
-/// 7. Update <see href="README.md" />
+/// 4. dotnet format analyzers --diagnostics RS0016 --severity info
+/// 5. Run <see cref="All_markdown"/>
+/// 6. Update <see href="../../README.md" />
 /// </summary>
 [Explicit]
 public class GenerateTests
@@ -525,7 +524,6 @@ public class GenerateTests
         File.WriteAllText(path, Names("AttributeNames", "AttributeType", names));
     }
 
-
     [Test]
     public void ElementRawText()
     {
@@ -548,7 +546,6 @@ public class GenerateTests
         var path = Directory.GetCurrentDirectory() + @"\..\..\..\..\..\src\Markupolation\Generated\ElementRawText.cs";
         File.WriteAllText(path, result.ToString());
     }
-
 
     private static string Names(string className, string enumName, IEnumerable<string> names)
     {
