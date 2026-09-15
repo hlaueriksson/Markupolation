@@ -85,9 +85,9 @@ public class GenerateTests
 
             foreach (var name in names)
             {
-                var isVoidElement = voidElements.Contains(name).ToString().ToLower();
+                var isVoidElement = voidElements.Contains(name) ? ", IsVoidElement = true" : string.Empty;
 
-                result.AppendLine($"    [Element(\"{description}\", {isVoidElement}{attributeTypes})]");
+                result.AppendLine($"    [Element(\"{description}\"{attributeTypes}{isVoidElement})]");
                 result.AppendLine($"    {name},");
                 result.AppendLine();
             }
@@ -142,8 +142,8 @@ public class GenerateTests
             var nextName = await GetNameAsync(i < attributes.Count - 1 ? attributes[i + 1] : null);
 
             var description = (await attribute.EvalOnSelectorAsync<string>("td:nth-of-type(2)", "e => e.innerText")).Replace("\"", "\\\"").TrimEnd('.');
-            var isGlobalAttribute = globalAttributes.Contains(name!).ToString().ToLower();
-            var isBooleanAttribute = (await attribute.QuerySelectorAsync("td a[href$='boolean-attribute']") != null).ToString().ToLower();
+            var isGlobalAttribute = globalAttributes.Contains(name!) ? ", IsGlobalAttribute = true" : string.Empty;
+            var isBooleanAttribute = await attribute.QuerySelectorAsync("td a[href$='boolean-attribute']") != null ? ", IsBooleanAttribute = true" : string.Empty;
             var elements = await GetElementsAsync(attribute);
             var elementTypes = elements.Length != 0 ? ", " + string.Join(", ", elements.Select(x => $"ElementType.{x.CleanName()}")) : string.Empty;
 
@@ -157,7 +157,7 @@ public class GenerateTests
                 ? ", IsEmptyStringValid = true"
                 : string.Empty;
 
-            result.AppendLine($"    [Attribute(\"{description}\", {isGlobalAttribute}, {isBooleanAttribute}{elementTypes}{isEmptyStringValid})]");
+            result.AppendLine($"    [Attribute(\"{description}\"{elementTypes}{isGlobalAttribute}{isBooleanAttribute}{isEmptyStringValid})]");
             if (name != nextName)
             {
                 result.AppendLine($"    {name},");
