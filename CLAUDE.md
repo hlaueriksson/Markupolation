@@ -4,103 +4,237 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Markupolation (Markup + String Interpolation) is a C# library for generating HTML with a fluent API of chainable static methods (`html(head(e.title("x")), body(h1("Hello")))`). The element/attribute API is *generated from the WHATWG HTML specification*, not hand-written.
+Markupolation (Markup + String Interpolation) is a C# library for generating HTML with a fluent API of
+chainable static methods (`html(head(e.title("x")), body(h1("Hello")))`). The element/attribute API is
+*generated from the WHATWG HTML specification*, not hand-written.
 
-Two NuGet packages ship from `src/`:
+Six packages ship from `src/`:
 
 - `Markupolation` — elements, attributes, event handler content attributes
-- `Markupolation.Extensions` — `Each`/`If*` extension methods for loops and conditionals in templates
+- `Markupolation.Extensions` — `Each` / `If*` extension methods for loops and conditionals
+- `Markupolation.AspNetCore` — `HtmlResult`, `Results.Extensions.Html(...)`, htmx request/response headers
+- `Markupolation.Htmx` — hand-written htmx attributes
+- `Markupolation.Converter` — HTML back into Markupolation source
+- `Markupolation.Cli` — the `markupolation convert` dotnet tool over the converter
 
 ## Commands
 
 ```powershell
-dotnet build                                   # build the solution (Markupolation.slnx)
-dotnet test tests/Markupolation.Tests          # run the unit tests (test.bat does the same)
+dotnet build                                   # whole solution (Markupolation.slnx)
+dotnet test tests/Markupolation.Tests          # the unit tests (test.bat does the same)
 dotnet test tests/Markupolation.Tests --filter "FullyQualifiedName~ElementsTests.VoidElement"   # a single test
-coverage.bat                                   # dotnet test with coverage collection -> HTML + text summary report
+coverage.bat                                   # test with coverage -> HTML + text summary report
 pack.bat                                       # dotnet build -c Release /p:TF_BUILD=true -> NuGet packages
 nuget-local.bat                                # publish built packages into a local ./packages feed
-dotnet run --project tests/Markupolation.Benchmark -c Release   # BenchmarkDotNet comparison vs Razor Slices, HtmlTags, HyperTextExpression
+dotnet run --project tests/Markupolation.Benchmark -c Release   # vs Razor Slices, HtmlTags, HyperTextExpression
 ```
 
-`GenerateTests` and `PlaygroundTests` are `[Explicit]` and are skipped by a normal test run.
+`GenerateTests` and `PlaygroundTests` are `[Explicit]` and are skipped by a normal test run. CI
+(`.github/workflows/build.yml`) restores, builds and runs only `tests/Markupolation.Tests`.
 
 ## Architecture
 
 ### The string pipeline
 
-Everything is a string under the hood; there is no DOM or tree.
+Everything is a string under the hood; there is no DOM or tree. The *why* behind each rule below is
+written up in the XML doc remarks on the types themselves — read `Content.cs`, `Content.Operators.cs`,
+`Content.Conversions.cs`, `Contents.cs`, `Attribute.cs` and `ValueFormatter.cs` before changing them.
 
-- `Content` (record, `src/Markupolation/Content.cs`) wraps a `string?`. `string` converts to it implicitly (encoding as text); the way back out is **explicit** (`(string)content`, or `ToString()`). That asymmetry is the invariant the whole design rests on: markup never becomes a `string` by accident, so it can never be re-encoded by accident. It is what makes `"text"`, `$"interpolated {x}"`, elements and attributes all mix freely in the same `params Content[]`.
-- **Text is encoded** (`HtmlEncoder`, `& < > "`). Encoding happens at the boundary where a `string` becomes `Content` — the implicit conversion — and in `Attribute.ToString`. It never happens during element rendering, because children are already `Content`. `HtmlEncoder.Encode` returns the input instance when there is nothing to encode, which is the common case; keep that fast path.
-- Everything that is *text* must go through `Content.FromText`, which stores the original and encodes lazily in `Value`. That is what gives raw text elements something to fall back to. Building a pre-encoded string and passing it to the raw constructor looks equivalent but is not: it leaves `Unencoded` null, so `script`/`style` would render the encoded form. A `Content.Text` helper had exactly that bug before it was removed.
-- The `Content(string?)` constructor, `Content.Raw`, `Element(string)` and `Attribute(string, string?)` are **raw** — they exist so the library and its users can wrap markup verbatim. Opting out of encoding is what they are for; encoding is the default.
-- `Contents` (`Contents.cs`) is the hand-written markup that is neither an element nor an attribute: `DOCTYPE()`, `comment(string?)` and `raw(string?)`. `raw` is the unqualified spelling of `Content.Raw`, imported by a static using next to `Elements` and `Attributes` so that `body(raw("<!-- c -->"), p("Hi"))` reads inline. Both stay public, the same way `div` and `Elements.div` both do — this is the house style, not a duplicate API. `Content.Raw` is **not** internal on purpose: `new Content(string?)` is public *and shipped*, as are `new Element(string)` and `new Attribute(string, string?)`, so hiding `Raw` would not reduce the raw paths to one, it would only remove the best-named one — and the unqualified `raw` is unavailable to anyone who neither enables `ImplicitUsings` nor lists the using themselves.
-- `Contents.comment` neutralises rather than encodes, and that is the whole reason it exists: the parser does not decode character references inside a comment (it is bogus/raw text, like `script`/`style`), so an encoded `--&gt;` would still end the comment early and let the rest of the text into the document as markup. It breaks up every `--` with a space, which covers `<!--`, `-->` and `--!>` at once, and pads a leading `>`/`->` and a trailing `<!-`. That makes it safe for user text where `raw` is not. It does not throw on bad input — nothing in the library does. `EncodingTests` pins the exact output *and* round-trips ten shapes through AngleSharp to assert the document still has exactly one comment node.
-- There is deliberately no `CDATA` helper. `<![CDATA[` is only honoured in foreign content (SVG/MathML); in HTML it is a `cdata-in-html-content` parse error that becomes a bogus comment ending at the first `>`, so the rest leaks into the document. Markupolation generates from the HTML element index and has no SVG/MathML elements — foreign content is reached through `new E("<svg ...>")`, where the caller is writing raw markup anyway.
-- Adding a member to `Contents` adds an unqualified name to every consumer's file scope, so it can collide with a generated element or attribute exactly as the nine ambiguous names do. `MethodConflictTests.Contents_does_not_collide_with_the_specification` pins the member list and asserts no overlap with `ElementType`/`AttributeType`/`EventHandlerContentAttributeType` (ordinal — that is what C# overload resolution uses), so a spec addition fails the build instead of quietly changing what an unqualified call binds to.
-- Do **not** rename `comment`/`raw` to `Comment`/`Raw` or `comment_`/`raw_` to pre-empt that. The `_` suffix means "collided with a **C# keyword**" (`class_`, `for_`, `base_`) — a compiler constraint, not a style — so using it here would advertise a clash that does not exist, and a `_` prefix reads as a private field (SA1309 is off for that reason). PascalCase `Raw` would duplicate `Content.Raw` and lose the inline reading that justified `Contents.raw` in the first place. If the spec ever does add one, `e.`/`a.` disambiguate, as they already do for `title`, `span` and the rest. It also has to be added in four places that list the imports by hand: `buildTransitive/Markupolation.props`, `tests/Markupolation.Tests`, `samples/Markupolation.Sample.Api`, and `tests/Markupolation.Benchmark` — the last one **conditioned on `MarkupolationLocal`**, because the 2.1.0 package it otherwise references has no `Contents`. `HtmlConverterTests.Usings` is a fifth: it is the using list the round-trip test compiles emitted source against, and the converter emits `DOCTYPE()`.
-- Do **not** re-add a `Content.Text(s)` helper. It existed briefly and was removed: it is exactly `(Content)s`, nothing in the library called it, and naming the default made it read like something you opt into — it sat in the README's "to opt out" table without opting out of anything. A second public path to one behaviour also has to be pinned by a test, and it did drift once (see above).
-- `Content` is also an `[InterpolatedStringHandler]`, which is what keeps interpolation working under encoding: `AppendLiteral` stays raw (author-written), a `Content` hole stays raw, everything else is encoded. The generic `AppendFormatted<T>` must keep its runtime `is Content` check — an `Element` hole binds there rather than to `AppendFormatted(Content)`, because an identity conversion beats an implicit reference conversion. `InterpolatedStringHandlerAttribute.cs` polyfills the attribute for `netstandard2.1`.
-- `HtmlEncoder` is hand-rolled rather than `WebUtility.HtmlEncode` for one reason: `WebUtility` encodes Latin-1 non-ASCII as numeric references (`Göteborg` -> `G&#246;teborg`), which is bigger and unreadable in a UTF-8 document. It also encodes `'`, which is unnecessary here because attribute values are always double-quoted. Speed is a wash. `System.Web.HttpUtility` is not in `netstandard2.1`, and `System.Text.Encodings.Web` would be the package's only dependency.
-- `& < > "` is the right set *because attribute values are always double-quoted* (`Attribute.ToString`). If that ever changes, `'` has to be added.
-- `<script>` and `<style>` are raw text elements — the parser never decodes references inside them — so their content is rendered unencoded. This works because `Content` keeps the text it was built from (`Content.Unencoded`, `null` once the content is markup) and encodes it lazily in `Value`; `Element` renders `Unencoded` for those two elements and `Value` everywhere else. `ElementRawText.Get` is the generated lookup, emitted by `GenerateTests.ElementRawText` from a hardcoded set — the parsing spec (13.2.5) defines it, not the element index the other generators scrape. `<title>` and `<textarea>` are *escapable* raw text and must keep encoding. Attribute values on script/style are still encoded. Pinned by `EncodingTests`.
-- Consequence worth knowing: script and style bodies are unencoded, so never build one from user data — an interpolation hole there is encoded (which breaks the script) and `Content.Raw` there is an injection risk. Serialise to JSON instead.
-- No URL encoding, deliberately: the caller composes the URL, the library encodes it for placement. Encoding does not make `href("javascript:...")` safe.
-- One place encoding can still surprise, covered by `EncodingTests`: markup assembled into a `string` before it reaches an element is encoded whole (`Content.Raw` opts out). A conditional mixing an element and a string used to be a second such place; it is not any more, because with no implicit conversion to `string` the branches have no common type and the conditional is target-typed to `Content`.
-- The `If*` / `IfMatch` family declares its parameters as `Content`, so each argument converts on its own. That is now the same outcome a ternary gives; prefer `If` for how it reads in a template, not because the ternary is broken.
-- Value types convert to `Content` directly so that `cond ? element : value` has no natural type and is target-typed to `Content`. The **numeric set must stay complete** (`sbyte byte short ushort int uint long ulong float double decimal char`): once `ulong` is declared, `int` and `ulong` are incomparable, so the smaller types no longer have a unique conversion to widen through and become `CS0457`. Omitting `char` renders `'a'` as `97`, and omitting `float` renders `0.1f` with `double` artefacts. The rest of the set is `string bool DateTime DateTimeOffset TimeSpan Guid Enum` — one `Enum` conversion covers every enum, by boxing. `DateOnly`/`TimeOnly`/`Half`/`Int128` are deliberately absent: they are not in `netstandard2.1` and would make the public API differ per target framework. Nullable value types do convert: the lookup uses the underlying type, so `int?` reaches `operator Content(int)`, and the compiler emits the `HasValue` check so a null yields null content instead of throwing. The conversions live in `Content.Conversions.cs`, a partial of the same record. The conversion to `string` being explicit covers the `string` branch as well, so these conversions are now about rendering a value correctly rather than about rescuing a conditional.
-- `Content.operator +` (`Content.Operators.cs`) is how siblings are written without a wrapper: `h1("a") + p("b")`. It concatenates each side's rendered `Value`, so every operand keeps its own rule — an element stays markup, a `string` is text and is encoded. A user-defined `+` removes the predefined string concatenation from the candidate set, which is exactly the point: `element + element` binds here instead of producing a `string` that the next `Content` position would encode. Two consequences to keep in mind. `DOCTYPE()` must return `Content`, not `string`, or the doctype is encoded as text — this is what sank an earlier attempt at the operator. And when both operands are still text the result keeps their combined `Unencoded`, so `script`/`style` can still fall back to it; mixing a `string` with an element inside a raw text element loses that, which is nonsense markup anyway.
-- Do **not** add `operator +(Content, string)` / `(string, Content)` overloads. They would make a `string` operand raw, contradicting "a string is text everywhere", and reopen `userName + b("x")` as an injection. `Content.Raw` is the opt-out.
-- Accumulate into a `Content`, not a `string`: `Content acc = Content.Raw(null); acc += li(i);`. The `string` form no longer compiles, which is deliberate — it used to silently re-encode what it had already accumulated.
-- Anything in `ContentExtensions` that accumulates rendered markup must return `Content.Raw(...)`, not a `string`, or the implicit conversion encodes it a second time (this is what `Each` does).
-- `Content.Empty` is the shared instance for "renders nothing", and is what every `ContentExtensions` branch that is not taken returns. It used to be `return string.Empty;`, which ran the implicit conversion and allocated a fresh `Content` on each of 36 call sites — on a hot path, because every `If*` evaluates one. It is `Raw(string.Empty)` rather than `Raw(null)` so that `Value` stays `""` and nothing about rendering or equality shifts. Sharing is safe because `Content` never changes after construction. Use it for a `+=` accumulator seed too.
-- `Element` and `Attribute` are sealed records deriving from `Content`. Their constructors render the final string immediately (`Element.ToString(name, isVoidElement, content)`), so composition is plain string concatenation.
-- `Element` separates its `params Content[]` into `Attribute`s (rendered inside the tag) and everything else (rendered as children) by runtime type. Void elements discard children.
-- Name mangling is precomputed into generated lookup tables — `ElementNames.Get(type)` / `AttributeNames.Get(type)`, indexed by the enum value. Enum names are trimmed of a trailing `_` (keyword escape) and, for attributes, `_` becomes `-` (`http_equiv` → `http-equiv`). This happens at generation time, so no `Enum.ToString()` runs on the rendering path.
-- `Attributes.data(name, value)` and the public `Element(string)` / `Attribute(string, string?)` constructors are the escape hatches for anything outside the spec (SVG, Open Graph, htmx). `data` also sanitises its *name*: a name is never quoted, so encoding cannot save it — tab/LF/FF/CR/space/`/`/`=`/`>` each end the name in the tokenizer's attribute-name state, and are replaced with `_`. Two names that differ only in those characters therefore render as the same attribute twice, which the parser resolves to the first. Like everything else here it is null tolerant rather than throwing: a null name renders nothing, which is also what `new Attribute(null!, "x")` now does instead of emitting a nameless `="x"` into the tag.
-- **Bare and omitted are different things, and the constructor arity is what says which.** `internal Attribute(AttributeType)` always renders bare; `internal Attribute(AttributeType, string?)` omits the attribute entirely when the value is null. So `required()` and `hidden()` render bare, while `href(null)` renders nothing at all and `progress(value(null))` is indeterminate rather than zero — a nullable property with nothing in it cannot accidentally turn into a bare attribute. There is deliberately no runtime boolean-ness lookup: the arity already carries the distinction, which is why `AttributeBooleanness` was deleted. The name-based paths keep the old null-is-bare meaning, having no metadata to consult — `new Attribute("href")` and `data("foo", null)` both render bare, where `href(null)` omits.
-- Two kinds of attribute get the no-argument spelling, and `[Attribute]` carries both flags. `IsBooleanAttribute` is the specification's *boolean attribute* — present means true whatever the value, so `disabled="false"` is still disabled, and the generator emits **only** `disabled()`. `IsEmptyStringValid` is new and means the index's Value column lists *"the empty string"*: nine enumerated attributes (`autocorrect`, `contenteditable`, `crossorigin`, `hidden`, `popover`, `preload`, `spellcheck`, `translate`, `writingsuggestions`) where bare is allowed because bare and `=""` are indistinguishable once parsed. They get the no-argument overload **in addition** to the value ones, because `hidden("until-found")` and `contenteditable("false")` are real states a boolean attribute could not express — marking them boolean would delete those overloads. `lang` is the tenth row with "the empty string" and is excluded in the scraper on purpose: there `lang=""` asserts *unknown language* rather than switching something on, so `lang()` would read as nonsense. `download` is bare-able in practice but its Value column says "Text", so it has no no-argument spelling — write `download("")`, which parses identically.
-- `ValueFormatter` is the single definition of how a *value* renders, the way `NameExtensions.CleanName` is for names. Three paths reach it and have to agree, because `div(true)`, `div((Content)true)` and `div($"{true}")` are the same thing to whoever writes them: the implicit conversions in `Content.Conversions.cs`, the interpolated string handler, and the generated `object` overloads on `Elements`/`Attributes`. Everything is `InvariantCulture` — a server's culture is a deployment detail, and a decimal comma silently breaks a numeric attribute or embedded JSON. `bool` renders lowercase `true`/`false`, not `bool.ToString()`'s `True`/`False`, because everything that reads a value back compares against the lowercase form (`dataset.x === "true"`, htmx, Alpine). `DateTime`/`DateTimeOffset` render ISO 8601 (`s`, and `yyyy-MM-ddTHH:mm:sszzz` to keep the offset), because that is what HTML's date and time attributes are defined in terms of — not the round-trip `O`, whose seven fractional digits exceed the three HTML allows. An explicit format in a hole (`$"{price:N2}"`) still wins.
-- Giving an ambiguous name more arguments than its *attribute* takes silently reaches the **element** instead. `title("a", "b")` compiles and renders `<title>ab</title>`, because `Attributes.title` takes one argument and `Elements.title(params Content[])` takes any number — so the extra argument quietly changes which of the two you called. Nothing catches this; it is a hazard to know about. `data` is the one exception, and only since it gained `data(string, object)`: that overload and `Elements.data(params Content[])` are both applicable to `data("on", true)` and neither wins, so it is now `CS0121` where it used to render `<data>onTrue</data>`. Write `a.data("on", true)`. A string value is unaffected — `data("on", "v")` matches `data(string, string)` exactly and binds to the attribute.
+- `Content` (record, split across `Content*.cs` partials) wraps a `string?` and is in one of three
+  states: **markup** (raw constructor, `Raw`, `Element`, `Attribute`), **text** (every implicit
+  conversion, encoded lazily in `Value`) or **interpolated** (a `StringBuilder` filled by the
+  interpolated string handler). It never changes after construction.
+- `string` converts to `Content` implicitly (as text, encoded); the way back out is **explicit**
+  (`(string)content` / `ToString()`). That asymmetry is the invariant the design rests on: markup never
+  becomes a `string` by accident, so it can never be re-encoded by accident.
+- **Text is encoded** — `& < > "`, by the hand-rolled `HtmlEncoder`. `'` is absent because attribute
+  values are always double-quoted; if that changes, add it. `Encode` returns the input instance when
+  there is nothing to encode — keep that fast path.
+- Text must go through `Content.FromText` (private; every implicit conversion uses it), which keeps the
+  original in `Unencoded` and encodes lazily. Encoding a string yourself and handing it to the raw
+  constructor looks equivalent but leaves `Unencoded` null, and `script`/`style` then render the encoded
+  form.
+- `<script>` and `<style>` are raw text elements: `Element` renders `Unencoded` for them and `Value`
+  everywhere else, via the generated `ElementRawText.Get`. `<title>` and `<textarea>` are *escapable* raw
+  text and keep encoding. Attribute values on script/style are still encoded. Pinned by `EncodingTests`.
+- `Contents` is the hand-written markup that is neither element nor attribute: `DOCTYPE()`,
+  `comment(string?)`, `raw(string?)`. It is imported by a static using next to `Elements` and
+  `Attributes`, so its members arrive unqualified and can collide with a generated name — see
+  *Adding to `Contents`* below.
+- `Element` and `Attribute` are sealed records deriving from `Content`. Their constructors render the
+  final string immediately (`Element` computes the exact length and writes one span — `Length` must skip
+  exactly what `Write` skips), so composition is plain string concatenation. `Element` separates its
+  `params Content[]` into `Attribute`s (inside the tag) and everything else (children) by runtime type;
+  void elements discard children.
+- **Attribute arity carries bare-vs-omitted.** `internal Attribute(AttributeType)` always renders bare
+  (`required()`, `hidden()`); `internal Attribute(AttributeType, string?)` omits the attribute entirely
+  when the value is null, so `href(null)` renders nothing and `progress(value(null))` is indeterminate
+  rather than zero. The name-based public paths have no metadata to consult and keep the old
+  null-is-bare meaning: `new Attribute("href")` and `data("foo", null)` render bare.
+- `Content.operator +` writes siblings without a wrapper (`h1("a") + p("b")`). It concatenates each
+  side's rendered `Value`, so every operand keeps its own rule. Do **not** add
+  `operator +(Content, string)` overloads — they would make a `string` operand raw and reopen
+  `userName + b("x")` as an injection. Accumulate into a `Content`, never a `string`.
+- `Content.Empty` is the shared "renders nothing" instance and what every untaken `ContentExtensions`
+  branch returns; `data` keeps a private empty `Attribute` of its own for a name that sanitises to
+  nothing. Use `Content.Empty` as a `+=` seed.
+- Anything that accumulates rendered markup must return `Content.Raw(...)`, not a `string`, or the
+  implicit conversion encodes it a second time (this is what `Each` does).
+- The implicit conversions in `Content.Conversions.cs` cover
+  `sbyte byte short ushort int uint long ulong float double decimal char string bool DateTime
+  DateTimeOffset TimeSpan Guid Enum`. The **numeric set must stay complete**: once `ulong` is declared
+  the smaller types have no unique conversion to widen through and become `CS0457`; without `char`,
+  `'a'` renders as `97`; without `float`, `0.1f` renders with `double` artefacts. `DateOnly`/`TimeOnly`/
+  `Half`/`Int128` are deliberately absent — not in `netstandard2.1`, and the public API must not differ
+  per target framework. Nullable value types work through the underlying type.
+- `ValueFormatter` is the single definition of how a *value* renders, the way `NameExtensions.CleanName`
+  is for names. Three paths reach it and must agree — the implicit conversions, the interpolated string
+  handler, and the generated `object` overloads — because `div(true)`, `div((Content)true)` and
+  `div($"{true}")` are the same thing to whoever writes them. Everything is `InvariantCulture`; `bool` is
+  lowercase; dates are ISO 8601. An explicit format in a hole (`$"{price:N2}"`) wins.
+- `AppendFormatted<T>` must keep its runtime `is Content` check: an `Element` hole binds there rather
+  than to `AppendFormatted(Content)`, because an identity conversion beats an implicit reference
+  conversion. `InterpolatedStringHandlerAttribute.cs` polyfills the attribute for `netstandard2.1`.
+- `Attributes.data(name, value)` and the public `Element(string)` / `Attribute(string, string?)`
+  constructors are the escape hatches for anything outside the spec (SVG, Open Graph, htmx). `data`
+  sanitises its *name*: a name is never quoted, so encoding cannot save it — the characters that end a
+  name in the tokenizer become `-`, the separator a `data-*` name is spelled with, so
+  `data("foo bar", "x")` is `data-foo-bar="x"` and reaches JavaScript as `dataset.fooBar`. One
+  argument is the *spec* attribute instead, and is not sanitised: `data("foo bar")` is
+  `data="foo bar"`. A run collapses to one `-` and a run at either end is dropped; a `-` the caller
+  wrote is never touched. A name that is nothing but those characters sanitises to nothing, so
+  `data` tests the name *after* replacing rather than before — the public
+  `Attribute(string, string?)` constructor stays raw and sanitises nothing.
+- The whole library is null tolerant rather than throwing: a null name, value, sequence or delegate
+  yields empty content.
 
 ### Code generation (important)
 
-`src/Markupolation/Generated/*.cs` is ~4,300 lines of generated code. **Never hand-edit it** — regenerate instead.
+`src/Markupolation/Generated/*.cs` is ~4,300 lines of generated code. **Never hand-edit it** — regenerate.
 
-The generator is `tests/Markupolation.Tests/GenerateTests.cs`: `[Explicit]` NUnit tests that scrape <https://html.spec.whatwg.org> with Playwright and write files back into `src/Markupolation/Generated/` via a relative path. It is a two-stage bootstrap, because stage 2 reflects over the enums produced by stage 1:
+The generator is `tests/Markupolation.Tests/GenerateTests.cs`: `[Explicit]` NUnit tests that scrape
+<https://html.spec.whatwg.org> with Playwright and write back into `src/Markupolation/Generated/` via a
+relative path. It is a two-stage bootstrap, because stage 2 reflects over the enums stage 1 produced:
 
 1. Build, then install Playwright: `pwsh tests/Markupolation.Tests/bin/Debug/net10.0/playwright.ps1 install`
-2. Run `All_enums` → writes `ElementType.cs`, `AttributeType.cs`, `EventHandlerContentAttributeType.cs`. These enums carry all spec metadata (description, void-ness, boolean-ness, global-ness, related elements/attributes) as `[Element]`/`[Attribute]`/`[EventHandlerContentAttribute]` attributes. The related elements/attributes are the constructor's `params` array; every flag is a **named argument emitted only when true** (`[Attribute("...", ElementType.iframe, IsBooleanAttribute = true)]`), which is why the flags must follow the params list — C# takes named arguments last. Do not move one back to a positional `bool`: that put a `false` nobody reads on all ~470 attribute and ~150 element rows, positionally, with nothing to say which bool was which.
+2. Run `All_enums` → `ElementType.cs`, `AttributeType.cs`, `EventHandlerContentAttributeType.cs`. These
+   enums carry all spec metadata as `[Element]` / `[Attribute]` / `[EventHandlerContentAttribute]`.
 3. **Compile** (so the new enum members exist).
-4. Run `All_classes` → reflects over the enums to write `Elements.cs`, `Attributes.cs`, `EventHandlerContentAttributes.cs` (including XML doc comments) plus `ElementNames.cs` and `AttributeNames.cs` (the name lookup tables).
-5. Run `All_markdown` → prints the `<details>` API tables to stdout; paste them into `README.md` (the Elements/Attributes/EventHandlerContentAttributes sections).
+4. Run `All_classes` → `Elements.cs`, `Attributes.cs`, `EventHandlerContentAttributes.cs` (with XML docs),
+   plus the `ElementNames` / `AttributeNames` / `ElementRawText` lookup tables.
+5. `dotnet format analyzers --diagnostics RS0016 --severity info` to update the PublicAPI files.
+6. Run `All_markdown` → prints the `<details>` API tables; paste them into `README.md`.
 
-`NameExtensions.CleanName` is the single place that applies the naming convention: `-` → `_`, and a `_` suffix for C# keywords.
+Details worth knowing:
 
-`Attributes.cs` in `src/Markupolation/` (outside `Generated/`) is the hand-written `partial` half of a generated class — `data(name, value)`, which is an attribute and so belongs there. `Elements` has no hand-written half: `DOCTYPE()` is **not** an element (it is a document type declaration, absent from the element index the generators scrape), so it lives in `Contents` instead.
+- Every metadata flag is a **named argument emitted only when true**
+  (`[Attribute("...", ElementType.iframe, IsBooleanAttribute = true)]`), which is why the flags follow
+  the `params` array of related elements. Do not move one back to a positional `bool`.
+- Two flags produce the no-argument spelling. `IsBooleanAttribute` is the specification's boolean
+  attribute — present means true, so the generator emits **only** `disabled()`. `IsEmptyStringValid`
+  means the index's Value column lists *"the empty string"* (`autocorrect`, `contenteditable`,
+  `crossorigin`, `hidden`, `popover`, `preload`, `spellcheck`, `translate`, `writingsuggestions`); those
+  get the no-argument overload **in addition** to the value ones, because `hidden("until-found")` is a
+  real state a boolean attribute could not express. `lang` also lists the empty string and is excluded in
+  the scraper on purpose — `lang=""` asserts *unknown language*, so `lang()` would read as nonsense.
+- Name mangling is precomputed into the generated lookup tables, so no `Enum.ToString()` runs while
+  rendering. `NameExtensions.CleanName` is the single definition of the convention (`-` → `_`, trailing
+  `_` for a C# keyword) and is shared by the generator, the converter and the runtime.
+- `src/Markupolation/Attributes.cs` (outside `Generated/`) is the hand-written `partial` half of a
+  generated class — `data(name, value)` is an attribute and belongs there. `Elements` has no hand-written
+  half: `DOCTYPE()` is not an element, so it lives in `Contents`.
+- The converter reads the same generated metadata rather than restating the specification — the two
+  enums for what exists, `IsVoidElement`, `IsBooleanAttribute`, and their intersection for the ambiguous
+  names. It needs `InternalsVisibleTo`.
 
 ### Naming convention consequences
 
-- Method names are lowercase to mirror the spec — this trips analyzer CS8981, disabled via `.editorconfig` in `tests/` and `samples/`.
-- Nine names exist as both element and attribute (`abbr`, `cite`, `data`, `form`, `label`, `slot`, `span`, `style`, `title`). The static-using import resolves them to the *attribute*; use the `e.` / `a.` aliases to disambiguate. `MethodConflictTests` asserts this list stays correct.
-- Consumers get the aliases automatically: `src/Markupolation/buildTransitive/Markupolation.props` injects `<Using>` items (`e`, `a`, `E`, `A` + static usings) when `ImplicitUsings` is enabled.
+- Method names are lowercase to mirror the spec — this trips CS8981, disabled via `.editorconfig` in
+  `tests/` and `samples/`.
+- Nine names exist as both element and attribute (`abbr`, `cite`, `data`, `form`, `label`, `slot`,
+  `span`, `style`, `title`). The static using resolves them to the *attribute*; `e.` / `a.` disambiguate.
+  `MethodConflictTests` pins the list.
+- Consumers get the aliases automatically: `src/Markupolation/buildTransitive/Markupolation.props`
+  injects `<Using>` items (`e`, `a`, `E`, `A` + static usings) when `ImplicitUsings` is enabled.
+
+### Adding to `Contents`
+
+A new `Contents` member adds an unqualified name to every consumer's file scope and can collide with a
+generated element or attribute exactly as the nine ambiguous names do.
+`MethodConflictTests.Contents_does_not_collide_with_the_specification` pins the member list and asserts
+no ordinal overlap with the three enums, so a spec addition fails the build instead of quietly changing
+what an unqualified call binds to. Keep the lowercase spelling: the `_` suffix means "collided with a
+**C# keyword**", and PascalCase `Raw` would duplicate `Content.Raw` and lose the inline reading.
+
+Seven places list the imports by hand and all need updating: `buildTransitive/Markupolation.props`,
+`tests/Markupolation.Tests`, the three samples that render markup (`Sample.Api`, `Sample.Examples`,
+`Sample.Functions`), `tests/Markupolation.Benchmark` (**conditioned on `MarkupolationLocal`** — the
+2.1.0 package it otherwise references has no `Contents`), and `HtmlConverterTests.Usings`, the list the
+round-trip test compiles emitted source against.
 
 ## Conventions and constraints
 
-- `src/` multi-targets `netstandard2.1;net10.0` and does **not** enable `ImplicitUsings` — explicit `using System.Linq;` etc. is required. `netstandard2.1` covers `Span<T>` and `string.Create`, so `Element` renders through one span path on every target with no `#if`. The `net10.0` target exists for exactly two things: `SearchValues<char>` in `HtmlEncoder` (measured at 2-4x the scan speed of `string.IndexOfAny(char[])`, worth roughly 15% on the `AdvancedUsage` benchmark) and `IsAotCompatible`. It is **not** needed for the interpolated string handler — that is our own type plus a polyfilled attribute, and works on `netstandard2.1`. Benchmarks and samples target `net10.0`; `tests/Markupolation.Tests` multi-targets `net8.0;net10.0` so the suite runs against **both** library builds (a `net8.0` consumer resolves the `netstandard2.1` asset).
-- `Analyzers.props` (imported by both `src/` projects only) sets `TreatWarningsAsErrors`, `AnalysisMode=AllEnabledByDefault`, StyleCop + Roslynator, and `GenerateDocumentationFile`. Any new public member in `src/` needs full XML docs or the build fails. The generator emits these docs for generated code.
-- `src/.editorconfig` turns off three CA rules that multi-targeting switched on and that conflict with the spec-mirroring API: CA1707 (underscored member names), CA1711 (the public type named `Attribute`) and CA2225 (implicit operators without named alternates). Do not "fix" the code to satisfy them.
-- `CompatibilitySuppressions.xml` in each `src/` project records one deliberate break — PKV006, dropping `netstandard2.0`. Delete both files once `PackageValidationBaselineVersion` moves past the release that drops it; do not add suppressions to silence unintended breaks.
-- The whole `ContentExtensions` family is null-tolerant: a null sequence, value or delegate yields empty content rather than throwing.
-- Every conditional in `ContentExtensions` comes in two forms: an eager `Content` parameter and a lazy `Func<Content>` one, so an unused branch need not be built. Positions that already take a value-carrying delegate (`Func<T, Content>`) are lazy as they are and get no second overload. Keep both forms when adding a conditional. The one call shape this costs is a bare `null` in an eager position (`x.IfNull(null)`), which is now CS0121 and needs `(Content)null`.
-- File-scoped namespaces are enforced (`csharp_style_namespace_declarations = file_scoped:warning` + warnings-as-errors in `src/`).
-- Tests use NUnit + FluentAssertions (pinned to `[7.2.2]`), asserting on exact output strings; AngleSharp.Diffing is used where HTML-equivalence rather than string-equality matters.
-- `src/Markupolation.AspNetCore` (net10.0 only) is the ASP.NET Core integration: `HtmlResult` (both `IResult` and `IActionResult`), `Results.Extensions.Html(...)`, `HtmlResults`, `ToHtmlContent()` for Razor, and the htmx request/response headers. Its API takes **`Content`**: encoding has happened inside the elements by the time a document reaches the response boundary, and `DOCTYPE() + html(...)` is already `Content`. It took `string` while the two were implicitly convertible both ways (overloading on both was `CS0121`); with the conversion out of `Content` now explicit, `Content` is the unambiguous and safer choice. A caller holding already-rendered markup in a `string` passes `Content.Raw(s)`.
-- `src/Markupolation.Htmx` is the htmx attributes: a hand-written `Htmx` static class, ~35 methods, imported as `hx`. Hand-written on purpose — the set is short and stable, and scraping htmx's docs would add a second fragile Playwright dependency to `GenerateTests.cs`. `hx_disable`, `hx_history_elt` and `hx_preserve` take no value and render bare; `hx_on(name, value)` prefixes `hx-on:`, so an htmx event needs a leading colon (`":after-request"` renders `hx-on::after-request`). Response headers belong in `Markupolation.AspNetCore`, not here.
-- `src/Markupolation.Converter` turns HTML back into Markupolation source, and `src/Markupolation.Cli` is the `dotnet tool` (`markupolation convert`) over it. The converter reads the same generated metadata the runtime renders from — `ElementType` / `AttributeType` for what exists, `[Element].IsVoidElement`, `[Attribute].IsBooleanAttribute`, and the intersection of the two enums for the nine ambiguous names — so the specification is never restated. It needs `InternalsVisibleTo`.
-- `NameExtensions.CleanName` lives in `src/Markupolation` and is the single definition of the naming convention, shared by the generator, the converter and the runtime. It used to be a copy inside `GenerateTests.cs`.
-- `tests/Markupolation.Tests` excludes `AspNetCore/**` and `Converter/**` on the `net8.0` leg, because those packages are net10.0 only.
-- `samples/Markupolation.Sample.Api` is the **exception**: it uses `ProjectReference` so it can consume the unpublished `Markupolation.AspNetCore`, and therefore declares the `<Using>` items itself — `buildTransitive` props only apply to package references. Switch it back to `PackageReference` once 3.0.0 ships.
-- `samples/` and `tests/Markupolation.Benchmark` reference the **published NuGet packages** (`Version="2.1.0"`), not the local projects — local `src/` changes do not flow into them until a release or a local feed (`nuget-local.bat`) is used. So they still compile against the implicit `Content` -> `string` conversion that 3.0 removes. When they move to 3.0 these need `.ToString()`: `Sample.Examples/Program.cs` (`string Simple() => DOCTYPE() + html(...)`), `Sample.Functions` (`new ContentResult { Content = ... }`) and the Blazor `(MarkupString)` casts. The benchmark is already done (it builds under `MarkupolationLocal=true`). The benchmark swaps in a `ProjectReference` when the `MarkupolationLocal` environment variable is `true` (an env var, not `-p:`, because BenchmarkDotNet builds a generated project in a child process).
-- CI (`.github/workflows/build.yml`) restores, builds and runs only `tests/Markupolation.Tests`.
+- `src/` multi-targets `netstandard2.1;net10.0` and does **not** enable `ImplicitUsings` — explicit
+  `using System.Linq;` etc. `netstandard2.1` covers `Span<T>` and `string.Create`, so `Element` renders
+  through one span path on every target with no `#if`. The `net10.0` target exists for exactly two
+  things: `SearchValues<char>` in `HtmlEncoder`/`Attributes` and `IsAotCompatible`. It is **not** needed
+  for the interpolated string handler. `tests/Markupolation.Tests` multi-targets `net8.0;net10.0` so the
+  suite runs against **both** library builds (a `net8.0` consumer resolves the `netstandard2.1` asset),
+  and excludes `AspNetCore/**` and `Converter/**` on the `net8.0` leg because those packages are
+  net10.0 only.
+- `Analyzers.props` (imported by the `src/` projects only) sets `TreatWarningsAsErrors`,
+  `AnalysisMode=AllEnabledByDefault`, `EnablePackageValidation`, StyleCop, Roslynator, Meziantou and
+  the PublicApiAnalyzers; `GenerateDocumentationFile` is set per project. Any new public member in
+  `src/` needs full XML docs **and** a line in `PublicAPI.Unshipped.txt`, or the build fails (RS0016
+  — `dotnet format analyzers --diagnostics RS0016 --severity info` writes them). `Markupolation`
+  keeps those files in per-TFM folders under `PublicAPI/`, because records get covariant `<Clone>$`
+  return types on some runtimes; the other projects keep them in the project directory.
+- `src/.editorconfig` turns off rules that conflict with the spec-mirroring API: CA1707 (underscored
+  names), CA1711 (the public type named `Attribute`), CA2225 (implicit operators), SA1309 (`_field`) and
+  CA1055 (`Uri` return types in the htmx package). Do not "fix" the code to satisfy them.
+- `CompatibilitySuppressions.xml` in `Markupolation` and `Markupolation.Extensions` records one
+  deliberate break — PKV006, dropping `netstandard2.0`. Delete both once
+  `PackageValidationBaselineVersion` moves past the release that drops it; do not add suppressions to
+  silence unintended breaks.
+- Every conditional in `ContentExtensions` comes in two forms: an eager `Content` parameter and a lazy
+  `Func<Content>` one. Positions that already take a value-carrying delegate (`Func<T, Content>`) are
+  lazy as they are. Keep both forms when adding a conditional. The cost is that a bare `null` in an eager
+  position is `CS0121` and needs `(Content)null`.
+- File-scoped namespaces are enforced (`csharp_style_namespace_declarations = file_scoped:warning` +
+  warnings-as-errors in `src/`).
+- Tests use NUnit + FluentAssertions (pinned to `[7.2.2]`), asserting on exact output strings;
+  AngleSharp.Diffing where HTML equivalence rather than string equality matters.
+- `Markupolation.AspNetCore`'s API takes **`Content`**, not `string`: encoding has happened inside the
+  elements by the time a document reaches the response boundary, and `DOCTYPE() + html(...)` is already
+  `Content`. A caller holding rendered markup in a `string` passes `Content.Raw(s)`.
+- `Markupolation.Htmx` is hand-written on purpose — the set is short and stable, and scraping htmx's docs
+  would add a second fragile Playwright dependency. `hx_disable`, `hx_history_elt` and `hx_preserve`
+  render bare; `hx_on(name, value)` prefixes `hx-on:`, so an htmx event needs a leading colon
+  (`":after-request"` → `hx-on::after-request`). Response headers belong in `Markupolation.AspNetCore`,
+  and are not the same shape as the attributes: `HX-Push-Url` and `HX-Replace-Url` read a url or `false`
+  and have no `true`, so `HtmxResponseExtensions` spells the `false` as `HxPreventPushUrl()` /
+  `HxPreventReplaceUrl()` instead of the `bool` overload `hx_push_url` / `hx_replace_url` have — htmx
+  special-cases only the literal `false`, so `HxPushUrl(true)` would have pushed the url `/true`.
+- The samples all use `ProjectReference` and declare their own `<Using>` items (`buildTransitive` props
+  only apply to package references). `tests/Markupolation.Benchmark` is the one project still on the
+  published 2.1.0 package; set the `MarkupolationLocal` **environment variable** (not `-p:`, which
+  BenchmarkDotNet's child-process build does not inherit) to measure the working tree.
+
+## Traps
+
+- Giving an ambiguous name more arguments than its *attribute* takes silently reaches the **element**.
+  `title("a", "b")` compiles and renders `<title>ab</title>`, because `Attributes.title` takes one
+  argument and `Elements.title(params Content[])` takes any number. Nothing catches this. `data` is the
+  one exception: `data("on", true)` is `CS0121` since `data(string, object)` exists — write
+  `a.data("on", true)`.
+- Script and style bodies are unencoded, so never build one from user data — an interpolation hole there
+  is encoded (which breaks the script) and `Content.Raw` there is an injection risk. Serialise to JSON.
+- Markup assembled into a `string` before it reaches an element is encoded whole; `Content.Raw` opts out.
+- `comment()` neutralises rather than encodes, and that is why it exists: the parser does not decode
+  character references inside a comment, so an encoded `--&gt;` would still end it early. It is safe for
+  user text where `raw` is not.
+- There is deliberately no `CDATA` helper. `<![CDATA[` is only honoured in foreign content; in HTML it
+  becomes a bogus comment ending at the first `>`. Foreign content (SVG/MathML) is reached through
+  `new E("<svg ...>")`, where the caller is writing raw markup anyway.
+- No URL encoding, deliberately: the caller composes the URL, the library encodes it for placement.
+  Encoding does not make `href("javascript:...")` safe.
