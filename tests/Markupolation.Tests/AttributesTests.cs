@@ -73,12 +73,30 @@ public class AttributesTests
     public void Data_neutralises_a_dynamic_name_that_would_otherwise_break_out_of_the_tag()
     {
         // The name is never quoted, so encoding & < > " (as HtmlEncoder does for a value) would not
-        // help here - a space, /, > or = in the name has to not be there at all.
-        data("foo bar", "value").ToString().Should().Be("data-foo_bar=\"value\"");
-        data("foo=bar", "value").ToString().Should().Be("data-foo_bar=\"value\"");
-        data("foo/bar", "value").ToString().Should().Be("data-foo_bar=\"value\"");
-        data("foo>bar", "value").ToString().Should().Be("data-foo_bar=\"value\"");
-        data("foo\tbar\r\n", "value").ToString().Should().Be("data-foo_bar__=\"value\"");
+        // help here - a space, /, > or = in the name has to not be there at all. What it becomes is
+        // -, the separator a data-* name is spelled with, so what renders is the name the caller
+        // meant: data("foo bar", "value") and data("foo-bar", "value") are the same attribute, and
+        // JavaScript reads it as dataset.fooBar rather than dataset.foo_bar.
+        data("foo bar", "value").ToString().Should().Be("data-foo-bar=\"value\"");
+        data("foo=bar", "value").ToString().Should().Be("data-foo-bar=\"value\"");
+        data("foo/bar", "value").ToString().Should().Be("data-foo-bar=\"value\"");
+        data("foo>bar", "value").ToString().Should().Be("data-foo-bar=\"value\"");
+        data("foo\fbar", "value").ToString().Should().Be("data-foo-bar=\"value\"");
+
+        // A run collapses into one separator and a run at either end is dropped, so sloppy input
+        // still spells the name a dataset reader expects instead of data-foo-bar-- .
+        data("foo\tbar\r\n", "value").ToString().Should().Be("data-foo-bar=\"value\"");
+        data("foo  bar ", "value").ToString().Should().Be("data-foo-bar=\"value\"");
+        data(" foo", "value").ToString().Should().Be("data-foo=\"value\"");
+
+        // Only the replacements are normalised - a - the caller wrote is left exactly where it is,
+        // so this keeps both rather than quietly merging them.
+        data("foo- bar", "value").ToString().Should().Be("data-foo--bar=\"value\"");
+
+        // And the point of all of it, in the place it matters: inside the tag, where the space
+        // would have started a second attribute and the > would have closed the tag early.
+        div(data("foo bar", "x")).ToString().Should().Be("<div data-foo-bar=\"x\"></div>");
+        div(data("foo>bar", "x")).ToString().Should().Be("<div data-foo-bar=\"x\"></div>");
     }
 
     [Test]
@@ -93,6 +111,11 @@ public class AttributesTests
         // (the specification wants at least one character after the dash) and dataset would not
         // expose it, so it does not render either.
         div(data("", "value"), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
+
+        // And so is a name that sanitising empties out, which is why the name is tested after the
+        // replacement and not before - otherwise this would reach the tag as data-="value".
+        div(data("   ", "value"), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
+        div(Attributes.data(" > ", true), id("x")).ToString().Should().Be("<div id=\"x\"></div>");
 
         // And it does not fall back to the data attribute, which is a different thing entirely -
         // object's resource URL. That one is spelled data("value").
