@@ -6,7 +6,6 @@ namespace Markupolation.AspNetCore;
 /// htmx request and response headers.
 /// </summary>
 /// <remarks>
-/// These are response-side, so they live here rather than in the attributes package.
 /// See <see href="https://htmx.org/reference/#headers"/>.
 /// </remarks>
 public static class HtmxResponseExtensions

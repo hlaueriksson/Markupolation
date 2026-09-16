@@ -8,28 +8,12 @@ namespace Markupolation.Tests;
 /// <summary>
 /// Several sibling nodes without a wrapper element.
 /// </summary>
-/// <remarks>
-/// <para>
-/// <c>element + element</c> is the obvious way to write this, and it is what you should write.
-/// <see cref="Content"/> declares <c>operator +</c>, which concatenates each side's rendered value,
-/// so the result is <see cref="Content"/> and every operand keeps its own rule: an element is
-/// already markup and stays raw, a <see cref="string"/> is text and is encoded.
-/// </para>
-/// <para>
-/// It used to be a trap. Without a user-defined <c>+</c> the expression fell through to predefined
-/// <c>string</c> concatenation, and the resulting string was encoded as text the moment it reached
-/// a <see cref="Content"/> position - so the fragment only survived where it stayed a string all
-/// the way out to the caller. These tests pin that it no longer does.
-/// </para>
-/// </remarks>
 public class FragmentTests
 {
     private static readonly Item[] Items = [new("T1", "B1"), new("T2", "B2")];
 
     // A component returning two siblings, written the way you reach for first.
     private static Content Card(Item x) => h3(x.Title) + p(x.Body);
-
-    // ------------------------------------------------------------- where the + lands ----------
 
     [Test]
     public void Nested_in_an_element()
@@ -64,8 +48,6 @@ public class FragmentTests
         div(new Content[] { h1("a"), p("b") }).ToString()
             .Should().Be("<div><h1>a</h1><p>b</p></div>");
     }
-
-    // ------------------------------------------------- the three examples, as they stand -------
 
     [Test]
     public void Cards_a_component_returning_two_siblings()
@@ -102,8 +84,6 @@ public class FragmentTests
             + "<div id=\"count\" hx-swap-oob=\"true\">two</div>"
             + "</div>");
     }
-
-    // ------------------------------------------------------------------- what + means ---------
 
     [Test]
     public void A_string_operand_is_text()

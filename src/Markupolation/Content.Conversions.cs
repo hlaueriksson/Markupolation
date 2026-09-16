@@ -6,29 +6,12 @@ namespace Markupolation;
 /// <content>
 /// Conversions to and from <see cref="Content"/>.
 /// </content>
-/// <remarks>
-/// Value types convert directly, rather than through <see cref="object.ToString()"/>, so that a
-/// conditional mixing an element with a value has no natural type and is target-typed to
-/// <see cref="Content"/> — which keeps the element as markup instead of rendering it and encoding
-/// the result as text.
-/// <para>
-/// The numeric set has to stay complete. Once <see cref="ulong"/> is declared, <see cref="int"/>
-/// and <see cref="ulong"/> are incomparable, so the smaller integer types no longer have a unique
-/// conversion to widen through and become ambiguous. <see cref="char"/> would otherwise widen to
-/// <see cref="int"/> and render as a numeric code, and <see cref="float"/> would widen to
-/// <see cref="double"/> and render its binary artefacts.
-/// </para>
-/// </remarks>
 public partial record Content
 {
     /// <summary>
     /// Converts <see cref="Content"/> to <see cref="string"/>.
     /// </summary>
-    /// <remarks>
-    /// Explicit on purpose. Markup that leaves <see cref="Content"/> for a <see cref="string"/> has
-    /// lost what the library knows about it, and is encoded as text the next time it reaches an
-    /// element - so saying so is part of the API. <see cref="object.ToString()"/> does the same.
-    /// </remarks>
+    /// <remarks>Explicit on purpose.</remarks>
     /// <param name="value">The content.</param>
     public static explicit operator string(Content value)
     {
@@ -83,11 +66,7 @@ public partial record Content
     /// <summary>
     /// Converts <see cref="DateTime"/> to <see cref="Content"/>.
     /// </summary>
-    /// <remarks>
-    /// ISO 8601 (<c>2026-09-15T13:45:00</c>), because that is what HTML's date and time attributes
-    /// are defined in terms of - an invariant <see cref="DateTime.ToString()"/> would render
-    /// <c>09/15/2026 13:45:00</c>, which <c>&lt;time datetime&gt;</c> does not accept.
-    /// </remarks>
+    /// <remarks>ISO 8601 (<c>2026-09-15T13:45:00</c>).</remarks>
     /// <param name="value">The value.</param>
     public static implicit operator Content(DateTime value)
     {
@@ -127,11 +106,7 @@ public partial record Content
     /// <summary>
     /// Converts <see cref="bool"/> to <see cref="Content"/>.
     /// </summary>
-    /// <remarks>
-    /// Renders lowercase <c>true</c> or <c>false</c>, not the <c>True</c>/<c>False</c> of
-    /// <see cref="bool.ToString()"/> - see <see cref="ValueFormatter.Format(bool)"/> for why. A
-    /// conditional usually reads better as <c>flag.If(...)</c> than as a rendered bool.
-    /// </remarks>
+    /// <remarks>Renders lowercase <see langword="true"/> or <see langword="false"/>.</remarks>
     /// <param name="value">The value.</param>
     public static implicit operator Content(bool value)
     {
@@ -141,10 +116,7 @@ public partial record Content
     /// <summary>
     /// Converts <see cref="DateTimeOffset"/> to <see cref="Content"/>.
     /// </summary>
-    /// <remarks>
-    /// ISO 8601 with the offset spelled out (<c>2026-09-15T13:45:00+02:00</c>), which is HTML's
-    /// global date and time string.
-    /// </remarks>
+    /// <remarks>ISO 8601 with the offset spelled out (<c>2026-09-15T13:45:00+02:00</c>).</remarks>
     /// <param name="value">The value.</param>
     public static implicit operator Content(DateTimeOffset value)
     {

@@ -6,12 +6,6 @@ namespace Markupolation;
 /// <summary>
 /// HTML content.
 /// </summary>
-/// <remarks>
-/// The markup that is neither an element nor an attribute, and so is hand-written rather than
-/// generated from the specification. Imported with a static using alongside <see cref="Elements"/>
-/// and <see cref="Attributes"/>, so it reads inline with the rest of the API:
-/// <c>DOCTYPE() + html(body(comment("content here"), p("Hello")))</c>.
-/// </remarks>
 public static class Contents
 {
     private static readonly Content Doctype = Content.Raw("<!DOCTYPE html>");
@@ -21,31 +15,13 @@ public static class Contents
     /// <summary>
     /// DOCTYPE.
     /// </summary>
-    /// <remarks>
-    /// Not an element - it is a document type declaration, and not in the element index the rest of
-    /// <see cref="Elements"/> is generated from. <see cref="Content"/> rather than
-    /// <see cref="string"/>, so that <c>DOCTYPE() + html(...)</c> composes as markup; a raw
-    /// <see cref="string"/> here would be text, and encoded.
-    /// </remarks>
+    /// <remarks>A document type declaration.</remarks>
     /// <returns><c><![CDATA[<!DOCTYPE html>]]></c></returns>
     public static Content DOCTYPE() => Doctype;
 
     /// <summary>
     /// Comment.
     /// </summary>
-    /// <remarks>
-    /// <para>
-    /// A comment looks like text but is markup, so it cannot be written as one - <c>body("&lt;!-- x
-    /// --&gt;")</c> shows up on the page as literal text.
-    /// </para>
-    /// <para>
-    /// Encoding is not the answer either: the HTML parser does not decode character references
-    /// inside a comment, so <c>&amp;lt;</c> would appear as it is and <c>--&gt;</c> would still end
-    /// the comment early and let the rest of the text into the document as markup. The sequences
-    /// the specification forbids are broken up with a space instead, which is why this is safe for
-    /// text that came from a user where <see cref="raw(string?)"/> is not.
-    /// </para>
-    /// </remarks>
     /// <param name="value">Comment text.</param>
     /// <returns><c><![CDATA[<!--{value}-->]]></c></returns>
     public static Content comment(string? value)
@@ -59,8 +35,7 @@ public static class Contents
     /// Wraps a string that is already markup, without encoding it.
     /// </summary>
     /// <remarks>
-    /// The unqualified spelling of <see cref="Content.Raw(string?)"/>, the way <c>div</c> is the
-    /// unqualified spelling of <see cref="Elements"/>.<c>div</c>.
+    /// The unqualified spelling of <see cref="Content.Raw(string?)"/>.
     /// </remarks>
     /// <param name="value">Markup.</param>
     /// <returns><see cref="Content"/></returns>
