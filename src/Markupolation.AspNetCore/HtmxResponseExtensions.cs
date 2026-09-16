@@ -111,16 +111,34 @@ public static class HtmxResponseExtensions
     /// <summary>
     /// Pushes a new url into the history stack. Sets <c>HX-Push-Url</c>.
     /// </summary>
+    /// <remarks>
+    /// Prevent it with <see cref="HxPreventPushUrl(HttpResponse)"/>.
+    /// </remarks>
     /// <param name="response">The response.</param>
-    /// <param name="value">A url, or <c>false</c> to prevent it.</param>
+    /// <param name="value">A url.</param>
     public static void HxPushUrl(this HttpResponse response, string value) => Set(response, "HX-Push-Url", value);
+
+    /// <summary>
+    /// Prevents the history stack being updated. Sets <c>HX-Push-Url</c> to <c>false</c>.
+    /// </summary>
+    /// <param name="response">The response.</param>
+    public static void HxPreventPushUrl(this HttpResponse response) => Set(response, "HX-Push-Url", "false");
 
     /// <summary>
     /// Replaces the current url. Sets <c>HX-Replace-Url</c>.
     /// </summary>
+    /// <remarks>
+    /// Prevent it with <see cref="HxPreventReplaceUrl(HttpResponse)"/>.
+    /// </remarks>
     /// <param name="response">The response.</param>
-    /// <param name="value">A url, or <c>false</c> to prevent it.</param>
+    /// <param name="value">A url.</param>
     public static void HxReplaceUrl(this HttpResponse response, string value) => Set(response, "HX-Replace-Url", value);
+
+    /// <summary>
+    /// Prevents the current url being replaced. Sets <c>HX-Replace-Url</c> to <c>false</c>.
+    /// </summary>
+    /// <param name="response">The response.</param>
+    public static void HxPreventReplaceUrl(this HttpResponse response) => Set(response, "HX-Replace-Url", "false");
 
     /// <summary>
     /// Makes the client redirect. Sets <c>HX-Redirect</c>.

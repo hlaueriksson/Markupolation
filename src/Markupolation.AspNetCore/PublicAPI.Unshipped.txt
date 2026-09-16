@@ -20,6 +20,8 @@ static Markupolation.AspNetCore.HtmxResponseExtensions.HtmxTarget(this Microsoft
 static Markupolation.AspNetCore.HtmxResponseExtensions.HtmxTrigger(this Microsoft.AspNetCore.Http.HttpRequest! request) -> string?
 static Markupolation.AspNetCore.HtmxResponseExtensions.HtmxTriggerName(this Microsoft.AspNetCore.Http.HttpRequest! request) -> string?
 static Markupolation.AspNetCore.HtmxResponseExtensions.HxLocation(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.HtmxResponseExtensions.HxPreventPushUrl(this Microsoft.AspNetCore.Http.HttpResponse! response) -> void
+static Markupolation.AspNetCore.HtmxResponseExtensions.HxPreventReplaceUrl(this Microsoft.AspNetCore.Http.HttpResponse! response) -> void
 static Markupolation.AspNetCore.HtmxResponseExtensions.HxPushUrl(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
 static Markupolation.AspNetCore.HtmxResponseExtensions.HxRedirect(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
 static Markupolation.AspNetCore.HtmxResponseExtensions.HxRefresh(this Microsoft.AspNetCore.Http.HttpResponse! response) -> void
