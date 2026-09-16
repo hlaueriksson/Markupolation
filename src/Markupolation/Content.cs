@@ -72,7 +72,7 @@ public partial record Content
     public string? Value => _value ??= _builder?.ToString() ?? HtmlEncoder.Encode(_unencoded);
 
     /// <summary>
-    /// Gets the text this content was created from, before encoding, or <c>null</c> when the
+    /// Gets the text this content was created from, before encoding, or <see langword="null"/> when the
     /// content is already markup.
     /// </summary>
     /// <remarks>

@@ -21,7 +21,7 @@ public sealed record Element : Content
     /// Initializes a new instance of the <see cref="Element"/> class.
     /// </summary>
     /// <param name="name">Element name.</param>
-    /// <param name="isVoidElement"><c>true</c> to mark the element as self-closing; otherwise, <c>false</c>.</param>
+    /// <param name="isVoidElement"><see langword="true"/> to mark the element as self-closing; otherwise, <see langword="false"/>.</param>
     /// <param name="content">Attributes, elements and content.</param>
     public Element(string name, bool isVoidElement, params Content[] content)
         : base(ToString(name, isVoidElement, false, content))

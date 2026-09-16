@@ -10,7 +10,7 @@ public sealed record ConvertOptions
     /// <c>DOCTYPE</c> / <c>html</c> / <c>head</c> / <c>body</c> wrapper the parser adds.
     /// </summary>
     /// <remarks>
-    /// <c>null</c>, the default, decides from the input: a whole document if it has a doctype or
+    /// <see langword="null"/>, the default, decides from the input: a whole document if it has a doctype or
     /// an <c>html</c> element, a fragment otherwise.
     /// </remarks>
     public bool? Fragment { get; init; }
@@ -23,7 +23,7 @@ public sealed record ConvertOptions
     /// Nine names collide — <c>abbr</c>, <c>cite</c>, <c>data</c>, <c>form</c>, <c>label</c>,
     /// <c>slot</c>, <c>span</c>, <c>style</c> and <c>title</c>. Unqualified they resolve to the
     /// attribute, so an element of that name needs <c>e.</c> to compile. That is why this defaults
-    /// to <c>true</c>.
+    /// to <see langword="true"/>.
     /// </remarks>
     public bool Aliases { get; init; } = true;
 

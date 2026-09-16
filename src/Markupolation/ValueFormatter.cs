@@ -9,7 +9,7 @@ namespace Markupolation;
 /// <remarks>
 /// The single definition of how a value renders, the way <see cref="NameExtensions"/> is the single
 /// definition of the naming convention. Three paths reach it - the implicit conversions in
-/// <see cref="Content"/>, the interpolated string handler, and the generated <c>object</c> overloads
+/// <see cref="Content"/>, the interpolated string handler, and the generated <see langword="object"/> overloads
 /// on <see cref="Elements"/> and <see cref="Attributes"/> - and they have to agree, because
 /// <c>div(true)</c>, <c>div((Content)true)</c> and <c>div($"{true}")</c> are the same thing to the
 /// person writing them.
@@ -53,7 +53,7 @@ internal static class ValueFormatter
     /// Renders any value, for the paths that have only boxed it as <see cref="object"/>.
     /// </summary>
     /// <param name="value">The value.</param>
-    /// <returns>The text, or <c>null</c> when the value is.</returns>
+    /// <returns>The text, or <see langword="null"/> when the value is.</returns>
     internal static string? Format(object? value)
     {
         return value switch

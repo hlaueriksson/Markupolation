@@ -22,7 +22,7 @@ public partial record Content
     /// element.
     /// </summary>
     /// <remarks>
-    /// Each side is rendered by its own rule. A <c>null</c> operand, and one whose
+    /// Each side is rendered by its own rule. A <see langword="null"/> operand, and one whose
     /// <see cref="Value"/> is empty (such as <see cref="Empty"/> or <c>Raw(null)</c>), contributes
     /// nothing and is returned as the other side, untouched - so whichever side still carries
     /// <see cref="Unencoded"/> keeps it, including when accumulating with <c>+=</c> from an empty
