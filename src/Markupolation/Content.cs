@@ -72,7 +72,7 @@ public partial record Content
     public string? Value => _value ??= _builder?.ToString() ?? HtmlEncoder.Encode(_unencoded);
 
     /// <summary>
-    /// Gets the text this content was created from, before encoding, or <c>null</c> when the
+    /// Gets the text this content was created from, before encoding, or <see langword="null"/> when the
     /// content is already markup.
     /// </summary>
     /// <remarks>
@@ -86,6 +86,9 @@ public partial record Content
     /// <summary>
     /// Wraps a string that is already markup, without encoding it.
     /// </summary>
+    /// <remarks>
+    /// The qualified spelling of <see cref="Contents.raw(string?)"/>.
+    /// </remarks>
     /// <param name="value">Markup.</param>
     /// <returns><see cref="Content"/></returns>
     public static Content Raw(string? value) => new(value);
@@ -98,7 +101,7 @@ public partial record Content
     /// an interpolated string holds a builder rather than a value until it is first read.
     /// </remarks>
     /// <param name="other">The content to compare with.</param>
-    /// <returns><c>true</c> if the content is equal; otherwise, <c>false</c>.</returns>
+    /// <returns><see langword="true"/> if the content is equal; otherwise, <see langword="false"/>.</returns>
     public virtual bool Equals(Content? other)
     {
         return other is not null

@@ -39,7 +39,6 @@ public sealed class HtmlResult : IResult, IActionResult, IStatusCodeHttpResult, 
     /// <summary>
     /// Initializes a new instance of the <see cref="HtmlResult"/> class with a status code.
     /// </summary>
-    /// <remarks>See the other constructor.</remarks>
     /// <param name="html">The document.</param>
     /// <param name="statusCode">Status code.</param>
     public HtmlResult(Content html, int statusCode)

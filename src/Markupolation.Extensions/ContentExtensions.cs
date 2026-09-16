@@ -94,12 +94,7 @@ public static class ContentExtensions
     /// <summary>
     /// Returns <see cref="Content"/> if value is null.
     /// </summary>
-    /// <remarks>
-    /// Constrained to reference types. For a non-nullable value type, <c>value == null</c> boxes
-    /// and is always false - <c>then</c> could never run, silently. <see cref="Nullable{T}"/> has
-    /// its own overload below, so <c>int?</c> still works; a bare <c>int</c> is now a compile error
-    /// instead of a permanent no-op.
-    /// </remarks>
+    /// <remarks>Constrained to reference types.</remarks>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
     /// <param name="then">Attribute, element or content.</param>
@@ -120,12 +115,7 @@ public static class ContentExtensions
     /// <summary>
     /// Returns <see cref="Content"/> if value is null. The delegate is only invoked when it is.
     /// </summary>
-    /// <remarks>
-    /// Constrained to reference types. For a non-nullable value type, <c>value == null</c> boxes
-    /// and is always false - <c>then</c> could never run, silently. <see cref="Nullable{T}"/> has
-    /// its own overload below, so <c>int?</c> still works; a bare <c>int</c> is now a compile error
-    /// instead of a permanent no-op.
-    /// </remarks>
+    /// <remarks>Constrained to reference types.</remarks>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
     /// <param name="then">Attribute, element or content delegate.</param>
@@ -146,12 +136,7 @@ public static class ContentExtensions
     /// <summary>
     /// Returns <see cref="Content"/> if value is null; otherwise the fallback <see cref="Content"/>.
     /// </summary>
-    /// <remarks>
-    /// Constrained to reference types. For a non-nullable value type, <c>value == null</c> boxes
-    /// and is always false - <c>then</c> could never run, silently. <see cref="Nullable{T}"/> has
-    /// its own overload below, so <c>int?</c> still works; a bare <c>int</c> is now a compile error
-    /// instead of a permanent no-op.
-    /// </remarks>
+    /// <remarks>Constrained to reference types.</remarks>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
     /// <param name="then">Attribute, element or content.</param>
@@ -174,12 +159,7 @@ public static class ContentExtensions
     /// Returns <see cref="Content"/> if value is null; otherwise the fallback <see cref="Content"/>.
     /// Only the delegate for the branch that is taken is invoked.
     /// </summary>
-    /// <remarks>
-    /// Constrained to reference types. For a non-nullable value type, <c>value == null</c> boxes
-    /// and is always false - <c>then</c> could never run, silently. <see cref="Nullable{T}"/> has
-    /// its own overload below, so <c>int?</c> still works; a bare <c>int</c> is now a compile error
-    /// instead of a permanent no-op.
-    /// </remarks>
+    /// <remarks>Constrained to reference types.</remarks>
     /// <typeparam name="T">Type of value.</typeparam>
     /// <param name="value">Value.</param>
     /// <param name="then">Attribute, element or content delegate.</param>
