@@ -27,31 +27,52 @@ public static partial class Attributes
     /// <returns><c>data-{name}="{value}"</c></returns>
     public static Attribute data(string name, string value)
     {
-        return string.IsNullOrEmpty(name) ? None : new($"data-{Nameable(name)}", value);
+        var suffix = Nameable(name);
+
+        return string.IsNullOrEmpty(suffix) ? None : new($"data-{suffix}", value);
     }
 
     /// <inheritdoc cref="data(string, string)" />
     public static Attribute data(string name, object value)
     {
-        return string.IsNullOrEmpty(name) ? None : new($"data-{Nameable(name)}", ValueFormatter.Format(value));
+        var suffix = Nameable(name);
+
+        return string.IsNullOrEmpty(suffix) ? None : new($"data-{suffix}", ValueFormatter.Format(value));
     }
 
     /// <summary>
-    /// Makes a string safe to use as (part of) an attribute name, by replacing any character that
-    /// would end the name early with <c>_</c>.
+    /// Makes a string safe to use as (part of) a data attribute name, by replacing any character
+    /// that would end the name early with <c>-</c>.
     /// </summary>
     private static string Nameable(string name)
     {
-        if (IndexOfUnsafeCharacter(name) < 0)
+        // The common case needs nothing done to it, and is returned untouched - as HtmlEncoder does.
+        if (string.IsNullOrEmpty(name) || IndexOfUnsafeCharacter(name) < 0)
         {
             return name;
         }
 
         var builder = new StringBuilder(name.Length);
+        var pending = false;
 
         foreach (var c in name)
         {
-            builder.Append(IsUnsafeCharacter(c) ? '_' : c);
+            if (IsUnsafeCharacter(c))
+            {
+                // Held back rather than written: a run collapses into the single separator appended
+                // below, and a run at the end is simply never flushed.
+                pending = true;
+                continue;
+            }
+
+            if (pending && builder.Length > 0)
+            {
+                // The length check is what drops a leading run - there is nothing to separate yet.
+                builder.Append('-');
+            }
+
+            pending = false;
+            builder.Append(c);
         }
 
         return builder.ToString();

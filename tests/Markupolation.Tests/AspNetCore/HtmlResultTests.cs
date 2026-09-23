@@ -173,6 +173,19 @@ public class HtmlResultTests
     }
 
     [Test]
+    public void Htmx_history_update_can_be_prevented()
+    {
+        var context = Context();
+
+        context.Response.HxPreventPushUrl();
+        context.Response.HxPreventReplaceUrl();
+
+        // htmx special-cases the literal string false; anything else is the url to push.
+        context.Response.Headers["HX-Push-Url"].ToString().Should().Be("false");
+        context.Response.Headers["HX-Replace-Url"].ToString().Should().Be("false");
+    }
+
+    [Test]
     public void ToHtmlContent_writes_markup_without_re_encoding()
     {
         var writer = new StringWriter();

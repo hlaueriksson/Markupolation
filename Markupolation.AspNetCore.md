@@ -56,8 +56,17 @@ Request: `IsHtmx()`, `IsHtmxBoosted()`, `IsHtmxHistoryRestore()`, `HtmxTarget()`
 `HtmxTriggerName()`, `HtmxCurrentUrl()`, `HtmxPrompt()`.
 
 Response: `HxTrigger()`, `HxTriggerAfterSettle()`, `HxTriggerAfterSwap()`, `HxRetarget()`,
-`HxReswap()`, `HxReselect()`, `HxPushUrl()`, `HxReplaceUrl()`, `HxRedirect()`, `HxLocation()`,
-`HxRefresh()`.
+`HxReswap()`, `HxReselect()`, `HxPushUrl()`, `HxPreventPushUrl()`, `HxReplaceUrl()`,
+`HxPreventReplaceUrl()`, `HxRedirect()`, `HxLocation()`, `HxRefresh()`.
+
+`HX-Push-Url` and `HX-Replace-Url` read a url or `false`, and nothing else — unlike the
+`hx-push-url` attribute, there is no `true`, and htmx treats anything that is not the literal
+`false` as the url. `HxPreventPushUrl()` and `HxPreventReplaceUrl()` set that `false`:
+
+```cs
+response.HxPushUrl("/page/2");   // HX-Push-Url: /page/2
+response.HxPreventPushUrl();     // HX-Push-Url: false
+```
 
 ### A note on encoding
 
