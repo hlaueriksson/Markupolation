@@ -14,6 +14,7 @@
     <ProjectReference Include="..\..\src\Markupolation\Markupolation.csproj" />
     <ProjectReference Include="..\..\src\Markupolation.Extensions\Markupolation.Extensions.csproj" />
     <ProjectReference Include="..\..\src\Markupolation.AspNetCore\Markupolation.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\Markupolation.AspNetCore.Htmx\Markupolation.AspNetCore.Htmx.csproj" />
     <ProjectReference Include="..\..\src\Markupolation.Htmx\Markupolation.Htmx.csproj" />
   </ItemGroup>
 
@@ -29,6 +30,7 @@
     <Using Include="Markupolation.EventHandlerContentAttributes" Static="True" />
     <Using Include="Markupolation.Contents" Static="True" />
     <Using Include="Markupolation.AspNetCore" />
+    <Using Include="Markupolation.AspNetCore.Htmx" />
     <Using Include="Markupolation.Htmx" Static="True" />
   </ItemGroup>
 

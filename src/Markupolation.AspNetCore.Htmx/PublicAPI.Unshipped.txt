@@ -1,0 +1,24 @@
+#nullable enable
+Markupolation.AspNetCore.Htmx.HttpRequestExtensions
+Markupolation.AspNetCore.Htmx.HttpResponseExtensions
+static Markupolation.AspNetCore.Htmx.HttpRequestExtensions.HtmxCurrentUrl(this Microsoft.AspNetCore.Http.HttpRequest! request) -> string?
+static Markupolation.AspNetCore.Htmx.HttpRequestExtensions.HtmxPrompt(this Microsoft.AspNetCore.Http.HttpRequest! request) -> string?
+static Markupolation.AspNetCore.Htmx.HttpRequestExtensions.HtmxTarget(this Microsoft.AspNetCore.Http.HttpRequest! request) -> string?
+static Markupolation.AspNetCore.Htmx.HttpRequestExtensions.HtmxTrigger(this Microsoft.AspNetCore.Http.HttpRequest! request) -> string?
+static Markupolation.AspNetCore.Htmx.HttpRequestExtensions.HtmxTriggerName(this Microsoft.AspNetCore.Http.HttpRequest! request) -> string?
+static Markupolation.AspNetCore.Htmx.HttpRequestExtensions.IsHtmx(this Microsoft.AspNetCore.Http.HttpRequest! request) -> bool
+static Markupolation.AspNetCore.Htmx.HttpRequestExtensions.IsHtmxBoosted(this Microsoft.AspNetCore.Http.HttpRequest! request) -> bool
+static Markupolation.AspNetCore.Htmx.HttpRequestExtensions.IsHtmxHistoryRestore(this Microsoft.AspNetCore.Http.HttpRequest! request) -> bool
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxLocation(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxPreventPushUrl(this Microsoft.AspNetCore.Http.HttpResponse! response) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxPreventReplaceUrl(this Microsoft.AspNetCore.Http.HttpResponse! response) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxPushUrl(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxRedirect(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxRefresh(this Microsoft.AspNetCore.Http.HttpResponse! response) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxReplaceUrl(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxReselect(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxReswap(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxRetarget(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxTrigger(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxTriggerAfterSettle(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void
+static Markupolation.AspNetCore.Htmx.HttpResponseExtensions.HxTriggerAfterSwap(this Microsoft.AspNetCore.Http.HttpResponse! response, string! value) -> void

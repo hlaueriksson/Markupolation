@@ -182,8 +182,10 @@ Consumers on .NET Core 3.0+, .NET 5+, Mono 6.4+, Xamarin and Unity 2021.2+ are u
   `<Using Include="Markupolation.Htmx" Static="True" />`; add it yourself if you list the using
   directives instead of enabling `ImplicitUsings`.
 - New package **`Markupolation.AspNetCore`**: `Results.Extensions.Html(...)`, `HtmlResults`, `HtmlResult`
-  (usable as both `IResult` and `IActionResult`), `ToHtmlContent()` for Razor, and htmx request and
-  response headers.
+  (usable as both `IResult` and `IActionResult`), and `ToHtmlContent()` for Razor.
+- New package **`Markupolation.AspNetCore.Htmx`**: htmx request headers (`request.IsHtmx()`,
+  `HtmxTarget()`, ...) and response headers (`response.HxTrigger(...)`, `HxRetarget(...)`, ...) as
+  extension methods on `HttpRequest` and `HttpResponse`.
 - Value types convert to `Content` implicitly: every numeric type, `char`, `bool`, `DateTime`, `DateTimeOffset`, `TimeSpan`, `Guid` and any `enum`.
 - `Content` supports `+`, so siblings compose without a wrapper element, and `+=` accumulates.
 - New `Contents` static class, imported like `Elements` and `Attributes`, holding the markup that is

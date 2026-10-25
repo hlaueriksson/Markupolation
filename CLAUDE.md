@@ -8,11 +8,13 @@ Markupolation (Markup + String Interpolation) is a C# library for generating HTM
 chainable static methods (`html(head(e.title("x")), body(h1("Hello")))`). The element/attribute API is
 *generated from the WHATWG HTML specification*, not hand-written.
 
-Six packages ship from `src/`:
+Seven packages ship from `src/`:
 
 - `Markupolation` — elements, attributes, event handler content attributes
 - `Markupolation.Extensions` — `Each` / `If*` extension methods for loops and conditionals
-- `Markupolation.AspNetCore` — `HtmlResult`, `Results.Extensions.Html(...)`, htmx request/response headers
+- `Markupolation.AspNetCore` — `HtmlResult`, `Results.Extensions.Html(...)`, `ToHtmlContent()`
+- `Markupolation.AspNetCore.Htmx` — htmx request/response headers (`HttpRequestExtensions`,
+  `HttpResponseExtensions`); depends only on ASP.NET Core, not on `Markupolation`
 - `Markupolation.Htmx` — hand-written htmx attributes
 - `Markupolation.Converter` — HTML back into Markupolation source
 - `Markupolation.Cli` — the `markupolation convert` dotnet tool over the converter
@@ -210,9 +212,10 @@ round-trip test compiles emitted source against.
 - `Markupolation.Htmx` is hand-written on purpose — the set is short and stable, and scraping htmx's docs
   would add a second fragile Playwright dependency. `hx_disable`, `hx_history_elt` and `hx_preserve`
   render bare; `hx_on(name, value)` prefixes `hx-on:`, so an htmx event needs a leading colon
-  (`":after-request"` → `hx-on::after-request`). Response headers belong in `Markupolation.AspNetCore`,
-  and are not the same shape as the attributes: `HX-Push-Url` and `HX-Replace-Url` read a url or `false`
-  and have no `true`, so `HtmxResponseExtensions` spells the `false` as `HxPreventPushUrl()` /
+  (`":after-request"` → `hx-on::after-request`). Request and response headers belong in
+  `Markupolation.AspNetCore.Htmx` (`HttpRequestExtensions` / `HttpResponseExtensions`), and are not the
+  same shape as the attributes: `HX-Push-Url` and `HX-Replace-Url` read a url or `false` and have no
+  `true`, so `HttpResponseExtensions` spells the `false` as `HxPreventPushUrl()` /
   `HxPreventReplaceUrl()` instead of the `bool` overload `hx_push_url` / `hx_replace_url` have — htmx
   special-cases only the literal `false`, so `HxPushUrl(true)` would have pushed the url `/true`.
 - The samples all use `ProjectReference` and declare their own `<Using>` items (`buildTransitive` props
