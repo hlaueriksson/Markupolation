@@ -67,7 +67,7 @@ For anything not here, the escape hatch still works: `new A("hx-whatever", "valu
 ### Response headers
 
 htmx response headers such as `HX-Trigger` and `HX-Retarget` live in
-[Markupolation.AspNetCore](https://www.nuget.org/packages/Markupolation.AspNetCore), because they
+[Markupolation.AspNetCore.Htmx](https://www.nuget.org/packages/Markupolation.AspNetCore.Htmx), because they
 are response-side rather than markup.
 
 ### Would you like to know more? 🤔

@@ -45,28 +45,8 @@ Markupolation has already encoded the content, so this stops Razor encoding it a
 
 ### htmx
 
-```cs
-app.MapGet("/counter/{count}", (HttpRequest request, int count) =>
-    Results.Extensions.Html(request.IsHtmx()
-        ? mark(count)
-        : html(body(mark(count)))));
-```
-
-Request: `IsHtmx()`, `IsHtmxBoosted()`, `IsHtmxHistoryRestore()`, `HtmxTarget()`, `HtmxTrigger()`,
-`HtmxTriggerName()`, `HtmxCurrentUrl()`, `HtmxPrompt()`.
-
-Response: `HxTrigger()`, `HxTriggerAfterSettle()`, `HxTriggerAfterSwap()`, `HxRetarget()`,
-`HxReswap()`, `HxReselect()`, `HxPushUrl()`, `HxPreventPushUrl()`, `HxReplaceUrl()`,
-`HxPreventReplaceUrl()`, `HxRedirect()`, `HxLocation()`, `HxRefresh()`.
-
-`HX-Push-Url` and `HX-Replace-Url` read a url or `false`, and nothing else — unlike the
-`hx-push-url` attribute, there is no `true`, and htmx treats anything that is not the literal
-`false` as the url. `HxPreventPushUrl()` and `HxPreventReplaceUrl()` set that `false`:
-
-```cs
-response.HxPushUrl("/page/2");   // HX-Push-Url: /page/2
-response.HxPreventPushUrl();     // HX-Push-Url: false
-```
+htmx request and response headers, such as `request.IsHtmx()` and `response.HxTrigger(...)`, live in
+[Markupolation.AspNetCore.Htmx](https://www.nuget.org/packages/Markupolation.AspNetCore.Htmx).
 
 ### A note on encoding
 

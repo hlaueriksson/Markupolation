@@ -17,7 +17,7 @@ ASP.NET Core integration for HTML templating in C#:
     <PackageProjectUrl>https://github.com/hlaueriksson/Markupolation</PackageProjectUrl>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>Markupolation.AspNetCore.md</PackageReadmeFile>
-    <PackageTags>HTML;HTML5;Markup;AspNetCore;htmx</PackageTags>
+    <PackageTags>HTML;HTML5;Markup;AspNetCore</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
